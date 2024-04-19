@@ -1,8 +1,14 @@
 Clase Colaborador
-Se decide crear una clase concreta colaborador que englobe todos los atributos de las personas humanas y jurídicas. Si bien en un inicio se pensó en colaborador como una clase abstracta de la cual hereden los dos tipos nombrados anteriormente, finalmente se terminó descartando esta opción ya que entre estos no había algún comportamiento distinto, por lo que en vez de usar una relación tan fuerte como la herencia, resultó más conveniente usar un enumerado con el tipo y que se inicialicen los atributos correspondientes al mismo.
+Se decide crear una clase concreta colaborador que englobe todos los atributos de las personas humanas y jurídicas. Si bien en un inicio se pensó en colaborador como una clase abstracta de 
+la cual hereden los dos tipos nombrados anteriormente, finalmente se terminó descartando esta opción ya que entre estos no había algún comportamiento distinto, por lo que en vez de usar 
+una relación tan fuerte como la herencia, resultó más conveniente usar un enumerado con el tipo y que se inicialicen los atributos correspondientes al mismo.
 
 Interfaz Contribucion
-Se crean distintas clases para cada forma de contribución (DonacionDeViandas, DonacionDeDinero, DistribucionDeViandas, HacerseCargoDeHeladera), ya que cada una tiene sus propias relaciones con otras clases, pero a la vez, se necesita que las mismas se puedan guardar en una lista de contribuciones que posee el colaborador. Se piensa inicialmente en heredar de una clase abstracta, pero no hay algún comportamiento repetido que justifique esta decisión, también se baraja la posibilidad de que el atributo de Colaborador sea una List<Object>, pero con esto el sistema abre la posibilidad de agregar cualquier clase de elemento a la lista de colaboraciones. Por lo que finalmente se decide ir con esta interfaz Contribución, la cual posee un método contribuir() en el que posteriormente se mostrará el comportamiento propio que tendrá cada contribución cuando esta sea realizada por un colaborador.
+Se crean distintas clases para cada forma de contribución (DonacionDeViandas, DonacionDeDinero, DistribucionDeViandas, HacerseCargoDeHeladera), ya que cada una tiene sus propias relaciones 
+con otras clases, pero a la vez, se necesita que las mismas se puedan guardar en una lista de contribuciones que posee el colaborador. Se piensa inicialmente en heredar de una clase 
+abstracta, pero no hay algún comportamiento repetido que justifique esta decisión, también se baraja la posibilidad de que el atributo de Colaborador sea una List<Object>, pero con esto el 
+sistema abre la posibilidad de agregar cualquier clase de elemento a la lista de colaboraciones. Por lo que finalmente se decide ir con esta interfaz Contribución, la cual posee un método 
+contribuir() en el que posteriormente se mostrará el comportamiento propio que tendrá cada contribución cuando esta sea realizada por un colaborador.
 
 Clase HacerseCargoDeHeladera
 Con la información especificada, se decide que esta colaboración por el momento esté compuesta por una heladera.
@@ -11,4 +17,5 @@ Clase DonacionDeDinero
 La clase DonacionDeDinero tiene un atributo Frecuencia el cual no necesariamente tiene que estar seteado, el no tenerlo significa que la donación de dinero es única.
 
 Enums TipoDocumento, TipoJuridico, Frecuencia, MotivoDistribucion, TipoDeContacto
+
 En estos casos, usar enum sobre Strings nos permite evitar inconsistencia de datos, y además es conveniente porque es poco probable que estos enums sufran muchos cambios a lo largo del tiempo.
