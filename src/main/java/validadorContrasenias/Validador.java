@@ -16,41 +16,8 @@ public class Validador {
     this.condicionesAValidar.addAll(List.of(condiciones));
     };
 
-    /*
-    public static Validador getInstance() {
-        if(instance == null) {
-            instance = new Validador();
-        }
-        return instance;
-    }
-    */
-
-
     public boolean validarContrasenia(String contrasenia) {
         return this.condicionesAValidar.stream().allMatch(c -> c.validarCondicion(contrasenia));
-    }
-
-    private boolean validarContraseniaDebil(String contrasenia) {
-        try {
-            File file = new File(System.getProperty("user.dir") + "/contraseniasDebiles.txt");
-            Scanner scanner = new Scanner(file);
-            while (scanner.hasNextLine()) {
-                String linea = scanner.nextLine();
-                if (linea.equals(contrasenia)) {
-                    return false;
-            }
-            }
-            scanner.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("Archivo no encontrado: " + e.getMessage());
-            System.out.println(System.getProperty("user.dir"));
-        }
-        return true;
-    }
-
-
-    private boolean validarCoincidencia(String usuario, String contrasenia) {
-        return !usuario.equals(contrasenia);
     }
 
 }
