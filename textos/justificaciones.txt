@@ -1,7 +1,9 @@
 Clase Colaborador
-Se decide crear una clase concreta colaborador que englobe todos los atributos de las personas humanas y jurídicas. Si bien en un inicio se pensó en colaborador como una clase abstracta de 
-la cual hereden los dos tipos nombrados anteriormente, finalmente se terminó descartando esta opción ya que entre estos no había algún comportamiento distinto, por lo que en vez de usar 
-una relación tan fuerte como la herencia, resultó más conveniente usar un enumerado con el tipo y que se inicialicen los atributos correspondientes al mismo.
+Se decide crear una clase concreta colaborador que englobe los atributos que se consideran más importantes (TipoDeColaborador y MediosDeContacto) y se agrega un formulario para las preguntas específicas sobre cada tipo. Si bien en un inicio se pensó en colaborador como una clase abstracta de la cual hereden los dos tipos nombrados anteriormente, finalmente se terminó descartando esta opción ya que entre estos no había algún comportamiento distinto y pueden aparecer nuevos tipos de colaboradores, por lo que en vez de usar 
+una relación tan fuerte como la herencia, resultó más conveniente, un formulario que contenga los nuevos atributos/preguntas que puedan llegar a surgir.
+
+Clase Formulario
+Se crea una clase Formulario que tiene una lista de Preguntas, y tanto el Formulario como las preguntas son reutilizables. Tiene un método cargarRespuestas(colaborador:Colaborador) que le va pedir al Colaborador que responda a cada una de las preguntas, y estas se van a guardar luego en un Map de clave Pregunta y valor String (respuesta). 
 
 Interfaz Contribucion
 Se crean distintas clases para cada forma de contribución (DonacionDeViandas, DonacionDeDinero, DistribucionDeViandas, HacerseCargoDeHeladera), ya que cada una tiene sus propias relaciones 
