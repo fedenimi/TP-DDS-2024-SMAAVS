@@ -1,3 +1,4 @@
+DIAGRAMA GENERAL
 Clase Colaborador
 Se decide crear una clase concreta colaborador que englobe los atributos que se consideran más importantes (TipoDeColaborador y MediosDeContacto) y se agrega un formulario para las preguntas específicas sobre cada tipo. Si bien en un inicio se pensó en colaborador como una clase abstracta de la cual hereden los dos tipos nombrados anteriormente, finalmente se terminó descartando esta opción ya que entre estos no había algún comportamiento distinto y pueden aparecer nuevos tipos de colaboradores, por lo que en vez de usar 
 una relación tan fuerte como la herencia, resultó más conveniente, un formulario que contenga los nuevos atributos/preguntas que puedan llegar a surgir.
@@ -12,6 +13,8 @@ abstracta, pero no hay algún comportamiento repetido que justifique esta decisi
 sistema abre la posibilidad de agregar cualquier clase de elemento a la lista de colaboraciones. Por lo que finalmente se decide ir con esta interfaz Contribución, la cual posee un método 
 contribuir() en el que posteriormente se mostrará el comportamiento propio que tendrá cada contribución cuando esta sea realizada por un colaborador.
 
+
+
 Clase HacerseCargoDeHeladera
 Con la información especificada, se decide que esta colaboración por el momento esté compuesta por una heladera.
 
@@ -21,3 +24,6 @@ La clase DonacionDeDinero tiene un atributo Frecuencia el cual no necesariamente
 Enums TipoDocumento, TipoJuridico, Frecuencia, MotivoDistribucion, TipoDeContacto
 
 En estos casos, usar enum sobre Strings nos permite evitar inconsistencia de datos, y además es conveniente porque es poco probable que estos enums sufran muchos cambios a lo largo del tiempo.
+
+DIAGRAMA DEL VALIDADOR
+Se tiene una clase usuario, donde se lo inicializa con su nombre y posteriormente se le asigna un validador (ya que este necesita su nombre de usuario para verificar que no coincida con la contraseña). Además, tiene un método obtenerContrasenia(contrasenia: String), donde se le pide al validador que verifique que el parámetro ingresado sea válido, y si es así, se asigna este valor como la contraseña del usuario. El validador para hacer esta evaluación, tiene un método validarContrasenia(contrasenia: String), donde verifica que el valor pasado cumpla con todas las condiciones que posee el validador (guardadas en una lista, ya que en el futuro podrían agregarse más). Estas condiciones son modeladas como clases separadas que implementan la interfaz Condicion, que tiene el método validarCondicion(contrasenia: String).
