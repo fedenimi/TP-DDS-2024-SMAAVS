@@ -24,31 +24,30 @@ public class TestContrasenias {
 
     @Test
     public void testContrasenia64Caracteres() {
-        user1.obtenerContrasenia("abcdefghijklmnñopqrstuvwxyzabcdefghijklmnñopqrstuvwxyz0123456789asd");
+        user1.validarContrasenia("abcdefghijklmnñopqrstuvwxyzabcdefghijklmnñopqrstuvwxyz0123456789asd");
         Assert.assertEquals("abcdefghijklmnñopqrstuvwxyzabcdefghijklmnñopqrstuvwxyz0123456789asd", user1.getContrasenia());
     }
 
     @Test
     public void testContraseniaConEspacio() {
-        user1.obtenerContrasenia("Buenas Tardes");
+        user1.validarContrasenia("Buenas Tardes");
         Assert.assertEquals("Buenas Tardes", user1.getContrasenia());
     }
 
     @Test
     public void testContraseniaTop10k() {
-        user1.obtenerContrasenia("12345678");
+        Assert.assertThrows("Contraseña debil", RuntimeException.class,()->{user1.validarContrasenia("12345678");});
+
         Assert.assertEquals(null, user1.getContrasenia());
     }
 
     @Test
     public void testContraseniaCorta() {
-        user1.obtenerContrasenia("wabila9");
-        Assert.assertEquals(null, user1.getContrasenia());
+        Assert.assertThrows("La contraseña debe tener al menos 8 caracteres",RuntimeException.class, () ->{user1.validarContrasenia("wabila9");});
     }
 
     @Test
     public void testContraseniaIgualUsuario() {
-        user1.obtenerContrasenia("jorgejorge");
-        Assert.assertEquals(null, user1.getContrasenia());
+        Assert.assertThrows("Contrasenia igual a usuario",RuntimeException.class, () -> {user1.validarContrasenia("jorgejorge");});
     }
 }

@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class ContraseniaDebil implements Condicion{
+    private String path = "/contraseniasDebiles.txt";
+    private String excepcion = "Contraseña debil";
     public ContraseniaDebil() {
     }
 
@@ -12,12 +14,12 @@ public class ContraseniaDebil implements Condicion{
     public boolean validarCondicion(String contrasenia) {
 
             try {
-                File file = new File(System.getProperty("user.dir") + "/contraseniasDebiles.txt");
+                File file = new File(System.getProperty("user.dir") + path);
                 Scanner scanner = new Scanner(file);
                 while (scanner.hasNextLine()) {
                     String linea = scanner.nextLine();
                     if (linea.equals(contrasenia)) {
-                        return false;
+                        throw new RuntimeException(excepcion);
                     }
                 }
                 scanner.close();

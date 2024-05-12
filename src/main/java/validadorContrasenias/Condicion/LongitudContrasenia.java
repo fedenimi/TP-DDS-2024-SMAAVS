@@ -1,7 +1,9 @@
 package validadorContrasenias.Condicion;
 
-public class LongitudContrasenia implements Condicion{
+public class LongitudContrasenia implements Condicion {
     private Integer longitud;
+    private String excepcion = "La contraseña debe tener al menos 8 caracteres";
+
 
     public LongitudContrasenia(Integer longitud) {
         this.longitud = longitud;
@@ -9,6 +11,10 @@ public class LongitudContrasenia implements Condicion{
 
     @Override
     public boolean validarCondicion(String contrasenia) {
-        return contrasenia.length() >= longitud;
+        if (contrasenia.length() < longitud) {
+            throw new RuntimeException(excepcion);
+        } else {
+            return true;
+        }
     }
 }

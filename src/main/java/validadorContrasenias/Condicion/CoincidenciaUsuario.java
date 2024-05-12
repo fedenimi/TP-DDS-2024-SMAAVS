@@ -1,7 +1,8 @@
 package validadorContrasenias.Condicion;
 
-public class CoincidenciaUsuario implements Condicion{
+public class CoincidenciaUsuario implements Condicion {
     private String usuario;
+    private String excepcion = "Contrasenia igual a usuario";
 
     public CoincidenciaUsuario(String usuario) {
         this.usuario = usuario;
@@ -9,6 +10,8 @@ public class CoincidenciaUsuario implements Condicion{
 
     @Override
     public boolean validarCondicion(String contrasenia) {
-        return !usuario.equals(contrasenia);
+        if (usuario.equals(contrasenia)) {
+            throw new RuntimeException(excepcion);
+        } else return true;
     }
 }

@@ -1,7 +1,5 @@
 package validadorContrasenias;
 
-import validadorContrasenias.Validador;
-
 public class Usuario {
 
     private String usuario;
@@ -11,7 +9,7 @@ public class Usuario {
         this.usuario = usuario;
     }
 
-    public void obtenerContrasenia(String contrasenia) {
+    public void validarContrasenia(String contrasenia) {
         if(validador.validarContrasenia(contrasenia)) {
             this.contrasenia = contrasenia;
         }
