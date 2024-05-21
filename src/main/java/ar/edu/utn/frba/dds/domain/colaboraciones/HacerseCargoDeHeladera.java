@@ -2,24 +2,29 @@ package ar.edu.utn.frba.dds.domain.colaboraciones;
 
 import ar.edu.utn.frba.dds.domain.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.domain.personas.Colaborador;
+import ar.edu.utn.frba.dds.domain.utils.Calculador;
 import lombok.Getter;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Period;
+
 public class HacerseCargoDeHeladera implements Contribucion, Puntuable{
-    private Heladera heladera;
-    private Colaborador colaborador;
+    @Getter private Heladera heladera;
+    @Getter private Colaborador colaborador;
 
    @Getter private float multiplicador;
 
     @Override
     public void contribuir() {
-
-    }
-    @Override
-    public void aumentarPuntaje() {
-
+        Calculador.getInstance().aumentarPuntaje(this);
     }
     @Override
     public float puntaje() {
-        return 0;
+        return cantidadDeMesesActivas();
+    }
+
+    private int cantidadDeMesesActivas() {
+        return Period.between(heladera.getFechaInicio(), LocalDate.now()).getMonths();
     }
 }

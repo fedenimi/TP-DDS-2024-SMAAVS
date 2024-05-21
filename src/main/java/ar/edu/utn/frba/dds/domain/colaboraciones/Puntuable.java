@@ -1,8 +1,10 @@
 package ar.edu.utn.frba.dds.domain.colaboraciones;
 
-public interface Puntuable {
+import ar.edu.utn.frba.dds.domain.personas.Colaborador;
 
-    void aumentarPuntaje();
+public interface Puntuable {
     float puntaje();
     float getMultiplicador();
+
+    Colaborador getColaborador();
 }
