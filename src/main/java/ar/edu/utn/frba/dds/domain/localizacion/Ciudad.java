@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.domain.datosPersonas;
+package ar.edu.utn.frba.dds.domain.localizacion;
 
 public class Ciudad {
     private String nombre;
