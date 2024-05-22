@@ -15,6 +15,12 @@ public class DonacionDeDinero implements Contribucion, Puntuable{
     @Getter private float multiplicador;
 
     @Override
+    public void Contribucion(Colaborador colaborador, Integer cantidad){
+        this.colaborador = colaborador;
+        this.monto = cantidad;
+    }
+
+    @Override
     public void contribuir() {
         Calculador.getInstance().aumentarPuntaje(this);
     }

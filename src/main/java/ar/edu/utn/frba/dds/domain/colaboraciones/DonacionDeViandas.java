@@ -13,11 +13,17 @@ public class DonacionDeViandas implements Contribucion, Puntuable{
     private LocalDate fecha;
     @Getter private Colaborador colaborador;
     @Getter private float multiplicador;
+
+    
+    public void Contribucion(Colaborador colaborador, List<Vianda> viandasDonadas){
+        this.colaborador = colaborador;
+        this.viandasDonadas = viandasDonadas;
+    }
+
     @Override
     public void contribuir() {
         Calculador.getInstance().aumentarPuntaje(this);
     }
-
 
     @Override
     public float puntaje() {

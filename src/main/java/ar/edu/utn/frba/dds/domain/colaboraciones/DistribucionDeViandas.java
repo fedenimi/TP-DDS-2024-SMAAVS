@@ -19,6 +19,11 @@ public class DistribucionDeViandas implements Contribucion,Puntuable{
     @Getter private float multiplicador;
 
     @Override
+    public void Contribucion(Colaborador colaborador, Integer cantidad){
+        this.colaborador = colaborador;
+        this.cantidadDeViandas = cantidad;
+    }
+    @Override
     public void contribuir() {
         Calculador.getInstance().aumentarPuntaje(this);
     }

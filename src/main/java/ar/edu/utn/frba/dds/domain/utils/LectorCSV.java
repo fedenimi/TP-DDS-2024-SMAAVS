@@ -40,6 +40,8 @@ public class LectorCSV {
                 String formaColaboracion = linea[6];
                 String cantidad = linea[7];
 
+                Contribucion contribucion =
+
                 if(!this.existeColaboradorCon(tipoDoc, doc, colaboradores)) {
                     Colaborador colaborador = new Colaborador()
                 }
