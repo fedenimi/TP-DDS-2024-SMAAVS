@@ -2,10 +2,11 @@ package ar.edu.utn.frba.dds.domain.datosColaboraciones;
 
 import lombok.Setter;
 
+@Setter
 public class SensorTemperatura implements Sensor {
-    @Setter private float temperaturaMinima;
-    @Setter private float temperaturaMaxima;
-    @Setter private Medicion ultimaMedicion;
+    private float temperaturaMinima;
+    private float temperaturaMaxima;
+    private Medicion ultimaMedicion;
 
     @Override
     public boolean estaEnCondiciones() {

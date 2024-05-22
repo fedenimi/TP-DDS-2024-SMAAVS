@@ -13,6 +13,23 @@ public class Colaborador {
     private List<MedioDeContacto> mediosDeContacto;
     private List<Respuesta> respuestas;
     private float puntos;
+    private String tipoDocumento;
+    private String documento;
+    private String nombre;
+    private String apellido;
+
+    public Colaborador(List<Contribucion> contribuciones, Formulario formularioRespondido, TipoDeColaborador tipoDeColaborador, List<MedioDeContacto> mediosDeContacto, List<Respuesta> respuestas, String tipoDocumento, String documento, String nombre, String apellido) {
+        this.contribuciones = contribuciones;
+        this.formularioRespondido = formularioRespondido;
+        this.tipoDeColaborador = tipoDeColaborador;
+        this.mediosDeContacto = mediosDeContacto;
+        this.respuestas = respuestas;
+        this.tipoDocumento = tipoDocumento;
+        this.documento = documento;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.puntos = 0;
+    }
 
     public void agregarContribucion(Contribucion unaContribucion) {
         this.contribuciones.add(unaContribucion);

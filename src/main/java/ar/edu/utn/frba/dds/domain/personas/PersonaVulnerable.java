@@ -16,12 +16,12 @@ public class PersonaVulnerable {
     private List<PersonaVulnerable> menoresACargo;
     private Tarjeta tarjeta;
 
-    public int edad(LocalDate fecha) {
-        return Period.between(this.fechaDeNacimiento, fecha).getYears();
-    }
+    public int edad(LocalDate fecha) { return Period.between(this.fechaDeNacimiento, fecha).getYears(); }
+
     public int edad() {
         return this.edad(LocalDate.now());
     }
+
     public List<PersonaVulnerable> cantidadDeMenoresACargo(LocalDate fecha) {
         return (List<PersonaVulnerable>) menoresACargo.stream().filter(menor -> menor.eraMenorEn(fecha));
     }
