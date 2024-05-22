@@ -19,6 +19,12 @@ public class HacerseCargoDeHeladera implements Contribucion, Puntuable{
     public void contribuir() {
         Calculador.getInstance().aumentarPuntaje(this);
     }
+
+    @Override
+    public void Contribucion(Colaborador colaborador, Integer cantidad) {
+
+    }
+
     @Override
     public float puntaje() {
         return cantidadDeMesesActivas();

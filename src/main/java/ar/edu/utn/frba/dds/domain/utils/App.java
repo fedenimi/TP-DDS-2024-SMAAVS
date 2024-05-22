@@ -9,6 +9,6 @@ public class App
     {
         LectorCSV lectorCSV = new LectorCSV();
         //System.out.println(System.getProperty("user.dir"));
-        lectorCSV.read(new File("src/colaboraciones.csv"));
+        //lectorCSV.read(new File("src/colaboraciones.csv"));
     }
 }

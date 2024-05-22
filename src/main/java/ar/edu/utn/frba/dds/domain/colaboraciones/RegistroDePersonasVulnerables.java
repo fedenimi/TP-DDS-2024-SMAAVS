@@ -16,6 +16,11 @@ public class RegistroDePersonasVulnerables implements Contribucion, Puntuable {
     }
 
     @Override
+    public void Contribucion(Colaborador colaborador, Integer cantidad) {
+
+    }
+
+    @Override
     public float puntaje() {
         return 1;
     }

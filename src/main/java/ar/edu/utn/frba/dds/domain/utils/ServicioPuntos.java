@@ -25,7 +25,7 @@ public class ServicioPuntos {
         return instancia;
     }
 
-    public ListadoDePuntos listadoDeProvincias() throws IOException {
+    public ListadoDePuntos listadoDePuntos() throws IOException {
         PuntosService puntosService = this.retrofit.create(PuntosService.class);
         Call<ListadoDePuntos> requestPuntos = puntosService.puntos();
         Response<ListadoDePuntos> responsePuntos = requestPuntos.execute();

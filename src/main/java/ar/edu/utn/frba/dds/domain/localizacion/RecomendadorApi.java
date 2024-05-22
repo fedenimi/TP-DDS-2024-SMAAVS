@@ -1,10 +1,14 @@
 package ar.edu.utn.frba.dds.domain.localizacion;
 
-import java.util.List;
+import ar.edu.utn.frba.dds.domain.utils.ServicioPuntos;
+import lombok.NoArgsConstructor;
 
+import java.io.IOException;
+import java.util.List;
+@NoArgsConstructor
 public class RecomendadorApi implements AdapterRecomendadorApi{
     @Override
-    public List<Punto> puntosDeHeladeraRecomendados(Punto punto, int radioEnMetros) {
-        return null;
+    public List<Punto> puntosDeHeladeraRecomendados(Punto punto, int radioEnMetros) throws IOException {
+        return ServicioPuntos.instancia().listadoDePuntos().getPuntos();
     }
 }

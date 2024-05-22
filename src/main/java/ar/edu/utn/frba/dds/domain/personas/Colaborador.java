@@ -3,9 +3,12 @@ package ar.edu.utn.frba.dds.domain.personas;
 import ar.edu.utn.frba.dds.domain.colaboraciones.Contribucion;
 import ar.edu.utn.frba.dds.domain.datosPersonas.*;
 import ar.edu.utn.frba.dds.domain.localizacion.Punto;
+import ar.edu.utn.frba.dds.domain.localizacion.RecomendadorDePuntos;
+import lombok.NoArgsConstructor;
 
+import java.io.IOException;
 import java.util.List;
-
+@NoArgsConstructor
 public class Colaborador {
     private List<Contribucion> contribuciones;
     private Formulario formularioRespondido;
@@ -38,8 +41,8 @@ public class Colaborador {
 
     }
 
-    List<Punto> puntosDeHeladeraRecomendados(Punto punto, Integer  radioEnMetros){
-        return null;
+    public List<Punto> puntosDeHeladeraRecomendados(Punto punto, Integer radioEnMetros) throws IOException {
+        return RecomendadorDePuntos.getInstance().puntosDeHeladeraRecomendados(punto, radioEnMetros);
     }
 
     public void intercambiarPuntos(float puntos){
