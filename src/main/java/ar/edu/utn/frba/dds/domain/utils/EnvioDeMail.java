@@ -6,10 +6,9 @@ import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
 public class EnvioDeMail {
-    public static void main(String[] args) {
-        final String userName = "@gmail.com"; //same fromMail
-        final String password = "smaavsTP123";
-        final String toEmail = "jj7000@gmail.com";
+    public static void enviarMail(String mail, String nombre, String contrasenia) {
+        final String userName = "smaavstp@gmail.com";
+        final String password = "kphw tqrh dfpm owir";
 
         System.out.println("TLSEmail Start");
         Properties props = new Properties();
@@ -21,15 +20,15 @@ public class EnvioDeMail {
         Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
 
-                return new PasswordAuthentication("xxxxxxx@gmail.com", "xxxxxxxxxxxxxx");
+                return new PasswordAuthentication(userName,password);
 
             }
         });
         try{
             MimeMessage message = new MimeMessage(session);
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress("destinatario@mailserver.com.co", true));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(mail, true));
             message.setSubject("Prueba");
-            message.setText("Blablabla");
+            message.setText("Hola " + nombre + ", muchas gracias por colaborar!\nTu contraseña de ingreso es "+contrasenia+" y tu usuario es " + nombre);
             System.out.println("sending...");
             Transport.send(message);
             System.out.println("Sent message successfully....");
