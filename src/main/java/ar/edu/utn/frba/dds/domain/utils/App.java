@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.domain.utils;
 
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.Contribucion;
+import ar.edu.utn.frba.dds.domain.colaboraciones.Puntuable;
 import ar.edu.utn.frba.dds.domain.datosPersonas.MedioDeContacto;
 import ar.edu.utn.frba.dds.domain.datosPersonas.TipoDeColaborador;
 import ar.edu.utn.frba.dds.domain.datosPersonas.TipoDeContacto;
@@ -32,7 +33,7 @@ public class App
         colaboradores.add(colaborador2);
 
 
-        List<Contribucion> contribuciones = lectorCSV.cargarContribuciones(colaboradores ,new File("src/colaboraciones.csv"));
+        List<Puntuable> contribuciones = lectorCSV.cargarContribuciones(colaboradores ,new File("src/colaboraciones.csv"));
 
 
 

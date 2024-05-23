@@ -14,9 +14,9 @@ import java.util.List;
 import java.util.Optional;
 
 public class LectorCSV {
-    public List<Contribucion> cargarContribuciones(List<Colaborador> colaboradores, File file) throws Exception {
+    public List<Puntuable> cargarContribuciones(List<Colaborador> colaboradores, File file) throws Exception {
 
-        ArrayList<Contribucion> contribuciones = new ArrayList<Contribucion>();
+        ArrayList<Puntuable> contribuciones = new ArrayList<Puntuable>();
         String [] linea;
         CSVReader lectorCSV = null;
 
@@ -51,8 +51,8 @@ public class LectorCSV {
                 } else {
                     colaborador = new Colaborador(TipoDeColaborador.HUMANA, mediosDeContacto, tipoDoc, doc, nombre, apellido);
                     colaboradores.add(colaborador);
+                    this.enviarMail(linea[4]);
                 }
-
 
                 switch(formaColaboracion) {
                     case "DINERO":
@@ -84,6 +84,9 @@ public class LectorCSV {
         return contribuciones;
     }
 
+    private void enviarMail(String mail) {
+    }
+
     private Optional<Colaborador> colaboradorCon(String tipoDoc, String doc, List<Colaborador> colaboradores) {
         return colaboradores.stream()
                             .filter(colaborador ->
@@ -93,4 +96,3 @@ public class LectorCSV {
     }
 
 }
-
