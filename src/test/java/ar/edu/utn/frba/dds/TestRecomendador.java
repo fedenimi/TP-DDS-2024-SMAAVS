@@ -17,7 +17,13 @@ public class TestRecomendador {
     }
 
     @Test
-    public void primeraLatitudOk () {
-        Assert.assertEquals(puntosSolicitados.get(0).getLatitud(), 80, 0);
+    public void primerPuntoOk () {
+        Assert.assertEquals(80, puntosSolicitados.get(0).getLatitud(), 0);
+        Assert.assertEquals(100, puntosSolicitados.get(0).getLongitud(), 0);
+    }
+
+    @Test
+    public void cantidadDePuntosRecibidos() {
+        Assert.assertEquals(2, puntosSolicitados.size());
     }
 }
