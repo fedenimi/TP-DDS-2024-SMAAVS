@@ -2,7 +2,6 @@ package ar.edu.utn.frba.dds.domain.colaboraciones;
 
 import ar.edu.utn.frba.dds.domain.datosColaboraciones.Frecuencia;
 import ar.edu.utn.frba.dds.domain.personas.Colaborador;
-import ar.edu.utn.frba.dds.domain.utils.Calculador;
 import lombok.Getter;
 
 import java.time.LocalDate;
@@ -14,19 +13,21 @@ public class DonacionDeDinero implements Contribucion, Puntuable{
     @Getter private Colaborador colaborador;
     @Getter private float multiplicador;
 
-    @Override
-    public void Contribucion(Colaborador colaborador, Integer cantidad){
+    public DonacionDeDinero(Integer monto, Colaborador colaborador) {
+        this.monto = monto;
         this.colaborador = colaborador;
-        this.monto = cantidad;
     }
 
     @Override
     public void contribuir() {
-        Calculador.getInstance().aumentarPuntaje(this);
     }
-
     @Override
     public float puntaje() {
         return monto;
+    }
+
+    @Override
+    public int cantidadDeMesesActiva() {
+        return 0;
     }
 }

@@ -2,11 +2,9 @@ package ar.edu.utn.frba.dds.domain.colaboraciones;
 
 import ar.edu.utn.frba.dds.domain.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.domain.personas.Colaborador;
-import ar.edu.utn.frba.dds.domain.utils.Calculador;
 import lombok.Getter;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.Period;
 
 public class HacerseCargoDeHeladera implements Contribucion, Puntuable{
@@ -17,20 +15,18 @@ public class HacerseCargoDeHeladera implements Contribucion, Puntuable{
 
     @Override
     public void contribuir() {
-        Calculador.getInstance().aumentarPuntaje(this);
-    }
-
-    @Override
-    public void Contribucion(Colaborador colaborador, Integer cantidad) {
 
     }
+
 
     @Override
     public float puntaje() {
-        return cantidadDeMesesActivas();
+
+        return this.colaborador.sumatoriaDeMesesDeHeladerasActivas();
     }
 
-    private int cantidadDeMesesActivas() {
+    @Override
+    public int cantidadDeMesesActiva() {
         return Period.between(heladera.getFechaInicio(), LocalDate.now()).getMonths();
     }
 }

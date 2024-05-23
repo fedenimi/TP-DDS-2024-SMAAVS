@@ -2,7 +2,6 @@ package ar.edu.utn.frba.dds.domain.colaboraciones;
 
 import ar.edu.utn.frba.dds.domain.datosColaboraciones.Registro;
 import ar.edu.utn.frba.dds.domain.personas.Colaborador;
-import ar.edu.utn.frba.dds.domain.utils.Calculador;
 import lombok.Getter;
 
 public class RegistroDePersonasVulnerables implements Contribucion, Puntuable {
@@ -10,18 +9,22 @@ public class RegistroDePersonasVulnerables implements Contribucion, Puntuable {
     @Getter private Colaborador colaborador;
     @Getter private float multiplicador;
 
-    @Override
-    public void contribuir() {
-        Calculador.getInstance().aumentarPuntaje(this);
+    public RegistroDePersonasVulnerables(Colaborador colaborador) {
+        this.colaborador = colaborador;
     }
 
     @Override
-    public void Contribucion(Colaborador colaborador, Integer cantidad) {
+    public void contribuir() {
 
     }
 
     @Override
     public float puntaje() {
         return 1;
+    }
+
+    @Override
+    public int cantidadDeMesesActiva() {
+        return 0;
     }
 }

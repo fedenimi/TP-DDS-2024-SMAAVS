@@ -11,9 +11,4 @@ public class OfrecerProducto implements Contribucion {
     public void contribuir() {
 
     }
-
-    @Override
-    public void Contribucion(Colaborador colaborador, Integer cantidad) {
-
-    }
 }

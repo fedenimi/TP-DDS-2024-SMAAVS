@@ -2,7 +2,6 @@ package ar.edu.utn.frba.dds.domain.colaboraciones;
 
 import ar.edu.utn.frba.dds.domain.datosColaboraciones.Vianda;
 import ar.edu.utn.frba.dds.domain.personas.Colaborador;
-import ar.edu.utn.frba.dds.domain.utils.Calculador;
 import lombok.Getter;
 
 import java.time.LocalDate;
@@ -14,19 +13,12 @@ public class DonacionDeViandas implements Contribucion, Puntuable{
     @Getter private Colaborador colaborador;
     @Getter private float multiplicador;
 
-    
-    public void Contribucion(Colaborador colaborador, List<Vianda> viandasDonadas){
+    public DonacionDeViandas(Colaborador colaborador) {
         this.colaborador = colaborador;
-        this.viandasDonadas = viandasDonadas;
     }
 
     @Override
     public void contribuir() {
-        Calculador.getInstance().aumentarPuntaje(this);
-    }
-
-    @Override
-    public void Contribucion(Colaborador colaborador, Integer cantidad) {
 
     }
 
@@ -35,6 +27,10 @@ public class DonacionDeViandas implements Contribucion, Puntuable{
         return viandasDonadas.size();
     }
 
+    @Override
+    public int cantidadDeMesesActiva() {
+        return 0;
+    }
 
 
 }

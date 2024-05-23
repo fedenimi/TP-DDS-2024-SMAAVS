@@ -3,7 +3,6 @@ package ar.edu.utn.frba.dds.domain.colaboraciones;
 import ar.edu.utn.frba.dds.domain.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.domain.datosColaboraciones.Motivo;
 import ar.edu.utn.frba.dds.domain.personas.Colaborador;
-import ar.edu.utn.frba.dds.domain.utils.Calculador;
 import lombok.Getter;
 
 import java.time.LocalDate;
@@ -18,18 +17,23 @@ public class DistribucionDeViandas implements Contribucion,Puntuable{
     @Getter private Colaborador colaborador;
     @Getter private float multiplicador;
 
-    @Override
-    public void Contribucion(Colaborador colaborador, Integer cantidad){
+    public DistribucionDeViandas(Integer cantidadDeViandas, Colaborador colaborador) {
+        this.cantidadDeViandas = cantidadDeViandas;
         this.colaborador = colaborador;
-        this.cantidadDeViandas = cantidad;
     }
+
     @Override
     public void contribuir() {
-        Calculador.getInstance().aumentarPuntaje(this);
+
     }
 
     @Override
     public float puntaje() {
         return cantidadDeViandas;
+    }
+
+    @Override
+    public int cantidadDeMesesActiva() {
+        return 0;
     }
 }

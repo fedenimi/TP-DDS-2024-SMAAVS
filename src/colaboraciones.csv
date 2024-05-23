@@ -1,6 +1,6 @@
-Tipo Doc;Documento;Nombre;Apellido;Mail;Fecha de colaboracion;Forma de colaboracion;Cantidad
 DNI;44111222;Nicolas;Katz;nicokatz@nico.nico;20/10/2022;DINERO;300
 DNI;44111223;Santiago;CP;santi@nico.nico;21/10/2022;DONACION_VIANDAS;33
 DNI;44111224;Tomas;Podolsky;tomi@nico.nico;22/10/2022;REDISTRIBUCION_VIANDAS;3
 DNI;44111225;Federico;Nimietc;fede1@nico.nico;23/10/2022;DINERO;303
 DNI;44111226;Federico;Gallardo;fede2@nico.nico;24/10/2022;ENTREGA_TARJETAS;10
+DNI;44111223;Santiago;CP;santi@nico.nico;21/10/2022;DINERO;30
