@@ -51,8 +51,11 @@ public class LectorCSV {
                 } else {
                     colaborador = new Colaborador(TipoDeColaborador.HUMANA, mediosDeContacto, tipoDoc, doc, nombre, apellido);
                     colaboradores.add(colaborador);
-                    EnvioDeMail envioDeMail = new EnvioDeMail();
-                    envioDeMail.enviarMail(linea[4], nombre, "password");
+                    EnviadorDeMail enviadorDeMail = new EnviadorDeMail();
+                    enviadorDeMail.enviarMail(linea[4], "Nuevo Registro",
+                            "Hola " + nombre + ", muchas gracias por colaborar!\n" +
+                                    "Tu contraseña de ingreso es "+"password"+" y tu usuario es " + nombre
+                            );
                 }
 
                 switch(formaColaboracion) {
@@ -88,10 +91,8 @@ public class LectorCSV {
 
     private Optional<Colaborador> colaboradorCon(String tipoDoc, String doc, List<Colaborador> colaboradores) {
         return colaboradores.stream()
-                            .filter(colaborador ->
-                                colaborador.getTipoDocumento() == tipoDoc &&
-                                colaborador.getDocumento() == doc).
-                            findFirst();
+                .filter(colaborador -> colaborador.getTipoDocumento().equals(tipoDoc) &&
+                        colaborador.getDocumento().equals(doc))
+                .findFirst();
     }
-
 }
