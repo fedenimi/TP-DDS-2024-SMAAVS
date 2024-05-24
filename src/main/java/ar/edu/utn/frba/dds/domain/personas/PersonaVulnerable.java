@@ -22,12 +22,19 @@ public class PersonaVulnerable {
         return this.edad(LocalDate.now());
     }
 
-    public List<PersonaVulnerable> cantidadDeMenoresACargo(LocalDate fecha) {
+    public List<PersonaVulnerable> menoresACargoEn(LocalDate fecha) {
         return (List<PersonaVulnerable>) menoresACargo.stream().filter(menor -> menor.eraMenorEn(fecha));
     }
 
+    public Integer cantidadDeMenoresACargoEn(LocalDate fecha){
+        return menoresACargoEn(LocalDate.now()).size();
+    }
     private boolean eraMenorEn(LocalDate fecha) {
         return fecha.isAfter(this.fechaDeNacimiento) && this.edad(fecha) < 18;
+    }
+
+    public Integer cantidadMaximaDeUsosDeTarjetaDiarios() {
+        return tarjeta.getUsosMaximoBase() + tarjeta.getUsosMaximoPorMenor()*cantidadDeMenoresACargoEn(LocalDate.now());
     }
 
 }

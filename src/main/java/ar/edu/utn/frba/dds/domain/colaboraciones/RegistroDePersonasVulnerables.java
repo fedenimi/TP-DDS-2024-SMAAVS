@@ -24,7 +24,7 @@ public class RegistroDePersonasVulnerables implements Contribucion, Puntuable {
     }
 
     @Override
-    public int cantidadDeMesesActiva() {
+    public int cantidadDeMesesSiendoHeladera() {
         return 0;
     }
 }

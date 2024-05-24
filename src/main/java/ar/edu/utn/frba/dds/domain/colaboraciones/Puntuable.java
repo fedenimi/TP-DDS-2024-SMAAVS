@@ -7,5 +7,5 @@ public interface Puntuable {
     float getMultiplicador();
 
     Colaborador getColaborador();
-    int cantidadDeMesesActiva();
+    int cantidadDeMesesSiendoHeladera();
 }

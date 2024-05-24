@@ -12,6 +12,6 @@ public class Formulario {
         this.preguntas = preguntas;
     }
 
-    public void cargarRespuestas(Colaborador colaborador) {}
+
 
 }

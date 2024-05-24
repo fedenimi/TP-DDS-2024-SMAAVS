@@ -14,11 +14,11 @@ import java.util.List;
 public class Colaborador {
     private List<Puntuable> puntuables;
     private List<OfrecerProducto> ofrecerProductos;
-    private Formulario formularioRespondido;
+    private FormularioRespondido formularioRespondido;
     private TipoDeColaborador tipoDeColaborador;
     private List<MedioDeContacto> mediosDeContacto;
-    private List<Respuesta> respuestas;
-    private float puntos;
+    private float puntosDisponibles;
+    private float puntosCanjeados;
     @Getter
     private String tipoDocumento;
     @Getter
@@ -33,14 +33,15 @@ public class Colaborador {
         this.documento = documento;
         this.nombre = nombre;
         this.apellido = apellido;
-        this.puntos = 0;
+        this.puntosDisponibles = 0;
     }
 
-    //public void agregarContribucion(Contribucion unaContribucion) {
-    //   this.contribuciones.add(unaContribucion);
-    //}
-    public void ingresarRespuesta(Pregunta pregunta){
+    public void agregarPuntuable(Puntuable puntuable) {
+       this.puntuables.add(puntuable);
+    }
 
+    public void agregarOfrecerProducto(OfrecerProducto ofrecerProducto) {
+        this.ofrecerProductos.add(ofrecerProducto);
     }
 
     public List<Punto> puntosDeHeladeraRecomendados(Punto punto, Integer radioEnMetros) throws IOException {
@@ -48,15 +49,15 @@ public class Colaborador {
     }
 
     public Integer sumatoriaDeMesesDeHeladerasActivas() {
-        return this.puntuables.stream().mapToInt(puntuable -> puntuable.cantidadDeMesesActiva()).sum();
+        return this.puntuables.stream().mapToInt(puntuable -> puntuable.cantidadDeMesesSiendoHeladera()).sum();
     }
 
     public void intercambiarPuntos(float puntos){
-        this.puntos -= puntos;
+        this.puntosDisponibles -= puntos;
     }
 
     public void sumarPuntos(float puntos){
-        this.puntos += puntos;
+        this.puntosDisponibles += puntos;
     }
 
 }

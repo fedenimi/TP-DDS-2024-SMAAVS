@@ -26,7 +26,7 @@ public class HacerseCargoDeHeladera implements Contribucion, Puntuable{
     }
 
     @Override
-    public int cantidadDeMesesActiva() {
+    public int cantidadDeMesesSiendoHeladera() {
         return Period.between(heladera.getFechaInicio(), LocalDate.now()).getMonths();
     }
 }

@@ -15,8 +15,11 @@ public class Calculador {
         return instance;
     }
 
-    public Optional<Float> puntaje(List<Puntuable> contribuciones) {
-        return this.mapToPuntaje(contribuciones).reduce(Float::sum);
+    public float puntaje(List<Puntuable> contribuciones, float puntosCanjeados) {
+        if(!contribuciones.isEmpty()){
+            return this.mapToPuntaje(contribuciones).reduce(Float::sum).get() - puntosCanjeados;
+        }
+        return 0;
     }
 
     private Stream<Float> mapToPuntaje(List<Puntuable> contribuciones) {

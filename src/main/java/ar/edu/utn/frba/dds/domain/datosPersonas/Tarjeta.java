@@ -1,10 +1,12 @@
 package ar.edu.utn.frba.dds.domain.datosPersonas;
 
+import lombok.Getter;
+
 import java.util.List;
 
 public class Tarjeta {
     private String codigo;
-    private Integer usosMaximoBase;
-    private Integer usosMaximoPorMenor;
+    @Getter private Integer usosMaximoBase;
+    @Getter private Integer usosMaximoPorMenor;
     private List<Uso> usos;
 }

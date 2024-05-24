@@ -28,7 +28,7 @@ public class DonacionDeViandas implements Contribucion, Puntuable{
     }
 
     @Override
-    public int cantidadDeMesesActiva() {
+    public int cantidadDeMesesSiendoHeladera() {
         return 0;
     }
 
