@@ -4,18 +4,13 @@ import ar.edu.utn.frba.dds.domain.datosColaboraciones.Registro;
 import ar.edu.utn.frba.dds.domain.personas.Colaborador;
 import lombok.Getter;
 
-public class RegistroDePersonasVulnerables implements Contribucion, Puntuable {
+public class RegistroDePersonasVulnerables implements Puntuable {
     private Registro registro;
     @Getter private Colaborador colaborador;
     @Getter private float multiplicador;
 
     public RegistroDePersonasVulnerables(Colaborador colaborador) {
         this.colaborador = colaborador;
-    }
-
-    @Override
-    public void contribuir() {
-
     }
 
     @Override

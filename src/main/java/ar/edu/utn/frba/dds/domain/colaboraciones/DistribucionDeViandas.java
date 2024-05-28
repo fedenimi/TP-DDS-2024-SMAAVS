@@ -7,7 +7,7 @@ import lombok.Getter;
 
 import java.time.LocalDate;
 
-public class DistribucionDeViandas implements Contribucion,Puntuable{
+public class DistribucionDeViandas implements Puntuable{
     private Heladera heladeraOrigen;
     private Heladera heladeraDestino;
     private Integer cantidadDeViandas;
@@ -20,11 +20,6 @@ public class DistribucionDeViandas implements Contribucion,Puntuable{
     public DistribucionDeViandas(Integer cantidadDeViandas, Colaborador colaborador) {
         this.cantidadDeViandas = cantidadDeViandas;
         this.colaborador = colaborador;
-    }
-
-    @Override
-    public void contribuir() {
-
     }
 
     @Override

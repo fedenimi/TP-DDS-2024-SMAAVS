@@ -7,17 +7,11 @@ import lombok.Getter;
 import java.time.LocalDate;
 import java.time.Period;
 
-public class HacerseCargoDeHeladera implements Contribucion, Puntuable{
+public class HacerseCargoDeHeladera implements Puntuable{
     @Getter private Heladera heladera;
     @Getter private Colaborador colaborador;
 
    @Getter private float multiplicador;
-
-    @Override
-    public void contribuir() {
-
-    }
-
 
     @Override
     public float puntaje() {

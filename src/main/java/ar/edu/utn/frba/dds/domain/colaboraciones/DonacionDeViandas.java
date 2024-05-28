@@ -7,7 +7,7 @@ import lombok.Getter;
 import java.time.LocalDate;
 import java.util.List;
 
-public class DonacionDeViandas implements Contribucion, Puntuable{
+public class DonacionDeViandas implements Puntuable{
     private List<Vianda> viandasDonadas;
     private LocalDate fecha;
     @Getter private Colaborador colaborador;
@@ -15,11 +15,6 @@ public class DonacionDeViandas implements Contribucion, Puntuable{
 
     public DonacionDeViandas(Colaborador colaborador) {
         this.colaborador = colaborador;
-    }
-
-    @Override
-    public void contribuir() {
-
     }
 
     @Override

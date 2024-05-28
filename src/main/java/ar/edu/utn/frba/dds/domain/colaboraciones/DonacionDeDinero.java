@@ -7,7 +7,7 @@ import lombok.Getter;
 import java.time.LocalDate;
 import java.time.Period;
 
-public class DonacionDeDinero implements Contribucion, Puntuable{
+public class DonacionDeDinero implements Puntuable{
     private LocalDate fechaDeInicio;
     private Integer monto;
     private Frecuencia frecuencia;
@@ -19,9 +19,6 @@ public class DonacionDeDinero implements Contribucion, Puntuable{
         this.colaborador = colaborador;
     }
 
-    @Override
-    public void contribuir() {
-    }
     @Override
     public float puntaje() {
         return this.monto * this.frecuencia.puntajePara(this);
