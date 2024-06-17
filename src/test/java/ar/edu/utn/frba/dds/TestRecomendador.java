@@ -1,29 +1,52 @@
 package ar.edu.utn.frba.dds;
 
+import ar.edu.utn.frba.dds.domain.localizacion.AdapterRecomendadorApi;
 import ar.edu.utn.frba.dds.domain.localizacion.Punto;
+import ar.edu.utn.frba.dds.domain.localizacion.RecomendadorDePuntos;
 import ar.edu.utn.frba.dds.domain.personas.Colaborador;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentMatchers;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.configuration.IMockitoConfiguration;
+import org.mockito.internal.matchers.InstanceOf;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.lang.Integer;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class TestRecomendador {
-    Colaborador colaborador = new Colaborador();
-    List<Punto> puntosSolicitados = colaborador.puntosDeHeladeraRecomendados(new Punto(50,50), 100);
 
     public TestRecomendador() throws IOException {
     }
 
     @Test
-    public void primerPuntoOk () {
+    public void dosPuntosEsperados () throws IOException {
+        Colaborador colaborador = new Colaborador();
+
+        AdapterRecomendadorApi adapter = mock(AdapterRecomendadorApi.class);
+        RecomendadorDePuntos recomendador = RecomendadorDePuntos.getInstance();
+        recomendador.setAdapter(adapter);
+        Punto punto1 = new Punto(80, 100);
+        Punto punto2 = new Punto(70, 90);
+        List<Punto> puntos = Arrays.asList(punto1,punto2);
+        when(adapter.puntosDeHeladeraRecomendados(ArgumentMatchers.any(Punto.class), ArgumentMatchers.anyInt()))
+                .thenReturn(Arrays.asList(punto1, punto2));
+        List<Punto> puntosSolicitados = colaborador.puntosDeHeladeraRecomendados(new Punto(50,50), 100);
         Assert.assertEquals(80, puntosSolicitados.get(0).getLatitud(), 0);
         Assert.assertEquals(100, puntosSolicitados.get(0).getLongitud(), 0);
+        Assert.assertEquals(2, puntosSolicitados.size());
     }
 
     @Test
     public void cantidadDePuntosRecibidos() {
-        Assert.assertEquals(2, puntosSolicitados.size());
+        //Assert.assertEquals(2, puntosSolicitados.size());
     }
 }
