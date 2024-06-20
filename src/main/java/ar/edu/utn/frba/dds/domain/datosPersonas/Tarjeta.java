@@ -8,5 +8,5 @@ public class Tarjeta {
     private String codigo;
     @Getter private Integer usosMaximoBase;
     @Getter private Integer usosMaximoPorMenor;
-    private List<Uso> usos;
+    @Getter private List<Uso> usos;
 }

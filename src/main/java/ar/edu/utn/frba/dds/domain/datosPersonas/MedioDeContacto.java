@@ -1,7 +1,9 @@
 package ar.edu.utn.frba.dds.domain.datosPersonas;
 
+import lombok.Getter;
+
 public class MedioDeContacto {
-    private String valor;
+    @Getter private String valor;
     private TipoDeContacto tipo;
 
     public MedioDeContacto(String valor, TipoDeContacto tipo) {

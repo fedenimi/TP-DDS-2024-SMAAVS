@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.domain.personas;
 
 import ar.edu.utn.frba.dds.domain.datosPersonas.Documento;
 import ar.edu.utn.frba.dds.domain.datosPersonas.Tarjeta;
+import lombok.Getter;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -35,6 +36,17 @@ public class PersonaVulnerable {
 
     public Integer cantidadMaximaDeUsosDeTarjetaDiarios() {
         return tarjeta.getUsosMaximoBase() + tarjeta.getUsosMaximoPorMenor()*cantidadDeMenoresACargoEn(LocalDate.now());
+    }
+
+    public Long usosEn(LocalDate fecha) {
+        return tarjeta.getUsos().stream().filter(u->u.getFechaDeUso().toLocalDate().equals(fecha)).count();
+    }
+
+    public Long usosDeHoy() {
+        return usosEn(LocalDate.now());
+    }
+    public boolean puedeUsarLaTarjeta() {
+        return this.usosDeHoy() < this.cantidadMaximaDeUsosDeTarjetaDiarios();
     }
 
 }

@@ -5,8 +5,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
-public class EnviadorDeMail {
-    public static void enviarMail(String mail, String asunto, String mensaje) {
+public class EnviadorDeMail implements IEnviadorDeMail {
+    public void enviarMail(String mail, String asunto, String mensaje) {
         final String userName = "smaavstp@gmail.com";
         final String password = "kphw tqrh dfpm owir";
 

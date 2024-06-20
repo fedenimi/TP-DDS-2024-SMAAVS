@@ -11,11 +11,15 @@ import java.io.FileReader;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class LectorCSV {
-    public List<Puntuable> cargarContribuciones(List<Colaborador> colaboradores, File file) throws Exception {
+    private InstanciadorColaborador instanciadorColaborador;
+    private InstanciadorColaboracion instanciadorColaboracion = new InstanciadorColaboracion();
 
+    public LectorCSV(InstanciadorColaborador instanciadorColaborador) {
+        this.instanciadorColaborador = instanciadorColaborador;
+    }
+    public List<Puntuable> cargarContribuciones(List<Colaborador> colaboradores, File file) throws Exception {
         ArrayList<Puntuable> contribuciones = new ArrayList<Puntuable>();
         String [] linea;
         CSVReader lectorCSV = null;
@@ -30,7 +34,6 @@ public class LectorCSV {
             int lineaActual = 0;
 
             while ((linea = lectorCSV.readNext()) != null) {
-
                 String tipoDoc = linea[0];
                 String doc = linea[1];
                 String nombre = linea[2];
@@ -40,47 +43,15 @@ public class LectorCSV {
                 String formaColaboracion = linea[6];
                 int cantidad = Integer.parseInt(linea[7]);
 
-                List<MedioDeContacto> mediosDeContacto = new ArrayList<>();
-                mediosDeContacto.add(medioDeContacto);
+                ColaboradorDO colaboradorDO = ColaboradorDO.of(tipoDoc, doc,nombre,apellido,medioDeContacto,fechaColaboracion,formaColaboracion,cantidad);
+                Colaborador colaborador = instanciadorColaborador.crearColaborador(colaboradorDO, colaboradores);
 
-                Optional<Colaborador> colaboradorOptional = this.colaboradorCon(tipoDoc, doc, colaboradores);
-                Colaborador colaborador;
-
-                if (colaboradorOptional.isPresent()) {
-                    colaborador = colaboradorOptional.get();
-                } else {
-                    colaborador = new Colaborador(TipoDeColaborador.HUMANA, mediosDeContacto, tipoDoc, doc, nombre, apellido);
-                    colaboradores.add(colaborador);
-                    EnviadorDeMail enviadorDeMail = new EnviadorDeMail();
-                    enviadorDeMail.enviarMail(linea[4], "Nuevo Registro",
-                            "Hola " + nombre + ", muchas gracias por colaborar!\n" +
-                                    "Tu contraseña de ingreso es "+"password"+" y tu usuario es " + nombre
-                            );
-                }
-
-                switch(formaColaboracion) {
-                    case "DINERO":
-                        contribuciones.add(new DonacionDeDinero(cantidad, colaborador));
-                        break;
-                    case "DONACION_VIANDAS":
-                        contribuciones.add(new DonacionDeViandas(colaborador));
-                        break;
-                    case "REDISTRIBUCION_VIANDAS":
-                        contribuciones.add(new DistribucionDeViandas(cantidad, colaborador));
-                        break;
-                    case "ENTREGA_TARJETAS":
-                        for (int i = 0; i < cantidad; i++) {
-                            contribuciones.add(new RegistroDePersonasVulnerables(colaborador));
-                        }
-                        break;
-                }
-
+                instanciadorColaboracion.agregarColaboracion(contribuciones, formaColaboracion, colaborador, cantidad);
 
                 lineaActual++;
 
             }
         } finally {
-            //Close the reader
             if (lectorCSV != null) {
                 lectorCSV.close();
             }
@@ -89,10 +60,4 @@ public class LectorCSV {
     }
 
 
-    private Optional<Colaborador> colaboradorCon(String tipoDoc, String doc, List<Colaborador> colaboradores) {
-        return colaboradores.stream()
-                .filter(colaborador -> colaborador.getTipoDocumento().equals(tipoDoc) &&
-                        colaborador.getDocumento().equals(doc))
-                .findFirst();
-    }
 }
