@@ -1,23 +1,16 @@
 package ar.edu.utn.frba.dds;
 
-import ar.edu.utn.frba.dds.domain.localizacion.AdapterRecomendadorApi;
-import ar.edu.utn.frba.dds.domain.localizacion.Punto;
-import ar.edu.utn.frba.dds.domain.localizacion.RecomendadorDePuntos;
-import ar.edu.utn.frba.dds.domain.personas.Colaborador;
+import ar.edu.utn.frba.dds.entidades.localizacion.AdapterRecomendadorApi;
+import ar.edu.utn.frba.dds.entidades.localizacion.Punto;
+import ar.edu.utn.frba.dds.entidades.localizacion.RecomendadorDePuntos;
+import ar.edu.utn.frba.dds.entidades.personas.Colaborador;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentMatchers;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.configuration.IMockitoConfiguration;
-import org.mockito.internal.matchers.InstanceOf;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.lang.Integer;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

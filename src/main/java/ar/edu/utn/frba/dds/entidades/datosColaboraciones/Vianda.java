@@ -1,0 +1,16 @@
+package ar.edu.utn.frba.dds.entidades.datosColaboraciones;
+
+import ar.edu.utn.frba.dds.entidades.personas.Colaborador;
+import lombok.Getter;
+
+import java.time.LocalDate;
+
+public class Vianda {
+    private LocalDate fechaCaducidad;
+    private String comida;
+    @Getter private Colaborador colaborador;
+    private Heladera heladera;
+    private Integer calorias;
+    private Integer peso;
+    private boolean entregada;
+}
