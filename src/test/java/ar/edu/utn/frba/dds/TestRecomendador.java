@@ -1,9 +1,9 @@
 package ar.edu.utn.frba.dds;
 
-import ar.edu.utn.frba.dds.entidades.localizacion.AdapterRecomendadorApi;
-import ar.edu.utn.frba.dds.entidades.localizacion.Punto;
-import ar.edu.utn.frba.dds.entidades.localizacion.RecomendadorDePuntos;
-import ar.edu.utn.frba.dds.entidades.personas.Colaborador;
+import ar.edu.utn.frba.dds.modelo.entidades.localizacion.AdapterRecomendadorApi;
+import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Punto;
+import ar.edu.utn.frba.dds.modelo.entidades.localizacion.RecomendadorDePuntos;
+import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.ArgumentMatchers;
