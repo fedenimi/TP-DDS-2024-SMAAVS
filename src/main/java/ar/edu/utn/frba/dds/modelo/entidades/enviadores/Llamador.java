@@ -8,6 +8,13 @@ public class Llamador {
     private EnviadorDeMail enviadorDeMail;
     private EnviadorDeTelegram enviadorDeTelegram;
     private EnviadorDeWhatsapp enviadorDeWhatsapp;
+
+    private static Llamador instance = null;
+    public static Llamador getInstance() {
+        if(instance == null)
+            instance = new Llamador();
+        return instance;
+    }
     public void llamar(List<MedioDeContacto> mediosDeContacto, String mensaje, String asuntoOTitulo) {
         mediosDeContacto.forEach(medioDeContacto->{
             switch(medioDeContacto.getTipo()){
