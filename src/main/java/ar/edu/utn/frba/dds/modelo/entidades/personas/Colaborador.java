@@ -20,7 +20,7 @@ public class Colaborador {
     private List<OfrecerProducto> ofrecerProductos;
     private FormularioRespondido formularioRespondido;
     private TipoDeColaborador tipoDeColaborador;
-    private List<MedioDeContacto> mediosDeContacto;
+    @Getter private List<MedioDeContacto> mediosDeContacto;
     private float puntosDisponibles;
     private float puntosCanjeados;
     @Getter

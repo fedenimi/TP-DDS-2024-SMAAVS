@@ -1,7 +1,5 @@
 package ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.sensores;
 
-import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
-
 import java.time.LocalDateTime;
 import java.util.List;
 

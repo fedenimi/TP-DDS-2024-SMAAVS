@@ -13,17 +13,17 @@ import java.util.List;
 
 public class Heladera {
     private ModeloHeladera modeloHeladera;
-    private Integer id;
+    @Getter private Integer id;
     private Punto punto;
     private String direccion;
     private Integer capacidad;
-    @Setter private Estado estado;
+    @Setter @Getter private Estado estado;
     @Getter private LocalDate fechaInicio;
     private Integer tiempoParaVisitarEnMinutos;
     private List<Apertura> aperturas;
     private List<SolicitudApertura> solicitudAperturas;
     private List<VisitaTecnica> visitaTecnicas;
-    private Integer stock;
+    @Getter private Integer stock;
     private List<Topic> topics;
 
     public void agregarSolicitudApertura(SolicitudApertura solicitudApertura) {

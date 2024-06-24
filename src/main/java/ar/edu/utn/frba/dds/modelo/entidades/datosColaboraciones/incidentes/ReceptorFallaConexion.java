@@ -10,7 +10,7 @@ public class ReceptorFallaConexion extends Receptor {
     private List<FallaConexion> fallaConexion;
 
     public void recibirDato() {
-        this.registrarAlerta(Estado.FALLA_CONEXION);
+        this.registrarIncidente(IncidenteDO.of(Estado.FALLA_CONEXION));
         this.agregarFallaConexion();
     }
     public void agregarFallaConexion() {
