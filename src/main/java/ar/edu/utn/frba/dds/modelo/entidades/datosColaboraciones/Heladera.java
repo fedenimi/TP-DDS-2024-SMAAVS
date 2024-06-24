@@ -30,18 +30,6 @@ public class Heladera {
         solicitudAperturas.add(solicitudApertura);
     }
 
-    public void validarApertura(Apertura apertura) {
-        if(puedeAbrir(apertura)){
-            aperturas.add(apertura);
-        }
-    }
-
-    public boolean puedeAbrir(Apertura apertura) {
-        return solicitudAperturas.stream().anyMatch(s ->
-                s.getColaborador() == apertura.getColaborador() &&
-                ChronoUnit.MINUTES.between(s.getFechaYHora(), apertura.getFechaYHora()) < tiempoParaVisitarEnMinutos
-        );
-    }
 
     public Float obtenerTemperaturaMinima() {
         return modeloHeladera.getTemperaturaMinima();

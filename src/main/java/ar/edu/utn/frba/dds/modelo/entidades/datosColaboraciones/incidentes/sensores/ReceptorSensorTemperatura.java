@@ -2,17 +2,18 @@ package ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.sens
 
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class ReceptorSensorTemperatura extends Receptor{
     private List<Medicion> mediciones;
-    private Heladera heladera;
 
     public boolean evaluarTemperatura(Temperatura temperatura) {
-        return temperatura.getValor() >= heladera.obtenerTemperaturaMinima() && temperatura.getValor() <= heladera.obtenerTemperaturaMaxima();
+        return temperatura.getValor() >= this.getHeladera().obtenerTemperaturaMinima() && temperatura.getValor() <= this.getHeladera().obtenerTemperaturaMaxima();
     }
-    public void agregarMedicion(Medicion medicion) {
-
+    public void agregarMedicion(String temperatura) {
+        Medicion medicion = new Medicion(Float.parseFloat(temperatura), LocalDateTime.now());
+        mediciones.add(medicion);
     }
 
 

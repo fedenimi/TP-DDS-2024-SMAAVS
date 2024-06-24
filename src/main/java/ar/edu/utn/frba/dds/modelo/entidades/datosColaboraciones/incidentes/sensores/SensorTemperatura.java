@@ -9,6 +9,7 @@ public class SensorTemperatura {
         Temperatura temp = new Temperatura(Float.parseFloat(temperatura));
         if(!receptor.evaluarTemperatura(temp)) {
             receptor.registrarAlerta(Estado.FALLA_TEMPERATURA);
+            receptor.agregarMedicion(temperatura);
         }
     }
 }
