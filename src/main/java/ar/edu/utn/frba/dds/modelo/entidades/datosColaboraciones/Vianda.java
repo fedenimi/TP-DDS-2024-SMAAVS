@@ -9,8 +9,12 @@ public class Vianda {
     private LocalDate fechaCaducidad;
     private String comida;
     @Getter private Colaborador colaborador;
-    private Heladera heladera;
+    @Getter private Heladera heladera;
     private Integer calorias;
     private Integer peso;
     private boolean entregada;
+
+    public Vianda(Heladera heladera) {
+        this.heladera = heladera;
+    }
 }

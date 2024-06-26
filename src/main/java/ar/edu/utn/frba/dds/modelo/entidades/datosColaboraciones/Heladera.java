@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.*;
 import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Punto;
 import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.Topic;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
@@ -25,6 +26,10 @@ public class Heladera {
     private List<VisitaTecnica> visitaTecnicas;
     @Getter private Integer stock;
     private List<Topic> topics;
+
+    public Heladera(Integer id) {
+        this.id = id;
+    }
 
     public void agregarSolicitudApertura(SolicitudApertura solicitudApertura) {
         solicitudAperturas.add(solicitudApertura);

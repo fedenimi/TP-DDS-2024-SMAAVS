@@ -27,7 +27,7 @@ public class Colaborador {
     private String tipoDocumento;
     @Getter
     private String documento;
-    private String nombre;
+    @Getter private String nombre;
     private String apellido;
     private TarjetaColaborador tarjeta;
     private List<FormaColaboracion> formasDeColaborar;

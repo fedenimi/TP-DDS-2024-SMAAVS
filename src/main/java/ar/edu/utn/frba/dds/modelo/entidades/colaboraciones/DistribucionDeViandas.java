@@ -8,14 +8,21 @@ import lombok.Getter;
 import java.time.LocalDate;
 
 public class DistribucionDeViandas implements Puntuable{
-    private Heladera heladeraOrigen;
-    private Heladera heladeraDestino;
-    private Integer cantidadDeViandas;
+    @Getter private Heladera heladeraOrigen;
+    @Getter private Heladera heladeraDestino;
+    @Getter private Integer cantidadDeViandas;
     private Motivo motivoDistribucion;
     private LocalDate fecha;
 
     @Getter private Colaborador colaborador;
     @Getter private float multiplicador;
+
+    public DistribucionDeViandas(Integer cantidadDeViandas, Colaborador colaborador, Heladera heladeraDestino, Heladera heladeraOrigen) {
+        this.cantidadDeViandas = cantidadDeViandas;
+        this.colaborador = colaborador;
+        this.heladeraDestino = heladeraDestino;
+        this.heladeraOrigen = heladeraOrigen;
+    }
 
     public DistribucionDeViandas(Integer cantidadDeViandas, Colaborador colaborador) {
         this.cantidadDeViandas = cantidadDeViandas;
