@@ -1,13 +1,14 @@
 package ar.edu.utn.frba.dds.modelo.entidades.enviadores;
 
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.MedioDeContacto;
+import lombok.Setter;
 
 import java.util.List;
 
 public class Llamador {
-    private EnviadorDeMail enviadorDeMail;
-    private EnviadorDeTelegram enviadorDeTelegram;
-    private EnviadorDeWhatsapp enviadorDeWhatsapp;
+    private Enviador enviadorDeMail;
+    @Setter private Enviador enviadorDeTelegram;
+    private Enviador enviadorDeWhatsapp;
 
     private static Llamador instance = null;
     public static Llamador getInstance() {
