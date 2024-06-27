@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class FallaTecnica {
     private Colaborador reportador;
-    private  String descripcion;
+    private String descripcion;
     private String foto;
     private LocalDateTime fechaYHora;
     private Heladera heladera;
