@@ -1,5 +1,5 @@
 package ar.edu.utn.frba.dds.modelo.entidades.enviadores;
-
+/*
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -29,3 +29,5 @@ public class GetChatIdBot extends TelegramLongPollingBot {
         }
     }
 }
+*/
+
