@@ -8,20 +8,18 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.Incid
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.Estado;
 import lombok.Getter;
 
-import java.time.LocalDateTime;
 @Getter
 public abstract class Receptor {
     private Heladera heladera;
-    public void registrarIncidente(IncidenteDO incidenteDO) {
-        this.notificarAlertaALaHeladera(incidenteDO.getEstado());
-        this.crearIncidente(heladera, incidenteDO);
+    public void registrarIncidente(Estado estado) {
+        this.notificarAlertaALaHeladera(estado);
         AlertadorDeTecnicos.getInstance().alertar(heladera);
     }
     public void notificarAlertaALaHeladera(Estado estado) {
         heladera.setEstado(estado);
     }
 
-    public void crearIncidente(Heladera heladera, IncidenteDO incidenteDO) {
-        Alerta alerta = FactoryAlerta.getInstance().crearIncidente(heladera, incidenteDO);
+    public Alerta crearAlerta(Heladera heladera, IncidenteDO incidenteDO) {
+        return FactoryAlerta.getInstance().crearIncidente(heladera, incidenteDO);
     }
 }

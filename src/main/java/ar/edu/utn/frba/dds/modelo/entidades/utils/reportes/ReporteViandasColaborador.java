@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.modelo.entidades.utils.reportes;
 import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.DistribucionDeViandas;
 import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.DonacionDeViandas;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
+import ar.edu.utn.frba.dds.modelo.entidades.utils.CalculadorDeFechas;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioDistribucionesViandas;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioDonacionesViandas;
 import lombok.AllArgsConstructor;
@@ -33,7 +34,7 @@ public class ReporteViandasColaborador implements Reporte {
         colaboradorViandaMap = new HashMap<Colaborador, Integer>();
         for (int i = 0; i < repositorioDonacionesViandas.getDonacionDeViandas().size(); i++) {
             DonacionDeViandas donacionDeViandas = repositorioDonacionesViandas.getDonacionDeViandas().get(i);
-            if (this.esEstaSemana(donacionDeViandas.getFecha())){
+            if (CalculadorDeFechas.getInstance().esEstaSemana(donacionDeViandas.getFecha())){
                 Colaborador colaborador = donacionDeViandas.getColaborador();
                 Integer cantidadDeViandas = donacionDeViandas.cantidadDeViandas();
                 this.agregarViandasAMap(cantidadDeViandas, colaborador);
@@ -41,7 +42,7 @@ public class ReporteViandasColaborador implements Reporte {
         }
         for (int i = 0; i < repositorioDistribucionesViandas.getDistribucionDeViandas().size(); i++) {
             DistribucionDeViandas distribucionDeViandas = repositorioDistribucionesViandas.getDistribucionDeViandas().get(i);
-            if (this.esEstaSemana(distribucionDeViandas.getFecha())) {
+            if (CalculadorDeFechas.getInstance().esEstaSemana(distribucionDeViandas.getFecha())) {
                 Colaborador colaborador = distribucionDeViandas.getColaborador();
                 Integer cantidadDeViandas = distribucionDeViandas.getCantidadDeViandas();
                 this.agregarViandasAMap(cantidadDeViandas, colaborador);
@@ -59,20 +60,6 @@ public class ReporteViandasColaborador implements Reporte {
         }
         return result.toString();
     }
-
-    private boolean esEstaSemana(LocalDate fecha) {
-        LocalDate today = LocalDate.now();
-        WeekFields weekFields = WeekFields.of(Locale.getDefault());
-
-        int currentWeek = today.get(weekFields.weekOfWeekBasedYear());
-        int dateWeek = fecha.get(weekFields.weekOfWeekBasedYear());
-
-        int currentYear = today.get(weekFields.weekBasedYear());
-        int dateYear = fecha.get(weekFields.weekBasedYear());
-
-        return currentWeek == dateWeek && currentYear == dateYear;
-    }
-
     private void agregarViandasAMap(Integer cantidadDeViandas, Colaborador colaborador) {
         if(colaboradorViandaMap.containsKey(colaborador) ) {
             cantidadDeViandas += colaboradorViandaMap.get(colaborador);
