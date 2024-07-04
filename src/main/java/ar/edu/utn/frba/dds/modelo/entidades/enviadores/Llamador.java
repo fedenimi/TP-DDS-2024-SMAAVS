@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.modelo.entidades.enviadores;
 
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.MedioDeContacto;
 import lombok.Setter;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.List;
 
@@ -20,13 +21,25 @@ public class Llamador {
         mediosDeContacto.forEach(medioDeContacto->{
             switch(medioDeContacto.getTipo()){
                 case MAIL:
-                    enviadorDeMail.enviar(medioDeContacto.getValor(), asuntoOTitulo, mensaje);
+                    try {
+                        enviadorDeMail.enviar(medioDeContacto.getValor(), asuntoOTitulo, mensaje);
+                    } catch (TelegramApiException e) {
+                        throw new RuntimeException(e);
+                    }
                     break;
                 case WHATSAPP:
-                    enviadorDeWhatsapp.enviar(medioDeContacto.getValor(), asuntoOTitulo, mensaje);
+                    try {
+                        enviadorDeWhatsapp.enviar(medioDeContacto.getValor(), asuntoOTitulo, mensaje);
+                    } catch (TelegramApiException e) {
+                        throw new RuntimeException(e);
+                    }
                     break;
                 case TELEGRAM:
-                    enviadorDeTelegram.enviar(medioDeContacto.getValor(), asuntoOTitulo, mensaje);
+                    try {
+                        enviadorDeTelegram.enviar(medioDeContacto.getValor(), asuntoOTitulo, mensaje);
+                    } catch (TelegramApiException e) {
+                        throw new RuntimeException(e);
+                    }
                     break;
             }
         });

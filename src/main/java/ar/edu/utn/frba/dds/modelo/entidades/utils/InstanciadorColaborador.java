@@ -5,6 +5,7 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.TipoDeColaborador;
 import ar.edu.utn.frba.dds.modelo.entidades.enviadores.Enviador;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import lombok.AllArgsConstructor;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class InstanciadorColaborador {
     private Enviador enviador;
-    public Colaborador crearColaborador(ColaboradorDO colaboradorDO, List<Colaborador> colaboradores) {
+    public Colaborador crearColaborador(ColaboradorDO colaboradorDO, List<Colaborador> colaboradores) throws TelegramApiException {
         List<MedioDeContacto> mediosDeContacto = new ArrayList<>();
         mediosDeContacto.add(colaboradorDO.getMedioDeContacto());
         Optional<Colaborador> colaboradorOptional = this.colaboradorCon(colaboradorDO.getTipoDoc(), colaboradorDO.getDoc(), colaboradores);
