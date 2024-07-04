@@ -21,13 +21,15 @@ import java.util.Map;
 public class ReporteViandasColaborador implements Reporte {
     private RepositorioDonacionesViandas repositorioDonacionesViandas;
     private RepositorioDistribucionesViandas repositorioDistribucionesViandas;
-    Map<Colaborador, Integer> colaboradorViandaMap;
+    @Getter private Map<Colaborador, Integer> colaboradorViandaMap;
     @Getter private String nombreArchivo;
+    private ReporteStringViandasColaborador reporteStringViandasColaborador;
 
-    public ReporteViandasColaborador( RepositorioDonacionesViandas repositorioDonacionesViandas, RepositorioDistribucionesViandas repositorioDistribucionesViandas, String nombreArchivo) {
+    public ReporteViandasColaborador( RepositorioDonacionesViandas repositorioDonacionesViandas, RepositorioDistribucionesViandas repositorioDistribucionesViandas, String nombreArchivo, ReporteStringViandasColaborador reporteStringViandasColaborador) {
         this.repositorioDonacionesViandas = repositorioDonacionesViandas;
         this.repositorioDistribucionesViandas = repositorioDistribucionesViandas;
         this.nombreArchivo = nombreArchivo;
+        this.reporteStringViandasColaborador = reporteStringViandasColaborador;
     }
     @Override
     public String crearReporte() {
@@ -48,17 +50,7 @@ public class ReporteViandasColaborador implements Reporte {
                 this.agregarViandasAMap(cantidadDeViandas, colaborador);
             }
         }
-        StringBuilder result = new StringBuilder();
-        result.append("Fecha: ")
-                .append(LocalDate.now().toString())
-                .append("\n");
-        for (Map.Entry<Colaborador, Integer> entry : colaboradorViandaMap.entrySet()) {
-            result.append(entry.getKey().getNombre())
-                    .append(": ")
-                    .append(entry.getValue())
-                    .append(" viandas\n");
-        }
-        return result.toString();
+        return reporteStringViandasColaborador.crearReporteString(this);
     }
     private void agregarViandasAMap(Integer cantidadDeViandas, Colaborador colaborador) {
         if(colaboradorViandaMap.containsKey(colaborador) ) {

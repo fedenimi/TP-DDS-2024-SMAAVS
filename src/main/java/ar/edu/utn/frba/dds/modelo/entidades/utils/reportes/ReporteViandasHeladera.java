@@ -18,14 +18,16 @@ import java.util.Map;
 public class ReporteViandasHeladera implements Reporte {
     private RepositorioDonacionesViandas repositorioDonacionesViandas;
     private RepositorioDistribucionesViandas repositorioDistribucionesViandas;
-    Map<Heladera, Integer> heladeraViandaColocadaMap;
-    Map<Heladera, Integer> heladeraViandaRetiradaMap;
+    @Getter private Map<Heladera, Integer> heladeraViandaColocadaMap;
+    @Getter private Map<Heladera, Integer> heladeraViandaRetiradaMap;
     @Getter private String nombreArchivo;
+    private ReporteStringViandasHeladera reporteStringViandasHeladera;
 
-    public ReporteViandasHeladera( RepositorioDonacionesViandas repositorioDonacionesViandas, RepositorioDistribucionesViandas repositorioDistribucionesViandas, String nombreArchivo) {
+    public ReporteViandasHeladera( RepositorioDonacionesViandas repositorioDonacionesViandas, RepositorioDistribucionesViandas repositorioDistribucionesViandas, String nombreArchivo, ReporteStringViandasHeladera reporteStringViandasHeladera) {
         this.repositorioDonacionesViandas = repositorioDonacionesViandas;
         this.repositorioDistribucionesViandas = repositorioDistribucionesViandas;
         this.nombreArchivo = nombreArchivo;
+        this.reporteStringViandasHeladera = reporteStringViandasHeladera;
     }
     @Override
     public String crearReporte() {
@@ -48,25 +50,7 @@ public class ReporteViandasHeladera implements Reporte {
                 this.agregarViandasAMap(distribucionDeViandas.getCantidadDeViandas(), distribucionDeViandas.getHeladeraOrigen(), heladeraViandaRetiradaMap);
             }
         }
-        StringBuilder result = new StringBuilder();
-        result.append("Fecha: ")
-                .append(LocalDate.now().toString())
-                .append("\n");
-        Map<Heladera, Integer> allHeladeras = new HashMap<>(heladeraViandaRetiradaMap);
-        allHeladeras.putAll(heladeraViandaColocadaMap);
-
-        for (Heladera heladera : allHeladeras.keySet()) {
-            int colocadas = heladeraViandaColocadaMap.getOrDefault(heladera, 0);
-            int retiradas = heladeraViandaRetiradaMap.getOrDefault(heladera, 0);
-            result.append("Heladera ")
-                    .append(heladera.getId())
-                    .append(": ")
-                    .append(colocadas)
-                    .append(" colocadas y ")
-                    .append(retiradas)
-                    .append(" retiradas\n");
-        }
-        return result.toString();
+    return reporteStringViandasHeladera.crearReporteString(this);
     }
 
     private void agregarViandasAMap(Integer cantidadDeViandas, Heladera heladera, Map<Heladera, Integer> map) {

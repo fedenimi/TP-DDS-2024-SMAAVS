@@ -74,11 +74,11 @@ public class MainReportar {
 
 
 
-        ReporteViandasColaborador reporteViandasColaborador = new ReporteViandasColaborador(repoDona, repoDist, "reporteViandasColaborador");
+        ReporteViandasColaborador reporteViandasColaborador = new ReporteViandasColaborador(repoDona, repoDist, "reporteViandasColaborador", new ReporteStringViandasColaborador());
         creadoresDeReporte.add(reporteViandasColaborador);
-        ReporteViandasHeladera reporteViandasHeladera = new ReporteViandasHeladera(repoDona, repoDist, "reporteViandasHeladera");
+        ReporteViandasHeladera reporteViandasHeladera = new ReporteViandasHeladera(repoDona, repoDist, "reporteViandasHeladera", new ReporteStringViandasHeladera());
         creadoresDeReporte.add(reporteViandasHeladera);
-        ReporteFallas reporteFallas = new ReporteFallas(repositorioAlertas, repositorioFallasTecnicas, "reporteFallasHeladera");
+        ReporteFallas reporteFallas = new ReporteFallas(repositorioAlertas, repositorioFallasTecnicas, "reporteFallasHeladera", new ReporteStringFallas());
         creadoresDeReporte.add(reporteFallas);
         for (int i = 0; i < creadoresDeReporte.size(); i++) {
             Reporte reporte = creadoresDeReporte.get(i);
