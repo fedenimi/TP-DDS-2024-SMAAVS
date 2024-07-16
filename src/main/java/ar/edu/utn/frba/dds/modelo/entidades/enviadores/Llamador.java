@@ -21,25 +21,13 @@ public class Llamador {
         mediosDeContacto.forEach(medioDeContacto->{
             switch(medioDeContacto.getTipo()){
                 case MAIL:
-                    try {
-                        enviadorDeMail.enviar(medioDeContacto.getValor(), asuntoOTitulo, mensaje);
-                    } catch (TelegramApiException e) {
-                        throw new RuntimeException(e);
-                    }
+                    enviadorDeMail.enviar(medioDeContacto.getValor(), asuntoOTitulo, mensaje);
                     break;
                 case WHATSAPP:
-                    try {
-                        enviadorDeWhatsapp.enviar(medioDeContacto.getValor(), asuntoOTitulo, mensaje);
-                    } catch (TelegramApiException e) {
-                        throw new RuntimeException(e);
-                    }
+                    enviadorDeWhatsapp.enviar(medioDeContacto.getValor(), asuntoOTitulo, mensaje);
                     break;
                 case TELEGRAM:
-                    try {
-                        enviadorDeTelegram.enviar(medioDeContacto.getValor(), asuntoOTitulo, mensaje);
-                    } catch (TelegramApiException e) {
-                        throw new RuntimeException(e);
-                    }
+                    enviadorDeTelegram.enviar(medioDeContacto.getValor(), asuntoOTitulo, mensaje);
                     break;
             }
         });

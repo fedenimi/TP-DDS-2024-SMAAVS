@@ -1,9 +1,12 @@
-package ar.edu.utn.frba.dds.modelo.entidades.utils;
+package ar.edu.utn.frba.dds.modelo.entidades.utils.archivos;
 
 import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.Puntuable;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.MedioDeContacto;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.TipoDeContacto;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
+import ar.edu.utn.frba.dds.modelo.entidades.utils.ColaboradorDO;
+import ar.edu.utn.frba.dds.modelo.entidades.utils.InstanciadorColaboracion;
+import ar.edu.utn.frba.dds.modelo.entidades.utils.InstanciadorColaborador;
 import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;

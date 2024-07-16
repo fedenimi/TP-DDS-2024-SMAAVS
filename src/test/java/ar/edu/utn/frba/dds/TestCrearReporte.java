@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.modelo.entidades.utils.reportes;
+package ar.edu.utn.frba.dds;
 
 import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.DistribucionDeViandas;
 import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.DonacionDeViandas;
@@ -10,24 +10,24 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.Est
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.MedioDeContacto;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.TipoDeColaborador;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
-import ar.edu.utn.frba.dds.modelo.entidades.utils.CreadorPDF;
+import ar.edu.utn.frba.dds.modelo.entidades.utils.reportes.*;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioAlertas;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioDistribucionesViandas;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioDonacionesViandas;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioFallasTecnicas;
+import org.junit.Before;
+import org.junit.Test;
 
-import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainReportar {
-
-    public static void main(String[] args) throws FileNotFoundException {
-        CreadorPDF creadorPDF = new CreadorPDF();
-        List<Reporte> creadoresDeReporte = new ArrayList<>();
+public class TestCrearReporte {
+    List<Reporte> creadoresDeReporte = new ArrayList<>();
+    @Before
+    public void initializer() {
 
         List<MedioDeContacto> medios = new ArrayList<>();
         Colaborador martin = new Colaborador(TipoDeColaborador.HUMANA, medios, "DNI", "12345678", "Martin", "Martinez");
@@ -57,7 +57,7 @@ public class MainReportar {
         donacionesDeViandas.add(new DonacionDeViandas(nico, Arrays.asList(vianda6, vianda6), LocalDate.now()));
         RepositorioDonacionesViandas repoDona = new RepositorioDonacionesViandas(donacionesDeViandas);
 
-        Alerta alerta1 = new Alerta(Estado.FRAUDE ,LocalDateTime.now(), hel1);
+        Alerta alerta1 = new Alerta(Estado.FRAUDE , LocalDateTime.now(), hel1);
         Alerta alerta2 = new Alerta(Estado.FRAUDE, LocalDateTime.now(), hel2);
         Alerta alerta3 = new Alerta(Estado.FRAUDE, LocalDateTime.now(), hel3);
         FallaTecnica fallaTecnica1 = new FallaTecnica(nico, "Descripcion", "Foto", LocalDateTime.now(), hel1);
@@ -80,10 +80,14 @@ public class MainReportar {
         creadoresDeReporte.add(reporteViandasHeladera);
         ReporteFallas reporteFallas = new ReporteFallas(repositorioAlertas, repositorioFallasTecnicas, "reporteFallasHeladera", new ReporteStringFallas());
         creadoresDeReporte.add(reporteFallas);
+    }
+    @Test
+    public void crearPdf() {
         for (int i = 0; i < creadoresDeReporte.size(); i++) {
             Reporte reporte = creadoresDeReporte.get(i);
             String pdf = reporte.crearReporte();
-            creadorPDF.crearPDF(pdf, reporte.getNombreArchivo());
+            CreadorDeReporte creadorDeReporte = new CreadorDeReporte();
+            creadorDeReporte.crearReporte(pdf, reporte.getNombreArchivo(), FormatoReporte.PDF);
         }
     }
 }

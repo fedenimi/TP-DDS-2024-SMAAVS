@@ -7,7 +7,7 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.TipoDeContacto;
 import ar.edu.utn.frba.dds.modelo.entidades.enviadores.Enviador;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.InstanciadorColaborador;
-import ar.edu.utn.frba.dds.modelo.entidades.utils.LectorCSV;
+import ar.edu.utn.frba.dds.modelo.entidades.utils.archivos.LectorCSV;
 import org.junit.Assert;
 import org.junit.Test;
 

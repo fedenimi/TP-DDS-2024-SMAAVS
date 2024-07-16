@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.modelo.entidades.utils;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.AlertadorDeTecnicos;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.temporal.WeekFields;
 import java.util.Locale;
 
@@ -25,5 +26,9 @@ public class CalculadorDeFechas {
         int dateYear = fecha.get(weekFields.weekBasedYear());
 
         return currentWeek == dateWeek && currentYear == dateYear;
+    }
+
+    public LocalDateTime stringToLocalDateTime(String fechaString) {
+        return LocalDateTime.parse(fechaString);
     }
 }

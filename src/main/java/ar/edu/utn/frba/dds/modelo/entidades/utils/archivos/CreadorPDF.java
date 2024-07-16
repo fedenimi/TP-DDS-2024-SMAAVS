@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.modelo.entidades.utils;
+package ar.edu.utn.frba.dds.modelo.entidades.utils.archivos;
 
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;

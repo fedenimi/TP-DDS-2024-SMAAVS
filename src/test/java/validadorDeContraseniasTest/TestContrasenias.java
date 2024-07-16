@@ -18,7 +18,7 @@ public class TestContrasenias {
 
     @Before
     public void initializer()   {
-    user1.setValidador(validador);
+        user1.setValidador(validador);
 
     }
 
