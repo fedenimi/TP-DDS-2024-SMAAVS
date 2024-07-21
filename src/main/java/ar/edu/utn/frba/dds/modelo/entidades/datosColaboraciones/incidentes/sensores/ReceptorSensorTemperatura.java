@@ -4,11 +4,14 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.Alerta;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.CreadorAlerta;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.Estado;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.*;
+
 @Getter
+@AllArgsConstructor
 public class ReceptorSensorTemperatura {
     private List<Medicion> mediciones;
     private Heladera heladera;
@@ -24,4 +27,9 @@ public class ReceptorSensorTemperatura {
         return CreadorAlerta.getInstance().crearAlerta(heladera, estado);
     }
 
+    public LocalDateTime getUltimaConexion() {
+        Optional<Medicion> medicionMasNueva = mediciones.stream().min(Comparator.comparing(Medicion::getFechaYHora));
+        if(medicionMasNueva.isPresent()) return medicionMasNueva.get().getFechaYHora();
+        return null;
+    }
 }

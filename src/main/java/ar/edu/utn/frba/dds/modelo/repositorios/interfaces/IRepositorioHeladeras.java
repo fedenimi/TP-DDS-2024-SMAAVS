@@ -6,4 +6,5 @@ import java.util.Optional;
 
 public interface IRepositorioHeladeras {
     public Optional<Heladera> buscar(String id);
+    public void agregar(Heladera heladera);
 }

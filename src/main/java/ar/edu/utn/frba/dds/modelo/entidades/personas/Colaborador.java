@@ -15,19 +15,18 @@ import lombok.NoArgsConstructor;
 import java.io.IOException;
 import java.util.List;
 @NoArgsConstructor
+@Getter
 public class Colaborador {
     private List<Puntuable> puntuables;
     private List<OfrecerProducto> ofrecerProductos;
     private FormularioRespondido formularioRespondido;
     private TipoDeColaborador tipoDeColaborador;
-    @Getter private List<MedioDeContacto> mediosDeContacto;
+    private List<MedioDeContacto> mediosDeContacto;
     private float puntosDisponibles;
     private float puntosCanjeados;
-    @Getter
     private String tipoDocumento;
-    @Getter
     private String documento;
-    @Getter private String nombre;
+    private String nombre;
     private String apellido;
     private TarjetaColaborador tarjeta;
     private List<FormaColaboracion> formasDeColaborar;

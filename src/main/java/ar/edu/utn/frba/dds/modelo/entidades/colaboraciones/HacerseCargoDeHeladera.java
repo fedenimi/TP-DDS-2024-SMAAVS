@@ -5,6 +5,7 @@ import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import lombok.Getter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Period;
 
 public class HacerseCargoDeHeladera implements Puntuable{
@@ -21,6 +22,6 @@ public class HacerseCargoDeHeladera implements Puntuable{
 
     @Override
     public int cantidadDeMesesSiendoHeladera() {
-        return Period.between(heladera.getFechaInicio(), LocalDate.now()).getMonths();
+        return Period.between(heladera.getFechaYHoraInicio().toLocalDate(), LocalDate.now()).getMonths();
     }
 }

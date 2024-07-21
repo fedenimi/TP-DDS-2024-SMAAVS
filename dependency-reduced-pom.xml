@@ -100,7 +100,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>ar.edu.utn.frba.dds.modelo.entidades.utils.reportes.MainReportar</mainClass>
+              <mainClass>ar.edu.utn.frba.dds.modelo.entidades.cronJobs.MainReportar</mainClass>
             </manifest>
           </archive>
         </configuration>
@@ -116,7 +116,7 @@
               <shadedArtifactAttached>true</shadedArtifactAttached>
               <transformers>
                 <transformer>
-                  <mainClass>ar.edu.utn.frba.dds.modelo.entidades.utils.reportes.MainReportar</mainClass>
+                  <mainClass>ar.edu.utn.frba.dds.modelo.entidades.cronJobs.MainReportar</mainClass>
                 </transformer>
               </transformers>
             </configuration>

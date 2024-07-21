@@ -7,7 +7,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import java.util.List;
 
 public class Llamador {
-    private Enviador enviadorDeMail;
+    @Setter private Enviador enviadorDeMail;
     @Setter private Enviador enviadorDeTelegram;
     private Enviador enviadorDeWhatsapp;
 

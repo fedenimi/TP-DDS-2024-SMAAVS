@@ -230,7 +230,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>ar.edu.utn.frba.dds.modelo.entidades.utils.reportes.MainReportar</mainClass>
+              <mainClass>ar.edu.utn.frba.dds.modelo.entidades.cronJobs.MainReportar</mainClass>
             </manifest>
           </archive>
         </configuration>
@@ -251,7 +251,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>ar.edu.utn.frba.dds.modelo.entidades.utils.reportes.MainReportar</mainClass>
+              <mainClass>ar.edu.utn.frba.dds.modelo.entidades.cronJobs.MainReportar</mainClass>
             </manifest>
           </archive>
         </configuration>
@@ -260,23 +260,40 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
         <version>3.1.0</version>
-        <configuration>
-          <descriptorRefs>
-            <descriptorRef>jar-with-dependencies</descriptorRef>
-          </descriptorRefs>
-          <archive>
-            <manifest>
-              <mainClass>ar.edu.utn.frba.dds.modelo.entidades.utils.reportes.MainReportar</mainClass>
-            </manifest>
-          </archive>
-        </configuration>
         <executions>
           <execution>
-            <id>make-assembly</id>
+            <id>make-assembly-main1</id>
             <phase>package</phase>
             <goals>
               <goal>single</goal>
             </goals>
+            <configuration>
+              <descriptorRefs>
+                <descriptorRef>jar-with-dependencies</descriptorRef>
+              </descriptorRefs>
+              <archive>
+                <manifest>
+                  <mainClass>ar.edu.utn.frba.dds.modelo.entidades.cronJobs.MainVerificarConexiones</mainClass>
+                </manifest>
+              </archive>
+            </configuration>
+          </execution>
+          <execution>
+            <id>make-assembly-main2</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <descriptorRefs>
+              <descriptorRef>jar-with-dependencies</descriptorRef>
+            </descriptorRefs>
+              <archive>
+                <manifest>
+                  <mainClass>ar.edu.utn.frba.dds.modelo.entidades.cronJobs.MainReportar</mainClass>
+                </manifest>
+              </archive>
+            </configuration>
           </execution>
         </executions>
       </plugin>

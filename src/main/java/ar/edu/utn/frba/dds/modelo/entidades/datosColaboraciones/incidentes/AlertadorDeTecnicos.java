@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AlertadorDeTecnicos {
-    private BuscadorDeTecnicos buscadorDeTecnicos;
 
     private static AlertadorDeTecnicos instance = null;
     public static AlertadorDeTecnicos getInstance() {
@@ -17,10 +16,10 @@ public class AlertadorDeTecnicos {
             instance = new AlertadorDeTecnicos();
         return instance;
     }
-    public void alertar(Heladera heladera) {
+    public void alertar(Heladera heladera, IBuscadorDeTecnicos buscadorDeTecnicos) {
         Tecnico tecnicoMasCercano = buscadorDeTecnicos.buscarTecnicoMasCercanoA(heladera);
         List<MedioDeContacto> mediosDeContacto = new ArrayList<>();
         mediosDeContacto.add(tecnicoMasCercano.getMedioDeContacto());
-        Llamador.getInstance().llamar(mediosDeContacto, "Anda a arreglar una heladera", "HELADERA ROTA");
+        Llamador.getInstance().llamar(mediosDeContacto, "Anda a arreglar la heladera " + heladera.getId(), "HELADERA ROTA");
     }
 }
