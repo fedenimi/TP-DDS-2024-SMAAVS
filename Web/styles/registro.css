@@ -2,8 +2,21 @@
     height: calc(100vh - 80px);
     display: grid;
     grid-template-rows: auto 1fr auto;
-    padding:8rem;
+    padding: 6rem;
     color: #A7A7A7;
+}
+
+.registro2-main {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 80px);
+    padding: 6rem;
+}
+
+.registro2-title {
+    display: flex;
+    flex: 1;
+    justify-content: flex-start;
 }
 
 .btns-title {
@@ -25,6 +38,15 @@
     grid-template-columns: 2fr 1fr 2fr;
     grid-template-rows: repeat(4, auto);
     padding-top: 15px;
+}
+
+.form-registro2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 5;
+    color: #A7A7A7;
 }
 
 .btn-title {
@@ -56,13 +78,44 @@
     border-radius: 5px;
 }
 
+.form-element2 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.form-element2 label {
+    margin-bottom: 0.5rem;
+    margin-left: 0.2rem;
+    font-weight: bold;
+}
+
+.form-element2 input {
+    width: 100%;
+    padding: 0.5rem 10rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
 .btn-next {
     display: flex;
     justify-content: flex-end;
     padding: 1rem 0;
 }
 
-.btn-next a {
+.btns-next {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+}
+
+.btn-next2 i {
+    display: none;
+}
+
+.btn-next a,
+.btn-next2 {
     background-color: #A0C6FF;
     border: none;
     padding: 20px 60px;
@@ -74,7 +127,7 @@
     transition: background-color 0.3s ease;
 }
 
-.btn-next a:hover {
+.btn-next a:hover , .btn-next2:hover{
     background-color: #87ceeb;
 }
 
@@ -91,8 +144,39 @@
     .form-registro {
         grid-template-columns: 1fr;
     }
+
     .tipo-colab {
         align-items: center;
     }
-}
 
+    .btn-next {
+        justify-content: center;
+    }
+
+    .registro2-main {
+        display: flex;
+        flex-direction: column;
+        padding: 2rem;
+    }
+
+    .btn-next2 {
+        display: block;
+        border: none;
+        cursor: pointer;
+        scale: 0.8;
+        border-radius: 50px;
+        transition: scale 0.3s ease;
+    }
+
+    .form-registro2 {
+        flex: 0;
+    }
+
+    .btn-next2 i {
+        display: block;
+    }
+
+    .btn-next2 p {
+        display: none;
+    }
+}

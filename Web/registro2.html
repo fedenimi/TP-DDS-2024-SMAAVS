@@ -25,7 +25,7 @@
             </ul>
             <div class="header-btns" href="#">
                 <a class="header-btn left-btn" href="inicioSesion.html">Iniciar sesión</a>
-                <a class="header-btn right-btn pressed-btn" href="registroJ.html">Registrarse</a>
+                <a class="header-btn right-btn pressed-btn" href="registroH.html">Registrarse</a>
             </div>
             <div class="toggle-btn">
                 <i class="fa-solid fa-bars"></i>
@@ -35,58 +35,41 @@
             <li><a href="main.html">Menu</li>
             <li><a href="">Contacto</li>
             <li><a href="inicioSesion.html">Iniciar sesión</a></li>
-            <li><a href="registroJ.html">Registrarse</a></li>
+            <li><a href="registroH.html">Registrarse</a></li>
         </div>
     </header>
-    <main class="registro-main">
-        <div class="tipo-colab">
-            <label class="">Tipo de colaborador</label>
-            <div class="btns-title">
-                <a class="btn-title left-btn" href="registroH.html">Humana</a>
-                <a class="btn-title right-btn pressed-btn" href="registroJ.html">Jurídica</a>
-            </div>
+    <main class="registro2-main">
+        <div class="registro2-title">
+            <h1>Hola Ramón <br>
+                Ya falta poco! </h1>
         </div>
-        <form class="form-registro">
-            <div class="form-element">
-                <label for="form-nombre">Razón social</label>
+        <form class="form-registro2">
+            <div class="form-element2">
+                <label for="form-nombre">Usuario</label>
                 <input type="text" name="apellido" id="form-apellido" required>
             </div>
-            <div></div>
-            <div class="form-element">
-                <label for="form-apellido">Mail</label>
-                <input type="text" name="apellido" id="form-apellido" required>
-            </div>
-            <div class="form-element">
-                <label for="form-nombre">Tipo juridico</label>
-                <input type="text" name="apellido" id="form-apellido" required>
-            </div>
-            <div></div>
-            <div class="form-element">
-                <label for="form-nombre">Teléfono</label>
-                <input type="text" name="apellido" id="form-apellido" required>
-            </div>
-            <div class="form-element">
-                <label for="form-nombre">Dirección</label>
-                <input type="text" name="apellido" id="form-apellido" required>
-            </div>
-            <div></div>
-            <div class="form-element">
-                <label for="form-apellido">Whatsapp</label>
-                <input type="text" name="apellido" id="form-apellido" required>
-            </div>
-            <div class="form-element">
-                <label for="form-nombre">Rubro</label>
+            <div class="form-element2">
+                <label for="form-apellido">Contraseña</label>
                 <input type="text" name="apellido" id="form-apellido" required>
             </div>
         </form>
-        <div class="btn-next">
-            <a href="registro2.html">Siguiente</a>
+        <div class="btns-next">
+            <a class="btn-next2" href="registroH.html">
+                <p>Atrás</p>
+                <i class="fa fa-arrow-left"></i>
+            </a>
+            <a class="btn-next2" href="">
+                <p>Finalizar</p>
+                <i class="fa fa-arrow-right"></i>
+            </a>
         </div>
     </main>
     <script>
         const toggleBtn = document.querySelector('.toggle-btn');
         const toggleBtnIcon = document.querySelector('.toggle-btn i');
         const dropdownMenu = document.querySelector('.dropdown-menu');
+
+
 
         toggleBtn.onclick = function () {
             dropdownMenu.classList.toggle('open');
