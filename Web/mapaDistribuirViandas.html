@@ -7,8 +7,8 @@
     <title>Mapa de Heladeras</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <link rel="stylesheet" href="styles/main.css">
@@ -28,7 +28,7 @@
 
         .heladeras-dashboard {
             z-index: 1000;
-            border-top-right-radius: 0;   
+            border-top-right-radius: 0;
             max-height: 100%;
             display: none;
             max-width: 800px;
@@ -57,20 +57,6 @@
         .leaflet-left {
             display: none;
         }
-
-        .dropdown-heladera ul {
-            display: none;
-            position: absolute;
-            background-color: white;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-            list-style: none;
-            padding: 0;
-        }
-
-        .dropdown-heladera:hover ul {
-            display: block;
-        }
     </style>
 </head>
 
@@ -81,9 +67,11 @@
             <section class="heladeras-dashboard open">
                 <section class="heladeras-dashboard-scrollable">
                     <div class="title">
-                        <div>
-                            <h2>ELEGIR HELADERA ORIGEN</h2>
-                            <h2>1/2</h2>
+                        <div class="title-text">
+                            <h2 class="dist1">ELEGIR HELADERA ORIGEN</h2>
+                            <h2 class="dist2">ELEGIR HELADERA DESTINO</h2>
+                            <h2 class="dist1">1/2</h2>
+                            <h2 class="dist2">2/2</h2>
                         </div>
                         <hr>
                     </div>
@@ -95,22 +83,6 @@
                                 <hr>
                                 <p>3 viandas</p>
                             </div>
-                            <div class="dropdown-heladera">
-                                <ul>
-                                    <li>
-                                        <a href="">
-                                            <i class="fa-solid fa-pencil"></i>
-                                            <p>Modificar</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="">
-                                            <i class="fa-solid fa-trash"></i>
-                                            <p>Eliminar</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
                     <div class="heladeras-sin-fallas-dashboard">
@@ -121,33 +93,20 @@
                                 <hr>
                                 <p>3 viandas</p>
                             </div>
-                            <div class="dropdown-heladera">
-                                <ul>
-                                    <li>
-                                        <a href="">
-                                            <i class="fa-solid fa-pencil"></i>
-                                            <p>Modificar</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="">
-                                            <i class="fa-solid fa-trash"></i>
-                                            <p>Eliminar</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>                      
+                        </div>
                     </div>
                 </section>
-                <div class="boton-dashboard">
-                    <a>
-                        <a href="distribuirViandas3.html">Confirmar</a>
+                <div class="btns">
+                    <a class="boton-dashboard volver-btn dist2">Volver</a>
+                    <a href="distribuirViandas.html" class="boton-dashboard volver-btn dist1">Volver</a>
+                    <a class="boton-dashboard sig-btn dist1">Siguiente</a>
+                    <a href="distribuirViandas3.html" class="boton-dashboard dist2">
+                        Confirmar
                     </a>
                 </div>
             </section>
             <button class="arrow-opener">
-                <i class="fa-solid fa-chevron-right"></i>
+                <i class="fa-solid fa-chevron-left"></i>
             </button>
         </div>
     </div>
@@ -157,6 +116,7 @@
 
     <script src="scripts/mapViandas.js"></script>
     <script src="scripts/dropdownScript.js"></script>
+    <script src="scripts/modalViandas.js"></script>
 
 </body>
 

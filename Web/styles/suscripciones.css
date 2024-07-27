@@ -23,7 +23,7 @@
 
 .suscripcion {
     width: 100%;
-    background-color: green;
+    background-color: rgb(144, 241, 144);
     font-size: 1.5em;
     display: flex;
     padding: 10px;
@@ -55,7 +55,7 @@
 }
 
 .alerta {
-    background-color: red;
+    background-color: rgb(223, 95, 95);
 }
 
 .linea-suscripciones {

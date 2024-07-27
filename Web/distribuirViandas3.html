@@ -1,118 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Datos</title>
+    <title>SMAAVS</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'JetBrains Mono', monospace;
-            background-color: #D3A98D;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .container {
-            background-color: rgba(255, 255, 255, 0.2);
-            padding: 40px;
-            border-radius: 10px;
-            backdrop-filter: blur(15px);
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            max-width: 90%;
-            height: 90%;
-            box-sizing: border-box;
-            color: #A7A7A7;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .container h1 {
-            font-size: 36px;
-            margin-bottom: 20px;
-        }
-
-        .container label {
-            font-size: 18px;
-            margin-bottom: 5px;
-            display: block;
-            font-weight: bold;
-        }
-
-        .container input[type="text"],
-        .container select {
-            width: 100%;
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-            font-size: 18px;
-            background-color: #fff;
-            color: #333;
-        }
-
-        .container .buttons {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .container .buttons a,
-        .container .buttons button {
-            padding: 15px 30px;
-            font-size: 18px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            background-color: #A0C6FF;
-            color: black;
-            font-weight: bold;
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
-            transition: background-color 0.3s ease;
-        }
-
-        .container .buttons a:hover,
-        .container .buttons button:hover {
-            background-color: #87ceeb;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/registro.css">
+    <link rel="stylesheet" href="styles/viandas.css">
 </head>
 
 <body>
-    <div class="container">
-        <h1>Complete los datos correspondientes</h1>
-        <label for="heladera-origen">Heladera origen seleccionada</label>
-        <input type="text" id="heladera-origen" value="Heladera A        3 Viandas" readonly>
-        
-        <label for="heladera-destino">Heladera destino seleccionada</label>
-        <input type="text" id="heladera-destino" value="Heladera A        0 Viandas" readonly>
-        
-        <label for="motivo">Motivo</label>
-        <select id="motivo">
-            <option value="falla">Falla</option>
-            <option value="falta">Falta de viandas</option>
-        </select>
-        
-        <label for="cantidad">Cantidad de viandas a mover</label>
-        <select id="cantidad">
-            <option value="1">1 Vianda</option>
-            <option value="2">2 Viandas</option>
-            <option value="3">3 Viandas</option>
-        </select>
-
-        <div class="buttons">
-            <a href="mapaDistribuirViandas.html">Volver</a>
-            <button class="btn-submit">Aceptar</button>
+    <header>
+        <div class="inner-header">
+            <div class="header-title">
+                <a href="main.html">SMAAVS</a>
+            </div>
+            <ul class="links">
+                <li><a href="configuracionH.html">Configuración</a></li>
+                <li><a href="">Contacto</a></li>
+                <li>
+                    <a href="" class="shadow-header-btn">
+                        Manuel
+                        <i class="fa-solid fa-user"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="" class="shadow-header-btn">
+                        300 puntos
+                        <i class="fa-solid fa-shopping-cart"></i>
+                    </a>
+                </li>
+            </ul>
+            <div class="toggle-btn">
+                <i class="fa-solid fa-bars"></i>
+            </div>
         </div>
-    </div>
+        <div class="dropdown-menu drop-men-logged">
+            <li><a href="configuracionH.html">Configuración</li>
+            <li><a href="">Contacto</li>
+            <li><a href="main.html">Tienda</a></li>
+        </div>
+    </header>
+    <main class="registro2-main">
+        <div class="registro2-title">
+            <h1>Complete los datos correspondientes</h1>
+        </div>
+        <form class="form-registro2 donar-dinero">
+            <div class="form-element2 donar-dinero-element">
+                <label for="form-nombre">Heladera origen seleccionada</label>
+                <div class="info-viandas-3">
+                    <p>Heladera a</p>
+                    <hr>
+                    <p>5 viandas</p>
+                </div>
+            </div>
+            <div class="form-element2 donar-dinero-element">
+                <label for="form-nombre">Heladera destino seleccionada</label>
+                <div class="info-viandas-3">
+                    <p>Heladera a</p>
+                    <hr>
+                    <p>5 viandas</p>
+                </div>
+            </div>
+            <div class="form-element2 donar-dinero-element">
+                <label for="form-nombre">Motivo</label>
+                <div class="form-element-dropdown">
+                    <div class="dropdown-select-btn">
+                        <p>Seleccionar</p>
+                        <span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </span>
+                    </div>
+                    <ul class="dropdown-item-list">
+                        <li class="dropdown-item-only">
+                            <span>
+                                <i class="fa-solid fa-check check-icon"></i>
+                            </span>
+                            <p>Falla</p>
+                        </li>
+                        <li class="dropdown-item-only">
+                            <span>
+                                <i class="fa-solid fa-check check-icon"></i>
+                            </span>
+                            <p>Falta de viandas</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="form-element2 donar-dinero-element">
+                <label for="form-nombre">¿Qué monto quiere donar?</label>
+                <input type="number" name="apellido" id="form-apellido" required>
+            </div>
+        </form>
+        <div class="btns-next">
+            <a class="btn-next2" href="mainIniciado.html">
+                <p>Atrás</p>
+                <i class="fa fa-arrow-left"></i>
+            </a>
+            <a class="btn-next2" href="mainIniciado.html">
+                <p>Finalizar</p>
+                <i class="fa fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+    <script src="scripts/dropdownScript.js">
+    </script>
 </body>
 
 </html>

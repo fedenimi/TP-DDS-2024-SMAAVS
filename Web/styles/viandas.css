@@ -1,0 +1,25 @@
+.info-viandas-3 {
+    background-color: #fff;
+    width: 100%;
+    padding: 0.5rem 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    flex-direction: row;
+    display: flex;
+    justify-content: space-between;    
+    align-items: center;
+}
+
+.info-viandas-3 hr {
+    width: 40%;
+    border: none;
+    height: 1px;
+    background: #ccc;
+}
+
+@media(max-width: 944px) {
+
+    .info-viandas-3 hr {
+        display: none;
+    }
+}

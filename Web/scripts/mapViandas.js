@@ -29,18 +29,18 @@ function mostrarPunto(heladera, icon) {
 
 const arrowOpener = document.querySelector('.arrow-opener');
 const heladerasDashboard = document.querySelector('.heladeras-dashboard');
-let isOpen = false;
+let isArrowOpen = true;
 
 if (arrowOpener) {
     arrowOpener.addEventListener('click', () => {
-        if (isOpen) {
+        if (isArrowOpen) {
             arrowOpener.children[0].classList.remove('fa-chevron-left');
             arrowOpener.children[0].classList.add('fa-chevron-right');
-            isOpen = false;
+            isArrowOpen = false;
         } else {
             arrowOpener.children[0].classList.remove('fa-chevron-right');
             arrowOpener.children[0].classList.add('fa-chevron-left');
-            isOpen = true;
+            isArrowOpen = true;
         }
         heladerasDashboard.classList.toggle('open');
     });

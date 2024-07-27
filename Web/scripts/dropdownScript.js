@@ -14,7 +14,9 @@ if (toggleBtn) {
 
 //SELECTION DROPDOWN
 const selectionBtn = document.querySelector('.dropdown-select-btn'),
-    items = document.querySelectorAll('.dropdown-item');
+    items = document.querySelectorAll('.dropdown-item'),
+    itemOnly = document.querySelectorAll('.dropdown-item-only');
+
 if (selectionBtn) {
     selectionBtn.addEventListener('click', () => {
         selectionBtn.classList.toggle('open');
@@ -30,7 +32,28 @@ if (selectionBtn) {
 
         });
     });
+
+    itemOnly.forEach(item => {
+        item.addEventListener('click', () => {
+            if (!item.classList.contains('checked')) {
+                itemOnly.forEach(i => {
+                    i.classList.remove('checked');
+                });
+                item.classList.add('checked');
+                let btnText = document.querySelector('.dropdown-select-btn p');
+                btnText.innerHTML = item.children[1].innerHTML;
+            } else {
+                item.classList.remove('checked');
+                let btnText = document.querySelector('.dropdown-select-btn p');
+                btnText.innerHTML = 'Seleccionar';
+            }
+            
+        });
+    });
 }
+
+
+
 //HELADERA DROPDOWN
 const heladeraBtns = document.querySelectorAll('.heladera');
 const dropdownsHeladera = document.querySelectorAll('.dropdown-heladera');
