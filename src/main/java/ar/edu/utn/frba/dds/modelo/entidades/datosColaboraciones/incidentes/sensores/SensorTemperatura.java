@@ -26,6 +26,6 @@ public class SensorTemperatura implements IMqttMessageListener {
         if(!receptor.evaluarTemperatura(temp)) {
             Alerta alerta = receptor.crearAlerta(receptor.getHeladera(), Estado.FALLA_TEMPERATURA);
         }
-        //System.out.println("Message recived from topic " + topic + ": " + mqttMessage.toString());
+        System.out.println("Message recived from topic " + topic + ": " + mqttMessage.toString());
     }
 }

@@ -30,18 +30,19 @@ public class ControladorContribucionesViandas {
     }
     private void solicitarAperturaDeHeladera(Heladera heladera, Colaborador colaborador) {
         SolicitudApertura solicitudApertura = new SolicitudApertura(colaborador.getTarjeta(), LocalDateTime.now());
+        //Publicar al broker
         heladera.agregarSolicitudApertura(solicitudApertura);
     }
     public boolean puedeDonar(Colaborador colaborador) {
         return colaborador.getFormasDeColaborar().stream().anyMatch(formaDeColaborar -> formaDeColaborar.equals(FormaColaboracion.DONACION_VIANDAS));
     }
 
-    public void donacionViandas(AperturaDTO aperturaDTO, DonacionViandasDTO donacionViandasDTO) {
+    public void donacionViandas(AperturaDTO aperturaDTO, DonacionViandasDTO donacionViandasDTO) throws Exception {
         this.abrirHeladera(aperturaDTO);
         this.donarViandas(donacionViandasDTO);
     }
     public void donarViandas(DonacionViandasDTO donacionViandasDTO) {
-     new DonacionDeViandas()
+        //new DonacionDeViandas();
     }
 
     public void abrirHeladera(AperturaDTO aperturaDTO) throws Exception {

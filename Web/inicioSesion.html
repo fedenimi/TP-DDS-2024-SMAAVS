@@ -10,6 +10,7 @@
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/registro.css">
 </head>
 
 <body>
@@ -37,7 +38,22 @@
             <li><a href="registroH.html">Registrarse</a></li>
         </div>
     </header>
-    <main>
+    <main class="registro2-main">
+        <form class="form-registro2">
+            <div class="form-element2">
+                <label for="form-nombre">Usuario</label>
+                <input type="text" name="apellido" id="form-apellido" required>
+            </div>
+            <div class="form-element2">
+                <label for="form-apellido">Contraseña</label>
+                <input type="text" name="apellido" id="form-apellido" required>
+            </div>
+        </form>
+        <div class="btns-login">
+            <a class="btn-login" href="mainIniciado.html">
+                <p>Iniciar sesión</p>
+            </a>
+        </div>
     </main>
     <script>
         const toggleBtn = document.querySelector('.toggle-btn');

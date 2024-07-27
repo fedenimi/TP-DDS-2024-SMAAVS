@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa de Heladeras</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/heladeras.css">
+
+    <style>
+        #map {
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: row;
+            justify-content: start;
+            align-items: center;
+            gap: 0px;
+        }
+
+
+        .heladeras-dashboard {
+            z-index: 1000;
+            border-top-right-radius: 0;   
+            max-height: 60%;
+            display: none;
+            max-width: 800px;
+        }
+
+        .arrow-opener{
+            z-index: 1000;
+            background-color: #e3e3e3;
+            width: 25px;
+            height: 90px;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+            box-shadow: 2px 3px 5px 1px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: none;
+            
+        }
+
+        .open {
+            display: flex;
+        }
+
+        .leaflet-left{
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div>
+        <div id="map">
+            <section class="heladeras-dashboard">
+                <section class="heladeras-dashboard-scrollable">
+                    <div class="title">
+                        <div>
+                            <h2>ELEGIR HELADERA ORIGEN</h2>
+                            <h2>1/2</h2>
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="heladeras-fallas-dashboard">
+                        <h2>Heladeras con fallas</h2>
+                        <div>
+                            <div class="heladera">
+                                <p>Heladera A</p>
+                                <hr>
+                                <p>3 viandas</p>
+                            </div>
+                            <div class="dropdown-heladera">
+                                <li>
+                                    <a href="">
+                                        <i class="fa-solid fa-pencil"></i>
+                                        <p>Modificar</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <i class="fa-solid fa-trash"></i>
+                                        <p>Eliminar</p>
+                                    </a>
+                                </li>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="heladeras-sin-fallas-dashboard">
+                        <h2>Total de heladeras</h2>
+                        <div>
+                            <div class="heladera">
+                                <p>Heladera A</p>
+                                <hr>
+                                <p>3 viandas</p>
+                            </div>
+                            <div class="dropdown-heladera">
+                                <li>
+                                    <a href="">
+                                        <i class="fa-solid fa-pencil"></i>
+                                        <p>Modificar</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <i class="fa-solid fa-trash"></i>
+                                        <p>Eliminar</p>
+                                    </a>
+                                </li>
+                            </div>
+                        </div>                      
+                    </div>
+                </section>
+                <div class="boton-dashboard">
+                    <a>
+                        Confirmar
+                    </a>
+                </div>
+            </section>
+            <button class="arrow-opener">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <script src="scripts/mapViandas.js"></script>
+    <script src="scripts/dropdownScript.js">
+    </script>
+
+</body>
+
+</html>

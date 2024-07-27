@@ -8,7 +8,7 @@ import lombok.Getter;
 import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Alerta {
-    private Estado tipoAlerta;
+   private Estado tipoAlerta;
    @Getter private LocalDateTime fechaYHora;
    @Getter private Heladera heladera;
 }

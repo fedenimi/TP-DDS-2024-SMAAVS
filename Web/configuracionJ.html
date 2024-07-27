@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/registro.css">
+    <link rel="stylesheet" href="styles/main.css">
 </head>
 
 <body>
@@ -20,66 +20,52 @@
                 <a href="main.html">SMAAVS</a>
             </div>
             <ul class="links">
-                <li><a href="main.html">Menu</li>
-                <li><a href="">Contacto</li>
+                <li><a href="configuracionH.html">Configuración</a></li>
+                <li><a href="">Contacto</a></li>
+                <li>
+                    <a href="" class="shadow-header-btn">
+                        Manuel
+                        <i class="fa-solid fa-user"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="" class="shadow-header-btn">
+                        300 puntos
+                        <i class="fa-solid fa-shopping-cart"></i>
+                    </a>
+                </li>
             </ul>
-            <div class="header-btns" href="#">
-                <a class="header-btn left-btn" href="inicioSesion.html">Iniciar sesión</a>
-                <a class="header-btn right-btn pressed-btn" href="registroH.html">Registrarse</a>
-            </div>
             <div class="toggle-btn">
                 <i class="fa-solid fa-bars"></i>
             </div>
         </div>
-        <div class="dropdown-menu">
-            <li><a href="main.html">Menu</li>
+        <div class="dropdown-menu drop-men-logged">
+            <li><a href="configuracionH.html">Configuración</li>
             <li><a href="">Contacto</li>
-            <li><a href="inicioSesion.html">Iniciar sesión</a></li>
-            <li><a href="registroH.html">Registrarse</a></li>
+            <li><a href="main.html">Tienda</a></li>
         </div>
     </header>
-    <main class="registro-main">
-        <div class="tipo-colab">
-            <label class="">Tipo de colaborador</label>
-            <div class="btns-title">
-                <a class="btn-title left-btn pressed-btn" href="registroH.html">Humana</a>
-                <a class="btn-title right-btn" href="registroJ.html">Jurídica</a>
-            </div>
-        </div>
-        <form class="form-registro">
-            <div class="form-element">
-                <label for="form-nombre">Nombre</label>
-                <input type="text" name="apellido" id="form-apellido" required>
-            </div>
-            <div></div>
-            <div class="form-element">
-                <label for="form-apellido">Mail</label>
-                <input type="text" name="apellido" id="form-apellido" required>
-            </div>
-            <div class="form-element">
-                <label for="form-nombre">Apellido</label>
-                <input type="text" name="apellido" id="form-apellido" required>
-            </div>
-            <div></div>
-            <div class="form-element">
-                <label for="form-nombre">Teléfono</label>
-                <input type="text" name="apellido" id="form-apellido" required>
-            </div>
-            <div class="form-element">
+    <main class="registro-main config">
+        <form class="form-registro config-form">
+            <div class="form-element config-form-element">
                 <label for="form-nombre">Dirección</label>
                 <input type="text" name="apellido" id="form-apellido" required>
             </div>
             <div></div>
-            <div class="form-element">
-                <label for="form-apellido">Whatsapp</label>
+            <div class="form-element config-form-element">
+                <label for="form-apellido">Mail</label>
                 <input type="text" name="apellido" id="form-apellido" required>
             </div>
-            <div class="form-element">
-                <label for="form-nombre">Fecha de nacimiento</label>
+            <div class="form-element config-form-element">
+                <label for="form-nombre">Teléfono</label>
                 <input type="text" name="apellido" id="form-apellido" required>
             </div>
             <div></div>
-            <div class="form-element">
+            <div class="form-element config-form-element">
+                <label for="form-nombre">Whatsapp</label>
+                <input type="text" name="apellido" id="form-apellido" required>
+            </div>
+            <div class="form-element config-form-element">
                 <label for="form-nombre">Formas de colaborar</label>
                 <div class="form-element-dropdown">
                     <div class="dropdown-select-btn">
@@ -99,20 +85,28 @@
                             <span>
                                 <i class="fa-solid fa-check check-icon"></i>
                             </span>
-                            <p>Donar viandas</p>
-                        </li>
-                        <li class="dropdown-item">
-                            <span>
-                                <i class="fa-solid fa-check check-icon"></i>
-                            </span>
-                            <p>Distribuir viandas</p>
+                            <p>Administrar heladeras</p>
                         </li>
                     </ul>
                 </div>
             </div>
+            <div></div>
+            <div class="form-element config-form-element">
+                <label>‎ </label>
+                <a class="btn-next2 btn-form" href="adminHeladeras.html">
+                    <p>Administrar heladeras</p>
+                </a>
+            </div>
         </form>
-        <div class="btn-next">
-            <a href="registro2.html">Siguiente</a>
+        <div class="btns-next">
+            <a class="btn-next2" href="mainIniciado.html">
+                <p>Volver</p>
+                <i class="fa fa-arrow-left"></i>
+            </a>
+            <a class="btn-next2" href="mainIniciado.html">
+                <p>Guardar cambios</p>
+                <i class="fa fa-arrow-right"></i>
+            </a>
         </div>
     </main>
     <script src="scripts/dropdownScript.js">

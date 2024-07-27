@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMAAVS</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/registro.css">
+</head>
+
+<body>
+    <header>
+        <div class="inner-header">
+            <div class="header-title">
+                <a href="main.html">SMAAVS</a>
+            </div>
+            <ul class="links">
+                <li><a href="configuracionH.html">Configuración</a></li>
+                <li><a href="">Contacto</a></li>
+                <li>
+                    <a href="" class="shadow-header-btn">
+                        Manuel
+                        <i class="fa-solid fa-user"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="" class="shadow-header-btn">
+                        300 puntos
+                        <i class="fa-solid fa-shopping-cart"></i>
+                    </a>
+                </li>
+            </ul>
+            <div class="toggle-btn">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+        <div class="dropdown-menu drop-men-logged">
+            <li><a href="configuracionH.html">Configuración</li>
+            <li><a href="">Contacto</li>
+            <li><a href="main.html">Tienda</a></li>
+        </div>
+    </header>
+    <main class="registro2-main">
+        <div class="registro2-title">
+            <h1>Ha elegido “Donación de Dinero”<br>
+                Complete los datos correspondientes
+            </h1>
+        </div>
+        <form class="form-registro2 donar-dinero">
+            <div class="form-element2 donar-dinero-element">
+                <label for="form-nombre">¿Qué monto quiere donar?</label>
+                <input type="text" name="apellido" id="form-apellido" required>
+            </div>
+            <div class="form-element2 donar-dinero-element">
+                <label for="form-nombre">Formas de colaborar</label>
+                <div class="form-element-dropdown">
+                    <div class="dropdown-select-btn">
+                        <p>0 seleccionadas</p>
+                        <span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </span>
+                    </div>
+                    <ul class="dropdown-item-list">
+                        <li class="dropdown-item">
+                            <span>
+                                <i class="fa-solid fa-check check-icon"></i>
+                            </span>
+                            <p>Única</p>
+                        </li>
+                        <li class="dropdown-item">
+                            <span>
+                                <i class="fa-solid fa-check check-icon"></i>
+                            </span>
+                            <p>Mensual</p>
+                        </li>
+                        <li class="dropdown-item">
+                            <span>
+                                <i class="fa-solid fa-check check-icon"></i>
+                            </span>
+                            <p>Anual</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+        <div class="btns-next">
+            <a class="btn-next2" href="mainIniciado.html">
+                <p>Atrás</p>
+                <i class="fa fa-arrow-left"></i>
+            </a>
+            <a class="btn-next2" href="mainIniciado.html">
+                <p>Finalizar</p>
+                <i class="fa fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+    <script src="scripts/dropdownScript.js">
+    </script>
+</body>
+
+</html>
