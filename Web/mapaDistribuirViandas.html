@@ -26,16 +26,15 @@
             gap: 0px;
         }
 
-
         .heladeras-dashboard {
             z-index: 1000;
             border-top-right-radius: 0;   
-            max-height: 60%;
+            max-height: 100%;
             display: none;
             max-width: 800px;
         }
 
-        .arrow-opener{
+        .arrow-opener {
             z-index: 1000;
             background-color: #e3e3e3;
             width: 25px;
@@ -49,25 +48,37 @@
             justify-content: center;
             align-items: center;
             border: none;
-            
         }
 
         .open {
             display: flex;
         }
 
-        .leaflet-left{
+        .leaflet-left {
             display: none;
         }
-    </style>
 
+        .dropdown-heladera ul {
+            display: none;
+            position: absolute;
+            background-color: white;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            list-style: none;
+            padding: 0;
+        }
+
+        .dropdown-heladera:hover ul {
+            display: block;
+        }
+    </style>
 </head>
 
 <body>
 
     <div>
         <div id="map">
-            <section class="heladeras-dashboard">
+            <section class="heladeras-dashboard open">
                 <section class="heladeras-dashboard-scrollable">
                     <div class="title">
                         <div>
@@ -85,18 +96,20 @@
                                 <p>3 viandas</p>
                             </div>
                             <div class="dropdown-heladera">
-                                <li>
-                                    <a href="">
-                                        <i class="fa-solid fa-pencil"></i>
-                                        <p>Modificar</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <i class="fa-solid fa-trash"></i>
-                                        <p>Eliminar</p>
-                                    </a>
-                                </li>
+                                <ul>
+                                    <li>
+                                        <a href="">
+                                            <i class="fa-solid fa-pencil"></i>
+                                            <p>Modificar</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            <i class="fa-solid fa-trash"></i>
+                                            <p>Eliminar</p>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -109,25 +122,27 @@
                                 <p>3 viandas</p>
                             </div>
                             <div class="dropdown-heladera">
-                                <li>
-                                    <a href="">
-                                        <i class="fa-solid fa-pencil"></i>
-                                        <p>Modificar</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <i class="fa-solid fa-trash"></i>
-                                        <p>Eliminar</p>
-                                    </a>
-                                </li>
+                                <ul>
+                                    <li>
+                                        <a href="">
+                                            <i class="fa-solid fa-pencil"></i>
+                                            <p>Modificar</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            <i class="fa-solid fa-trash"></i>
+                                            <p>Eliminar</p>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>                      
                     </div>
                 </section>
                 <div class="boton-dashboard">
                     <a>
-                        Confirmar
+                        <a href="distribuirViandas3.html">Confirmar</a>
                     </a>
                 </div>
             </section>
@@ -141,8 +156,7 @@
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
     <script src="scripts/mapViandas.js"></script>
-    <script src="scripts/dropdownScript.js">
-    </script>
+    <script src="scripts/dropdownScript.js"></script>
 
 </body>
 
