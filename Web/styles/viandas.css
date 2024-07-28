@@ -17,9 +17,51 @@
     background: #ccc;
 }
 
+.donar-viandas-main {
+    gap: 0px !important;
+    
+}
+
+.donar-viandas {
+    flex: 2;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    gap: 10px;
+}
+
+.btns-viandas {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 30px;
+    align-items: center;
+    padding: 0.5rem 0.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;    
+}
+
+.btns-next-viandas {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
 @media(max-width: 944px) {
 
     .info-viandas-3 hr {
         display: none;
+    }
+}
+
+@media(max-width: 463px) {
+    .btns-viandas {
+        padding: 0;
     }
 }
