@@ -39,7 +39,6 @@ if (selectionBtn) {
 
     function addListenerDropdown(item) {
         item.addEventListener('click', () => {
-            console.log(itemOnly.length);
             if (!item.classList.contains('checked')) {
                 itemOnly.forEach(i => {
                     i.classList.remove('checked');
@@ -47,10 +46,6 @@ if (selectionBtn) {
                 item.classList.add('checked');
                 let btnText = document.querySelector('.dropdown-select-btn p');
                 btnText.innerHTML = item.children[1].innerHTML;
-            } else {
-                item.classList.remove('checked');
-                let btnText = document.querySelector('.dropdown-select-btn p');
-                btnText.innerHTML = 'Seleccionar';
             }
             if (item.classList.contains('closable')) {
                 selectionBtn.classList.toggle('open');
@@ -58,21 +53,27 @@ if (selectionBtn) {
             if (item.classList.contains('es-vianda')) {
                 let vianda = Object.values(viandas).find(vianda => vianda.name === item.children[1].innerHTML);
                 let viandaInfo = document.querySelector('.donar-viandas');
-                viandaInfo.children[1].children[1].placeholder = vianda.comida;
-                viandaInfo.children[2].children[1].value = formatDate(vianda.fechaCaducidad);
-                viandaInfo.children[3].children[1].placeholder = vianda.peso;
-                viandaInfo.children[4].children[1].placeholder = vianda.calorias;
-                viandaInfo.children[5].children[1].placeholder = vianda.heladera;
+                viandaInfo.children[1].children[1].value = vianda.comida;
+                viandaInfo.children[2].children[1].value = vianda.fechaCaducidad;
+                viandaInfo.children[3].children[1].value = vianda.peso;
+                viandaInfo.children[4].children[1].value = vianda.calorias;
+                viandaInfo.children[5].children[1].value = vianda.heladera;
             }
             if (item.classList.contains('agregar-vianda')) {
-                let viandaInfo = document.querySelector('.donar-viandas');
-                viandaInfo.children[1].children[1].placeholder = '';
-                viandaInfo.children[2].children[1].value = '';
-                viandaInfo.children[3].children[1].placeholder = '';
-                viandaInfo.children[4].children[1].placeholder = '';
-                viandaInfo.children[5].children[1].placeholder = '';
+                infoAgregarVianda();
             }
         });
+    }
+
+
+
+    function infoAgregarVianda() {
+        let viandaInfo = document.querySelector('.donar-viandas');
+        viandaInfo.children[1].children[1].value = '';
+        viandaInfo.children[2].children[1].value = '';
+        viandaInfo.children[3].children[1].value = '';
+        viandaInfo.children[4].children[1].value = '';
+        viandaInfo.children[5].children[1].value = '';
     }
 
     function formatDate(date) {
@@ -84,24 +85,49 @@ if (selectionBtn) {
 
 
 //HELADERA DROPDOWN
-const heladeraBtns = document.querySelectorAll('.heladera');
-const dropdownsHeladera = document.querySelectorAll('.dropdown-heladera');
+let heladeraBtns = document.querySelectorAll('.heladera');
+let dropdownsHeladera = document.querySelectorAll('.dropdown-heladera');
+let heladeraOpened = "none";
 
 if (heladeraBtns.length > 0) {
     heladeraBtns.forEach((btn, index) => {
-        btn.addEventListener('click', () => {
-            heladeraBtns[index].classList.toggle('open');
-            heladeraBtns.forEach((btn, i) => {
-                if (i !== index) {
-                    btn.classList.remove('open');
-                }
-            });
-            dropdownsHeladera[index].classList.toggle('open');
-            dropdownsHeladera.forEach((dropdown, i) => {
-                if (i !== index) {
-                    dropdown.classList.remove('open');
-                }
-            });
-        });
+        listenerHeladeraBtn(btn);
     });
+}
+
+function listenerHeladeraBtn(heladera) {
+    let index = Array.from(heladeraBtns).indexOf(heladera);
+    heladera.addEventListener('click', () => {
+        heladera.classList.toggle('open');
+        heladeraBtns.forEach((btn, i) => {
+            if (i !== index) {
+                btn.classList.remove('open');
+            }
+        });
+        const modalDonarViandas = document.querySelector('.modal-info-heladera-viandas');
+        if (modalDonarViandas) {
+            const heladeraObject = Object.values(heladerasTotales).find(h => h.nombre === heladera.children[0].innerHTML);
+            if (heladeraOpened === heladeraObject.nombre) {
+                modalDonarViandas.classList.remove('open');
+                closeBtns();
+                closeDropdowns();
+                console.log("asdas");
+                heladeraOpened = "none";
+            } else {
+                openInfoHeladera(heladeraObject)();
+            }
+        }
+    });
+}
+
+function handleDropdown(heladera) {
+    if (dropdownsHeladera.length > 0) {
+        dropdownsHeladera.forEach((dropdown, i) => {
+            if (dropdownsHeladera[i].previousElementSibling.children[0].innerHTML === heladera) {
+                dropdownsHeladera[i].classList.toggle('open');
+            } else {
+                dropdownsHeladera[i].classList.remove('open');
+            }
+        })
+    }
 }

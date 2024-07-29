@@ -1,11 +1,3 @@
-
-var heladeras = [
-    { latitud: -34.61315, longitud: -58.37723, nombre: "Heladera A", direccion: "Av. Rivadavia 7200" },
-    { latitud: -34.590075, longitud: -58.386510, nombre: "Heladera B", direccion: "Av. Corrientes 3200" },
-    { latitud: -34.579320, longitud: -58.413611, nombre: "Heladera C", direccion: "Av. Córdoba 2000" },
-    { latitud: -34.601305, longitud: -58.415235, nombre: "Heladera D", direccion: "Av. Santa Fe 3000" }
-];
-
 var blueIcon = L.icon({
     iconUrl: "images/bluePin.png",
     shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
@@ -20,11 +12,11 @@ var mapContainer = document.getElementById('map');
 var map = L.map(mapContainer).setView([-34.6037, -58.3816], 13);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-heladeras.forEach(heladera => mostrarPunto(heladera, blueIcon));
+heladerasTotales.forEach(heladera => mostrarPunto(heladera, blueIcon));
 
 function mostrarPunto(heladera, icon) {
     var marker = L.marker([heladera.latitud, heladera.longitud], { icon: icon }).addTo(map);
-    marker.bindPopup(heladera.nombre);
+    marker.on('click', openInfoHeladera(heladera));
 }
 
 const arrowOpener = document.querySelector('.arrow-opener');
@@ -44,4 +36,63 @@ if (arrowOpener) {
         }
         heladerasDashboard.classList.toggle('open');
     });
+}
+
+
+const modalDonarViandas = document.querySelector('.modal-info-heladera-viandas');
+
+document.addEventListener('click', function (event) {
+    if (!event.target.closest('.modal-info-heladera-viandas') &&
+        !event.target.classList.contains('leaflet-marker-icon') &&
+        !event.target.closest('.heladera') &&
+        !event.target.closest('.arrow-opener') &&
+        !event.target.closest('.sig-btn') &&
+        !event.target.classList.contains('confirmar-btn-susc')
+    ){
+        console.log("aa");
+        modalDonarViandas.classList.remove('open');
+        closeBtns();
+        closeDropdowns();
+        heladeraOpened = "none";
+    }
+});
+
+function openInfoHeladera(heladera) {
+    return function () {
+        console.log("Opened: " + heladeraOpened);
+        console.log("Heladera: " + heladera.nombre);
+        if (heladeraOpened === heladera.nombre) {
+            modalDonarViandas.classList.remove('open');
+            closeDropdowns();
+            closeBtns();
+            heladeraOpened = "none";
+        } else {
+            modalDonarViandas.classList.add('open');
+            modalDonarViandas.children[0].innerHTML = heladera.nombre;
+            modalDonarViandas.children[1].children[0].innerHTML = heladera.direccion;
+            if (heladeraBtns.length > 0) {
+                heladeraBtns.forEach(btn => {
+                    if (btn.children[0].innerHTML === heladera.nombre) {
+                        btn.classList.add('open');
+                    } else {
+                        btn.classList.remove('open');
+                    }
+                });
+            }
+            handleDropdown(heladera.nombre)
+            heladeraOpened = heladera.nombre;
+        }
+    }
+}
+
+function closeDropdowns() {
+    if (dropdownsHeladera.length > 0) {
+        dropdownsHeladera.forEach(dropdown => dropdown.classList.remove('open'));
+    }
+}
+
+function closeBtns() {
+    if (heladeraBtns.length > 0) {
+        heladeraBtns.forEach(btn => btn.classList.remove('open'));
+    }
 }

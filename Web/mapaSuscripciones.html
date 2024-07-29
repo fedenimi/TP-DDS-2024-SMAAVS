@@ -14,7 +14,8 @@
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/heladeras.css">
     <link rel="stylesheet" href="styles/mapa.css">
-
+    <link rel="stylesheet" href="styles/suscripciones.css">
+    <link rel="stylesheet" href="styles/registro.css">
     <style>
         #map {
             width: 100vw;
@@ -188,43 +189,21 @@
     <div>
         <div id="map">
             <div class="dashboard-arrow">
-                <section class="heladeras-dashboard open">
+                <section class="heladeras-dashboard">
                     <section class="heladeras-dashboard-scrollable">
                         <div class="title">
                             <div class="title-text">
-                                <h2 class="dist1">ELEGIR HELADERA ORIGEN</h2>
-                                <h2 class="dist2">ELEGIR HELADERA DESTINO</h2>
-                                <h2 class="dist1">1/2</h2>
-                                <h2 class="dist2">2/2</h2>
+                                <h2>SUSCRIPCIONES</h2>
                             </div>
                             <hr>
                         </div>
-                        <div class="heladeras-fallas-dashboard">
-                            <h2>Heladeras con fallas</h2>
-                            <div>
-                                <div class="heladera">
-                                    <p>Heladera B</p>
-                                    <hr>
-                                    <p>3 viandas</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="heladeras-sin-fallas-dashboard">
-                            <h2>Total de heladeras</h2>
-                            <div>
-                                <div class="heladera">
-                                    <p>Heladera A</p>
-                                    <hr>
-                                    <p>3 viandas</p>
-                                </div>
-                            </div>
-                        </div>
+                        <h1 class="grey open">No tiene ninguna suscripción</h1>
                     </section>
                     <div class="btns">
-                        <a class="boton-dashboard volver-btn dist2">Volver</a>
-                        <a href="distribuirViandas.html" class="boton-dashboard volver-btn dist1">Volver</a>
-                        <a class="boton-dashboard sig-btn dist1">Siguiente</a>
-                        <a href="distribuirViandas3.html" class="boton-dashboard dist2">
+                        <a class="boton-dashboard volver-btn-susc dist2">Volver</a>
+                        <a href="javascript:history.back()" class="boton-dashboard volver-btn-susc dist1">Volver</a>
+                        <a class="boton-dashboard confirmar-btn-susc dist1">Siguiente</a>
+                        <a href="distribuirViandas3.html" class="boton-dashboard dist2 confirmar-btn-susc">
                             Confirmar
                         </a>
                     </div>
@@ -236,14 +215,44 @@
             <div class="modal-info-heladera-viandas">
                 <h1 class="title-mapa-heladera">Heladera A</h1>
                 <div class="title-mapa-direccion">
-                    <p>Medrano 951</p>
+                    <p></p>
                 </div>
-                <a class="title-mapa-btn confirmar-btn dist1">
-                    <p>Confirmar</p>
-                </a>
-                <a href="distribuirViandas3.html" class="title-mapa-btn confirmar-btn dist2">
-                    <p>Confirmar</p>
-                </a>
+                <div class="btns-topics-mapa">
+                    <a class="btn-topic dist1">Viandas restantes</a>
+                    <a class="btn-topic dist1">Viandas faltantes</a>
+                    <a class="btn-topic dist1">Desperfectos</a>
+                </div>
+                <div class="btns-topics-mapa">
+                    <form class="form-registro suscripcion-form dist2">
+                        <div class="form-element dist2">
+                            <label for="faltantes" >N viandas faltantes</label>
+                            <input type="number" name="faltantes" required>
+                        </div>
+                        <div></div>
+                        <div class="form-element dist2">
+                            <label for="restantes">N viandas restantes</label>
+                            <input type="number" name="restantes" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="btns-modal-mapa">
+                    <a href="javascript:history.back()"
+                        class="title-mapa-btn volver-btn-susc btn-suscripcion-modal dist1">
+                        <p>Volver</p>
+                    </a>
+                    <a class="title-mapa-btn confirmar-btn-susc btn-suscripcion-modal dist1">
+                        <p>Siguiente</p>
+                    </a>
+                </div>
+
+                <div class="btns-modal-mapa">
+                    <a class="title-mapa-btn volver-btn-susc btn-suscripcion-modal dist2">
+                        <p>Volver</p>
+                    </a>
+                    <a class="title-mapa-btn confirmar-btn-susc btn-suscripcion-modal dist2">
+                        <p>Siguiente</p>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -255,6 +264,7 @@
     <script src="scripts/mapViandas.js"></script>
     <script src="scripts/dropdownScript.js"></script>
     <script src="scripts/modalViandas.js"></script>
+    <script src="scripts/suscripciones.js"></script>
 </body>
 
 </html>

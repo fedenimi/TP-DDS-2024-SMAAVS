@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMAAVS</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/heladeras.css">
+    <link rel="stylesheet" href="styles/suscripciones.css">
+</head>
+
+<body>
+    <header>
+        <div class="inner-header">
+            <div class="header-title">
+                <a href="main.html">SMAAVS</a>
+            </div>
+            <ul class="links">
+                <li><a href="configuracionH.html">Configuración</a></li>
+                <li><a href="">Contacto</a></li>
+                <li>
+                    <a href="" class="shadow-header-btn">
+                        Manuel
+                        <i class="fa-solid fa-user"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="" class="shadow-header-btn">
+                        300 puntos
+                        <i class="fa-solid fa-shopping-cart"></i>
+                    </a>
+                </li>
+            </ul>
+            <div class="toggle-btn">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+        <div class="dropdown-menu drop-men-logged">
+            <li><a href="configuracionH.html">Configuración</li>
+            <li><a href="">Contacto</li>
+            <li><a href="main.html">Tienda</a></li>
+        </div>
+    </header>
+    <main class="admin-heladeras">
+        <h1>Reportar fallas:
+        </h1>
+        <div class="heladeras-mapa">
+            <section class="heladeras-dashboard">
+                <section class="heladeras-dashboard-scrollable">
+                    <div class="title">
+                        <hr>
+                    </div>
+                </section>
+                <div class="btns">
+                    <a href="javascript:history.back()" class="boton-dashboard">Volver</a>
+                    <a class="boton-dashboard btn-reportar">Siguiente</a>
+                </div>
+            </section>
+            <section class="blurred-map">
+                <a href="mapaReportarFallas.html">ABRIR MAPA</a>
+            </section>
+        </div>
+    </main>
+    <script src="scripts/heladeras.js"></script>
+    <script src="scripts/dropdownScript.js"></script>
+    <script src="scripts/reportarFallas.js"></script>
+    <script src="scripts/modalViandas.js"></script>
+</body>
+
+</html>

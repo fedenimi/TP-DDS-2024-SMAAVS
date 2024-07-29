@@ -87,10 +87,30 @@ input {
     transform: scale(1.05);
 }
 
+#carousel-s1:checked~.cards #slide2 .carousel-btn,
+#carousel-s1:checked~.cards #slide3 .carousel-btn,
+#carousel-s1:checked~.cards #slide4 .carousel-btn,
+#carousel-s1:checked~.cards #slide5 .carousel-btn,
+#carousel-s2:checked~.cards #slide1 .carousel-btn,
+#carousel-s2:checked~.cards #slide3 .carousel-btn,
+#carousel-s2:checked~.cards #slide4 .carousel-btn,
+#carousel-s2:checked~.cards #slide5 .carousel-btn,
+#carousel-s3:checked~.cards #slide1 .carousel-btn,
+#carousel-s3:checked~.cards #slide2 .carousel-btn,
+#carousel-s3:checked~.cards #slide4 .carousel-btn,
+#carousel-s3:checked~.cards #slide5 .carousel-btn,
+#carousel-s4:checked~.cards #slide1 .carousel-btn,
+#carousel-s4:checked~.cards #slide2 .carousel-btn,
+#carousel-s4:checked~.cards #slide3 .carousel-btn,
+#carousel-s4:checked~.cards #slide5 .carousel-btn {
+        pointer-events: none;
+}
+
 #carousel-s1:checked~.cards #slide3,
 #carousel-s2:checked~.cards #slide4,
-#carousel-s3:checked~.cards #slide1,
-#carousel-s4:checked~.cards #slide2 {
+#carousel-s3:checked~.cards #slide5,
+#carousel-s4:checked~.cards #slide1,
+#carousel-s5:checked~.cards #slide2 {
     box-shadow: 0 15px 30px rgba(0, 0, 0, 45%);
     transform: translate3d(-40%, 0, -220px);
     --current-color: #A0C6FF;
@@ -98,25 +118,11 @@ input {
     filter: grayscale(90%);
 }
 
-#carousel-s1:checked~.cards #slide3 .carousel-btn,
-#carousel-s1:checked~.cards #slide2 .carousel-btn,
-#carousel-s1:checked~.cards #slide4 .carousel-btn,
-#carousel-s2:checked~.cards #slide1 .carousel-btn,
-#carousel-s2:checked~.cards #slide3 .carousel-btn,
-#carousel-s2:checked~.cards #slide4 .carousel-btn,
-#carousel-s3:checked~.cards #slide1 .carousel-btn,
-#carousel-s3:checked~.cards #slide2 .carousel-btn,
-#carousel-s3:checked~.cards #slide4 .carousel-btn,
-#carousel-s4:checked~.cards #slide1 .carousel-btn,
-#carousel-s4:checked~.cards #slide2 .carousel-btn,
-#carousel-s4:checked~.cards #slide3 .carousel-btn {
-    pointer-events: none;
-}
-
-#carousel-s1:checked~.cards #slide4,
+#carousel-s1:checked~.cards #slide5,
 #carousel-s2:checked~.cards #slide1,
 #carousel-s3:checked~.cards #slide2,
-#carousel-s4:checked~.cards #slide3 {
+#carousel-s4:checked~.cards #slide3,
+#carousel-s5:checked~.cards #slide4 {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 45%);
     transform: translate3d(-20%, 0, -120px);
     --current-color: #A0C6FF;
@@ -127,7 +133,8 @@ input {
 #carousel-s1:checked~.cards #slide1,
 #carousel-s2:checked~.cards #slide2,
 #carousel-s3:checked~.cards #slide3,
-#carousel-s4:checked~.cards #slide4 {
+#carousel-s4:checked~.cards #slide4,
+#carousel-s5:checked~.cards #slide5 {
     box-shadow: 0 25px 50px rgba(0, 0, 0, 50%);
     transform: translate3d(0%, 0, 0px);
     --current-color: #A0C6FF;
@@ -137,13 +144,27 @@ input {
 #carousel-s1:checked~.cards #slide2,
 #carousel-s2:checked~.cards #slide3,
 #carousel-s3:checked~.cards #slide4,
-#carousel-s4:checked~.cards #slide1 {
+#carousel-s4:checked~.cards #slide5,
+#carousel-s5:checked~.cards #slide1 {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 45%);
     transform: translate3d(20%, 0, -120px);
     --current-color: #A0C6FF;
     --current-color2: #F0B6AF;
     filter: grayscale(45%);
 }
+
+#carousel-s1:checked~.cards #slide4,
+#carousel-s2:checked~.cards #slide5,
+#carousel-s3:checked~.cards #slide1,
+#carousel-s4:checked~.cards #slide2,
+#carousel-s5:checked~.cards #slide3 {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 45%);
+    transform: translate3d(40%, 0, -220px);
+    --current-color: #A0C6FF;
+    --current-color2: #F0B6AF;
+    filter: grayscale(90%);
+}
+
 
 @media (max-width: 632px) {
     .cards {

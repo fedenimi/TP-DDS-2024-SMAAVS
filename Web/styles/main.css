@@ -238,3 +238,28 @@ a.contribute:hover {
     flex-direction: column;
     gap: 3rem;
 }
+
+.btns-reportes {
+    display: flex;
+    gap: 3rem;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.btns-reportes a {
+    background-color: #F0B6AF;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 2px 3px 5px 1px rgba(0, 0, 0, 0.2);
+}
+
+@media(max-width: 796px) {
+    .btns-reportes {
+        flex-direction: column;
+        text-align: center;
+    }
+}
