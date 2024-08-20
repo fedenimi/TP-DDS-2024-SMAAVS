@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/heladeras.css">
     <link rel="stylesheet" href="styles/suscripciones.css">
+    <link rel="stylesheet" href="styles/puntos.css">
 </head>
 
 <body>
@@ -47,38 +48,29 @@
         </div>
     </header>
     <main class="admin-heladeras">
-        <h1>Suscripciones
+        <h1>Canje de productos
         </h1>
         <div class="heladeras-mapa">
             <section class="heladeras-dashboard">
                 <section class="heladeras-dashboard-scrollable">
                     <div class="title">
-                        <div class="title-text">
-                            <h2>SUSCRIPCIONES</h2>
-                        </div>
                         <hr>
                     </div>
-                    <h1 class="grey open">No tiene ninguna suscripción</h1>
                 </section>
                 <div class="btns">
-                    <a class="boton-dashboard volver-btn dist2">Volver</a>
-                    <a href="mainIniciado.html" class="boton-dashboard volver-btn dist1">Volver</a>
-                    <a class="boton-dashboard sig-btn dist1">Siguiente</a>
-                    <a href="distribuirViandas3.html" class="boton-dashboard dist2">
-                        Confirmar
-                    </a>
+                    <a href="javascript:history.back()" class="boton-dashboard">Cancelar</a>
+                    <a class="boton-dashboard btn-reportar" href="canjearPuntos2.html">Confirmar</a>
                 </div>
             </section>
-            <section class="blurred-map">
-                <a href="mapaSuscripciones.html">AGREGAR SUSCRIPCIONES</a>
+            <section class="grid-puntos">
+                
             </section>
         </div>
     </main>
-    <script src="scripts/repositories/heladeras.js"></script>
-    <script src="scripts/dropdownScript.js">
-    </script>
+    <script src="scripts/repositories/categorias.js"></script>
+    <script src="scripts/dropdownScript.js"></script>
+    <script src="scripts/canjePuntos.js"></script>
     <script src="scripts/modalViandas.js"></script>
-    <script src="scripts/suscripciones.js"></script>
 </body>
 
 </html>

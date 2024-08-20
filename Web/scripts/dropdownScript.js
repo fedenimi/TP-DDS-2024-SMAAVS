@@ -39,6 +39,7 @@ if (selectionBtn) {
 
     function addListenerDropdown(item) {
         item.addEventListener('click', () => {
+            console.log(item.classList);
             if (!item.classList.contains('checked')) {
                 itemOnly.forEach(i => {
                     i.classList.remove('checked');
@@ -79,6 +80,24 @@ if (selectionBtn) {
     function formatDate(date) {
         let dateArray = date.split('/');
         return `${dateArray[2]}-${dateArray[1]}-${dateArray[0]}`;
+    }
+
+    const divForm = document.querySelector('.form-element-dropdown');
+    if (divForm.classList.contains('form-categoria')) {
+        categoriasTotales.forEach(categoria => {
+            console.log(divForm.classList);
+            let htmlUl = 
+            `<li class="dropdown-item-only closable">
+                <p></p>
+                <p>${categoria.nombre}</p>
+            </li>`;
+            const dropdownItemList = document.querySelector('.dropdown-item-list');
+            dropdownItemList.innerHTML += htmlUl;
+        });
+        itemOnly = document.querySelectorAll('.dropdown-item-only');
+        itemOnly.forEach(item => {
+            addListenerDropdown(item);
+        });
     }
 }
 
@@ -131,3 +150,4 @@ function handleDropdown(heladera) {
         })
     }
 }
+
