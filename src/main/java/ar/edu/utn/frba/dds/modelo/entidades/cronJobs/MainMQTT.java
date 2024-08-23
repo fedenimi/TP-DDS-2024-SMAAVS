@@ -29,7 +29,7 @@ public class MainMQTT {
             System.out.println("Connected");
 
             System.out.println("Build our receptor");
-            SensorTemperatura receptor = new SensorTemperatura(new ReceptorSensorTemperatura(new ArrayList<>(), new Heladera("123", LocalDateTime.of(2021, 1, 1, 0, 0))));
+            SensorTemperatura receptor = new SensorTemperatura(new ReceptorSensorTemperatura(new ArrayList<>(), new Heladera(123L, LocalDateTime.of(2021, 1, 1, 0, 0))));
 
             System.out.println("Now we subscribe to the topic");
             sampleClient.subscribe(topic, receptor);

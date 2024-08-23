@@ -4,17 +4,42 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Motivo;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 @Getter
+@NoArgsConstructor
+@Entity
+@Table(name = "Distribucion_de_viandas")
 public class DistribucionDeViandas implements Puntuable{
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "heladera_origen_id")
     private Heladera heladeraOrigen;
+
+    @ManyToOne
+    @JoinColumn(name = "heladera_destino_id")
     private Heladera heladeraDestino;
+
+    @Column(name = "cantidad_de_viandas", columnDefinition = "int")
     private Integer cantidadDeViandas;
+
+    @Column(name = "motivo_distribucion")
+    @Enumerated(EnumType.STRING)
     private Motivo motivoDistribucion;
+
+    //TODO: converter
     private LocalDate fecha;
 
+    @ManyToOne
+    @JoinColumn(name = "colaborador_id")
     @Getter private Colaborador colaborador;
+
+    @Column(name = "multiplicador", columnDefinition = "float")
     @Getter private float multiplicador;
 
     public DistribucionDeViandas(Integer cantidadDeViandas, Colaborador colaborador, Heladera heladeraDestino, Heladera heladeraOrigen, LocalDate fecha) {

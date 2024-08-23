@@ -1,9 +1,7 @@
 package ar.edu.utn.frba.dds;
 
 import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.Puntuable;
-import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.MedioDeContacto;
-import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.TipoDeColaborador;
-import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.TipoDeContacto;
+import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.*;
 import ar.edu.utn.frba.dds.modelo.entidades.enviadores.Enviador;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.InstanciadorColaborador;
@@ -28,11 +26,11 @@ public class TestLectorCSV {
         List<Colaborador> colaboradores = new ArrayList<Colaborador>();
         List<MedioDeContacto> mediosDeContacto = new ArrayList<>();
         mediosDeContacto.add(new MedioDeContacto("mail@mail.com", TipoDeContacto.MAIL));
-        Colaborador colaborador1 = new Colaborador(TipoDeColaborador.HUMANA, mediosDeContacto, "DNI", "1234", "Jorge", "Jor");
+        Colaborador colaborador1 = new Colaborador(TipoDeColaborador.HUMANA, mediosDeContacto, new Documento(1L, "123", TipoDocumento.DNI), "Jorge", "Jor");
         colaboradores.add(colaborador1);
         List<MedioDeContacto> mediosDeContacto2 = new ArrayList<>();
         mediosDeContacto.add(new MedioDeContacto("mail@mail.com", TipoDeContacto.MAIL));
-        Colaborador colaborador2 = new Colaborador(TipoDeColaborador.HUMANA, mediosDeContacto, "DNI", "12345", "Manuel", "Man");
+        Colaborador colaborador2 = new Colaborador(TipoDeColaborador.HUMANA, mediosDeContacto, new Documento(2L, "124", TipoDocumento.DNI), "Manuel", "Man");
         colaboradores.add(colaborador2);
 
         List<Puntuable> contribuciones = lectorCSV.cargarContribuciones(colaboradores ,new File("src/colaboraciones.csv"));

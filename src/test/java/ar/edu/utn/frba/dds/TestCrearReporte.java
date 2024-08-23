@@ -7,8 +7,10 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Vianda;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.Alerta;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.FallaTecnica;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.Estado;
+import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.Documento;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.MedioDeContacto;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.TipoDeColaborador;
+import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.TipoDocumento;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.reportes.*;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioAlertas;
@@ -30,12 +32,12 @@ public class TestCrearReporte {
     public void initializer() {
 
         List<MedioDeContacto> medios = new ArrayList<>();
-        Colaborador martin = new Colaborador(TipoDeColaborador.HUMANA, medios, "DNI", "12345678", "Martin", "Martinez");
-        Colaborador nico = new Colaborador(TipoDeColaborador.HUMANA, medios, "DNI", "12345678", "Nicolas", "Katz");
-        Colaborador juan = new Colaborador(TipoDeColaborador.HUMANA, medios, "DNI", "12345678", "Juan", "Juan");
-        Heladera hel1 = new Heladera("1", LocalDateTime.now());
-        Heladera hel2 = new Heladera("2", LocalDateTime.now());
-        Heladera hel3 = new Heladera("3", LocalDateTime.now());
+        Colaborador martin = new Colaborador(TipoDeColaborador.HUMANA, medios, new Documento(1L, "123", TipoDocumento.DNI), "Martin", "Martinez");
+        Colaborador nico = new Colaborador(TipoDeColaborador.HUMANA, medios, new Documento(2L, "124", TipoDocumento.DNI), "Nicolas", "Katz");
+        Colaborador juan = new Colaborador(TipoDeColaborador.HUMANA, medios, new Documento(3L, "125", TipoDocumento.DNI), "Juan", "Juan");
+        Heladera hel1 = new Heladera(1L, LocalDateTime.now());
+        Heladera hel2 = new Heladera(2L, LocalDateTime.now());
+        Heladera hel3 = new Heladera(3L, LocalDateTime.now());
 
         List<DistribucionDeViandas> distribucionesDeViandas = new ArrayList<>();
         distribucionesDeViandas.add(new DistribucionDeViandas(3, martin, hel1, hel2, LocalDate.now()));

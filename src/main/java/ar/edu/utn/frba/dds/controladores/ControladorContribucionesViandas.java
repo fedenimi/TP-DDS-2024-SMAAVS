@@ -29,7 +29,7 @@ public class ControladorContribucionesViandas {
         this.solicitarAperturaDeHeladera(heladera, colaborador);
     }
     private void solicitarAperturaDeHeladera(Heladera heladera, Colaborador colaborador) {
-        SolicitudApertura solicitudApertura = new SolicitudApertura(colaborador.getTarjeta(), LocalDateTime.now());
+        SolicitudApertura solicitudApertura = new SolicitudApertura(1L,colaborador.getTarjeta(), LocalDateTime.now());
         //Publicar al broker
         heladera.agregarSolicitudApertura(solicitudApertura);
     }
@@ -55,7 +55,7 @@ public class ControladorContribucionesViandas {
         if (!optionalColaborador.isPresent()) throw new Exception("No se encontro el colaborador");
         Colaborador colaborador = optionalColaborador.get();
 
-        heladera.agregarApertura(new Apertura(colaborador.getTarjeta(),
+        heladera.agregarApertura(new Apertura(1L,colaborador.getTarjeta(),
                 CalculadorDeFechas.getInstance().stringToLocalDateTime(aperturaDTO.getFechaApertura()),
                 heladera.buscarSolicitudAperturaPor(colaborador.getTarjeta(),
                 CalculadorDeFechas.getInstance().stringToLocalDateTime(aperturaDTO.getFechaSolicitud()))));

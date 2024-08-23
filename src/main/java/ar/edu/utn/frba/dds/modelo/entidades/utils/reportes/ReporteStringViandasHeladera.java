@@ -22,7 +22,7 @@ public class ReporteStringViandasHeladera{
             int colocadas = reporteViandasHeladera.getHeladeraViandaColocadaMap().getOrDefault(heladera, 0);
             int retiradas = reporteViandasHeladera.getHeladeraViandaRetiradaMap().getOrDefault(heladera, 0);
             result.append("Heladera ")
-                    .append(heladera.getId())
+                    .append(heladera.getId().toString())
                     .append(": ")
                     .append(colocadas)
                     .append(" colocadas y ")

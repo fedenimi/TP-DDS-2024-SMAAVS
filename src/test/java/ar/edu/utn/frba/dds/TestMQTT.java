@@ -49,7 +49,7 @@ public class TestMQTT {
         broker = "tcp://broker.hivemq.com:1883";
         clientId = "JavaSample";
         persistence = new MemoryPersistence();
-        heladera = new Heladera("123", LocalDateTime.of(2021, 1, 1, 0, 0));
+        heladera = new Heladera(123L, LocalDateTime.of(2021, 1, 1, 0, 0));
         RepositorioHeladeras.getInstance().agregar(heladera);
         receptorTemperatura = new ReceptorSensorTemperatura(new ArrayList<>(), heladera);
         RepositorioSensoresTemperatura.getInstance().agregar(new SensorTemperatura(receptorTemperatura));
@@ -89,9 +89,10 @@ public class TestMQTT {
         ControladorFallaConexion controladorFallaConexion = new ControladorFallaConexion(5, buscadorDeTecnicos);
         when(buscadorDeTecnicos.buscarTecnicoMasCercanoA(ArgumentMatchers.any(Heladera.class)))
                 .thenReturn(new Tecnico(
+                        1L,
                         "Juan",
                         "Perez",
-                        new Documento("123", TipoDocumento.DNI),
+                        new Documento(1L,"123", TipoDocumento.DNI),
                         "201232",
                         new MedioDeContacto("podolskytomi@gmail.com", TipoDeContacto.MAIL),
                         null));

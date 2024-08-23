@@ -1,5 +1,14 @@
 package ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "rubro")
 public class Rubro {
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @Column(name = "nombre", columnDefinition = "VARCHAR")
     private String nombre;
 }

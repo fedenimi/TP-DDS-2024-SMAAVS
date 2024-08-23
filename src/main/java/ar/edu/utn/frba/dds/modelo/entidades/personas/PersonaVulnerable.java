@@ -3,17 +3,31 @@ package ar.edu.utn.frba.dds.modelo.entidades.personas;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.Documento;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.TarjetaPersonaVulnerable;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
-
+@Entity
+@Table(name = "persona_vulnerable")
 public class PersonaVulnerable {
+    @Id
+    @GeneratedValue
+    private Long id;
+    @Column(name = "nombre", columnDefinition = "VARCHAR")
     private String nombre;
+    //TODO converters
     private LocalDate fechaDeNacimiento;
     private LocalDate fechaDeRegistro;
+    @Column(name = "domicilio", columnDefinition = "TEXT")
     private String domicilio;
+    @OneToOne
+    //TODO completar
     private Documento documento;
+    @OneToMany
+    @JoinColumn(name = "persona_vulnerable_id")
     private List<PersonaVulnerable> menoresACargo;
+    @OneToOne
+    //TODO completar
     private TarjetaPersonaVulnerable tarjeta;
 
     public int edad(LocalDate fecha) { return Period.between(this.fechaDeNacimiento, fecha).getYears(); }
