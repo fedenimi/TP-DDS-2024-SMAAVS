@@ -1,8 +1,8 @@
-package ar.edu.utn.frba.dds.modelo.entidades.cronJobs;
+package ar.edu.utn.frba.dds.modelo.cronJobs;
 
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.sensores.ReceptorSensorTemperatura;
-import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.sensores.SensorTemperatura;
+import ar.edu.utn.frba.dds.modelo.entidades.utils.broker.ReceptorBroker;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
@@ -29,7 +29,7 @@ public class MainMQTT {
             System.out.println("Connected");
 
             System.out.println("Build our receptor");
-            SensorTemperatura receptor = new SensorTemperatura(new ReceptorSensorTemperatura(new ArrayList<>(), new Heladera(123L, LocalDateTime.of(2021, 1, 1, 0, 0))));
+            ReceptorBroker receptor = ReceptorBroker.getInstance();
 
             System.out.println("Now we subscribe to the topic");
             sampleClient.subscribe(topic, receptor);

@@ -2,6 +2,8 @@ package ar.edu.utn.frba.dds.modelo.entidades.suscripciones;
 
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.enviadores.Llamador;
+import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.condiciones.CondicionSuscripcionHeladera;
+import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.CondicionSuscripcionHeladeraConverter;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -22,7 +24,8 @@ public class Topic {
     private String mensaje;
 
     @ManyToOne
-    @JoinColumn(name = "condicion_suscripcion_heladera_id") //TODO: arreglar
+    @Convert(converter = CondicionSuscripcionHeladeraConverter.class)
+    @JoinColumn(name = "condicion_suscripcion_heladera_id")
     private CondicionSuscripcionHeladera condicionSuscripcionHeladera;
     public void notificarSuscriptores(Heladera heladera) {
         suscripciones.forEach(suscripcion -> {

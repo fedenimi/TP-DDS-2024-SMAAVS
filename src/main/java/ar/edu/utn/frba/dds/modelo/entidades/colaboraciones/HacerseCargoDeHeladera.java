@@ -6,16 +6,11 @@ import lombok.Getter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.Period;
 
 @Entity
-@Table(name = "hacerse_cargo_de_heladera")
-public class HacerseCargoDeHeladera implements Puntuable{
-    @Id
-    @GeneratedValue
-    private Long id;
-
+@DiscriminatorValue("hacerse_cargo_de_heladera")
+public class HacerseCargoDeHeladera extends Puntuable{
     @OneToOne //TODO: OneToOne
     @Getter private Heladera heladera;
 
@@ -28,7 +23,6 @@ public class HacerseCargoDeHeladera implements Puntuable{
 
     @Override
     public float puntaje() {
-
         return this.colaborador.sumatoriaDeMesesDeHeladerasActivas();
     }
 

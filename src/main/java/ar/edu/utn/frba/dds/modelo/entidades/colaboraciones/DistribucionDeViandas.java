@@ -11,12 +11,8 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "Distribucion_de_viandas")
-public class DistribucionDeViandas implements Puntuable{
-    @Id
-    @GeneratedValue
-    private Long id;
-
+@DiscriminatorValue("distribucion_viandas")
+public class DistribucionDeViandas extends Puntuable {
     @ManyToOne
     @JoinColumn(name = "heladera_origen_id")
     private Heladera heladeraOrigen;

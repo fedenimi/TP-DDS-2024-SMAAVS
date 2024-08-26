@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "frecuencia_unica")
-public class Unica {
+public class Unica implements Frecuencia{
     @Id
     @GeneratedValue
     private Long id;

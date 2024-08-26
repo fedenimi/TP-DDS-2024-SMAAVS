@@ -11,10 +11,8 @@ public class TarjetaColaborador {
     @Id
     @GeneratedValue
     @Getter
-    private Long id;
+    private String id;
 
-    @Column (name = "codigo", columnDefinition = "VARCHAR[12]")
-    private String codigo;
     // TODO: converter
     private LocalDateTime fechaEmision;
 }

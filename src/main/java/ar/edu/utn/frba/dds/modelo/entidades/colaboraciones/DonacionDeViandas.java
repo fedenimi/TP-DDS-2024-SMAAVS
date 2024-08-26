@@ -3,15 +3,16 @@ package ar.edu.utn.frba.dds.modelo.entidades.colaboraciones;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Vianda;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 @Getter
+@NoArgsConstructor
 @Entity
-@Table(name = "donacion_de_viandas")
-public class DonacionDeViandas implements Puntuable{
+@DiscriminatorValue("donacion_viandas")
+public class DonacionDeViandas extends Puntuable{
     @OneToMany
     @JoinColumn(name = "vianda_id")
     private List<Vianda> viandasDonadas;

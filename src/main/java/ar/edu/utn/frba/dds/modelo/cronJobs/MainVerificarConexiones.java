@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.modelo.entidades.cronJobs;
+package ar.edu.utn.frba.dds.modelo.cronJobs;
 
 import ar.edu.utn.frba.dds.controladores.ControladorFallaConexion;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;

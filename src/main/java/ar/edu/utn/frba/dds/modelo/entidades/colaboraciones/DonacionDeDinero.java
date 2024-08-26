@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.modelo.entidades.colaboraciones;
 
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.frecuencia.Frecuencia;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
+import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.FrecuenciaConverter;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -10,12 +11,8 @@ import java.time.LocalDate;
 import java.time.Period;
 @NoArgsConstructor
 @Entity
-@Table(name = "donacion_de_dinero")
-public class DonacionDeDinero implements Puntuable{
-    @Id
-    @GeneratedValue
-    private Long id;
-
+@DiscriminatorValue("donacion_dinero")
+public class DonacionDeDinero extends Puntuable {
     //TODO: converter
     private LocalDate fechaDeInicio;
 
@@ -23,7 +20,8 @@ public class DonacionDeDinero implements Puntuable{
     private Integer monto;
 
     @ManyToOne
-    @JoinColumn(name = "frecuencia_id") //TODO: arreglar
+    @Convert(converter = FrecuenciaConverter.class)
+    @JoinColumn(name = "frecuencia_id")
     private Frecuencia frecuencia;
 
     @ManyToOne

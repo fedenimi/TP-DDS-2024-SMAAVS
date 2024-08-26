@@ -8,15 +8,13 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.Documento;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.MedioDeContacto;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.TipoDeContacto;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.TipoDocumento;
-import ar.edu.utn.frba.dds.modelo.entidades.enviadores.Enviador;
 import ar.edu.utn.frba.dds.modelo.entidades.enviadores.EnviadorDeMail;
 import ar.edu.utn.frba.dds.modelo.entidades.enviadores.Llamador;
-import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Punto;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Tecnico;
+import ar.edu.utn.frba.dds.modelo.entidades.utils.broker.ReceptorBroker;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioAlertas;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioHeladeras;
-import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioSensoresTemperatura;
-import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.sensores.SensorTemperatura;
+import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioReceptoresTemperatura;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
@@ -51,8 +49,8 @@ public class TestMQTT {
         persistence = new MemoryPersistence();
         heladera = new Heladera(123L, LocalDateTime.of(2021, 1, 1, 0, 0));
         RepositorioHeladeras.getInstance().agregar(heladera);
-        receptorTemperatura = new ReceptorSensorTemperatura(new ArrayList<>(), heladera);
-        RepositorioSensoresTemperatura.getInstance().agregar(new SensorTemperatura(receptorTemperatura));
+        receptorTemperatura = new ReceptorSensorTemperatura(1L,new ArrayList<>(), heladera);
+        RepositorioReceptoresTemperatura.getInstance().agregar(receptorTemperatura);
     }
 
     @Test
@@ -67,7 +65,7 @@ public class TestMQTT {
             System.out.println("Connected");
 
             System.out.println("Build our receptor");
-            SensorTemperatura receptor = new SensorTemperatura(receptorTemperatura);
+            ReceptorBroker receptor = ReceptorBroker.getInstance();
 
             System.out.println("Now we subscribe to the topic");
             sampleClient.subscribe(topic, receptor);

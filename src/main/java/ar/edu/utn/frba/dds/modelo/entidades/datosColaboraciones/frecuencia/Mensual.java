@@ -5,7 +5,7 @@ import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.DonacionDeDinero;
 import javax.persistence.*;
 @Entity
 @Table(name = "frecuencia_mensual")
-public class Mensual {
+public class Mensual implements Frecuencia{
     @Id
     @GeneratedValue
     private Long id;

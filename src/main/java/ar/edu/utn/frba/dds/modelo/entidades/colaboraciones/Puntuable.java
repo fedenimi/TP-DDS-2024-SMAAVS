@@ -2,15 +2,22 @@ package ar.edu.utn.frba.dds.modelo.entidades.colaboraciones;
 
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-public interface Puntuable {
-    float puntaje();
-    float getMultiplicador();
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Table(name = "puntuable")
+@DiscriminatorColumn(name = "tipo_puntuable")
+public abstract class Puntuable {
+    @Id
+    @GeneratedValue
+    private Long id;
+    public abstract float puntaje();
 
-    Colaborador getColaborador();
-    int cantidadDeMesesSiendoHeladera();
+    public abstract float getMultiplicador();
+
+    public abstract Colaborador getColaborador();
+    public int cantidadDeMesesSiendoHeladera(){
+        return 0;
+    }
 }

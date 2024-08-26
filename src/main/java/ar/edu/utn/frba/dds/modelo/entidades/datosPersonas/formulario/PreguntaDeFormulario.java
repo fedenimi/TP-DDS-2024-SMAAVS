@@ -10,6 +10,6 @@ public class PreguntaDeFormulario {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "")
+    @JoinColumn(name = "pregunta_id")
     private Pregunta pregunta;
 }

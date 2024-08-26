@@ -14,7 +14,14 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 public class ControladorMovimiento {
+
     private IBuscadorDeTecnicos buscadorDeTecnicos;
+    private static ControladorMovimiento instance = null;
+    public static ControladorMovimiento getInstance() {
+        if(instance == null)
+            instance = new ControladorMovimiento();
+        return instance;
+    }
     public void recibirFraude(FraudeDTO fraudeDTO) {
         LocalDateTime fechaYHora;
         Heladera heladera = null;

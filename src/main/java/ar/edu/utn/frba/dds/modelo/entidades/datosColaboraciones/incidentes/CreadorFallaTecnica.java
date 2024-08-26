@@ -14,7 +14,7 @@ public class CreadorFallaTecnica {
         return instance;
     }
     public FallaTecnica crearFallaTecnica(Heladera heladera, Colaborador reportador, String descripcion, String foto, LocalDateTime fechaYHora) {
-        return new FallaTecnica(reportador, descripcion, foto, fechaYHora, heladera);
+        return new FallaTecnica(1L,reportador, descripcion, foto, fechaYHora, heladera);
     }
 
 }

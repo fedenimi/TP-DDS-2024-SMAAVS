@@ -10,11 +10,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "registro_de_personas_vulnerables")
-public class RegistroDePersonasVulnerables implements Puntuable {
-    @Id
-    @GeneratedValue
-    private Long id;
-
+public class RegistroDePersonasVulnerables extends Puntuable {
     @OneToOne //TODO: OneToOne
     private Registro registro;
 

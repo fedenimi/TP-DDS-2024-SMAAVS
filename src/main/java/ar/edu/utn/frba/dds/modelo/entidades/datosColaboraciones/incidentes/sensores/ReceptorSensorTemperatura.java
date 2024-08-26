@@ -4,22 +4,41 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.Alerta;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.CreadorAlerta;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.Estado;
+import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioAlertas;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.*;
 
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "receptor_sensor_temperatura")
 public class ReceptorSensorTemperatura {
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @OneToMany
+    @JoinColumn(name = "receptor_sensor_temperatura_id")
     private List<Medicion> mediciones;
+
+    @OneToOne
+    //TODO: oneToOne
     private Heladera heladera;
-    public boolean evaluarTemperatura(Temperatura temperatura) {
-        return temperatura.getValor() >= heladera.obtenerTemperaturaMinima() && temperatura.getValor() <= this.getHeladera().obtenerTemperaturaMaxima();
+    public void evaluarTemperatura(Temperatura temperatura) {
+        this.agregarMedicion(temperatura);
+        if (temperatura.getValor() < heladera.obtenerTemperaturaMinima() || temperatura.getValor() > this.getHeladera().obtenerTemperaturaMaxima()){
+            Alerta alerta = this.crearAlerta(heladera, Estado.FALLA_TEMPERATURA);
+            RepositorioAlertas.getInstance().guardar(alerta);
+        }
     }
-    public void agregarMedicion(String temperatura) {
-        Medicion medicion = new Medicion(Float.parseFloat(temperatura), LocalDateTime.now());
+    public void agregarMedicion(Temperatura temperatura) {
+        Medicion medicion = new Medicion(1L, temperatura.getValor(), LocalDateTime.now());
         mediciones.add(medicion);
     }
 

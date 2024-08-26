@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.modelo.entidades.cronJobs;
+package ar.edu.utn.frba.dds.modelo.cronJobs;
 
 import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.DistribucionDeViandas;
 import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.DonacionDeViandas;
@@ -55,11 +55,11 @@ public class MainReportar {
         donacionesDeViandas.add(new DonacionDeViandas(nico, Arrays.asList(vianda6, vianda6), LocalDate.now()));
         RepositorioDonacionesViandas repoDona = new RepositorioDonacionesViandas(donacionesDeViandas);
 
-        Alerta alerta1 = new Alerta(Estado.FRAUDE , LocalDateTime.now(), hel1);
-        Alerta alerta2 = new Alerta(Estado.FRAUDE, LocalDateTime.now(), hel2);
-        Alerta alerta3 = new Alerta(Estado.FRAUDE, LocalDateTime.now(), hel3);
-        FallaTecnica fallaTecnica1 = new FallaTecnica(nico, "Descripcion", "Foto", LocalDateTime.now(), hel1);
-        FallaTecnica fallaTecnica2 = new FallaTecnica(nico, "Descripcion", "Foto", LocalDateTime.now(), hel3);
+        Alerta alerta1 = new Alerta(1L,Estado.FRAUDE , LocalDateTime.now(), hel1);
+        Alerta alerta2 = new Alerta(2L,Estado.FRAUDE, LocalDateTime.now(), hel2);
+        Alerta alerta3 = new Alerta(3L,Estado.FRAUDE, LocalDateTime.now(), hel3);
+        FallaTecnica fallaTecnica1 = new FallaTecnica(1L,nico, "Descripcion", "Foto", LocalDateTime.now(), hel1);
+        FallaTecnica fallaTecnica2 = new FallaTecnica(2L,nico, "Descripcion", "Foto", LocalDateTime.now(), hel3);
         List<FallaTecnica> fallasTecnicas = new ArrayList<FallaTecnica>();
         fallasTecnicas.add(fallaTecnica1);
         fallasTecnicas.add(fallaTecnica2);

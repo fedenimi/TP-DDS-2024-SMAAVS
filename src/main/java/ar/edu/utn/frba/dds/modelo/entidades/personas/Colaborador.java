@@ -22,13 +22,20 @@ public class Colaborador {
     private Long id;
 
     @OneToMany
+    @JoinColumn(name = "colaborador_id")
     private List<Puntuable> puntuables;
 
     @OneToMany
     private List<OfrecerProducto> ofrecerProductos;
     @OneToOne
     private FormularioRespondido formularioRespondido;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_colaborador")
     private TipoDeColaborador tipoDeColaborador;
+
+    @OneToMany
+    @JoinColumn(name = "colaborador_id")
     private List<MedioDeContacto> mediosDeContacto;
 
     @Column(name = "puntos_disponibles", columnDefinition = "FLOAT(10,2)")
@@ -49,7 +56,10 @@ public class Colaborador {
     @OneToOne
     private TarjetaColaborador tarjeta;
 
-
+    // TODO: ElementCollection
+    @ElementCollection
+    @CollectionTable(name = "", joinColumns= @JoinColumn(name= ""))
+    @Column(name = "")
     private List<FormaColaboracion> formasDeColaborar;
 
     public Colaborador(TipoDeColaborador tipoDeColaborador, List<MedioDeContacto> mediosDeContacto,  Documento documento, String nombre, String apellido) {
