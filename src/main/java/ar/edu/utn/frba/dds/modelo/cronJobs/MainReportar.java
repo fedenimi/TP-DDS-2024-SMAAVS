@@ -67,7 +67,7 @@ public class MainReportar {
         alertas.add(alerta1);
         alertas.add(alerta2);
         alertas.add(alerta3);
-        RepositorioFallasTecnicas repositorioFallasTecnicas = new RepositorioFallasTecnicas(fallasTecnicas);
+        RepositorioFallasTecnicas repositorioFallasTecnicas = new RepositorioFallasTecnicas();
         RepositorioAlertas repositorioAlertas = new RepositorioAlertas();
 
         ReporteViandasColaborador reporteViandasColaborador = new ReporteViandasColaborador(repoDona, repoDist, "reporteViandasColaborador", new ReporteStringViandasColaborador());

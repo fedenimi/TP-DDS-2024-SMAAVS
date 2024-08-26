@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.sensores;
 
+import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateTimeConverter;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,7 @@ public class Medicion {
     @Column(name = "temperatura", columnDefinition = "FLOAT(5,2)")
     private float temperatura;
 
-    //TODO: converter
+    @Column(name = "fecha_y_hora")
+    @Convert(converter = LocalDateTimeConverter.class)
     private LocalDateTime fechaYHora;
 }

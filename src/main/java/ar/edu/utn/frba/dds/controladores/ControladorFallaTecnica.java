@@ -9,6 +9,7 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.Regis
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.Estado;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.CalculadorDeFechas;
+import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioFallasTecnicas;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioHeladeras;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioColaboradores;
 import lombok.AllArgsConstructor;
@@ -33,6 +34,6 @@ public class ControladorFallaTecnica {
         RegistradorDeIncidentes.getInstance().registrarIncidente(Estado.FALLA_TECNICA, heladera, buscadorDeTecnicos);
 
         FallaTecnica fallaTecnica = CreadorFallaTecnica.getInstance().crearFallaTecnica(heladera, reportador, fallaTecnicaDTO.getDescripcion(), fallaTecnicaDTO.getFoto(), fechaYHora);
-        //TODO: Guardar falla tecnica
+        RepositorioFallasTecnicas.getInstance().guardar(fallaTecnica);
     }
 }

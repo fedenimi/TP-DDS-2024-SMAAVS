@@ -8,12 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "quedan_n_viandas")
 public class QuedanNViandas implements CondicionSuscripcionHeladera {
-    @Id
-    @GeneratedValue
-    private Long id;
     @Override
     public Boolean debeEnviar(Heladera heladera, Suscripcion suscripcion) {
         return heladera.getStock() <= suscripcion.getConfigurableN();

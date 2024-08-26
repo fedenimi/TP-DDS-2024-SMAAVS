@@ -14,10 +14,6 @@ public class HacerseCargoDeHeladera extends Puntuable{
     @OneToOne //TODO: OneToOne
     @Getter private Heladera heladera;
 
-    @ManyToOne
-    @JoinColumn(name = "colaborador_id")
-    @Getter private Colaborador colaborador;
-
     @Column(name = "multiplicador", columnDefinition = "float")
     @Getter private float multiplicador;
 

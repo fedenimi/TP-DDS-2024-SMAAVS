@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.modelo.entidades.colaboraciones;
 
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Vianda;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
+import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateConverter;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -17,12 +18,9 @@ public class DonacionDeViandas extends Puntuable{
     @JoinColumn(name = "vianda_id")
     private List<Vianda> viandasDonadas;
 
-    //TODO: converter
+    @Column(name = "fecha")
+    @Convert(converter = LocalDateConverter.class)
     private LocalDate fecha;
-
-    @ManyToOne
-    @JoinColumn(name = "colaborador_id")
-    private Colaborador colaborador;
 
     @Column(name = "multiplicador", columnDefinition = "float")
     private float multiplicador;

@@ -26,7 +26,9 @@ public class Colaborador {
     private List<Puntuable> puntuables;
 
     @OneToMany
+    @JoinColumn(name = "colaborador_id")
     private List<OfrecerProducto> ofrecerProductos;
+
     @OneToOne
     private FormularioRespondido formularioRespondido;
 
@@ -58,8 +60,8 @@ public class Colaborador {
 
     // TODO: ElementCollection
     @ElementCollection
-    @CollectionTable(name = "", joinColumns= @JoinColumn(name= ""))
-    @Column(name = "")
+    @CollectionTable(name = "colaborador_forma_de_colaborar", joinColumns= @JoinColumn(name= "colaborador_id"))
+    @Column(name = "forma_de_colaborar")
     private List<FormaColaboracion> formasDeColaborar;
 
     public Colaborador(TipoDeColaborador tipoDeColaborador, List<MedioDeContacto> mediosDeContacto,  Documento documento, String nombre, String apellido) {
@@ -73,6 +75,7 @@ public class Colaborador {
 
     public void agregarPuntuable(Puntuable puntuable) {
        this.puntuables.add(puntuable);
+       puntuable.setColaborador(this);
     }
 
     public void agregarOfrecerProducto(OfrecerProducto ofrecerProducto) {

@@ -11,6 +11,6 @@ public class PartidoODepartamento {
     @Column(name = "nombre", columnDefinition = "VARCHAR")
     private String nombre;
     @OneToOne
-    //TODO completar
+    //TODO oneToOne
     private ProvinciaOEstado provincia;
 }

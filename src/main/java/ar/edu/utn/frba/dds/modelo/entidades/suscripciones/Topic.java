@@ -23,9 +23,8 @@ public class Topic {
     @Column(name = "mensaje", columnDefinition = "TEXT")
     private String mensaje;
 
-    @ManyToOne
     @Convert(converter = CondicionSuscripcionHeladeraConverter.class)
-    @JoinColumn(name = "condicion_suscripcion_heladera_id")
+    @Column(name = "condicion_suscripcion_heladera")
     private CondicionSuscripcionHeladera condicionSuscripcionHeladera;
     public void notificarSuscriptores(Heladera heladera) {
         suscripciones.forEach(suscripcion -> {

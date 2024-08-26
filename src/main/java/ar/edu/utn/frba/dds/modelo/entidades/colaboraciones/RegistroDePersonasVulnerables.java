@@ -14,10 +14,6 @@ public class RegistroDePersonasVulnerables extends Puntuable {
     @OneToOne //TODO: OneToOne
     private Registro registro;
 
-    @ManyToOne
-    @JoinColumn(name = "colaborador_id")
-    @Getter private Colaborador colaborador;
-
     @Column(name = "multiplicador", columnDefinition = "float")
     @Getter private float multiplicador;
 

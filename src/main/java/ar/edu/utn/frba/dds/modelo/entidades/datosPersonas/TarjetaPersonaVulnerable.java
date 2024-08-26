@@ -17,6 +17,8 @@ public class TarjetaPersonaVulnerable {
     private Integer usosMaximoBase;
     @Column(name = "usos_maximo_por_menor", columnDefinition = "VARCHAR")
     private Integer usosMaximoPorMenor;
-    //TODO ManyToMany?
+
+    @OneToMany
+    @JoinColumn(name = "tarjeta_persona_vulnerable_id")
     private List<Uso> usos;
 }

@@ -71,7 +71,7 @@ public class TestCrearReporte {
         alertas.add(alerta1);
         alertas.add(alerta2);
         alertas.add(alerta3);
-        RepositorioFallasTecnicas repositorioFallasTecnicas = new RepositorioFallasTecnicas(fallasTecnicas);
+        RepositorioFallasTecnicas repositorioFallasTecnicas = new RepositorioFallasTecnicas();
         RepositorioAlertas repositorioAlertas = new RepositorioAlertas();
 
 

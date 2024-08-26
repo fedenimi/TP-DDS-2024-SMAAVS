@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera;
 
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Tecnico;
+import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateConverter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -18,7 +19,8 @@ public class VisitaTecnica {
     @Column(name = "foto",columnDefinition = "text")
     private String foto;
 
-    //TODO: converter
+    @Column(name = "fecha_visita")
+    @Convert(converter = LocalDateConverter.class)
     private LocalDate fechaVisita;
 
     @ManyToOne

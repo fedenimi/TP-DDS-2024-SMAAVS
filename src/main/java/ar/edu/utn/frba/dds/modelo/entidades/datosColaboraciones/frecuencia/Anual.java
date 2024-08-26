@@ -5,12 +5,7 @@ import lombok.AllArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "frecuencia_anual")
 public class Anual implements Frecuencia{
-    @Id
-    @GeneratedValue
-    private Long id;
     public float puntajePara(DonacionDeDinero donacionDeDinero){
         return donacionDeDinero.anios();
     }

@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes;
 
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.Estado;
+import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateTimeConverter;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,7 +22,8 @@ public class Alerta {
    @Enumerated(EnumType.STRING)
    private Estado tipoAlerta;
 
-   //TODO: converter
+   @Column(name = "fecha_y_hora")
+   @Convert(converter = LocalDateTimeConverter.class)
    @Getter private LocalDateTime fechaYHora;
 
    @ManyToOne

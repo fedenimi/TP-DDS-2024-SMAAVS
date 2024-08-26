@@ -19,4 +19,14 @@ public class RepositorioColaboradores implements IRepositorioColaboradores {
     public Optional<Colaborador> buscarPor(String doc, String tipoDoc) {
         return null;
     }
+
+    @Override
+    public List<Colaborador> buscarTodos() {
+        return colaboradores;
+    }
+
+    @Override
+    public Colaborador guardar(Colaborador colaborador) {
+        return colaborador;
+    }
 }

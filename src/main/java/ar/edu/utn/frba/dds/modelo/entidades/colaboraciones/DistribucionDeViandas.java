@@ -31,16 +31,11 @@ public class DistribucionDeViandas extends Puntuable {
     //TODO: converter
     private LocalDate fecha;
 
-    @ManyToOne
-    @JoinColumn(name = "colaborador_id")
-    @Getter private Colaborador colaborador;
-
     @Column(name = "multiplicador", columnDefinition = "float")
     @Getter private float multiplicador;
 
     public DistribucionDeViandas(Integer cantidadDeViandas, Colaborador colaborador, Heladera heladeraDestino, Heladera heladeraOrigen, LocalDate fecha) {
         this.cantidadDeViandas = cantidadDeViandas;
-        this.colaborador = colaborador;
         this.heladeraDestino = heladeraDestino;
         this.fecha = fecha;
         this.heladeraOrigen = heladeraOrigen;

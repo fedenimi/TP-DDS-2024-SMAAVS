@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera;
 
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.TarjetaColaborador;
+import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateTimeConverter;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,10 +18,11 @@ public class SolicitudApertura {
     @GeneratedValue
     private Long id;
 
-    @Column(name = "tarjeta_colaborador")
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "tarjeta_colaborador_id")
     private TarjetaColaborador tarjetaColaborador;
-    //TODO: converter
+
+    @Column(name = "fecha_y_hora")
+    @Convert(converter = LocalDateTimeConverter.class)
     private LocalDateTime fechaYHora;
 }

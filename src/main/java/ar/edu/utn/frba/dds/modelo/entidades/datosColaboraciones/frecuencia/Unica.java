@@ -7,12 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "frecuencia_unica")
 public class Unica implements Frecuencia{
-    @Id
-    @GeneratedValue
-    private Long id;
 
     public float puntajePara(DonacionDeDinero donacionDeDinero){
         return 1;

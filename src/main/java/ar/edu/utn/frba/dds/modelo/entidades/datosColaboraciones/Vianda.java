@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones;
 
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
+import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateConverter;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -15,7 +16,8 @@ public class Vianda {
     @GeneratedValue
     private Long id;
 
-    //TODO: converter
+    @Column(name = "fecha_caducidad")
+    @Convert(converter = LocalDateConverter.class)
     private LocalDate fechaCaducidad;
 
     @Column(name = "comida", columnDefinition = "VARCHAR(50)")

@@ -1,5 +1,7 @@
 package ar.edu.utn.frba.dds.modelo.entidades.datosPersonas;
 
+import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateConverter;
+import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateTimeConverter;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -13,6 +15,7 @@ public class TarjetaColaborador {
     @Getter
     private String id;
 
-    // TODO: converter
+    @Column(name = "fecha_emision")
+    @Convert(converter = LocalDateTimeConverter.class)
     private LocalDateTime fechaEmision;
 }

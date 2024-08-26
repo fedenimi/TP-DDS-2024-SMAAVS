@@ -14,6 +14,6 @@ public class Barrio {
     private Integer codigoPostal;
 
     @OneToOne
-    //TODO completar
+    //TODO oneToOne
     private Ciudad ciudad;
 }

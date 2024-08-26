@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.modelo.entidades.colaboraciones;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.frecuencia.Frecuencia;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.FrecuenciaConverter;
+import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateConverter;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -13,20 +14,16 @@ import java.time.Period;
 @Entity
 @DiscriminatorValue("donacion_dinero")
 public class DonacionDeDinero extends Puntuable {
-    //TODO: converter
+    @Column(name = "fecha_de_inicio")
+    @Convert(converter = LocalDateConverter.class)
     private LocalDate fechaDeInicio;
 
     @Column(name = "monto", columnDefinition = "int")
     private Integer monto;
 
-    @ManyToOne
     @Convert(converter = FrecuenciaConverter.class)
-    @JoinColumn(name = "frecuencia_id")
+    @Column(name = "frecuencia")
     private Frecuencia frecuencia;
-
-    @ManyToOne
-    @JoinColumn(name = "colaborador_id")
-    @Getter private Colaborador colaborador;
 
     @Column(name = "multiplicador", columnDefinition = "float")
     @Getter private float multiplicador;

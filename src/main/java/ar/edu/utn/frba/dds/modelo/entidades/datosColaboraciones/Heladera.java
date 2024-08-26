@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.*;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.TarjetaColaborador;
 import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Punto;
 import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.Topic;
+import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateTimeConverter;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,8 +26,7 @@ public class Heladera {
     @JoinColumn(name = "modelo_heladera_id")
     private ModeloHeladera modeloHeladera;
 
-    @Column(name = "punto")
-    @OneToOne
+    @OneToOne //TODO: oneToOne
     private Punto punto;
 
     @Column(name = "direccion", columnDefinition = "TEXT")
@@ -39,7 +39,8 @@ public class Heladera {
     @Enumerated(EnumType.STRING)
     @Setter @Getter private Estado estado;
 
-    //TODO: converter
+    @Column(name = "fecha_y_hora_inicio")
+    @Convert(converter = LocalDateTimeConverter.class)
     @Getter private LocalDateTime fechaYHoraInicio;
 
     @Column(name = "tiempo_para_visitar_en_minutos", columnDefinition = "int")

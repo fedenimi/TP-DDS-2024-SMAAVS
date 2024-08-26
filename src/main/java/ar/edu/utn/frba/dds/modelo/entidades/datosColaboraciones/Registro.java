@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones;
 
 import ar.edu.utn.frba.dds.modelo.entidades.personas.PersonaVulnerable;
+import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateConverter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -15,6 +16,7 @@ public class Registro {
     @OneToOne //TODO: OneToOne
     private PersonaVulnerable personaVulnerable;
 
-    //TODO: converter
+    @Column(name = "fecha_de_registro")
+    @Convert(converter = LocalDateConverter.class)
     private LocalDate fechaDeRegistro;
 }

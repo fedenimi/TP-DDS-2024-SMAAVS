@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.modelo.entidades.datosPersonas;
 
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
+import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateTimeConverter;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -14,6 +15,7 @@ public class Uso {
     @ManyToOne
     @JoinColumn(name = "heladera_id")
     private Heladera heladera;
-    //TODO converter
+    @Column(name = "fecha_de_uso")
+    @Convert(converter = LocalDateTimeConverter.class)
     @Getter private LocalDateTime fechaDeUso;
 }
