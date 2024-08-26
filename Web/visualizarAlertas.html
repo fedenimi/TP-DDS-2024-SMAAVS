@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/heladeras.css">
     <link rel="stylesheet" href="styles/suscripciones.css">
-    <link rel="stylesheet" href="styles/puntos.css">
 </head>
 
 <body>
@@ -48,29 +47,33 @@
         </div>
     </header>
     <main class="admin-heladeras">
-        <h1>Canje de productos
+        <h1>Alertas vigentes:
         </h1>
         <div class="heladeras-mapa">
             <section class="heladeras-dashboard">
                 <section class="heladeras-dashboard-scrollable">
                     <div class="title">
+                        <div class="title-text">
+                            <h2>Alertas</h2>
+                        </div>
                         <hr>
                     </div>
+                    <h1 class="grey open">No tiene ninguna alerta</h1>
                 </section>
                 <div class="btns">
-                    <a href="javascript:history.back()" class="boton-dashboard">Cancelar</a>
-                    <a class="boton-dashboard btn-reportar" href="canjearPuntos2.html">Confirmar</a>
+                    <a href="javascript:history.back()" class="boton-dashboard">Volver</a>
                 </div>
             </section>
-            <section class="grid-puntos">
-                
+            <section class="blurred-map">
+                <a href="mapaAlertas.html">VER ALERTAS</a>
             </section>
         </div>
     </main>
-    <script src="scripts/repositories/categorias.js"></script>
-    <script src="scripts/dropdownScript.js"></script>
-    <script src="scripts/canjePuntos.js"></script>
+    <script src="scripts/repositories/heladeras.js"></script>
+    <script src="scripts/dropdownScript.js">
+    </script>
     <script src="scripts/modalViandas.js"></script>
+    <script src="scripts/alertas.js"></script>
 </body>
 
 </html>
