@@ -11,7 +11,7 @@ public class ModeloHeladera {
     @GeneratedValue
     private Long id;
 
-    @Column(name = "nombre", columnDefinition = "VARCHAR[255]")
+    @Column(name = "nombre", columnDefinition = "VARCHAR(255)")
     private String nombre;
 
     @Column(name = "temperatura_minima", columnDefinition = "FLOAT(5,2)")

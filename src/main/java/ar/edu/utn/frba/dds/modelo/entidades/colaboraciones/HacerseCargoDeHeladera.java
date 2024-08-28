@@ -11,7 +11,7 @@ import java.time.Period;
 @Entity
 @DiscriminatorValue("hacerse_cargo_de_heladera")
 public class HacerseCargoDeHeladera extends Puntuable{
-    @OneToOne //TODO: OneToOne
+    @Transient
     @Getter private Heladera heladera;
 
     @Column(name = "multiplicador", columnDefinition = "float")

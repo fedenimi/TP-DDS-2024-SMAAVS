@@ -9,6 +9,6 @@ public class Rubro {
     @GeneratedValue
     private Long id;
 
-    @Column(name = "nombre", columnDefinition = "VARCHAR")
+    @Column(name = "nombre", columnDefinition = "VARCHAR(255)")
     private String nombre;
 }

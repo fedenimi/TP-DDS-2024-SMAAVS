@@ -8,9 +8,10 @@ public class Ciudad {
     @Id
     @GeneratedValue
     private Long id;
-    @Column(name = "nombre", columnDefinition = "VARCHAR")
+    @Column(name = "nombre", columnDefinition = "VARCHAR(255)")
     private String nombre;
-    @OneToOne
-    //TODO oneToOne
+
+    @ManyToOne
+    @JoinColumn(name = "partio_o_departamento_id")
     private PartidoODepartamento partidoODepartamento;
 }

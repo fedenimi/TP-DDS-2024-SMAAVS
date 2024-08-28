@@ -29,7 +29,7 @@ public class Colaborador {
     @JoinColumn(name = "colaborador_id")
     private List<OfrecerProducto> ofrecerProductos;
 
-    @OneToOne
+    @Transient //TODO
     private FormularioRespondido formularioRespondido;
 
     @Enumerated(EnumType.STRING)
@@ -46,19 +46,18 @@ public class Colaborador {
     @Column(name = "puntos_canjeados", columnDefinition = "FLOAT(10,2)")
     private Float puntosCanjeados;
 
-    @OneToOne
+    @Transient //TODO
     private Documento documento;
 
-    @Column(name = "nombre", columnDefinition = "VARCHAR[255]")
+    @Column(name = "nombre", columnDefinition = "VARCHAR(255)")
     private String nombre;
 
-    @Column(name = "apellido", columnDefinition = "VARCHAR[255]")
+    @Column(name = "apellido", columnDefinition = "VARCHAR(255)")
     private String apellido;
 
-    @OneToOne
+    @Transient //TODO
     private TarjetaColaborador tarjeta;
 
-    // TODO: ElementCollection
     @ElementCollection
     @CollectionTable(name = "colaborador_forma_de_colaborar", joinColumns= @JoinColumn(name= "colaborador_id"))
     @Column(name = "forma_de_colaborar")

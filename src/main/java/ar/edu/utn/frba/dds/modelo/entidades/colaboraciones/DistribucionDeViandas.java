@@ -3,6 +3,8 @@ package ar.edu.utn.frba.dds.modelo.entidades.colaboraciones;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Motivo;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
+import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateConverter;
+import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateTimeConverter;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -28,7 +30,8 @@ public class DistribucionDeViandas extends Puntuable {
     @Enumerated(EnumType.STRING)
     private Motivo motivoDistribucion;
 
-    //TODO: converter
+    @Column(name = "fecha")
+    @Convert(converter = LocalDateConverter.class)
     private LocalDate fecha;
 
     @Column(name = "multiplicador", columnDefinition = "float")

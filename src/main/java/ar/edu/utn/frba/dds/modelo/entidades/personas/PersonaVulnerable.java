@@ -14,7 +14,8 @@ public class PersonaVulnerable {
     @Id
     @GeneratedValue
     private Long id;
-    @Column(name = "nombre", columnDefinition = "VARCHAR")
+
+    @Column(name = "nombre", columnDefinition = "VARCHAR(255)")
     private String nombre;
 
     @Column(name = "fecha_de_nacimiento")
@@ -26,14 +27,15 @@ public class PersonaVulnerable {
     private LocalDate fechaDeRegistro;
     @Column(name = "domicilio", columnDefinition = "TEXT")
     private String domicilio;
-    @OneToOne
-    //TODO oneToOne
+    @Transient
+    //TODO transient
     private Documento documento;
     @OneToMany
     @JoinColumn(name = "persona_vulnerable_id")
     private List<PersonaVulnerable> menoresACargo;
-    @OneToOne
-    //TODO oneToOne
+
+    @Transient
+    //TODO transient
     private TarjetaPersonaVulnerable tarjeta;
 
     public int edad(LocalDate fecha) { return Period.between(this.fechaDeNacimiento, fecha).getYears(); }

@@ -15,7 +15,7 @@ public class OfrecerProducto {
     @GeneratedValue
     private Long id;
 
-    @OneToOne
+    @Transient //TODO: transient
     private Oferta oferta;
 
     @ManyToOne

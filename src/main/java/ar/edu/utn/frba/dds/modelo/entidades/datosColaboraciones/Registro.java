@@ -13,7 +13,7 @@ public class Registro {
     @GeneratedValue
     private Long id;
 
-    @OneToOne //TODO: OneToOne
+    @Transient //TODO: Transient
     private PersonaVulnerable personaVulnerable;
 
     @Column(name = "fecha_de_registro")

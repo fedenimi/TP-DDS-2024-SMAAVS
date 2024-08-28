@@ -27,8 +27,7 @@ public class ReceptorSensorTemperatura {
     @JoinColumn(name = "receptor_sensor_temperatura_id")
     private List<Medicion> mediciones;
 
-    @OneToOne
-    //TODO: oneToOne
+    @Transient //TODO: Transient
     private Heladera heladera;
     public void evaluarTemperatura(Temperatura temperatura) {
         this.agregarMedicion(temperatura);

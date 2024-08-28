@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "registro_de_personas_vulnerables")
 public class RegistroDePersonasVulnerables extends Puntuable {
-    @OneToOne //TODO: OneToOne
+    @Transient //TODO: transient
     private Registro registro;
 
     @Column(name = "multiplicador", columnDefinition = "float")

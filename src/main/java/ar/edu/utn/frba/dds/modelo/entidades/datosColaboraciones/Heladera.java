@@ -26,7 +26,7 @@ public class Heladera {
     @JoinColumn(name = "modelo_heladera_id")
     private ModeloHeladera modeloHeladera;
 
-    @OneToOne //TODO: oneToOne
+    @Transient //TODO: transient
     private Punto punto;
 
     @Column(name = "direccion", columnDefinition = "TEXT")

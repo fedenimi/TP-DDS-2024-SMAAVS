@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.modelo.entidades.colaboraciones;
 
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -17,6 +18,7 @@ public abstract class Puntuable {
     @ManyToOne
     @JoinColumn(name = "colaborador_id")
     @Getter
+    @Setter
     protected Colaborador colaborador;
     public abstract float puntaje();
 
@@ -25,7 +27,4 @@ public abstract class Puntuable {
         return 0;
     }
 
-    public void setColaborador(Colaborador colaborador) {
-        this.colaborador = colaborador;
-    }
 }

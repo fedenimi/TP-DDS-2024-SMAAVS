@@ -6,16 +6,16 @@ import javax.persistence.*;
 import java.util.List;
 @Getter
 @Entity
-@Table(name = "barrio_por_area")
+@Table(name = "tarjeta_persona_vulnerable")
 public class TarjetaPersonaVulnerable {
     @Id
-    @GeneratedValue
-    private Long id;
-    @Column(name = "codigo", columnDefinition = "VARCHAR[12]")
+    @Column(name = "codigo", columnDefinition = "VARCHAR(12)")
     private String codigo;
-    @Column(name = "usos_maximo_base", columnDefinition = "VARCHAR")
+
+    @Column(name = "usos_maximo_base", columnDefinition = "INT")
     private Integer usosMaximoBase;
-    @Column(name = "usos_maximo_por_menor", columnDefinition = "VARCHAR")
+
+    @Column(name = "usos_maximo_por_menor", columnDefinition = "INT")
     private Integer usosMaximoPorMenor;
 
     @OneToMany

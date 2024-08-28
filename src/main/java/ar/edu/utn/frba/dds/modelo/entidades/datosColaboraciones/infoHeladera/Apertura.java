@@ -20,13 +20,13 @@ public class Apertura {
     @Getter private Long id;
 
     @ManyToOne
-    @JoinColumn(name="id")
+    @JoinColumn(name="tarjeta_colaborador_id")
     private TarjetaColaborador tarjetaColaborador;
 
     @Column(name = "fecha_y_hora")
     @Convert(converter = LocalDateTimeConverter.class)
     private LocalDateTime fechaYHora;
 
-    @OneToOne
+    @Transient //TODO: transient
     private SolicitudApertura solicitudApertura;
 }

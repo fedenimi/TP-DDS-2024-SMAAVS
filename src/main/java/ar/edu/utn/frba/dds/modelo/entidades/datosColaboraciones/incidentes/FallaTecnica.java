@@ -25,7 +25,7 @@ public class FallaTecnica {
     @Column(name = "descripcion", columnDefinition = "TEXT")
     private String descripcion;
 
-    @Column(name = "foto", columnDefinition = "VARCHAR[255]")
+    @Column(name = "foto", columnDefinition = "VARCHAR(255)")
     private String foto;
 
     @Column(name = "fecha_y_hora")
