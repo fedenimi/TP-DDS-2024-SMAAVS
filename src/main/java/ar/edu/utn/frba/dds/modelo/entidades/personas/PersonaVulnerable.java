@@ -27,10 +27,9 @@ public class PersonaVulnerable {
     private LocalDate fechaDeRegistro;
     @Column(name = "domicilio", columnDefinition = "TEXT")
     private String domicilio;
-    @Transient
-    //TODO transient
+    @Embedded
     private Documento documento;
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "persona_vulnerable_id")
     private List<PersonaVulnerable> menoresACargo;
 

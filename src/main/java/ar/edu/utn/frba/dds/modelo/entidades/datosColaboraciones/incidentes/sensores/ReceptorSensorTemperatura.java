@@ -23,11 +23,11 @@ public class ReceptorSensorTemperatura {
     @GeneratedValue
     private Long id;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "receptor_sensor_temperatura_id")
     private List<Medicion> mediciones;
 
-    @Transient //TODO: Transient
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Heladera heladera;
     public void evaluarTemperatura(Temperatura temperatura) {
         this.agregarMedicion(temperatura);

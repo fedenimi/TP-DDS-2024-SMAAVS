@@ -6,14 +6,10 @@ import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateConverter;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "registro")
+@Embeddable
 public class Registro {
-    @Id
-    @GeneratedValue
-    private Long id;
 
-    @Transient //TODO: Transient
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private PersonaVulnerable personaVulnerable;
 
     @Column(name = "fecha_de_registro")

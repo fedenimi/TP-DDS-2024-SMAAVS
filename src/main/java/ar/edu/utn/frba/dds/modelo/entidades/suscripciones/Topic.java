@@ -16,7 +16,7 @@ public class Topic {
     @GeneratedValue
     @Getter private Long id;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "topic_id")
     private List<Suscripcion> suscripciones;
 

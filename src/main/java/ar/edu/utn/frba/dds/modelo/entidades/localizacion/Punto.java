@@ -9,12 +9,11 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Entity
-@Table(name = "punto")
+//@Entity
+//@Table(name = "punto")
+@Embeddable
 public class Punto {
-    @Id
-    @GeneratedValue
-    private Long id;
+
     @Column(name = "latitud", columnDefinition = "FLOAT(9,6)")
     private float latitud;
     @Column(name = "longitud", columnDefinition = "FLOAT(9,6)")

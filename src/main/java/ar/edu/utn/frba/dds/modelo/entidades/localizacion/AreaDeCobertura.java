@@ -9,7 +9,7 @@ public class AreaDeCobertura {
     @GeneratedValue
     private Long id;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "area_cobertura_id")
     private List<BarrioPorArea> barriosPorArea;
 }

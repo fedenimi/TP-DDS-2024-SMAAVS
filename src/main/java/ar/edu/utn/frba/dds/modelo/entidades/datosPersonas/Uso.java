@@ -15,6 +15,7 @@ public class Uso {
     @ManyToOne
     @JoinColumn(name = "heladera_id")
     private Heladera heladera;
+
     @Column(name = "fecha_de_uso")
     @Convert(converter = LocalDateTimeConverter.class)
     @Getter private LocalDateTime fechaDeUso;

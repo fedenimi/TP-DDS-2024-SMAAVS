@@ -18,7 +18,7 @@ public class TarjetaPersonaVulnerable {
     @Column(name = "usos_maximo_por_menor", columnDefinition = "INT")
     private Integer usosMaximoPorMenor;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "tarjeta_persona_vulnerable_id")
     private List<Uso> usos;
 }

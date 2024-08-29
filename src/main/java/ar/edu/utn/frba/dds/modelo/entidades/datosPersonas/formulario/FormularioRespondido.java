@@ -13,7 +13,7 @@ public class FormularioRespondido {
     @JoinColumn(name = "formulario_id")
     private Formulario formulario;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "formulario_respondido_id")
     private List<Respuesta> respuestas;
 }

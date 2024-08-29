@@ -25,8 +25,7 @@ public class Heladera {
     @ManyToOne
     @JoinColumn(name = "modelo_heladera_id")
     private ModeloHeladera modeloHeladera;
-
-    @Transient //TODO: transient
+    @Embedded
     private Punto punto;
 
     @Column(name = "direccion", columnDefinition = "TEXT")
@@ -46,22 +45,22 @@ public class Heladera {
     @Column(name = "tiempo_para_visitar_en_minutos", columnDefinition = "int")
     private Integer tiempoParaVisitarEnMinutos;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "heladera_id")
     private List<Apertura> aperturas;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "heladera_id")
     private List<SolicitudApertura> solicitudAperturas;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "heladera_id")
     private List<VisitaTecnica> visitaTecnicas;
 
     @Column(name = "stock", columnDefinition = "int")
     @Getter private Integer stock;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name="heladera_id")
     @Getter private List<Topic> topics;
 

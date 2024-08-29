@@ -13,6 +13,7 @@ public class RegistradorDeIncidentes {
             instance = new RegistradorDeIncidentes();
         return instance;
     }
+
     public void registrarIncidente(Estado estado, Heladera heladera, IBuscadorDeTecnicos buscadorDeTecnicos) {
         this.notificarAlertaALaHeladera(estado, heladera);
         AlertadorDeTecnicos.getInstance().alertar(heladera, buscadorDeTecnicos);

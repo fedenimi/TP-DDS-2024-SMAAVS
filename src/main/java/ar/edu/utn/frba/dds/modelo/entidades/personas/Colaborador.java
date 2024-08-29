@@ -21,22 +21,24 @@ public class Colaborador {
     @GeneratedValue
     private Long id;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "colaborador")
     @JoinColumn(name = "colaborador_id")
     private List<Puntuable> puntuables;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "colaborador")
     @JoinColumn(name = "colaborador_id")
     private List<OfrecerProducto> ofrecerProductos;
 
-    @Transient //TODO
+    //@Transient
+    // TODO no estoy seguro
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     private FormularioRespondido formularioRespondido;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_colaborador")
     private TipoDeColaborador tipoDeColaborador;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "colaborador_id")
     private List<MedioDeContacto> mediosDeContacto;
 
@@ -46,7 +48,7 @@ public class Colaborador {
     @Column(name = "puntos_canjeados", columnDefinition = "FLOAT(10,2)")
     private Float puntosCanjeados;
 
-    @Transient //TODO
+    @Embedded
     private Documento documento;
 
     @Column(name = "nombre", columnDefinition = "VARCHAR(255)")

@@ -27,6 +27,6 @@ public class Apertura {
     @Convert(converter = LocalDateTimeConverter.class)
     private LocalDateTime fechaYHora;
 
-    @Transient //TODO: transient
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private SolicitudApertura solicitudApertura;
 }

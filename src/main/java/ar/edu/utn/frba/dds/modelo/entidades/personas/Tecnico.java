@@ -25,14 +25,13 @@ public class Tecnico {
     @Column(name = "apellido", columnDefinition = "varchar(255)")
     private String apellido;
 
-    @ManyToOne
-    @JoinColumn(name = "documento_id")
+    @Embedded
     private Documento documento;
 
     @Column(name = "cuil", columnDefinition = "varchar(255)")
     private String cuil;
 
-    @ManyToOne
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "medio_de_contacto_id")
     private MedioDeContacto medioDeContacto;
 

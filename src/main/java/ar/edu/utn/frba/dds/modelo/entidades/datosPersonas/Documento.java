@@ -8,12 +8,10 @@ import javax.persistence.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "documento")
+//@Entity
+//@Table(name = "documento")
+@Embeddable
 public class Documento {
-    @Id
-    @GeneratedValue
-    private Long id;
 
     @Column(name = "numero", columnDefinition = "varchar(20)")
     private String numero;

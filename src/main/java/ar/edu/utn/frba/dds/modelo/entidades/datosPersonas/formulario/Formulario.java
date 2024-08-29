@@ -12,7 +12,7 @@ public class Formulario {
     @GeneratedValue
     private Long id;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "formulario_id")
     private List<PreguntaDeFormulario> preguntas;
 
