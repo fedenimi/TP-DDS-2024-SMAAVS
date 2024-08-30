@@ -6,6 +6,7 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.*;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.formulario.FormularioRespondido;
 import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Punto;
 import ar.edu.utn.frba.dds.modelo.entidades.localizacion.RecomendadorDePuntos;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ import javax.persistence.*;
 import java.io.IOException;
 import java.util.List;
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Entity
 @Table (name = "colaborador")

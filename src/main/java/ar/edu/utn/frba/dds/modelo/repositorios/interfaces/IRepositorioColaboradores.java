@@ -7,8 +7,8 @@ import java.util.Optional;
 
 public interface IRepositorioColaboradores {
     public Optional<Colaborador> buscarPor(String doc, String tipoDoc);
-
+    public Optional<Colaborador> buscar(String id);
     public List<Colaborador> buscarTodos();
-
-    public Colaborador guardar(Colaborador colaborador);
+    public void eliminar(Colaborador colaborador);
+    public void guardar(Colaborador colaborador);
 }

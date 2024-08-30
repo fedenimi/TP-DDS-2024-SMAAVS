@@ -4,11 +4,12 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.Alert
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.FallaTecnica;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IRepositorioFallasTecnicas {
     public void guardar(FallaTecnica fallaTecnica);
     public void eliminar(FallaTecnica fallaTecnica);
 
-    public FallaTecnica buscar(String idHeladera);
-    public List<Alerta> buscarTodos();
+    public Optional<FallaTecnica> buscar(String idHeladera);
+    public List<FallaTecnica> buscarTodos();
 }

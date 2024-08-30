@@ -1,18 +1,18 @@
 package ar.edu.utn.frba.dds.modelo.repositorios;
 
-import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.DonacionDeViandas;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.Alerta;
 import ar.edu.utn.frba.dds.modelo.repositorios.interfaces.IRepositorioAlertas;
-import lombok.AllArgsConstructor;
+import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Getter
 @NoArgsConstructor
-public class RepositorioAlertas implements IRepositorioAlertas {
+public class RepositorioAlertas implements IRepositorioAlertas, WithSimplePersistenceUnit {
     List<Alerta> alertas = new ArrayList<>();
     private static RepositorioAlertas instance = null;
     public static RepositorioAlertas getInstance() {
@@ -22,21 +22,23 @@ public class RepositorioAlertas implements IRepositorioAlertas {
     }
     @Override
     public void guardar(Alerta alerta) {
-        alertas.add(alerta);
+        entityManager().persist(alerta);
     }
 
     @Override
     public void eliminar(Alerta alerta) {
-        alertas.remove(alerta);
+        entityManager().remove(alerta);
     }
 
     @Override
-    public Alerta buscar(String idHeladera) {
-        return null;
+    public Optional<Alerta> buscar(String idHeladera) {
+       return Optional.ofNullable(entityManager().find(Alerta.class, idHeladera));
     }
 
     @Override
     public List<Alerta> buscarTodos() {
-        return alertas;
+        return entityManager()
+                .createQuery("from " + Alerta.class.getName())
+                .getResultList();
     }
 }
