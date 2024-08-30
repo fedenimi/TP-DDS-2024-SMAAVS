@@ -48,7 +48,7 @@ public class TestMQTT {
         clientId = "JavaSample";
         persistence = new MemoryPersistence();
         heladera = new Heladera(123L, LocalDateTime.of(2021, 1, 1, 0, 0));
-        RepositorioHeladeras.getInstance().agregar(heladera);
+        RepositorioHeladeras.getInstance().guardar(heladera);
         receptorTemperatura = new ReceptorSensorTemperatura(1L,new ArrayList<>(), heladera);
         RepositorioReceptoresTemperatura.getInstance().agregar(receptorTemperatura);
     }

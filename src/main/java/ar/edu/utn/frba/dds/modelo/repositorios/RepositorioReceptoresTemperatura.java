@@ -1,13 +1,15 @@
 package ar.edu.utn.frba.dds.modelo.repositorios;
 
+import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.Alerta;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.sensores.ReceptorSensorTemperatura;
 import ar.edu.utn.frba.dds.modelo.repositorios.interfaces.IRepositorioReceptoresTemperatura;
+import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class RepositorioReceptoresTemperatura implements IRepositorioReceptoresTemperatura {
+public class RepositorioReceptoresTemperatura implements IRepositorioReceptoresTemperatura, WithSimplePersistenceUnit {
 
     private static RepositorioReceptoresTemperatura instance = null;
     List<ReceptorSensorTemperatura> receptores = new ArrayList<>();
@@ -17,17 +19,24 @@ public class RepositorioReceptoresTemperatura implements IRepositorioReceptoresT
         return instance;
     }
     @Override
-    public Optional<ReceptorSensorTemperatura> buscar(Long idHeladera) {
-        return receptores.stream().filter(receptor -> receptor.getHeladera().getId().equals(idHeladera)).findFirst();
+    public Optional<ReceptorSensorTemperatura> buscar(Long id) {
+        return Optional.ofNullable(entityManager().find(ReceptorSensorTemperatura.class, id));
     }
 
     @Override
     public List<ReceptorSensorTemperatura> buscarTodos() {
-        return receptores;
+        return entityManager()
+                .createQuery("from " + ReceptorSensorTemperatura.class.getName())
+                .getResultList();
     }
 
     @Override
     public void agregar(ReceptorSensorTemperatura sensorTemperatura) {
-        receptores.add(sensorTemperatura);
+        entityManager().persist(sensorTemperatura);
+    }
+
+    @Override
+    public void eliminar(ReceptorSensorTemperatura receptorSensorTemperatura) {
+        entityManager().remove(receptorSensorTemperatura);
     }
 }

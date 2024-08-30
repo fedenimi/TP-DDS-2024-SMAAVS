@@ -8,6 +8,7 @@ import java.util.Optional;
 public interface IRepositorioReceptoresTemperatura {
     public Optional<ReceptorSensorTemperatura> buscar(Long idHeladera);
     public List<ReceptorSensorTemperatura> buscarTodos();
+    public void agregar(ReceptorSensorTemperatura receptorSensorTemperatura);
 
-    public void agregar(ReceptorSensorTemperatura sensor);
+    public void eliminar(ReceptorSensorTemperatura receptorSensorTemperatura);
 }
