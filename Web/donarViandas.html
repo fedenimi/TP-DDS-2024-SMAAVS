@@ -48,10 +48,10 @@
         </div>
     </header>
     <main class="admin-heladeras donar-viandas-main">
-        <h1>Ha elegido "Donar viandas" <br>
+        <h1 class="distribuir-viandas-3">Ha elegido "Donar viandas" <br>
             Complete los datos correspondientes
         </h1>
-        <div class="heladeras-mapa">
+        <div class="heladeras-mapa distribuir-viandas-3">
             <form class="form-registro2 donar-viandas">
                 <div class="form-element2 donar-dinero-element">
                     <label for="form-nombre">Viandas</label>
@@ -95,7 +95,7 @@
                         <i class="fa-solid fa-trash"></i>
                         <p>Eliminar vianda</p>
                     </button>
-                    <button class="btn-next2 guardar-vianda" type="button">
+                    <button class="btn-next2 guardar-vianda btn-opener-solicitudes-apertura" type="button">
                         <i class="fa-solid fa-check"></i>
                         <p>Guardar</p>
                     </button>
@@ -105,7 +105,22 @@
                 <a href="mapaDonarViandas.html">ABRIR MAPA</a>
             </section>
         </div>
-        <div class="btns-next-viandas">
+        <div class="modal-solicitudes-apertura hidden">
+            <div class="modal-solicitudes-apertura-header">
+                <h1 class="timer"></h1>
+            </div>
+            <div class="heladeras-solicitadas">
+                <div class="heladeras-solicitadas-text">
+                    <p>Heladera a</p>
+                </div>
+                <a class="btn-next2 btn-aceptar-modal-donar">
+                    <p>Finalizar</p>
+                    <i class="fa fa-arrow-right"></i>
+                </a>
+            </div>
+
+        </div>
+        <div class="btns-next-viandas distribuir-viandas-3">
             <a class="btn-next2" href="mainIniciado.html">
                 <p>Atrás</p>
                 <i class="fa fa-arrow-left"></i>
@@ -120,6 +135,7 @@
     </script>
     <script src="scripts/modalViandas.js"></script>
     <script src="scripts/donarViandas.js"></script>
+    <script src="scripts/timer.js"></script>
 </body>
 
 </html>

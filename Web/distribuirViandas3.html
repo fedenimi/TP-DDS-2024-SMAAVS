@@ -47,10 +47,10 @@
         </div>
     </header>
     <main class="registro2-main">
-        <div class="registro2-title">
+        <div class="registro2-title distribuir-viandas-3">
             <h1>Complete los datos correspondientes</h1>
         </div>
-        <form class="form-registro2 donar-dinero">
+        <form class="form-registro2 donar-dinero distribuir-viandas-3">
             <div class="form-element2 donar-dinero-element">
                 <label for="form-nombre">Heladera origen seleccionada</label>
                 <div class="info-viandas-3">
@@ -92,23 +92,43 @@
                     </ul>
                 </div>
             </div>
+
             <div class="form-element2 donar-dinero-element">
                 <label for="form-nombre">¿Qué monto quiere donar?</label>
                 <input type="number" name="apellido" id="form-apellido" required>
             </div>
         </form>
-        <div class="btns-next">
+        <div class="modal-solicitudes-apertura hidden">
+            <div class="modal-solicitudes-apertura-header">
+                <h1 class="timer"></h1>
+            </div>
+            <div class="heladeras-solicitadas">
+                <div class="heladeras-solicitadas-text">
+                    <p>Heladera a</p>
+                    <p>Heladera b</p>
+                </div>
+                <a class="btn-next2 btn-aceptar-modal" href="mainIniciado.html">
+                    <p>Finalizar</p>
+                    <i class="fa fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        <div class="btns-next distribuir-viandas-3">
             <a class="btn-next2" href="javascript:history.back()">
                 <p>Atrás</p>
                 <i class="fa fa-arrow-left"></i>
             </a>
-            <a class="btn-next2" href="mainIniciado.html">
+            <a class="btn-next2 btn-opener-solicitudes-apertura">
                 <p>Finalizar</p>
                 <i class="fa fa-arrow-right"></i>
             </a>
         </div>
     </main>
     <script src="scripts/dropdownScript.js">
+    </script>
+    <script src="scripts/modalViandas.js">
+    </script>
+    <script src="scripts/timer.js">
     </script>
 </body>
 

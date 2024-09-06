@@ -126,3 +126,29 @@ if (titleText) {
         })
     }
 }
+
+const btnOpenerSolicitudesApertura = document.querySelector('.btn-opener-solicitudes-apertura');
+const distribuirViandas3 = document.querySelectorAll('.distribuir-viandas-3');
+const btnAceptarModal = document.querySelector('.btn-aceptar-modal-donar');
+
+if (btnOpenerSolicitudesApertura && distribuirViandas3) {
+    btnOpenerSolicitudesApertura.addEventListener('click', () => {
+        distribuirViandas3.forEach(dist => {
+            dist.classList.add('opacity-low');
+        })
+        const modal = document.querySelector('.modal-solicitudes-apertura');
+        modal.classList.contains('hidden') ? modal.classList.remove('hidden') : modal.classList.add('hidden'); 
+        modal.classList.add('show-modal');
+    })
+}
+
+if (btnAceptarModal) {
+    btnAceptarModal.addEventListener('click', () => {
+        const modal = document.querySelector('.modal-solicitudes-apertura');
+        modal.classList.contains('show-modal') ? modal.classList.remove('show-modal') : modal.classList.add('show-modal');
+        modal.classList.add('hidden');
+        distribuirViandas3.forEach(dist => {
+            dist.classList.remove('opacity-low');
+        })
+    })
+}
