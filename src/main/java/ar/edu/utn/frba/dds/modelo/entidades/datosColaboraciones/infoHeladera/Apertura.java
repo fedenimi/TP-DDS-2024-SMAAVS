@@ -28,5 +28,6 @@ public class Apertura {
     private LocalDateTime fechaYHora;
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name="solicitud_apertura_id")
     private SolicitudApertura solicitudApertura;
 }

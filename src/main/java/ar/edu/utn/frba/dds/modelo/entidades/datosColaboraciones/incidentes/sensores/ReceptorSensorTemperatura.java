@@ -28,6 +28,7 @@ public class ReceptorSensorTemperatura {
     private List<Medicion> mediciones;
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "heladera_id")
     private Heladera heladera;
     public void evaluarTemperatura(Temperatura temperatura) {
         this.agregarMedicion(temperatura);

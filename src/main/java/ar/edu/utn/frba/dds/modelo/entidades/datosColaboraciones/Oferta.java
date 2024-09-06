@@ -6,10 +6,6 @@ import javax.persistence.*;
 //@Table(name = "oferta")
 @Embeddable
 public class Oferta {
-    @Id
-    @GeneratedValue
-    private Long id;
-
     @Column(name = "puntaje_minimo", columnDefinition = "FLOAT(10,2)")
     private Float puntajeMinimo;
 

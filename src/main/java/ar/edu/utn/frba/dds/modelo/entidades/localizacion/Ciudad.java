@@ -12,6 +12,6 @@ public class Ciudad {
     private String nombre;
 
     @ManyToOne
-    @JoinColumn(name = "partio_o_departamento_id")
+    @JoinColumn(name = "partido_o_departamento_id")
     private PartidoODepartamento partidoODepartamento;
 }
