@@ -28,7 +28,7 @@ public class ControladorFallaTecnica {
         Optional<Colaborador> reportadorOptional = RepositorioColaboradores.getInstance().buscarPor(fallaTecnicaDTO.getDoc(), fallaTecnicaDTO.getTipoDoc());
         if (reportadorOptional.isPresent()) reportador = reportadorOptional.get();
         fechaYHora = CalculadorDeFechas.getInstance().stringToLocalDateTime(fallaTecnicaDTO.getFechaYHora());
-        Optional<Heladera> heladeraOptional = RepositorioHeladeras.getInstance().buscar(fallaTecnicaDTO.getIdHeladera());
+        Optional<Heladera> heladeraOptional = RepositorioHeladeras.getInstance().buscar(Long.parseLong(fallaTecnicaDTO.getIdHeladera()));
         if (heladeraOptional.isPresent()) heladera = heladeraOptional.get();
 
         RegistradorDeIncidentes.getInstance().registrarIncidente(Estado.FALLA_TECNICA, heladera, buscadorDeTecnicos);

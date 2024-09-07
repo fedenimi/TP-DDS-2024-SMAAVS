@@ -28,7 +28,7 @@ public class ControladorMovimiento {
         Heladera heladera = null;
 
         fechaYHora = CalculadorDeFechas.getInstance().stringToLocalDateTime(fraudeDTO.getFechaYHora());
-        Optional<Heladera> heladeraOptional = RepositorioHeladeras.getInstance().buscar(fraudeDTO.getIdHeladera());
+        Optional<Heladera> heladeraOptional = RepositorioHeladeras.getInstance().buscar(Long.parseLong(fraudeDTO.getIdHeladera()));
         if (heladeraOptional.isPresent()) {
            heladera = heladeraOptional.get();
         }

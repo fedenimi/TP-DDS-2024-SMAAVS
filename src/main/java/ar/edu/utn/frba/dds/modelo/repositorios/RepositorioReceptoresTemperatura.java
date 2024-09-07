@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.modelo.repositorios;
 
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.Alerta;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.sensores.ReceptorSensorTemperatura;
+import ar.edu.utn.frba.dds.modelo.repositorios.interfaces.IRepositorio;
 import ar.edu.utn.frba.dds.modelo.repositorios.interfaces.IRepositorioReceptoresTemperatura;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class RepositorioReceptoresTemperatura implements IRepositorioReceptoresTemperatura, WithSimplePersistenceUnit {
+public class RepositorioReceptoresTemperatura implements IRepositorio<ReceptorSensorTemperatura>, WithSimplePersistenceUnit {
 
     private static RepositorioReceptoresTemperatura instance = null;
     List<ReceptorSensorTemperatura> receptores = new ArrayList<>();
@@ -31,7 +32,7 @@ public class RepositorioReceptoresTemperatura implements IRepositorioReceptoresT
     }
 
     @Override
-    public void agregar(ReceptorSensorTemperatura sensorTemperatura) {
+    public void guardar(ReceptorSensorTemperatura sensorTemperatura) {
         entityManager().persist(sensorTemperatura);
     }
 

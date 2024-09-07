@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.modelo.entidades.personas;
 
+import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Registro;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.Documento;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.TarjetaPersonaVulnerable;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateConverter;
@@ -33,8 +34,8 @@ public class PersonaVulnerable {
     @JoinColumn(name = "persona_vulnerable_id")
     private List<PersonaVulnerable> menoresACargo;
 
-    @Transient
-    //TODO transient
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @JoinColumn(name = "tarjeta_persona_vulnerable_id", referencedColumnName = "codigo")
     private TarjetaPersonaVulnerable tarjeta;
 
     public int edad(LocalDate fecha) { return Period.between(this.fechaDeNacimiento, fecha).getYears(); }

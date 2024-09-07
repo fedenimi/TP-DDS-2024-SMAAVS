@@ -1,13 +1,20 @@
 package ar.edu.utn.frba.dds.modelo.entidades.localizacion;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "barrrio")
+@Table(name = "barrio")
 public class Barrio {
+    @Getter
     @Id
     @GeneratedValue
     private Long id;
+
+    @Setter
+    @Getter
     @Column(name = "nombre", columnDefinition = "VARCHAR(255)")
     private String nombre;
     @Column(name = "codigo_postal", columnDefinition = "INT")

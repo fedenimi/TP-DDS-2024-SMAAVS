@@ -25,7 +25,7 @@ public class InstanciadorColaborador {
         if (colaboradorOptional.isPresent()) {
             colaborador = colaboradorOptional.get();
         } else {
-            colaborador = new Colaborador(TipoDeColaborador.HUMANA, mediosDeContacto, new Documento(1L, "12123123", TipoDocumento.DNI), colaboradorDO.getNombre(), colaboradorDO.getApellido());
+            colaborador = new Colaborador(TipoDeColaborador.HUMANA, mediosDeContacto, new Documento("12123123", TipoDocumento.DNI), colaboradorDO.getNombre(), colaboradorDO.getApellido());
             colaboradores.add(colaborador);
             enviador.enviar(colaboradorDO.getMedioDeContacto().getValor(), "Nuevo Registro",
                     "Hola " + colaboradorDO.getNombre() + ", muchas gracias por colaborar!\n" +

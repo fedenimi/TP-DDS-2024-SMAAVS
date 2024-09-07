@@ -26,11 +26,11 @@ public class TestLectorCSV {
         List<Colaborador> colaboradores = new ArrayList<Colaborador>();
         List<MedioDeContacto> mediosDeContacto = new ArrayList<>();
         mediosDeContacto.add(new MedioDeContacto("mail@mail.com", TipoDeContacto.MAIL));
-        Colaborador colaborador1 = new Colaborador(TipoDeColaborador.HUMANA, mediosDeContacto, new Documento(1L, "123", TipoDocumento.DNI), "Jorge", "Jor");
+        Colaborador colaborador1 = new Colaborador(TipoDeColaborador.HUMANA, mediosDeContacto, new Documento("123", TipoDocumento.DNI), "Jorge", "Jor");
         colaboradores.add(colaborador1);
         List<MedioDeContacto> mediosDeContacto2 = new ArrayList<>();
         mediosDeContacto.add(new MedioDeContacto("mail@mail.com", TipoDeContacto.MAIL));
-        Colaborador colaborador2 = new Colaborador(TipoDeColaborador.HUMANA, mediosDeContacto, new Documento(2L, "124", TipoDocumento.DNI), "Manuel", "Man");
+        Colaborador colaborador2 = new Colaborador(TipoDeColaborador.HUMANA, mediosDeContacto, new Documento("124", TipoDocumento.DNI), "Manuel", "Man");
         colaboradores.add(colaborador2);
 
         List<Puntuable> contribuciones = lectorCSV.cargarContribuciones(colaboradores ,new File("src/colaboraciones.csv"));

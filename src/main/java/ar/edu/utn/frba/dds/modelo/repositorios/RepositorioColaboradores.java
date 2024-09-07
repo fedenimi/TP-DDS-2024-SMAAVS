@@ -2,13 +2,14 @@ package ar.edu.utn.frba.dds.modelo.repositorios;
 
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.Alerta;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
+import ar.edu.utn.frba.dds.modelo.repositorios.interfaces.IRepositorio;
 import ar.edu.utn.frba.dds.modelo.repositorios.interfaces.IRepositorioColaboradores;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 
 import java.util.List;
 import java.util.Optional;
 
-public class RepositorioColaboradores implements IRepositorioColaboradores, WithSimplePersistenceUnit {
+public class RepositorioColaboradores implements IRepositorio<Colaborador>, WithSimplePersistenceUnit {
     private List<Colaborador> colaboradores;
     private static RepositorioColaboradores instance = null;
     public static RepositorioColaboradores getInstance() {
@@ -16,14 +17,11 @@ public class RepositorioColaboradores implements IRepositorioColaboradores, With
             instance = new RepositorioColaboradores();
         return instance;
     }
-
-    @Override
     public Optional<Colaborador> buscarPor(String doc, String tipoDoc) {
         return null;
     }
-
     @Override
-    public Optional<Colaborador> buscar(String id) {
+    public Optional<Colaborador> buscar(Long id) {
         return Optional.ofNullable(entityManager().find(Colaborador.class, id));
     }
 

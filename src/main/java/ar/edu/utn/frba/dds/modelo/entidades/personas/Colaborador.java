@@ -31,9 +31,8 @@ public class Colaborador {
     @JoinColumn(name = "colaborador_id")
     private List<OfrecerProducto> ofrecerProductos;
 
-    //@Transient
-    // TODO no estoy seguro
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @JoinColumn(name = "formulario_respondido_id", referencedColumnName = "id")
     private FormularioRespondido formularioRespondido;
 
     @Enumerated(EnumType.STRING)
@@ -59,7 +58,7 @@ public class Colaborador {
     @Column(name = "apellido", columnDefinition = "VARCHAR(255)")
     private String apellido;
 
-    @Transient //TODO
+    @Embedded
     private TarjetaColaborador tarjeta;
 
     @ElementCollection

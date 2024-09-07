@@ -25,17 +25,21 @@ public class ControladorContribucionesViandas {
             instance = new ControladorContribucionesViandas();
         return instance;
     }
+    // TODO: no estoy seguro pero por ahí dsps ver esto
+    /*
     public void solicitarAperturaDeHeladera(SolicitudAperturaHeladeraDTO solicitudAperturaHeladeraDTO) throws Exception {
         Optional<Colaborador> optionalColaborador = RepositorioColaboradores.getInstance().
             buscarPor(solicitudAperturaHeladeraDTO.getTipoDoc(), solicitudAperturaHeladeraDTO.getDoc());
         if (!optionalColaborador.isPresent()) throw new Exception("No se encontro el colaborador");
         Colaborador colaborador = optionalColaborador.get();
         if(!this.puedeDonar(colaborador)) throw new Exception("El colaborador no puede donar viandas");
-        Optional<Heladera> optionalHeladera = RepositorioHeladeras.getInstance().buscar(solicitudAperturaHeladeraDTO.getIdHeladera());
+        Optional<Heladera> optionalHeladera = RepositorioHeladeras.getInstance().buscar(Long.parseLong(solicitudAperturaHeladeraDTO.getIdHeladera()));
         if (!optionalHeladera.isPresent()) throw new Exception("No se encontro la heladera");
         Heladera heladera = optionalHeladera.get();
         this.solicitarAperturaDeHeladera(heladera, colaborador);
     }
+
+     */
     private void solicitarAperturaDeHeladera(Heladera heladera, Colaborador colaborador) throws MqttException {
         SolicitudApertura solicitudApertura = new SolicitudApertura(1L,colaborador.getTarjeta(), LocalDateTime.now());
         heladera.agregarSolicitudApertura(solicitudApertura);
@@ -52,9 +56,11 @@ public class ControladorContribucionesViandas {
     public void donarViandas(DonacionViandasDTO donacionViandasDTO) {
         //new DonacionDeViandas();
     }
+    // TODO: y esto tmb
 
     public void abrirHeladera(AperturaDTO aperturaDTO) throws Exception {
-        Optional<Heladera> optionalHeladera = RepositorioHeladeras.getInstance().buscar(aperturaDTO.getIdHeladera());
+        /*
+        Optional<Heladera> optionalHeladera = RepositorioHeladeras.getInstance().buscar(Long.parseLong(aperturaDTO.getIdHeladera()));
         if (!optionalHeladera.isPresent()) throw new Exception("No se encontro la heladera");
         Heladera heladera = optionalHeladera.get();
 
@@ -67,5 +73,8 @@ public class ControladorContribucionesViandas {
                 CalculadorDeFechas.getInstance().stringToLocalDateTime(aperturaDTO.getFechaApertura()),
                 heladera.buscarSolicitudAperturaPor(colaborador.getTarjeta(),
                 CalculadorDeFechas.getInstance().stringToLocalDateTime(aperturaDTO.getFechaSolicitud()))));
+                */
     }
 }
+
+

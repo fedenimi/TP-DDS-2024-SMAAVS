@@ -28,12 +28,13 @@ public class MainReportar {
     public static void main(String[] args) {
         List<Reporte> creadoresDeReporte = new ArrayList<>();
         List<MedioDeContacto> medios = new ArrayList<>();
-        Colaborador martin = new Colaborador(TipoDeColaborador.HUMANA, medios, new Documento(1L, "123", TipoDocumento.DNI), "Martin", "Martinez");
-        Colaborador nico = new Colaborador(TipoDeColaborador.HUMANA, medios, new Documento(2L, "124", TipoDocumento.DNI), "Nicolas", "Katz");
-        Colaborador juan = new Colaborador(TipoDeColaborador.HUMANA, medios, new Documento(3L, "125", TipoDocumento.DNI), "Juan", "Juan");
+        Colaborador martin = new Colaborador(TipoDeColaborador.HUMANA, medios, new Documento("123", TipoDocumento.DNI), "Martin", "Martinez");
+        Colaborador nico = new Colaborador(TipoDeColaborador.HUMANA, medios, new Documento("124", TipoDocumento.DNI), "Nicolas", "Katz");
+        Colaborador juan = new Colaborador(TipoDeColaborador.HUMANA, medios, new Documento("125", TipoDocumento.DNI), "Juan", "Juan");
         Heladera hel1 = new Heladera(1L, LocalDateTime.now());
         Heladera hel2 = new Heladera(2L, LocalDateTime.now());
         Heladera hel3 = new Heladera(3L, LocalDateTime.now());
+
 
         List<DistribucionDeViandas> distribucionesDeViandas = new ArrayList<>();
         distribucionesDeViandas.add(new DistribucionDeViandas(3, martin, hel1, hel2, LocalDate.now()));

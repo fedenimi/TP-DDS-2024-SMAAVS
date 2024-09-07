@@ -1,6 +1,8 @@
 package ar.edu.utn.frba.dds.modelo.repositorios;
 
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.Alerta;
+import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
+import ar.edu.utn.frba.dds.modelo.repositorios.interfaces.IRepositorio;
 import ar.edu.utn.frba.dds.modelo.repositorios.interfaces.IRepositorioAlertas;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import lombok.Getter;
@@ -12,7 +14,7 @@ import java.util.Optional;
 
 @Getter
 @NoArgsConstructor
-public class RepositorioAlertas implements IRepositorioAlertas, WithSimplePersistenceUnit {
+public class RepositorioAlertas implements IRepositorio<Alerta>, WithSimplePersistenceUnit{
     List<Alerta> alertas = new ArrayList<>();
     private static RepositorioAlertas instance = null;
     public static RepositorioAlertas getInstance() {
@@ -31,8 +33,8 @@ public class RepositorioAlertas implements IRepositorioAlertas, WithSimplePersis
     }
 
     @Override
-    public Optional<Alerta> buscar(String idHeladera) {
-       return Optional.ofNullable(entityManager().find(Alerta.class, idHeladera));
+    public Optional<Alerta> buscar(Long id) {
+        return Optional.ofNullable(entityManager().find(Alerta.class, id));
     }
 
     @Override

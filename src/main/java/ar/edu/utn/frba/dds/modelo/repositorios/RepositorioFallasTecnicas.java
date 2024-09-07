@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.modelo.repositorios;
 
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.Alerta;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.FallaTecnica;
+import ar.edu.utn.frba.dds.modelo.repositorios.interfaces.IRepositorio;
 import ar.edu.utn.frba.dds.modelo.repositorios.interfaces.IRepositorioFallasTecnicas;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import lombok.AllArgsConstructor;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Getter
-public class RepositorioFallasTecnicas implements IRepositorioFallasTecnicas, WithSimplePersistenceUnit {
+public class RepositorioFallasTecnicas implements IRepositorio<FallaTecnica>, WithSimplePersistenceUnit {
     private static RepositorioFallasTecnicas instance = null;
     public static RepositorioFallasTecnicas getInstance() {
         if(instance == null) {
@@ -32,7 +33,7 @@ public class RepositorioFallasTecnicas implements IRepositorioFallasTecnicas, Wi
     }
 
     @Override
-    public Optional<FallaTecnica> buscar(String id) {
+    public Optional<FallaTecnica> buscar(Long id) {
         return Optional.ofNullable(entityManager().find(FallaTecnica.class, id));
     }
 

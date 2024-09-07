@@ -10,6 +10,7 @@ import java.time.LocalDate;
 public class Registro {
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "persona_vulnerable_id", referencedColumnName = "id")
     private PersonaVulnerable personaVulnerable;
 
     @Column(name = "fecha_de_registro")

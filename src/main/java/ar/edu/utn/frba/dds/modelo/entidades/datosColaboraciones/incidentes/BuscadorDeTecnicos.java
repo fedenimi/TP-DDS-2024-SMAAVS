@@ -13,7 +13,7 @@ public class BuscadorDeTecnicos implements IBuscadorDeTecnicos{
                 1L,
                 "Juan",
                 "Perez",
-                new Documento(1L, "123", TipoDocumento.DNI),
+                new Documento("123", TipoDocumento.DNI),
                 "201232",
                 new MedioDeContacto("podolskytomi@gmail.com", TipoDeContacto.MAIL),
                 null);

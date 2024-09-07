@@ -50,7 +50,7 @@ public class TestMQTT {
         heladera = new Heladera(123L, LocalDateTime.of(2021, 1, 1, 0, 0));
         RepositorioHeladeras.getInstance().guardar(heladera);
         receptorTemperatura = new ReceptorSensorTemperatura(1L,new ArrayList<>(), heladera);
-        RepositorioReceptoresTemperatura.getInstance().agregar(receptorTemperatura);
+       RepositorioReceptoresTemperatura.getInstance().guardar(receptorTemperatura);
     }
 
     @Test
@@ -90,7 +90,7 @@ public class TestMQTT {
                         1L,
                         "Juan",
                         "Perez",
-                        new Documento(1L,"123", TipoDocumento.DNI),
+                        new Documento("123", TipoDocumento.DNI),
                         "201232",
                         new MedioDeContacto("podolskytomi@gmail.com", TipoDeContacto.MAIL),
                         null));

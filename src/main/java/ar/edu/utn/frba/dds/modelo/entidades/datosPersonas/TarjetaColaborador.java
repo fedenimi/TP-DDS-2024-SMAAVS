@@ -7,15 +7,14 @@ import lombok.Getter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "tarjeta_colaborador")
+@Embeddable
 public class TarjetaColaborador {
-    @Id
-    @GeneratedValue
-    @Getter
-    private String id;
 
-    @Column(name = "fecha_emision")
+    @Getter
+    @Column(name = "codigo_tarjeta")
+    private Long id;
+
+    @Column(name = "fecha_emision_tarjeta")
     @Convert(converter = LocalDateTimeConverter.class)
     private LocalDateTime fechaEmision;
 }

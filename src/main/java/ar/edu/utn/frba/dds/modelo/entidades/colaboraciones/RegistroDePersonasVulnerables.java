@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 @NoArgsConstructor
 @Entity
-@Table(name = "registro_de_personas_vulnerables")
+@DiscriminatorValue("registro_personas_vulnerables")
 public class RegistroDePersonasVulnerables extends Puntuable {
     @Embedded
     private Registro registro;

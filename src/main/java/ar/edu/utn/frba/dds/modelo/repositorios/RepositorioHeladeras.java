@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.modelo.repositorios;
 
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.Alerta;
+import ar.edu.utn.frba.dds.modelo.repositorios.interfaces.IRepositorio;
 import ar.edu.utn.frba.dds.modelo.repositorios.interfaces.IRepositorioHeladeras;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class RepositorioHeladeras implements IRepositorioHeladeras, WithSimplePersistenceUnit {
+public class RepositorioHeladeras implements IRepositorio<Heladera>, WithSimplePersistenceUnit {
     private List<Heladera> heladeras = new ArrayList<>();
     private static RepositorioHeladeras instance = null;
     public static RepositorioHeladeras getInstance() {
