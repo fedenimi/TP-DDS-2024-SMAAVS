@@ -9,7 +9,12 @@ public class AreaDeCobertura {
     @GeneratedValue
     private Long id;
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
-    @JoinColumn(name = "area_cobertura_id")
-    private List<BarrioPorArea> barriosPorArea;
+    @ManyToMany
+    @JoinTable(
+            name = "barrio_area",
+            joinColumns = @JoinColumn(name = "area_id",
+                    referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "barrio_id", referencedColumnName = "id")
+    )
+    private List<Barrio> barrios;
 }

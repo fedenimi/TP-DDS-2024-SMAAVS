@@ -40,11 +40,14 @@ public class ControladorContribucionesViandas {
     }
 
      */
+    /*
     private void solicitarAperturaDeHeladera(Heladera heladera, Colaborador colaborador) throws MqttException {
         SolicitudApertura solicitudApertura = new SolicitudApertura(1L,colaborador.getTarjeta(), LocalDateTime.now());
         heladera.agregarSolicitudApertura(solicitudApertura);
         PublicadorBroker.getInstance().publicar("apertura", heladera.getId().toString() + " " + colaborador.getTarjeta().getId());
     }
+
+     */
     public boolean puedeDonar(Colaborador colaborador) {
         return colaborador.getFormasDeColaborar().stream().anyMatch(formaDeColaborar -> formaDeColaborar.equals(FormaColaboracion.DONACION_VIANDAS));
     }

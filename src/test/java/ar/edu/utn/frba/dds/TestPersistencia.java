@@ -1,21 +1,10 @@
 package ar.edu.utn.frba.dds;
 
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.Alerta;
-import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Barrio;
-import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import io.github.flbulgarelli.jpa.extras.test.PersistenceTest;
-import io.github.flbulgarelli.jpa.extras.test.SimplePersistenceTest;
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.*;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
-
-import static org.json.XMLTokener.entity;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 /*
@@ -43,7 +32,6 @@ public class TestPersistencia implements SimplePersistenceTest {
 }
 
  */
-
 public class TestPersistencia implements PersistenceTest, WithSimplePersistenceUnit {
     @Test
     public void persistableIsInserted() {
@@ -52,5 +40,6 @@ public class TestPersistencia implements PersistenceTest, WithSimplePersistenceU
         assertNull(persistable.getId());
         persist(persistable);
         assertNotNull(persistable.getId());
+
     }
 }

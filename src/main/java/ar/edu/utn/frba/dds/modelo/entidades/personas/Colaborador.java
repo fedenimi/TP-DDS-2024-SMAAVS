@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.modelo.entidades.personas;
 
 import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.OfrecerProducto;
 import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.Puntuable;
+import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.Apertura;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.*;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.formulario.FormularioRespondido;
 import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Punto;
@@ -24,11 +25,11 @@ public class Colaborador {
     private Long id;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "colaborador")
-    @JoinColumn(name = "colaborador_id")
+    //@JoinColumn(name = "colaborador_id")
     private List<Puntuable> puntuables;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "colaborador")
-    @JoinColumn(name = "colaborador_id")
+    //@JoinColumn(name = "colaborador_id")
     private List<OfrecerProducto> ofrecerProductos;
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
@@ -49,6 +50,7 @@ public class Colaborador {
     @Column(name = "puntos_canjeados", columnDefinition = "FLOAT(10,2)")
     private Float puntosCanjeados;
 
+    @Getter
     @Embedded
     private Documento documento;
 
@@ -57,9 +59,6 @@ public class Colaborador {
 
     @Column(name = "apellido", columnDefinition = "VARCHAR(255)")
     private String apellido;
-
-    @Embedded
-    private TarjetaColaborador tarjeta;
 
     @ElementCollection
     @CollectionTable(name = "colaborador_forma_de_colaborar", joinColumns= @JoinColumn(name= "colaborador_id"))

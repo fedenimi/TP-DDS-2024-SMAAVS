@@ -12,11 +12,16 @@ public class Formulario {
     @GeneratedValue
     private Long id;
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
-    @JoinColumn(name = "formulario_id")
-    private List<PreguntaDeFormulario> preguntas;
+    @ManyToMany
+    @JoinTable(
+            name = "formulario_pregunta",
+            joinColumns = @JoinColumn(name = "formulario_id",
+                    referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "pregunta_id", referencedColumnName = "id")
+    )
+    private List<Pregunta> preguntas;
 
-    public Formulario(List<PreguntaDeFormulario> preguntas) {
+    public Formulario(List<Pregunta> preguntas) {
         this.preguntas = preguntas;
     }
 

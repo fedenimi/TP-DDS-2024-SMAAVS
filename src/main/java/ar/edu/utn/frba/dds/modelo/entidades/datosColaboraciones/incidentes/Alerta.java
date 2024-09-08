@@ -6,9 +6,11 @@ import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateTimeConver
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+@Setter
 @Entity
 @Table(name = "alerta")
 @NoArgsConstructor
