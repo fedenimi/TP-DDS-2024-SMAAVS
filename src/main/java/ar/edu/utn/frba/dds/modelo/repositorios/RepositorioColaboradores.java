@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.modelo.repositorios;
 
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.Alerta;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.MedioDeContacto;
+import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.TipoDocumento;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.repositorios.interfaces.IRepositorio;
 import ar.edu.utn.frba.dds.modelo.repositorios.interfaces.IRepositorioColaboradores;
@@ -21,7 +22,7 @@ public class RepositorioColaboradores implements IRepositorio<Colaborador>, With
             instance = new RepositorioColaboradores();
         return instance;
     }
-    public Optional<Colaborador> buscarPor(String doc, String tipoDoc) {
+    public Optional<Colaborador> buscarPor(String doc, TipoDocumento tipoDoc) {
         try {
             Colaborador colaborador = entityManager()
                     .createQuery("from Colaborador c where c.documento.tipo = :tipo and c.documento.numero = :numero", Colaborador.class)

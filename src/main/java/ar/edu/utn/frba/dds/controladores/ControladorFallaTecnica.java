@@ -9,6 +9,7 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.Regis
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.Estado;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.CalculadorDeFechas;
+import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.TipoDocumentoConverter;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioFallasTecnicas;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioHeladeras;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioColaboradores;
@@ -25,7 +26,7 @@ public class ControladorFallaTecnica {
         LocalDateTime fechaYHora;
         Heladera heladera = null;
 
-        Optional<Colaborador> reportadorOptional = RepositorioColaboradores.getInstance().buscarPor(fallaTecnicaDTO.getDoc(), fallaTecnicaDTO.getTipoDoc());
+        Optional<Colaborador> reportadorOptional = RepositorioColaboradores.getInstance().buscarPor(fallaTecnicaDTO.getDoc(), TipoDocumentoConverter.getInstance().convertToEntityAttribute(fallaTecnicaDTO.getTipoDoc()));
         if (reportadorOptional.isPresent()) reportador = reportadorOptional.get();
         fechaYHora = CalculadorDeFechas.getInstance().stringToLocalDateTime(fallaTecnicaDTO.getFechaYHora());
         Optional<Heladera> heladeraOptional = RepositorioHeladeras.getInstance().buscar(Long.parseLong(fallaTecnicaDTO.getIdHeladera()));

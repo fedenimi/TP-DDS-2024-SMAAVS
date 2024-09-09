@@ -10,10 +10,12 @@ import ar.edu.utn.frba.dds.modelo.entidades.localizacion.RecomendadorDePuntos;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.IOException;
 import java.util.List;
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

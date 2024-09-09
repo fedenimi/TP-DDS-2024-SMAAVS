@@ -2,7 +2,9 @@ package ar.edu.utn.frba.dds;
 
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.Alerta;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.Estado;
+import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.Documento;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.MedioDeContacto;
+import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.TipoDocumento;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioColaboradores;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioObjects;
@@ -66,6 +68,37 @@ public class TestPersistencia implements SimplePersistenceTest {
         System.out.println("El id es: " + optCol.get().getId());
         List<Colaborador> colaboradores = RepositorioColaboradores.getInstance().buscarTodos();
         assertEquals(1, colaboradores.size());
+    }
+
+    @Test
+    public void colaboradorEliminado() {
+        Colaborador persistable = new Colaborador();
+        RepositorioColaboradores.getInstance().guardar(persistable);
+        List<Colaborador> colaboradores = RepositorioColaboradores.getInstance().buscarTodos();
+        assertEquals(1, colaboradores.size());
+        RepositorioColaboradores.getInstance().eliminar(persistable);
+        List<Colaborador> noColaboradores = RepositorioColaboradores.getInstance().buscarTodos();
+        assertEquals(0, noColaboradores.size());
+    }
+
+    @Test
+    public void buscarColaboradorPorDoc(){
+        Colaborador persistable = new Colaborador();
+        persistable.setDocumento(new Documento("1", TipoDocumento.DNI));
+        RepositorioColaboradores.getInstance().guardar(persistable);
+        Optional<Colaborador> colaborador = RepositorioColaboradores.getInstance().buscarPor("1", TipoDocumento.DNI);
+        Assert.assertEquals(persistable, colaborador.get());
+    }
+
+    @Test
+    public void colaboradorActualizado() {
+        Colaborador persistable = new Colaborador();
+        RepositorioColaboradores.getInstance().guardar(persistable);
+        persistable.setApellido("perez");
+        RepositorioColaboradores.getInstance().guardar(persistable);
+        Optional<Colaborador> optCol = RepositorioColaboradores.getInstance().buscar(1L);
+        assertEquals(persistable.getApellido(), optCol.get().getApellido());
+
     }
 
     @Test
