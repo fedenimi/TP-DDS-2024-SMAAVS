@@ -83,11 +83,11 @@ public class Heladera {
                 solicitudApertura.getFechaYHora().equals(fechaYHora)).findFirst().orElse(null);
     }
 
-    public Float obtenerTemperaturaMinima() {
+    public Double obtenerTemperaturaMinima() {
         return modeloHeladera.getTemperaturaMinima();
     }
 
-    public Float obtenerTemperaturaMaxima() {
+    public Double obtenerTemperaturaMaxima() {
         return modeloHeladera.getTemperaturaMaxima();
     }
 }

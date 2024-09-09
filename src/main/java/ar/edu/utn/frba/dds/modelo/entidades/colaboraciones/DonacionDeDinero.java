@@ -26,7 +26,7 @@ public class DonacionDeDinero extends Puntuable {
     private Frecuencia frecuencia;
 
     @Column(name = "multiplicador", columnDefinition = "float")
-    @Getter private float multiplicador;
+    @Getter private Double multiplicador;
 
     public DonacionDeDinero(Integer monto, Colaborador colaborador) {
         this.monto = monto;
@@ -34,8 +34,8 @@ public class DonacionDeDinero extends Puntuable {
     }
 
     @Override
-    public float puntaje() {
-        return this.monto * this.frecuencia.puntajePara(this);
+    public Double puntaje() {
+        return this.monto.doubleValue() * this.frecuencia.puntajePara(this);
     }
 
     @Override

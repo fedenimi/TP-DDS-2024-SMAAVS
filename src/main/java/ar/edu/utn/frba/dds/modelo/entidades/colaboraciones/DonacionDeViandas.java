@@ -23,7 +23,7 @@ public class DonacionDeViandas extends Puntuable{
     private LocalDate fecha;
 
     @Column(name = "multiplicador", columnDefinition = "float")
-    private float multiplicador;
+    private Double multiplicador;
 
 
     public DonacionDeViandas(Colaborador colaborador) {
@@ -37,8 +37,9 @@ public class DonacionDeViandas extends Puntuable{
     }
 
     @Override
-    public float puntaje() {
-        return viandasDonadas.size();
+    public Double puntaje() {
+        Integer ret = viandasDonadas.size();
+        return ret.doubleValue();
     }
 
     @Override

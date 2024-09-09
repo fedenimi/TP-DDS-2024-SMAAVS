@@ -20,9 +20,9 @@ public abstract class Puntuable {
     @Getter
     @Setter
     protected Colaborador colaborador;
-    public abstract float puntaje();
+    public abstract Double puntaje();
 
-    public abstract float getMultiplicador();
+    public abstract Double getMultiplicador();
     public int cantidadDeMesesSiendoHeladera(){
         return 0;
     }

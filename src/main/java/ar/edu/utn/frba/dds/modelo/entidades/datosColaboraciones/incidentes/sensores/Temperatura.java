@@ -4,5 +4,5 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 @AllArgsConstructor
 public class Temperatura {
-    @Getter private Float valor;
+    @Getter private Double valor;
 }

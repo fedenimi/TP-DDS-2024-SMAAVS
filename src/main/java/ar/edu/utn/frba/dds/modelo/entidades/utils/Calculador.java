@@ -14,14 +14,14 @@ public class Calculador {
         return instance;
     }
 
-    public float puntaje(List<Puntuable> contribuciones, float puntosCanjeados) {
+    public Double puntaje(List<Puntuable> contribuciones, float puntosCanjeados) {
         if(!contribuciones.isEmpty()){
-            return this.mapToPuntaje(contribuciones).reduce(Float::sum).get() - puntosCanjeados;
+            return this.mapToPuntaje(contribuciones).reduce(Double::sum).get() - puntosCanjeados;
         }
-        return 0;
+        return 0D;
     }
 
-    private Stream<Float> mapToPuntaje(List<Puntuable> contribuciones) {
+    private Stream<Double> mapToPuntaje(List<Puntuable> contribuciones) {
         return contribuciones.stream().map(contribucion -> contribucion.puntaje()*contribucion.getMultiplicador());
     }
 }

@@ -5,6 +5,7 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.Est
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.MedioDeContacto;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioColaboradores;
+import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioObjects;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import io.github.flbulgarelli.jpa.extras.test.PersistenceTest;
 import io.github.flbulgarelli.jpa.extras.test.SimplePersistenceTest;
@@ -16,10 +17,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
+
 /*
 public class TestPersistencia implements SimplePersistenceTest {
     private static EntityManagerFactory emf;
@@ -54,14 +56,32 @@ public class TestPersistencia implements SimplePersistenceTest {
         em = emf.createEntityManager();
     }
     @Test
-    public void persistableIsInserted() {
+    public void colaboradorPersistido() {
         Colaborador persistable = new Colaborador();
-        //persist(persistable);
         RepositorioColaboradores.getInstance().guardar(persistable);
         assertNotNull(persistable.getId());
 
         Optional<Colaborador> optCol = RepositorioColaboradores.getInstance().buscar(1L);
         assertNotNull(optCol.get());
+        System.out.println("El id es: " + optCol.get().getId());
+        List<Colaborador> colaboradores = RepositorioColaboradores.getInstance().buscarTodos();
+        assertEquals(1, colaboradores.size());
+    }
+
+    @Test
+    public void medioPersistido() {
+        MedioDeContacto medioDeContacto = new MedioDeContacto();
+        RepositorioObjects repositorioObjects = new RepositorioObjects();
+        beginTransaction();
+        repositorioObjects.guardar(medioDeContacto);
+        commitTransaction();
+        assertNotNull(medioDeContacto.getId());
+
+        Optional<MedioDeContacto> optCol = repositorioObjects.buscar(1L);
+        assertNotNull(optCol.get());
+        System.out.println("El id es: " + optCol.get().getId());
+        List<MedioDeContacto> medioDeContactos = repositorioObjects.buscarTodos();
+        assertEquals(1, medioDeContactos.size());
     }
 
 }

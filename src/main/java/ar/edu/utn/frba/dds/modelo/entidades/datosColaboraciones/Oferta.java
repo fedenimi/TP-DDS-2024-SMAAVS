@@ -6,8 +6,8 @@ import javax.persistence.*;
 //@Table(name = "oferta")
 @Embeddable
 public class Oferta {
-    @Column(name = "puntaje_minimo", columnDefinition = "FLOAT(10,2)")
-    private Float puntajeMinimo;
+    @Column(name = "puntaje_minimo")
+    private Double puntajeMinimo;
 
     @Column(name = "nombre", columnDefinition = "VARCHAR(255)")
     private String nombre;

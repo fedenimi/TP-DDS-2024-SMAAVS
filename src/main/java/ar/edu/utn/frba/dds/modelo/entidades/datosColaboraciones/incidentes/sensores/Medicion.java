@@ -17,8 +17,8 @@ public class Medicion {
     @GeneratedValue
     private Long id;
 
-    @Column(name = "temperatura", columnDefinition = "FLOAT(5,2)")
-    private float temperatura;
+    @Column(name = "temperatura")
+    private Double temperatura;
 
     @Column(name = "fecha_y_hora")
     @Convert(converter = LocalDateTimeConverter.class)

@@ -14,9 +14,9 @@ import javax.persistence.*;
 @Embeddable
 public class Punto {
 
-    @Column(name = "latitud", columnDefinition = "FLOAT(9,6)")
-    private float latitud;
-    @Column(name = "longitud", columnDefinition = "FLOAT(9,6)")
-    private float longitud;
+    @Column(name = "latitud")
+    private Double latitud;
+    @Column(name = "longitud")
+    private Double longitud;
 
 }

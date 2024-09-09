@@ -29,7 +29,7 @@ public class ReceptorBroker implements IMqttMessageListener {
             case "temperatura":
                 String temperatura = messageTokenizer.nextToken();
                 ReceptorSensorTemperatura receptor = RepositorioReceptoresTemperatura.getInstance().buscar(Long.parseLong(idHeladera)).get();
-                receptor.evaluarTemperatura(new Temperatura(Float.parseFloat(temperatura)));
+                receptor.evaluarTemperatura(new Temperatura(Double.parseDouble(temperatura)));
                 break;
             case "fraude":
                 String fechaYHora = messageTokenizer.nextToken();
