@@ -14,9 +14,9 @@ public class ModeloHeladera {
     @Column(name = "nombre", columnDefinition = "VARCHAR(255)")
     private String nombre;
 
-    @Column(name = "temperatura_minima", columnDefinition = "FLOAT(5,2)")
-    @Getter private float temperaturaMinima;
+    @Column(name = "temperatura_minima")
+    @Getter private Double temperaturaMinima;
 
-    @Column(name = "temperatura_maxima", columnDefinition = "FLOAT(5,2)")
-    @Getter private float temperaturaMaxima;
+    @Column(name = "temperatura_maxima")
+    @Getter private Double temperaturaMaxima;
 }

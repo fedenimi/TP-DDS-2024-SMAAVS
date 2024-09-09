@@ -15,15 +15,15 @@ public class RegistroDePersonasVulnerables extends Puntuable {
     private Registro registro;
 
     @Column(name = "multiplicador", columnDefinition = "float")
-    @Getter private float multiplicador;
+    @Getter private Double multiplicador;
 
     public RegistroDePersonasVulnerables(Colaborador colaborador) {
         this.colaborador = colaborador;
     }
 
     @Override
-    public float puntaje() {
-        return 1;
+    public Double puntaje() {
+        return 1D;
     }
 
     @Override

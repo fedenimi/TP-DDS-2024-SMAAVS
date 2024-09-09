@@ -1,12 +1,15 @@
 package ar.edu.utn.frba.dds.modelo.repositorios;
 
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.Alerta;
+import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.MedioDeContacto;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.repositorios.interfaces.IRepositorio;
 import ar.edu.utn.frba.dds.modelo.repositorios.interfaces.IRepositorioColaboradores;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 
 import javax.persistence.NoResultException;
+import javax.persistence.Query;
+import javax.persistence.Transient;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,11 +48,11 @@ public class RepositorioColaboradores implements IRepositorio<Colaborador>, With
 
     @Override
     public void eliminar(Colaborador colaborador) {
-        entityManager().remove(colaborador);
+        withTransaction(() -> entityManager().remove(colaborador));
     }
 
     @Override
     public void guardar(Colaborador colaborador) {
-        entityManager().persist(colaborador);
+        withTransaction(() -> entityManager().persist(colaborador));
     }
 }

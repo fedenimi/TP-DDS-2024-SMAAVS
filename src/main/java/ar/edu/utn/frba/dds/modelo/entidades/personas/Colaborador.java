@@ -25,11 +25,9 @@ public class Colaborador {
     private Long id;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "colaborador")
-    //@JoinColumn(name = "colaborador_id")
     private List<Puntuable> puntuables;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "colaborador")
-    //@JoinColumn(name = "colaborador_id")
     private List<OfrecerProducto> ofrecerProductos;
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
@@ -44,16 +42,17 @@ public class Colaborador {
     @JoinColumn(name = "colaborador_id")
     private List<MedioDeContacto> mediosDeContacto;
 
-    @Column(name = "puntos_disponibles", columnDefinition = "FLOAT(10,2)")
-    private Float puntosDisponibles;
+    @Column(name = "puntos_disponibles")
+    private Double puntosDisponibles;
 
-    @Column(name = "puntos_canjeados", columnDefinition = "FLOAT(10,2)")
-    private Float puntosCanjeados;
+    @Column(name = "puntos_canjeados")
+    private Double puntosCanjeados;
 
     @Getter
     @Embedded
     private Documento documento;
 
+    @Getter
     @Column(name = "nombre", columnDefinition = "VARCHAR(255)")
     private String nombre;
 
@@ -71,7 +70,7 @@ public class Colaborador {
         this.documento = documento;
         this.nombre = nombre;
         this.apellido = apellido;
-        this.puntosDisponibles = 0F;
+        this.puntosDisponibles = 0D;
     }
 
     public void agregarPuntuable(Puntuable puntuable) {
@@ -98,5 +97,4 @@ public class Colaborador {
     public void sumarPuntos(float puntos){
         this.puntosDisponibles += puntos;
     }
-
 }

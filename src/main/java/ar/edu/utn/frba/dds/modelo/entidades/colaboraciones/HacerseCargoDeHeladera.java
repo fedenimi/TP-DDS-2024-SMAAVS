@@ -1,7 +1,6 @@
 package ar.edu.utn.frba.dds.modelo.entidades.colaboraciones;
 
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
-import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -15,11 +14,11 @@ public class HacerseCargoDeHeladera extends Puntuable{
     @Getter private Heladera heladera;
 
     @Column(name = "multiplicador", columnDefinition = "float")
-    @Getter private float multiplicador;
+    @Getter private Double multiplicador;
 
     @Override
-    public float puntaje() {
-        return this.colaborador.sumatoriaDeMesesDeHeladerasActivas();
+    public Double puntaje() {
+        return this.colaborador.sumatoriaDeMesesDeHeladerasActivas().doubleValue();
     }
 
     @Override

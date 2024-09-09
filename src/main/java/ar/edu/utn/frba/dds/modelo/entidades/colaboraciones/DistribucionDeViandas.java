@@ -4,7 +4,6 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Motivo;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateConverter;
-import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateTimeConverter;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -35,7 +34,7 @@ public class DistribucionDeViandas extends Puntuable {
     private LocalDate fecha;
 
     @Column(name = "multiplicador", columnDefinition = "float")
-    @Getter private float multiplicador;
+    @Getter private Double multiplicador;
 
     public DistribucionDeViandas(Integer cantidadDeViandas, Colaborador colaborador, Heladera heladeraDestino, Heladera heladeraOrigen, LocalDate fecha) {
         this.cantidadDeViandas = cantidadDeViandas;
@@ -50,8 +49,8 @@ public class DistribucionDeViandas extends Puntuable {
     }
 
     @Override
-    public float puntaje() {
-        return cantidadDeViandas;
+    public Double puntaje() {
+        return cantidadDeViandas.doubleValue();
     }
 
     @Override
