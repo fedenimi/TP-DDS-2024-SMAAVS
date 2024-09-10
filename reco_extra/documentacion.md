@@ -11,7 +11,7 @@ Obtiene una lista de colaboradores que cumplen con los criterios especificados e
 ### Parámetros
 - minDonaciones (opcional): Cantidad mínima de donaciones de viandas realizadas en el último mes. Si no se especifica, se considera `0`.
 - minPuntos (opcional): Cantidad mínima de puntos requeridos. Si no se especifica, se considera `0`.
-- maxColaboradores (opcional): Cantidad máxima de colaboradores a devolver. Si no se especifica, se considera `0`.
+- maxColaboradores (opcional): Cantidad máxima de colaboradores a devolver. Si no se especifica, se considera `10`.
 
 ### Ejemplo de URL
 http://localhost:8080/recoextra?minDonaciones=0&minPuntos=20&maxColaboradores=3
