@@ -43,16 +43,16 @@ var categoriasTotales = [
         nombre: "Ropa",
         productosDisponibles: [
             {
-                foto: "images/remera.jpg", nombre: "Remera", precio: 1000
+                foto: "images/remera.webp", nombre: "Remera", precio: 1000
             },
             {
-                foto: "images/remera.jpg", nombre: "Remera", precio: 1000
+                foto: "images/remera.webp", nombre: "Remera", precio: 1000
             },
             {
-                foto: "images/remera.jpg", nombre: "Remera", precio: 1000
+                foto: "images/remera.webp", nombre: "Remera", precio: 1000
             },
             {
-                foto: "images/remera.jpg", nombre: "Remera", precio: 1000
+                foto: "images/remera.webp", nombre: "Remera", precio: 1000
             },]
     }
 
