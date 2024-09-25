@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
+@Getter
 @NoArgsConstructor
 @Entity
 @DiscriminatorValue("donacion_dinero")

@@ -1,7 +1,9 @@
 package ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones;
 
-import javax.persistence.*;
+import lombok.Getter;
 
+import javax.persistence.*;
+@Getter
 @Entity
 @Table(name = "rubro")
 public class Rubro {
