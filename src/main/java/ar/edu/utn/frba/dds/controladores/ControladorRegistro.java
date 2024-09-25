@@ -1,9 +1,14 @@
 package ar.edu.utn.frba.dds.controladores;
 
 import io.javalin.http.Context;
+import java.util.HashMap;
+import java.util.Map;
+
 public class ControladorRegistro {
     public void mostrarRegistro(Context context) {
-        context.render("registro/registroHumana.hbs");
+        Map<String, Object> model = new HashMap<>();
+        model.put("Tipo", "Humana");
+        context.render("registro/registroHumana.hbs", model);
     }
 
     public void guardarCampos(Context context) {

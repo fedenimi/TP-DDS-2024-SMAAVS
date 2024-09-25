@@ -12,11 +12,13 @@
             <label class="">Tipo de colaborador</label>
             <div class="btns-title">
                 <a class="btn-title left-btn pressed-btn" href="registro">Humana</a>
-                <a class="btn-title right-btn" href="registroJ">Jurídica</a>
+                <a class="btn-title right-btn" >Jurídica</a>
             </div>
         </div>
         <form class="form-registro" id="registroForm" method="POST">
             <div class="form-element">
+                {{#if (funcionPrueba 1)}}
+                    <p>true</p>{{else}}<p>false</p>{{/if}}
                 <label for="nombre">Nombre</label>
                 <input type="text" name="nombre" id="form-apellido" required>
             </div>
@@ -81,19 +83,12 @@
             </div>
         </form>
         <div class="btn-next">
-            <button id="submitButton">Siguiente</button>
+            <a id="submitButton">Siguiente</a>
         </div>
     </main>
 {{/partial}}
 {{#partial "scripts"}}
-    <script>
-        document.querySelector('submitButton').addEventListener(
-            'click',
-            function() {
-                console.log('submit');
-                document.querySelector('registroForm').submit();
-            }
-        );
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+    <script src="js/registro.js"></script>
 {{/partial}}
 {{> templates/base/landingBase }}
