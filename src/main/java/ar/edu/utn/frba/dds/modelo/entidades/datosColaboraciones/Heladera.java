@@ -5,9 +5,7 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.TarjetaColaborador;
 import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Punto;
 import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.Topic;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateTimeConverter;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -17,7 +15,9 @@ import java.util.List;
 @Entity
 @Table(name = "heladera")
 @NoArgsConstructor
-public class Heladera {
+@AllArgsConstructor
+@Builder
+public class Heladera{
     @Id
     @GeneratedValue
     @Getter private Long id;
@@ -39,7 +39,7 @@ public class Heladera {
     @Setter @Getter private Estado estado;
 
     @Column(name = "fecha_y_hora_inicio")
-    @Convert(converter = LocalDateTimeConverter.class)
+    //@Convert(converter = LocalDateTimeConverter.class)
     @Getter private LocalDateTime fechaYHoraInicio;
 
     @Column(name = "tiempo_para_visitar_en_minutos", columnDefinition = "int")

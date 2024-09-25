@@ -76,8 +76,8 @@ public class Colaborador {
     }
 
     public void agregarPuntuable(Puntuable puntuable) {
-       this.puntuables.add(puntuable);
-       puntuable.setColaborador(this);
+        this.puntuables.add(puntuable);
+        puntuable.setColaborador(this);
     }
 
     public void agregarOfrecerProducto(OfrecerProducto ofrecerProducto) {

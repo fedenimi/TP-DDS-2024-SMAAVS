@@ -1,11 +1,15 @@
 package ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "ModeloHeladera")
+@AllArgsConstructor
+@Builder
 public class ModeloHeladera {
     @Id
     @GeneratedValue
@@ -19,4 +23,5 @@ public class ModeloHeladera {
 
     @Column(name = "temperatura_maxima")
     @Getter private Double temperaturaMaxima;
+
 }

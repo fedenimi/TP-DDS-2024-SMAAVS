@@ -37,6 +37,7 @@ public class Colaborador {
     }
 
     public boolean tienePuntos(Integer finalMinPuntos) {
+
         return this.puntosDisponibles >= finalMinPuntos;
     }
 }

@@ -1,0 +1,99 @@
+{{#partial "estilos"}}
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/registro.css">
+{{/partial}}
+{{#partial "header-btns-register"}}
+    <a class="header-btn left-btn" href="inicioSesion">Iniciar sesión</a>
+    <a class="header-btn right-btn pressed-btn" href="registro" >Registrarse</a>
+{{/partial}}
+{{#partial "main"}}
+    <main class="registro-main">
+        <div class="tipo-colab">
+            <label class="">Tipo de colaborador</label>
+            <div class="btns-title">
+                <a class="btn-title left-btn pressed-btn" href="registro">Humana</a>
+                <a class="btn-title right-btn" href="registroJ">Jurídica</a>
+            </div>
+        </div>
+        <form class="form-registro" id="registroForm" method="POST">
+            <div class="form-element">
+                <label for="nombre">Nombre</label>
+                <input type="text" name="nombre" id="form-apellido" required>
+            </div>
+            <div></div>
+            <div class="form-element">
+                <label for="mail">Mail</label>
+                <input type="text" name="mail" id="form-apellido" required>
+            </div>
+            <div class="form-element">
+                <label for="apellido">Apellido</label>
+                <input type="text" name="apellido" id="form-apellido" required>
+            </div>
+            <div></div>
+            <div class="form-element">
+                <label for="telefono">Teléfono</label>
+                <input type="text" name="telefono" id="form-telefono" required>
+            </div>
+            <div class="form-element">
+                <label for="direccion">Dirección</label>
+                <input type="text" name="direccion" id="form-direccion" required>
+            </div>
+            <div></div>
+            <div class="form-element">
+                <label for="whatsapp">Whatsapp</label>
+                <input type="text" name="whatsapp" id="form-apellido" required>
+            </div>
+            <div class="form-element">
+                <label for="nacimiento">Fecha de nacimiento</label>
+                <input type="text" name="nacimiento" id="form-apellido" required>
+            </div>
+            <div></div>
+            <div class="form-element">
+                <label for="formas-colaborar">Formas de colaborar</label>
+                <div class="form-element-dropdown">
+                    <div class="dropdown-select-btn">
+                        <p>0 seleccionadas</p>
+                        <span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </span>
+                    </div>
+                    <ul class="dropdown-item-list">
+                        <li class="dropdown-item">
+                            <span>
+                                <i class="fa-solid fa-check check-icon"></i>
+                            </span>
+                            <p>Donar dinero</p>
+                        </li>
+                        <li class="dropdown-item">
+                            <span>
+                                <i class="fa-solid fa-check check-icon"></i>
+                            </span>
+                            <p>Donar viandas</p>
+                        </li>
+                        <li class="dropdown-item">
+                            <span>
+                                <i class="fa-solid fa-check check-icon"></i>
+                            </span>
+                            <p>Distribuir viandas</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+        <div class="btn-next">
+            <button id="submitButton">Siguiente</button>
+        </div>
+    </main>
+{{/partial}}
+{{#partial "scripts"}}
+    <script>
+        document.querySelector('submitButton').addEventListener(
+            'click',
+            function() {
+                console.log('submit');
+                document.querySelector('registroForm').submit();
+            }
+        );
+    </script>
+{{/partial}}
+{{> templates/base/landingBase }}
