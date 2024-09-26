@@ -1,30 +1,4 @@
-let viandas = {
-    vianda1: {
-        name: 'Vianda 1',
-        comida: 'Milanesa con puré',
-        fechaCaducidad: '2021-10-10',
-        peso: '500g',
-        calorias: '500kcal',
-        heladera: 'Heladera 1',
-    },
-    vianda2: {
-        name: 'Vianda 2',
-        comida: 'Pollo con arroz',
-        fechaCaducidad: '2021-10-10',
-        peso: '500g',
-        calorias: '500kcal',
-        heladera: 'Heladera 1',
-    },
-    vianda3: {
-        name: 'Vianda 3',
-        comida: 'Fideos con tuco',
-        fechaCaducidad: '2021-10-10',
-        peso: '500g',
-        calorias: '500kcal',
-        heladera: 'Heladera 1',
-    },
-}
-
+let viandas = {}
 
 const dropdownItemList = document.getElementsByClassName('dropdown-item-list');
 const eliminarViandaBtn = document.querySelector('.eliminar-vianda');

@@ -182,3 +182,11 @@
 .leaflet-left {
     display: none;
 }
+
+.not-overflow {
+    overflow-x: hidden;
+}
+
+.transparent {
+    visibility: hidden;
+}

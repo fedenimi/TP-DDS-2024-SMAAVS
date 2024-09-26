@@ -12,5 +12,8 @@ public class Router {
         app.get("/", ServiceLocator.instanceOf(ControladorHome.class)::mostrarLanding);
         app.get("/registro", ServiceLocator.instanceOf(ControladorRegistro.class)::mostrarRegistro);
         app.post("/registro", ServiceLocator.instanceOf(ControladorRegistro.class)::guardarCampos);
+        app.get("/{id}/home", ServiceLocator.instanceOf(ControladorHome.class)::mostrarHome);
+        app.get("{id}/viandas", ServiceLocator.instanceOf(ControladorHome.class)::mostrarDonacionViandas);
+
     }
 }

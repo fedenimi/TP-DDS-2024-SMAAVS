@@ -9,50 +9,47 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
           integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/main.css">
+
+    {{#block "home-estilos"}}
+    {{/block}}
 </head>
 
 <body>
 <header>
     <div class="inner-header">
-
         <div class="header-title">
-            <a href="index.html">SMAAVS</a>
+            <a href="/">SMAAVS</a>
         </div>
         <ul class="links">
-            <li><a href="index.html">Menu</a></li>
+            <li><a href="configuracionH.html">Configuración</a></li>
             <li><a href="">Contacto</a></li>
+            <li>
+                <a href="" class="shadow-header-btn">
+                    {{this.nombre}}
+                    <i class="fa-solid fa-user"></i>
+                </a>
+            </li>
+            <li>
+                <a href="canjearPuntos.html" class="shadow-header-btn">
+                    {{this.puntos}}
+                    <i class="fa-solid fa-shopping-cart"></i>
+                </a>
+            </li>
         </ul>
-        <div class="header-btns" href="#">
-            <a class="header-btn left-btn" href="inicioSesion.html">Iniciar sesión</a>
-            <a class="header-btn right-btn" href="registroH.html" >Registrarse</a>
-        </div>
         <div class="toggle-btn">
             <i class="fa-solid fa-bars"></i>
         </div>
     </div>
     <div class="dropdown-menu">
-        <li><a href="index.html">Menu</a></li>
+        <li><a href="configuracionH.html">Configuración</a></li>
         <li><a href="">Contacto</a></li>
-        <li><a href="inicioSesion.html">Iniciar sesión</a></li>
-        <li><a href="registroH.html">Registrarse</a></li>
+        <li><a href="canjearPuntos.html">Tienda</a></li>
     </div>
 </header>
-<main class="header-main main-no-log">
-    {{#block "main"}}{{/block}}
-</main>
-<script>
-    const toggleBtn = document.querySelector('.toggle-btn');
-    const toggleBtnIcon = document.querySelector('.toggle-btn i');
-    const dropdownMenu = document.querySelector('.dropdown-menu');
-
-    toggleBtn.onclick = function() {
-        dropdownMenu.classList.toggle('open');
-        const isOpen = dropdownMenu.classList.contains('open');
-
-        toggleBtnIcon.classList = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
-    }
-</script>
+{{#block "home-main"}}
+{{/block}}
+{{#block "home-scripts"}}
+{{/block}}
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-{{#partial "estilos"}}
+{{#partial "landing-estilos"}}
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/registro.css">
 {{/partial}}
@@ -6,89 +6,139 @@
     <a class="header-btn left-btn" href="inicioSesion">Iniciar sesión</a>
     <a class="header-btn right-btn pressed-btn" href="registro" >Registrarse</a>
 {{/partial}}
-{{#partial "main"}}
-    <main class="registro-main">
-        <div class="tipo-colab">
-            <label class="">Tipo de colaborador</label>
-            <div class="btns-title">
-                <a class="btn-title left-btn pressed-btn" href="registro">Humana</a>
-                <a class="btn-title right-btn" >Jurídica</a>
-            </div>
-        </div>
-        <form class="form-registro" id="registroForm" method="POST">
-            <div class="form-element">
-                {{#if (funcionPrueba 1)}}
-                    <p>true</p>{{else}}<p>false</p>{{/if}}
-                <label for="nombre">Nombre</label>
-                <input type="text" name="nombre" id="form-apellido" required>
-            </div>
-            <div></div>
-            <div class="form-element">
-                <label for="mail">Mail</label>
-                <input type="text" name="mail" id="form-apellido" required>
-            </div>
-            <div class="form-element">
-                <label for="apellido">Apellido</label>
-                <input type="text" name="apellido" id="form-apellido" required>
-            </div>
-            <div></div>
-            <div class="form-element">
-                <label for="telefono">Teléfono</label>
-                <input type="text" name="telefono" id="form-telefono" required>
-            </div>
-            <div class="form-element">
-                <label for="direccion">Dirección</label>
-                <input type="text" name="direccion" id="form-direccion" required>
-            </div>
-            <div></div>
-            <div class="form-element">
-                <label for="whatsapp">Whatsapp</label>
-                <input type="text" name="whatsapp" id="form-apellido" required>
-            </div>
-            <div class="form-element">
-                <label for="nacimiento">Fecha de nacimiento</label>
-                <input type="text" name="nacimiento" id="form-apellido" required>
-            </div>
-            <div></div>
-            <div class="form-element">
-                <label for="formas-colaborar">Formas de colaborar</label>
-                <div class="form-element-dropdown">
-                    <div class="dropdown-select-btn">
-                        <p>0 seleccionadas</p>
-                        <span>
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </span>
-                    </div>
-                    <ul class="dropdown-item-list">
-                        <li class="dropdown-item">
-                            <span>
-                                <i class="fa-solid fa-check check-icon"></i>
-                            </span>
-                            <p>Donar dinero</p>
-                        </li>
-                        <li class="dropdown-item">
-                            <span>
-                                <i class="fa-solid fa-check check-icon"></i>
-                            </span>
-                            <p>Donar viandas</p>
-                        </li>
-                        <li class="dropdown-item">
-                            <span>
-                                <i class="fa-solid fa-check check-icon"></i>
-                            </span>
-                            <p>Distribuir viandas</p>
-                        </li>
-                    </ul>
+{{#partial "landing-main"}}
+    <main>
+        <div class="registro-main">
+            <div class="tipo-colab">
+                <label class="">Tipo de colaborador</label>
+                <div class="btns-title">
+                    <a class="btn-title left-btn pressed-btn">Humana</a>
+                    <a class="btn-title right-btn" >Jurídica</a>
                 </div>
             </div>
-        </form>
-        <div class="btn-next">
-            <a id="submitButton">Siguiente</a>
+            <form class="form-registro" id="registro-form" method="POST">
+                <div class="form-element" id="elemento-nombre">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" name="nombre" id="form-apellido" required>
+                </div>
+                <div></div>
+                <div class="form-element">
+                    <label for="mail">Mail</label>
+                    <input type="text" name="mail" id="form-apellido" required>
+                </div>
+                <div class="form-element" id="elemento-apellido">
+                    <label for="apellido">Apellido</label>
+                    <input type="text" name="apellido" id="form-apellido" required>
+                </div>
+                <div></div>
+                <div class="form-element">
+                    <label for="telefono">Teléfono</label>
+                    <input type="text" name="telefono" id="form-telefono" required>
+                </div>
+                <div class="form-element">
+                    <label for="direccion">Dirección</label>
+                    <input type="text" name="direccion" id="form-direccion" required>
+                </div>
+                <div></div>
+                <div class="form-element">
+                    <label for="whatsapp">Whatsapp</label>
+                    <input type="text" name="whatsapp" id="form-apellido" required>
+                </div>
+                <div class="form-element" id="elemento-fecha-nac">
+                    <label for="nacimiento">Fecha de nacimiento</label>
+                    <input type="text" name="nacimiento" id="form-apellido" required>
+                </div>
+                <div></div>
+                <div class="form-element">
+                    <label for="formas-colaborar">Formas de colaborar</label>
+                    <div class="form-element-dropdown">
+                        <div class="dropdown-select-btn">
+                            <p>0 seleccionadas</p>
+                            <span>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </span>
+                        </div>
+                        <ul class="dropdown-item-list">
+                            <li class="dropdown-item" id="don-din">
+                                <span>
+                                    <i class="fa-solid fa-check check-icon"></i>
+                                </span>
+                                <p>Donar dinero</p>
+                            </li>
+                            <li class="dropdown-item" id="don-via">
+                                <span>
+                                    <i class="fa-solid fa-check check-icon"></i>
+                                </span>
+                                <p id="donar-viandas">Donar viandas</p>
+                            </li>
+                            <li class="dropdown-item" id="dist-via">
+                                <span>
+                                    <i class="fa-solid fa-check check-icon"></i>
+                                </span>
+                                <p>Distribuir viandas</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-element2 hidden">
+                    <label for="form-nombre">Usuario</label>
+                    <input type="text" name="usuario" id="form-usuario" required>
+                </div>
+                <div class="form-element2 hidden">
+                    <label for="form-apellido">Contraseña</label>
+                    <input type="text" name="contrasenia" id="form-contrasenia" required>
+                </div>
+                <div class="form-element2 hidden">
+                    <label for="form-nombre"></label>
+                    <input type="text" name="donar-viandas" id="form-don-via" required>
+                </div>
+                <div class="form-element2 hidden">
+                    <label for="form-apellido"></label>
+                    <input type="text" name="donar-dinero" id="form-don-din" required>
+                </div>
+                <div class="form-element2 hidden">
+                    <label for="form-nombre"></label>
+                    <input type="text" name="distribuir-viandas" id="form-dist-via" required>
+                </div>
+                <div class="form-element2 hidden">
+                    <label for="form-apellido"></label>
+                    <input type="text" name="administrar-heladeras" id="form-adm-hel" required>
+                </div>
+            </form>
+            <div class="btn-next">
+                <a id="siguiente-registro-btn">Siguiente</a>
+            </div>
+        </div>
+        <div class="registro2-main hidden">
+            <div class="registro2-title">
+                <h1>Hola Ramón <br>
+                    Ya falta poco! </h1>
+            </div>
+            <form class="form-registro2" id="registro-form2" method="POST">
+                <div class="form-element2">
+                    <label for="form-nombre">Usuario</label>
+                    <input type="text" name="usuario" id="usuario-input" required>
+                </div>
+                <div class="form-element2">
+                    <label for="form-apellido">Contraseña</label>
+                    <input type="password" name="contrasenia" id="contrasenia-input" required>
+                </div>
+            </form>
+            <div class="btns-next">
+                <a class="btn-next2" id="atras-registro-btn">
+                    <p >Atrás</p>
+                    <i class="fa fa-arrow-left"></i>
+                </a>
+                <a class="btn-next2" id="submit-btn">
+                    <p>Finalizar</p>
+                    <i class="fa fa-arrow-right"></i>
+                </a>
+            </div>
         </div>
     </main>
 {{/partial}}
-{{#partial "scripts"}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+{{#partial "landing-scripts"}}
     <script src="js/registro.js"></script>
+    <script src="js/dropdownScript.js"></script>
 {{/partial}}
 {{> templates/base/landingBase }}

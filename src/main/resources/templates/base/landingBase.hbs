@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
           integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
-    {{#block "estilos"}}{{/block}}
+    {{#block "landing-estilos"}}{{/block}}
 </head>
 
 <body>
@@ -20,8 +20,8 @@
             <a href="/">SMAAVS</a>
         </div>
         <ul class="links">
-            <li><a href="/">Menu</a></li>
-            <li><a href="">Contacto</a></li>
+            <li><a href="/">Menu</li>
+            <li><a href="">Contacto</li>
         </ul>
         <div class="header-btns" href="#">
             {{#block "header-btns-register"}}{{/block}}
@@ -37,7 +37,7 @@
         <li><a href="registro">Registrarse</a></li>
     </div>
 </header>
-{{#block "main"}}{{/block}}
+{{#block "landing-main"}}{{/block}}
 <script>
     const toggleBtn = document.querySelector('.toggle-btn');
     const toggleBtnIcon = document.querySelector('.toggle-btn i');
@@ -50,7 +50,7 @@
         toggleBtnIcon.classList = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
     }
 </script>
-{{#block "scripts"}}{{/block}}
+{{#block "landing-scripts"}}{{/block}}
 </body>
 
 </html>

@@ -12,9 +12,16 @@ public class ControladorRegistro {
     }
 
     public void guardarCampos(Context context) {
+        System.out.println("Llegó esto: ");
         System.out.println(context.formParam("nombre"));
         System.out.println(context.formParam("apellido"));
         System.out.println(context.formParam("mail"));
-        context.redirect("/registro2");
+        System.out.println(context.formParam("usuario"));
+        System.out.println(context.formParam("donar-viandas"));
+        System.out.println(context.formParam("donar-dinero"));
+        System.out.println(context.formParam("distribuir-viandas"));
+        System.out.println(context.formParam("administrar-heladeras"));
+        //TODO: el 3 está hardcodeado, tiene q dirigir a el id posta -->
+        context.redirect("/3/home");
     }
 }
