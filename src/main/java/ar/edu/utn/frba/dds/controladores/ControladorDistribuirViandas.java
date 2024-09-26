@@ -1,19 +1,39 @@
 package ar.edu.utn.frba.dds.controladores;
 
+import ar.edu.utn.frba.dds.dtos.HeladeraDTO;
+import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioDistribucionesViandas;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioHeladeras;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioPuntuables;
+import ar.edu.utn.frba.dds.servicios.ServiceHeladeras;
 import io.javalin.http.Context;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ControladorDistribuirViandas implements ICrudViewsHandler{
     private RepositorioPuntuables repositorioPuntuables;
+    private RepositorioHeladeras repositorioHeladeras;
 
-    public ControladorDistribuirViandas(RepositorioPuntuables repositorioPuntuables) {
+    public ControladorDistribuirViandas(RepositorioPuntuables repositorioPuntuables, RepositorioHeladeras repositorioHeladeras) {
         this.repositorioPuntuables = repositorioPuntuables;
+        this.repositorioHeladeras = repositorioHeladeras;
     }
     @Override
     public void index(Context context) {
-        context.render("colaboraciones/distribuirViandas.hbs");
+        List<Heladera> heladeras = this.repositorioHeladeras.buscarTodos();
+        List<HeladeraDTO> heladerasDTO = (List<HeladeraDTO>) heladeras.stream().
+                filter(heladera -> !heladera.tieneFallas()).
+                map(heladera -> ServiceHeladeras.toHeladeraDTO(heladera));
+        List<HeladeraDTO> heladerasConFallasDTO = (List<HeladeraDTO>) heladeras.stream().
+                filter(Heladera::tieneFallas).
+                map(heladera -> ServiceHeladeras.toHeladeraDTO(heladera));
+        Map<String, Object> model = new HashMap<>();
+        model.put("heladeras", heladerasDTO);
+        model.put("heladerasFallas", heladerasConFallasDTO);
+
+        context.render("colaboraciones/distribuirViandas.hbs", model);
     }
 
     @Override

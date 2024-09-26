@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones;
 
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.*;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.TarjetaColaborador;
+import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Direccion;
 import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Punto;
 import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.Topic;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateTimeConverter;
@@ -27,10 +28,10 @@ public class Heladera{
     @JoinColumn(name = "modelo_heladera_id")
     private ModeloHeladera modeloHeladera;
     @Embedded
-    private Punto punto;
+    private Direccion direccion;
 
-    @Column(name = "direccion", columnDefinition = "TEXT")
-    private String direccion;
+    @Column(name = "cantidad_viandas", columnDefinition = "int")
+    private Integer cantidadViandas;
 
     @Column(name = "capacidad", columnDefinition = "int")
     private Integer capacidad;
@@ -90,5 +91,9 @@ public class Heladera{
 
     public Double obtenerTemperaturaMaxima() {
         return modeloHeladera.getTemperaturaMaxima();
+    }
+
+    public boolean tieneFallas() {
+    return estado != Estado.ACTIVA;
     }
 }

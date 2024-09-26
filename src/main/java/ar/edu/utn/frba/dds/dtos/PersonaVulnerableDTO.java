@@ -9,4 +9,5 @@ public class PersonaVulnerableDTO {
     private String domicilio;
     private String tipo_documento;
     private String num_documento;
+    private String fecha_de_nacimiento;
 }

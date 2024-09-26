@@ -7,9 +7,14 @@ public class ServiceHeladeras {
     public static HeladeraDTO toHeladeraDTO(Heladera heladera) {
         return HeladeraDTO.builder().
                 id(heladera.getId().toString()).
-                direccion(heladera.getDireccion()).
-                //cantViandas(heladera.getCantViandas().toString()). TODO ver como sacar viandas
-                capacidad(heladera.getCapacidad().toString())
-                .build();
+                nombre(heladera.getDireccion().getNombre_direccion()).
+                latitud(heladera.getDireccion().getPunto().getLatitud().toString()).
+                longitud(heladera.getDireccion().getPunto().getLongitud().toString()).
+                direccion(heladera.getDireccion().getDireccion()).
+                cantViandas(heladera.getCantidadViandas().toString()).
+                capacidad(heladera.getCapacidad().toString()).
+                estado(heladera.getEstado().toString()).
+                build();
+
     }
 }
