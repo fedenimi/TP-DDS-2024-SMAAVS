@@ -80,6 +80,14 @@ public class ServiceLocator {
                 ControladorAlerta instance = new ControladorAlerta(instanceOf(RepositorioAlertas.class));
                 instances.put(componentName, instance);
             }
+            else if(componentName.equals(ControladorReportarFalla.class.getName())) {
+                ControladorReportarFalla instance = new ControladorReportarFalla(instanceOf(RepositorioFallasTecnicas.class));
+                instances.put(componentName, instance);
+            }
+            else if(componentName.equals(RepositorioFallasTecnicas.class.getName())) {
+                RepositorioFallasTecnicas instance = new RepositorioFallasTecnicas();
+                instances.put(componentName, instance);
+            }
         }
 
         return (T) instances.get(componentName);

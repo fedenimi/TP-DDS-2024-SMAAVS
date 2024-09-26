@@ -1,0 +1,34 @@
+{{#partial "home-estilos"}}
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/heladeras.css">
+    <link rel="stylesheet" href="../css/suscripciones.css">
+{{/partial}}
+{{#partial "home-main"}}
+    <main class="admin-heladeras reportar-falla-main">
+        <h1>Reportar fallas:
+        </h1>
+        <div class="heladeras-mapa">
+            <section class="heladeras-dashboard">
+                <section class="heladeras-dashboard-scrollable">
+                    <div class="title">
+                        <hr>
+                    </div>
+                </section>
+                <div class="btns">
+                    <a href="javascript:history.back()" class="boton-dashboard">Volver</a>
+                    <a class="boton-dashboard btn-reportar">Siguiente</a>
+                </div>
+            </section>
+            <section class="blurred-map">
+                <a href="/mapa">ABRIR MAPA</a>
+            </section>
+        </div>
+    </main>
+{{/partial}}
+{{#partial "home-scripts"}}
+    <script src="../js/heladeras.js"></script>
+    <script src="../js/dropdownScript.js"></script>
+    <script src="../js/reportarFallas.js"></script> <!--TODO-->
+    <script src="../js/modalViandas.js"></script>
+{{/partial}}
+{{>templates/base/homeBase}}

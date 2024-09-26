@@ -12,7 +12,7 @@ public class ControladorDonacionDeDinero implements ICrudViewsHandler{
     }
     @Override
     public void index(Context context) {
-
+        context.render("colaboraciones/donarDinero.hbs");
     }
 
     @Override
@@ -27,7 +27,10 @@ public class ControladorDonacionDeDinero implements ICrudViewsHandler{
 
     @Override
     public void save(Context context) {
-
+        System.out.println("Paramétros: ");
+        System.out.println(context.formParam("frecuencia"));
+        System.out.println(context.formParam("monto"));
+        context.redirect("home");
     }
 
     @Override

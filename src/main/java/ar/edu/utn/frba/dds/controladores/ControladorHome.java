@@ -25,6 +25,6 @@ public class ControladorHome {
     }
 
     public void mostrarDonacionViandas(Context context) {
-        context.render("colaboraciones/donarViandas.hbs");
+
     }
 }

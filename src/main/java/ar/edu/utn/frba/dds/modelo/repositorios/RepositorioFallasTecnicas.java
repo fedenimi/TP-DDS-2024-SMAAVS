@@ -7,12 +7,15 @@ import ar.edu.utn.frba.dds.modelo.repositorios.interfaces.IRepositorioFallasTecn
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.Optional;
 
 @Getter
+@NoArgsConstructor
 public class RepositorioFallasTecnicas implements IRepositorio<FallaTecnica>, WithSimplePersistenceUnit {
+    List<FallaTecnica> fallasTecnicas;
     private static RepositorioFallasTecnicas instance = null;
     public static RepositorioFallasTecnicas getInstance() {
         if(instance == null) {
@@ -20,7 +23,6 @@ public class RepositorioFallasTecnicas implements IRepositorio<FallaTecnica>, Wi
         }
         return instance;
     }
-    List<FallaTecnica> fallasTecnicas;
 
     @Override
     public void guardar(FallaTecnica fallaTecnica) {

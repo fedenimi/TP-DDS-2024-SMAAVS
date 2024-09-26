@@ -18,6 +18,25 @@ const dist2 = document.querySelectorAll('.dist2');
 if (titleText) {
     if (sigBtn) {
         sigBtn.addEventListener('click', () => {
+            if (heladeraSelected() != null) {
+                try {
+                    completarHeladerasInput("origen", heladeraSelected())
+                    document.querySelector('.form-mapa-distribuir').submit()
+                } catch (e) {}
+                try {document.querySelector('.modal-info-heladera-viandas').classList.remove('open')} catch (e) {
+                    console.log(e)}
+                dist1.forEach(dist => dist.classList.remove('dist1'));
+                dist1.forEach(dist => dist.classList.add('dist2'));
+                dist2.forEach(dist => dist.classList.remove('dist2'));
+                dist2.forEach(dist => dist.classList.add('dist1'));
+                heladeraBtns.forEach(btn => btn.classList.remove('open'));
+
+            }
+        })
+    }
+    if (confirmarBtn) {
+        confirmarBtn.addEventListener('click', () => {
+            try {completarHeladerasInput("destino", heladeraSelected())} catch (e) {}
             dist1.forEach(dist => dist.classList.remove('dist1'));
             dist1.forEach(dist => dist.classList.add('dist2'));
             dist2.forEach(dist => dist.classList.remove('dist2'));
@@ -25,14 +44,15 @@ if (titleText) {
             heladeraBtns.forEach(btn => btn.classList.remove('open'));
         })
     }
-    if (confirmarBtn) {
-        confirmarBtn.addEventListener('click', () => {
-            dist1.forEach(dist => dist.classList.remove('dist1'));
-            dist1.forEach(dist => dist.classList.add('dist2'));
-            dist2.forEach(dist => dist.classList.remove('dist2'));
-            dist2.forEach(dist => dist.classList.add('dist1'));
-            heladeraBtns.forEach(btn => btn.classList.remove('open'));
+
+    function heladeraSelected() {
+        let heladera = null
+        heladeraBtns.forEach(btn => {
+            if (btn.classList.contains('open')) {
+                heladera = btn.children[0].innerText;
+            }
         })
+        return heladera
     }
 
     if (volverBtnSusc1) {
@@ -129,7 +149,6 @@ if (titleText) {
 
 const btnOpenerSolicitudesApertura = document.querySelector('.btn-opener-solicitudes-apertura');
 const distribuirViandas3 = document.querySelectorAll('.distribuir-viandas-3');
-const btnAceptarModal = document.querySelector('.btn-aceptar-modal-donar');
 
 if (btnOpenerSolicitudesApertura && distribuirViandas3) {
     btnOpenerSolicitudesApertura.addEventListener('click', () => {
@@ -142,13 +161,3 @@ if (btnOpenerSolicitudesApertura && distribuirViandas3) {
     })
 }
 
-if (btnAceptarModal) {
-    btnAceptarModal.addEventListener('click', () => {
-        const modal = document.querySelector('.modal-solicitudes-apertura');
-        modal.classList.contains('show-modal') ? modal.classList.remove('show-modal') : modal.classList.add('show-modal');
-        modal.classList.add('hidden');
-        distribuirViandas3.forEach(dist => {
-            dist.classList.remove('opacity-low');
-        })
-    })
-}

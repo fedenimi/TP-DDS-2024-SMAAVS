@@ -18,8 +18,9 @@ public class RepositorioAlertas implements IRepositorio<Alerta>, WithSimplePersi
     List<Alerta> alertas = new ArrayList<>();
     private static RepositorioAlertas instance = null;
     public static RepositorioAlertas getInstance() {
-        if(instance == null)
+        if(instance == null) {
             instance = new RepositorioAlertas();
+        }
         return instance;
     }
     @Override

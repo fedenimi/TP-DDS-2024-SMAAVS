@@ -12,7 +12,7 @@ public class ControladorDonacionDeViandas implements ICrudViewsHandler{
     }
     @Override
     public void index(Context context) {
-
+        context.render("colaboraciones/donarViandas.hbs");
     }
 
     @Override

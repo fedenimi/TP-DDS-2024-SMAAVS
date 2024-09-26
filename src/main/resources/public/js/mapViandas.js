@@ -13,7 +13,7 @@ document.querySelector('#cerrar-mapa').addEventListener('click', () => {
 })}
 
 var blueIcon = L.icon({
-    iconUrl: "../img/bluePin.png",
+    iconUrl: "../../img/bluePin.png",
     shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
     iconSize: [30, 40],
     shadowSize: [50, 60],

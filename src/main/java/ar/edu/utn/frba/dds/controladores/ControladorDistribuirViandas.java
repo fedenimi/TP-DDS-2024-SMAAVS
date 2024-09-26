@@ -13,7 +13,7 @@ public class ControladorDistribuirViandas implements ICrudViewsHandler{
     }
     @Override
     public void index(Context context) {
-
+        context.render("colaboraciones/distribuirViandas.hbs");
     }
 
     @Override
@@ -28,7 +28,12 @@ public class ControladorDistribuirViandas implements ICrudViewsHandler{
 
     @Override
     public void save(Context context) {
-
+        System.out.println("Distribuir viandas: ");
+        System.out.println("Heladera origen: " + context.formParam("heladera-or"));
+        System.out.println("Heladera destino: " + context.formParam("heladera-dest"));
+        System.out.println("Motivo: " + context.formParam("motivo"));
+        System.out.println("Cantidad de viandas: " + context.formParam("cantidad-viandas"));
+        context.redirect("home");
     }
 
     @Override
@@ -44,5 +49,16 @@ public class ControladorDistribuirViandas implements ICrudViewsHandler{
     @Override
     public void delete(Context context) {
 
+    }
+
+    public void abrirMapa(Context context) {
+        context.render("colaboraciones/mapa/mapaDistribuirViandas.hbs");
+    }
+
+    public void guardarMapa(Context context) {
+        System.out.println("Mapa guardado");
+        System.out.println("Heladera origen: " + context.formParam("heladera-origen"));
+        System.out.println("Heladera destino: " + context.formParam("heladera-destino"));
+        context.redirect("home");
     }
 }
