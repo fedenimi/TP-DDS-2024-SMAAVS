@@ -4,12 +4,14 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Registro;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.Documento;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.TarjetaPersonaVulnerable;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateConverter;
+import lombok.Getter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
 @Entity
+@Getter
 @Table(name = "persona_vulnerable")
 public class PersonaVulnerable {
     @Id

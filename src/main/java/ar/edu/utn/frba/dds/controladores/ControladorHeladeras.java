@@ -23,11 +23,17 @@ public class ControladorHeladeras implements ICrudViewsHandler{
     public void index(Context context) {
         //PRETENDE DEVOLVER UNA VISTA QUE CONTENGA A TODOS LOS PRODUCTOS ALMACENADOS EN MI SISTEMA
         List<Heladera> heladeras = this.repositorioHeladeras.buscarTodos();
-        List<HeladeraDTO> heladerasDTO = (List<HeladeraDTO>) heladeras.stream().map(ServiceHeladeras::toHeladeraDTO);
+        List<HeladeraDTO> heladerasDTO = (List<HeladeraDTO>) heladeras.stream().
+                filter(heladera -> !heladera.tieneFallas()).
+                map(heladera -> ServiceHeladeras.toHeladeraDTO(heladera));
+        List<HeladeraDTO> heladerasConFallasDTO = (List<HeladeraDTO>) heladeras.stream().
+                filter(Heladera::tieneFallas).
+                map(heladera -> ServiceHeladeras.toHeladeraDTO(heladera));
 
 
         Map<String, Object> model = new HashMap<>();
         model.put("heladeras", heladerasDTO);
+        model.put("heladerasFallas", heladerasConFallasDTO);
         model.put("titulo", "Listado de heladeras");
 
         context.render("heladeras/heladeras.hbs", model);

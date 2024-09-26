@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.config;
 
 import ar.edu.utn.frba.dds.controladores.*;
+import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.BuscadorDeTecnicos;
 import ar.edu.utn.frba.dds.modelo.repositorios.*;
 
@@ -57,11 +58,11 @@ public class ServiceLocator {
                 instances.put(componentName, instance);
             }
             else if(componentName.equals(RepositorioPuntuables.class.getName())) {
-               RepositorioPuntuables instance = new RepositorioPuntuables();
-               instances.put(componentName, instance);
+                RepositorioPuntuables instance = new RepositorioPuntuables();
+                instances.put(componentName, instance);
             }
             else if(componentName.equals(ControladorDistribuirViandas.class.getName())) {
-                ControladorDistribuirViandas instance = new ControladorDistribuirViandas(instanceOf(RepositorioDistribucionesViandas.class));
+                ControladorDistribuirViandas instance = new ControladorDistribuirViandas(instanceOf(RepositorioPuntuables.class), instanceOf(RepositorioHeladeras.class));
                 instances.put(componentName, instance);
             }
             else if(componentName.equals(ControladorDonacionDeDinero.class.getName())) {
@@ -86,6 +87,18 @@ public class ServiceLocator {
             }
             else if(componentName.equals(RepositorioFallasTecnicas.class.getName())) {
                 RepositorioFallasTecnicas instance = new RepositorioFallasTecnicas();
+                instances.put(componentName, instance);
+            }
+            else if(componentName.equals((RepositorioPersonasVulnerables.class.getName()))) {
+                RepositorioPersonasVulnerables instance = new RepositorioPersonasVulnerables();
+                instances.put(componentName, instance);
+            }
+            else if(componentName.equals(ControladorPersonaVulnerable.class.getName())) {
+                ControladorPersonaVulnerable instance = new ControladorPersonaVulnerable(instanceOf(RepositorioPersonasVulnerables.class));
+                instances.put(componentName, instance);
+            }
+            else if(componentName.equals(ControladorSuscripciones.class.getName())) {
+                ControladorSuscripciones instance = new ControladorSuscripciones(instanceOf(RepositorioHeladeras.class));
                 instances.put(componentName, instance);
             }
         }
