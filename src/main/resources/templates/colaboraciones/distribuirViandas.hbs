@@ -28,18 +28,18 @@
                                 <div class="heladera">
                                     <p>{{this.nombre}}</p>
                                     <hr>
-                                    <p>{{this.cantidadFallas}} fallas</p>
+                                    <p>{{this.cantidadViandas}} viandas</p>
                                 </div>
                             {{/each}}
                             <div class="heladera">
                                 <p>Heladera 2</p>
                                 <hr>
-                                <p>1 falla</p>
+                                <p>1 vianda</p>
                             </div>
                             <div class="heladera">
                                 <p>Heladera 1</p>
                                 <hr>
-                                <p>2 fallas</p>
+                                <p>2 viandas</p>
                             </div>
                         </div>
                         <div class="heladeras-sin-fallas-dashboard">
@@ -185,14 +185,17 @@
 
         function completarHeladerasInput(strTipo, nombreHeladera) {
             const heladeras = document.querySelectorAll('.info-viandas-3');
+            const timerTexts = document.querySelectorAll('.timer-text');
             switch (strTipo) {
                 case "origen":
                     heladeras[0].querySelector('input').value = nombreHeladera;
                     heladeras[0].querySelector('p').textContent = nombreHeladera;
+                    timerTexts[0].textContent = nombreHeladera;
                     break;
                 case "destino":
                     heladeras[1].querySelector('input').value = nombreHeladera;
                     heladeras[1].querySelector('p').textContent = nombreHeladera;
+                    timerTexts[1].textContent = nombreHeladera;
                     break;
             }
         }

@@ -1,15 +1,16 @@
 package ar.edu.utn.frba.dds.controladores;
-
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioDistribucionesViandas;
-import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioHeladeras;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioPuntuables;
 import io.javalin.http.Context;
 
-public class ControladorDistribuirViandas implements ICrudViewsHandler{
-    private RepositorioPuntuables repositorioPuntuables;
+import java.util.HashMap;
+import java.util.Map;
 
-    public ControladorDistribuirViandas(RepositorioPuntuables repositorioPuntuables) {
-        this.repositorioPuntuables = repositorioPuntuables;
+public class ControladorDistribuirViandas implements ICrudViewsHandler{
+    private RepositorioDistribucionesViandas repositorioDistribucionesViandas;
+
+    public ControladorDistribuirViandas(RepositorioDistribucionesViandas repositorioDistribucionesViandas) {
+        this.repositorioDistribucionesViandas = repositorioDistribucionesViandas;
     }
     @Override
     public void index(Context context) {
@@ -56,9 +57,11 @@ public class ControladorDistribuirViandas implements ICrudViewsHandler{
     }
 
     public void guardarMapa(Context context) {
-        System.out.println("Mapa guardado");
-        System.out.println("Heladera origen: " + context.formParam("heladera-origen"));
-        System.out.println("Heladera destino: " + context.formParam("heladera-destino"));
-        context.redirect("home");
+        System.out.println("Distribuir viandas: ");
+        System.out.println("Heladera origen: " + context.formParam("heladera-or"));
+        System.out.println("Heladera destino: " + context.formParam("heladera-dest"));
+        System.out.println("Motivo: " + context.formParam("motivo"));
+        System.out.println("Cantidad de viandas: " + context.formParam("cantidad-viandas"));
+        context.redirect("/"+context.pathParam("id")+"/home");
     }
 }

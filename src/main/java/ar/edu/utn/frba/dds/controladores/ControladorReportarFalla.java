@@ -14,7 +14,6 @@ public class ControladorReportarFalla implements ICrudViewsHandler{
 
     @Override
     public void index(Context context) {
-        System.out.println("Index de reportar falla");
         context.render("colaboraciones/reportarFalla.hbs");
     }
 

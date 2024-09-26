@@ -1,5 +1,6 @@
 {{#partial "estilos-map"}}
     <link rel="stylesheet" href="../../css/registro.css">
+    <link rel="stylesheet" href="../../css/viandas.css">
     <style>
         #map {
             width: 100vw;
@@ -205,11 +206,9 @@
                     </section>
                     <div class="btns">
                         <a class="boton-dashboard volver-btn dist2">Volver</a>
-                        <a href="distribuirViandas.html" class="boton-dashboard volver-btn dist1">Volver</a>
+                        <a class="boton-dashboard volver-btn dist1">Volver</a>
                         <a class="boton-dashboard sig-btn dist1">Siguiente</a>
-                        <a href="distribuirViandas3.html" class="boton-dashboard dist2">
-                            Confirmar
-                        </a>
+                        <a class="boton-dashboard dist2 open-form-dist">Confirmar</a>
                     </div>
                 </section>
                 <button class="arrow-opener">
@@ -221,32 +220,143 @@
                 <div class="title-mapa-direccion">
                     <p>Medrano 951</p>
                 </div>
-                <a class="title-mapa-btn confirmar-btn dist1">
+                <a class="title-mapa-btn confirmar-btn dist1 completar-dist">
                     <p>Confirmar</p>
                 </a>
-                <a class="title-mapa-btn confirmar-btn dist2">
+                <a class="title-mapa-btn confirmar-btn dist2 open-form-dist">
                     <p>Confirmar</p>
                 </a>
             </div>
         </div>
-        <form class="hidden" id="form-mapa-distribuir" method="POST">
-            <input type="text" name="heladera-origen" id="heladera-origen">
-            <input type="text" name="heladera-destino" id="heladera-destino">
-        </form>
+        <main class="registro2-main hidden">
+            <div class="registro2-title distribuir-viandas-3">
+                <h1>Complete los datos correspondientes</h1>
+            </div>
+            <form class="form-registro2 donar-dinero distribuir-viandas-3" id="form-dist-viandas" method="POST">
+                <div class="form-element2 donar-dinero-element">
+                    <label for="form-nombre">Heladera origen seleccionada</label>
+                    <div class="info-viandas-3">
+                        <input type="text" name="heladera-or" id="heladera-origen" required class="hidden">
+                        <p></p>
+                        <hr>
+                        <p>5 viandas</p>
+                    </div>
+                </div>
+                <div class="form-element2 donar-dinero-element">
+                    <label for="form-nombre">Heladera destino seleccionada</label>
+                    <div class="info-viandas-3">
+                        <input type="text" name="heladera-dest" id="heladera-destino" required class="hidden">
+                        <p></p>
+                        <hr>
+                        <p>5 viandas</p>
+                    </div>
+                </div>
+                <div class="form-element2 donar-dinero-element">
+                    <label for="form-nombre">Motivo</label>
+                    <select name="motivo" id="motivo" class="hidden">
+                        <option value="falla"></option>
+                        <option value="falta-de-viandas"></option>
+                    </select>
+                    <div class="form-element-dropdown">
+                        <div class="dropdown-select-btn">
+                            <p>Seleccionar</p>
+                            <span>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </span>
+                        </div>
+                        <ul class="dropdown-item-list">
+                            <li class="dropdown-item-only">
+                                <span>
+                                    <i class="fa-solid fa-check check-icon"></i>
+                                </span>
+                                <p>Falla</p>
+                            </li>
+                            <li class="dropdown-item-only">
+                                <span>
+                                    <i class="fa-solid fa-check check-icon"></i>
+                                </span>
+                                <p>Falta de viandas</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="form-element2 donar-dinero-element">
+                    <label for="form-nombre">¿Cuántas viandas quiere donar?</label>
+                    <input type="number" name="cantidad-viandas" id="form-apellido" required>
+                </div>
+            </form>
+            <div class="modal-solicitudes-apertura hidden">
+                <div class="modal-solicitudes-apertura-header">
+                    <h1 class="timer"></h1>
+                </div>
+                <div class="heladeras-solicitadas">
+                    <div class="heladeras-solicitadas-text">
+                        <p class="timer-text"></p>
+                        <p class="timer-text"></p>
+                    </div>
+                    <a class="btn-next2 btn-aceptar-modal" >
+                        <p>Finalizar</p>
+                        <i class="fa fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="btns-next distribuir-viandas-3">
+                <a class="btn-next2" id="atras-heladeras-distribucion">
+                    <p>Atrás</p>
+                    <i class="fa fa-arrow-left"></i>
+                </a>
+                <a class="btn-next2 btn-opener-solicitudes-apertura">
+                    <p>Finalizar</p>
+                    <i class="fa fa-arrow-right"></i>
+                </a>
+            </div>
+        </main>
     </div>
 {{/partial}}
 {{#partial "scripts-map"}}
+    <script src="../../js/timer.js"></script>
     <script>
-        function completarHeladerasInput(tipoHeladera, heladera) {
-            switch (tipoHeladera) {
+        function completarHeladerasInput(strTipo, nombreHeladera) {
+            const heladeras = document.querySelectorAll('.info-viandas-3');
+            const timerTexts = document.querySelectorAll('.timer-text');
+            switch (strTipo) {
                 case "origen":
-                    document.querySelector('#heladera-origen').value = heladera;
+
+                    heladeras[0].querySelector('input').value = nombreHeladera;
+                    heladeras[0].querySelector('p').textContent = nombreHeladera;
+                    timerTexts[0].textContent = nombreHeladera;
                     break;
                 case "destino":
-                    document.querySelector('#heladera-destino').value = heladera;
+                    heladeras[1].querySelector('input').value = nombreHeladera;
+                    heladeras[1].querySelector('p').textContent = nombreHeladera;
+                    timerTexts[1].textContent = nombreHeladera;
                     break;
             }
         }
+
+        document.querySelectorAll('.open-form-dist').forEach(btn => {
+            btn.addEventListener('click', () => {
+                console.log("Selected: " + heladeraSelected())
+                completarHeladerasInput("destino", heladeraSelected())
+                document.querySelector('#map').classList.toggle('hidden')
+                document.querySelector('.registro2-main').classList.toggle('hidden')
+            });
+        });
+
+        document.querySelector('.btn-aceptar-modal').addEventListener('click', () => {
+            document.querySelector('#motivo').value = motivoSegun(document.querySelector('.checked').children[1].innerHTML)
+            document.querySelector('#form-dist-viandas').submit();
+        });
+
+        function motivoSegun(str) {
+            if (str === "Falla") {
+                return "falla";
+            } else if (str === "Falta de viandas") {
+                return "falta-de-viandas";
+            }
+        }
+
     </script>
 {{/partial}}
 {{>templates/base/mapaBase}}
