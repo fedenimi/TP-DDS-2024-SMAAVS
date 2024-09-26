@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.controladores;
 
+import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.Topic;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioAlertas;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioHeladeras;
@@ -15,7 +16,6 @@ public class ControladorSuscripciones implements ICrudViewsHandler {
     public void index(Context context) {
 
     }
-
     @Override
     public void show(Context context) {
 
