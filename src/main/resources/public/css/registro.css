@@ -1,0 +1,380 @@
+.registro-main {
+    height: calc(100vh - 80px);
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding: 6rem;
+    color: #000000;
+    gap: 1rem;
+}
+
+.config {
+    grid-template-rows: 1fr auto;
+}
+
+.registro2-main {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 80px);
+    padding: 6rem;
+}
+
+.registro2-title {
+    display: flex;
+    flex: 1;
+    justify-content: flex-start;
+}
+
+.btns-title {
+    display: flex;
+}
+
+.tipo-colab {
+    display: flex;
+    flex-direction: column;
+}
+
+.tipo-colab label {
+    margin-bottom: 0.5rem;
+    margin-left: 0.2rem;
+}
+
+.form-registro {
+    display: grid;
+    grid-template-columns: 2fr 1fr 2fr;
+    grid-template-rows: repeat(4, auto);
+    padding: 15px;
+    border-radius: 10px;
+    backdrop-filter: blur(15px);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.config-form {
+    grid-template-columns: 2fr 1fr 2fr;
+    grid-template-rows: repeat(3, auto);
+}
+
+.donar-dinero {
+    align-items: start;
+    width: 50%;
+}
+
+.donar-dinero-element {
+    width: 100%;
+}
+
+.btn-title {
+    background-color: #D9D9D9;
+    border: none;
+    box-shadow: 2px 3px 2px 0px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0.8rem 1rem;
+}
+
+.form-element {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.config-form-element {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.form-element label {
+    margin-bottom: 0.5rem;
+    margin-left: 0.2rem;
+    font-weight: bold;
+}
+
+.form-element input,
+.form-element select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-element-description textarea {
+    width: 100%;
+    
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    resize: none;
+}
+
+.form-element-description label {
+    font-size: 1rem;
+}
+
+.form-registro2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 5;
+    color: #000000;
+    padding: 15px;
+    border-radius: 10px;
+    backdrop-filter: blur(15px);
+    background: rgba(255, 255, 255, 0.2);
+    gap: 3rem;
+    width: 100%;
+}
+
+.form-element2 {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.form-element2 label {
+    margin-bottom: 0.5rem;
+    margin-left: 0.2rem;
+    font-weight: bold;
+}
+
+.form-element2 input {
+    width: 100%;
+    padding: 0.5rem 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-element-dropdown {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    position: relative;
+    border-radius: 8px;
+}
+
+.dropdown-select-btn {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    height: 36px;
+    padding: 0.5rem;
+    justify-content: space-between;
+    cursor: pointer;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-select-btn span {
+    height: 21px;
+    width: 21px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #A0C6FF;
+    color: white;
+    font-size: 14px;
+}
+
+.dropdown-item-list {
+    position: absolute;
+    transform: translate(0, 40px);
+    border-radius: 8px;
+    padding: 16px;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    display: none;
+}
+
+.dropdown-select-btn.open~.dropdown-item-list {
+    display: block;
+}
+
+
+.dropdown-item,
+.dropdown-item-only {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    cursor: pointer;
+    transition: 0.3s;
+    padding: 0 15px;
+    border-radius: 8px;
+}
+
+.dropdown-item:hover {
+    background-color: #f9f9f9;
+}
+
+.dropdown-item span,
+.dropdown-item-only span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 16px;
+    min-width: 16px;
+    border-radius: 4px;
+    margin-right: 12px;
+    border: 1.5px solid #c0c0c0;
+    transition: all 0.3s ease-in-out;
+}
+
+.dropdown-item span .check-icon,
+.dropdown-item-only span .check-icon {
+    font-size: 11px;
+    transform: scale(0);
+    transition: all 0.3s ease-in-out;
+}
+
+.dropdown-item.checked span,
+.dropdown-item-only.checked span {
+    background-color: #A0C6FF;
+    border: 1.5px solid #A0C6FF;
+}
+
+.dropdown-item.checked .check-icon,
+.dropdown-item-only.checked .check-icon {
+    color: white;
+    transform: scale(1);
+}
+
+.btn-next {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem 0;
+}
+
+.btns-next {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+}
+
+.btns-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+
+}
+
+.btn-next2 i {
+    display: none;
+}
+
+.btn-next a,
+.btn-next2,
+.btn-login,
+.btn-admin-heladeras {
+    background-color: #A0C6FF;
+    border: none;
+    padding: 20px 60px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn-csv {
+    width: 50%;
+    align-self: center;
+    font-size: 35px;
+}
+
+.btn-form {
+    width: 100%;
+    padding: 7.5px 36px;
+    align-self: flex-end;
+}
+
+.btn-next a:hover,
+.btn-next2:hover,
+.btn-login:hover {
+    background-color: #87ceeb;
+}
+
+.pressed-btn {
+    background-color: #B1B0B0;
+    box-shadow: inset 0px 3px 2px 0px rgba(0, 0, 0, 0.2);
+}
+
+@media(max-width: 796px) {
+    .registro-main {
+        padding: 2rem;
+    }
+
+    .form-registro {
+        grid-template-columns: 1fr;
+    }
+
+    .tipo-colab {
+        align-items: center;
+    }
+
+    .btn-next {
+        justify-content: center;
+    }
+
+    .registro2-main {
+        display: flex;
+        flex-direction: column;
+        padding: 2rem;
+    }
+
+    .registro2-title {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .btn-next2 {
+        display: block;
+        border: none;
+        cursor: pointer;
+        scale: 0.8;
+        border-radius: 50px;
+        transition: scale 0.3s ease;
+    }
+
+    .btn-csv {
+        width: 100%;
+        align-self: center;
+        font-size: 25px;
+    }
+
+    .form-registro2 {
+        flex: 0;
+    }
+
+    .form-element2 {
+        width: 100%;
+    }
+
+    .btn-next2 i {
+        display: block;
+    }
+
+    .btn-next2 p {
+        display: none;
+    }
+
+    .donar-dinero {
+        width: 100%;
+    }
+}
+
+.hidden {
+    display: none !important;
+}

@@ -20,13 +20,15 @@ public class ReporteFallas implements Reporte {
 
     private RepositorioAlertas repositorioAlertas;
     private RepositorioFallasTecnicas repositorioFallasTecnicas;
-    Map<Heladera, Integer> heladeraFallasMap;
+    @Getter private Map<Heladera, Integer> heladeraFallasMap;
     @Getter private String nombreArchivo;
+    private ReporteStringFallas reporteStringFallas;
 
-    public ReporteFallas(RepositorioAlertas repositorioAlertas, RepositorioFallasTecnicas repositorioFallasTecnicas, String nombreArchivo) {
+    public ReporteFallas(RepositorioAlertas repositorioAlertas, RepositorioFallasTecnicas repositorioFallasTecnicas, String nombreArchivo, ReporteStringFallas reporteStringFallas) {
         this.repositorioAlertas = repositorioAlertas;
         this.repositorioFallasTecnicas = repositorioFallasTecnicas;
         this.nombreArchivo = nombreArchivo;
+        this.reporteStringFallas = reporteStringFallas;
     }
 
     @Override
@@ -49,18 +51,7 @@ public class ReporteFallas implements Reporte {
             }
         }
 
-        StringBuilder result = new StringBuilder();
-        result.append("Fecha: ")
-                .append(LocalDate.now().toString())
-                .append("\n");
-        for (Map.Entry<Heladera, Integer> entry : heladeraFallasMap.entrySet()) {
-            result.append("Heladera: ")
-            .append(entry.getKey().getId())
-                    .append(": ")
-                    .append(entry.getValue())
-                    .append(" viandas\n");
-        }
-        return result.toString();
+       return reporteStringFallas.crearReporteString(this);
     }
     public void agregarFallaAHeladera(Heladera heladera) {
         if(heladeraFallasMap.containsKey(heladera)){

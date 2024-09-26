@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMAAVS</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/heladeras.css">
+    <link rel="stylesheet" href="styles/registro.css">
+    <link rel="stylesheet" href="styles/viandas.css">
+</head>
+
+<body>
+    <header>
+        <div class="inner-header">
+            <div class="header-title">
+                <a href="index.html">SMAAVS</a>
+            </div>
+            <ul class="links">
+                <li><a href="configuracionH.html">Configuración</a></li>
+                <li><a href="">Contacto</a></li>
+                <li>
+                    <a href="" class="shadow-header-btn">
+                        Manuel
+                        <i class="fa-solid fa-user"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="canjearPuntos.html" class="shadow-header-btn">
+                        300 puntos
+                        <i class="fa-solid fa-shopping-cart"></i>
+                    </a>
+                </li>
+            </ul>
+            <div class="toggle-btn">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+        <div class="dropdown-menu drop-men-logged">
+            <li><a href="configuracionH.html">Configuración</li>
+            <li><a href="">Contacto</li>
+            <li><a href="index.html">Tienda</a></li>
+        </div>
+    </header>
+    <main class="admin-heladeras donar-viandas-main">
+        <h1 class="distribuir-viandas-3">Ha elegido "Donar viandas" <br>
+            Complete los datos correspondientes
+        </h1>
+        <div class="heladeras-mapa distribuir-viandas-3">
+            <form class="form-registro2 donar-viandas">
+                <div class="form-element2 donar-dinero-element">
+                    <label for="form-nombre">Viandas</label>
+                    <div class="form-element-dropdown">
+                        <div class="dropdown-select-btn">
+                            <p>Agregar vianda</p>
+                            <span>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </span>
+                        </div>
+                        <ul class="dropdown-item-list">
+                            <li class="dropdown-item-only closable agregar-vianda checked">
+                                <p></p>
+                                <p>Agregar vianda</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-element2 donar-dinero-element">
+                    <label for="form-nombre">Comida</label>
+                    <input type="text" id="form-apellido" placeholder="">
+                </div>
+                <div class="form-element2 donar-dinero-element">
+                    <label for="form-nombre">Fecha de caducidad</label>
+                    <input type="date" id="form-apellido">
+                </div>
+                <div class="form-element2 donar-dinero-element">
+                    <label for="form-nombre">Peso comida</label>
+                    <input type="text" id="form-apellido">
+                </div>
+                <div class="form-element2 donar-dinero-element">
+                    <label for="form-nombre">Calorías comida</label>
+                    <input type="text" id="form-apellido">
+                </div>
+                <div class="form-element2 donar-dinero-element">
+                    <label for="form-nombre">Heladera</label>
+                    <input type="text" id="form-apellido">
+                </div>
+                <div class="btns-viandas">
+                    <button class="btn-next2 eliminar-vianda" type="button">
+                        <i class="fa-solid fa-trash"></i>
+                        <p>Eliminar vianda</p>
+                    </button>
+                    <button class="btn-next2 guardar-vianda btn-opener-solicitudes-apertura" type="button">
+                        <i class="fa-solid fa-check"></i>
+                        <p>Guardar</p>
+                    </button>
+                </div>
+            </form>
+            <section class="blurred-map">
+                <a href="mapaDonarViandas.html">ABRIR MAPA</a>
+            </section>
+        </div>
+        <div class="modal-solicitudes-apertura hidden">
+            <div class="modal-solicitudes-apertura-header">
+                <h1 class="timer"></h1>
+            </div>
+            <div class="heladeras-solicitadas">
+                <div class="heladeras-solicitadas-text">
+                    <p>Heladera a</p>
+                </div>
+                <a class="btn-next2 btn-aceptar-modal-donar">
+                    <p>Finalizar</p>
+                    <i class="fa fa-arrow-right"></i>
+                </a>
+            </div>
+
+        </div>
+        <div class="btns-next-viandas distribuir-viandas-3">
+            <a class="btn-next2" href="mainIniciado.html">
+                <p>Atrás</p>
+                <i class="fa fa-arrow-left"></i>
+            </a>
+            <a class="btn-next2" href="mainIniciado.html">
+                <p>Finalizar</p>
+                <i class="fa fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+    <script src="scripts/dropdownScript.js">
+    </script>
+    <script src="scripts/modalViandas.js"></script>
+    <script src="scripts/donarViandas.js"></script>
+    <script src="scripts/timer.js"></script>
+</body>
+
+</html>

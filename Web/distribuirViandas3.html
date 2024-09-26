@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMAAVS</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/registro.css">
+    <link rel="stylesheet" href="styles/viandas.css">
+</head>
+
+<body>
+    <header>
+        <div class="inner-header">
+            <div class="header-title">
+                <a href="index.html">SMAAVS</a>
+            </div>
+            <ul class="links">
+                <li><a href="configuracionH.html">Configuración</a></li>
+                <li><a href="">Contacto</a></li>
+                <li>
+                    <a href="" class="shadow-header-btn">
+                        Manuel
+                        <i class="fa-solid fa-user"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="canjearPuntos.html" class="shadow-header-btn">
+                        300 puntos
+                        <i class="fa-solid fa-shopping-cart"></i>
+                    </a>
+                </li>
+            </ul>
+            <div class="toggle-btn">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+        <div class="dropdown-menu drop-men-logged">
+            <li><a href="configuracionH.html">Configuración</li>
+            <li><a href="">Contacto</li>
+            <li><a href="index.html">Tienda</a></li>
+        </div>
+    </header>
+    <main class="registro2-main">
+        <div class="registro2-title distribuir-viandas-3">
+            <h1>Complete los datos correspondientes</h1>
+        </div>
+        <form class="form-registro2 donar-dinero distribuir-viandas-3">
+            <div class="form-element2 donar-dinero-element">
+                <label for="form-nombre">Heladera origen seleccionada</label>
+                <div class="info-viandas-3">
+                    <p>Heladera a</p>
+                    <hr>
+                    <p>5 viandas</p>
+                </div>
+            </div>
+            <div class="form-element2 donar-dinero-element">
+                <label for="form-nombre">Heladera destino seleccionada</label>
+                <div class="info-viandas-3">
+                    <p>Heladera a</p>
+                    <hr>
+                    <p>5 viandas</p>
+                </div>
+            </div>
+            <div class="form-element2 donar-dinero-element">
+                <label for="form-nombre">Motivo</label>
+                <div class="form-element-dropdown">
+                    <div class="dropdown-select-btn">
+                        <p>Seleccionar</p>
+                        <span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </span>
+                    </div>
+                    <ul class="dropdown-item-list">
+                        <li class="dropdown-item-only">
+                            <span>
+                                <i class="fa-solid fa-check check-icon"></i>
+                            </span>
+                            <p>Falla</p>
+                        </li>
+                        <li class="dropdown-item-only">
+                            <span>
+                                <i class="fa-solid fa-check check-icon"></i>
+                            </span>
+                            <p>Falta de viandas</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="form-element2 donar-dinero-element">
+                <label for="form-nombre">¿Qué monto quiere donar?</label>
+                <input type="number" name="apellido" id="form-apellido" required>
+            </div>
+        </form>
+        <div class="modal-solicitudes-apertura hidden">
+            <div class="modal-solicitudes-apertura-header">
+                <h1 class="timer"></h1>
+            </div>
+            <div class="heladeras-solicitadas">
+                <div class="heladeras-solicitadas-text">
+                    <p>Heladera a</p>
+                    <p>Heladera b</p>
+                </div>
+                <a class="btn-next2 btn-aceptar-modal" href="mainIniciado.html">
+                    <p>Finalizar</p>
+                    <i class="fa fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        <div class="btns-next distribuir-viandas-3">
+            <a class="btn-next2" href="javascript:history.back()">
+                <p>Atrás</p>
+                <i class="fa fa-arrow-left"></i>
+            </a>
+            <a class="btn-next2 btn-opener-solicitudes-apertura">
+                <p>Finalizar</p>
+                <i class="fa fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+    <script src="scripts/dropdownScript.js">
+    </script>
+    <script src="scripts/modalViandas.js">
+    </script>
+    <script src="scripts/timer.js">
+    </script>
+</body>
+
+</html>

@@ -2,17 +2,28 @@ package ar.edu.utn.frba.dds.modelo.entidades.colaboraciones;
 
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Vianda;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
+import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateConverter;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 @Getter
-public class DonacionDeViandas implements Puntuable{
+@NoArgsConstructor
+@Entity
+@DiscriminatorValue("donacion_viandas")
+public class DonacionDeViandas extends Puntuable{
+    @OneToMany
+    @JoinColumn(name = "vianda_id")
     private List<Vianda> viandasDonadas;
+
+    @Column(name = "fecha")
+    @Convert(converter = LocalDateConverter.class)
     private LocalDate fecha;
-    private Colaborador colaborador;
-    private float multiplicador;
+
+    @Column(name = "multiplicador", columnDefinition = "float")
+    private Double multiplicador;
 
 
     public DonacionDeViandas(Colaborador colaborador) {
@@ -26,8 +37,9 @@ public class DonacionDeViandas implements Puntuable{
     }
 
     @Override
-    public float puntaje() {
-        return viandasDonadas.size();
+    public Double puntaje() {
+        Integer ret = viandasDonadas.size();
+        return ret.doubleValue();
     }
 
     @Override

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMAAVS</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/carrusel.css">
+    <link rel="stylesheet" href="styles/suscripciones.css">
+</head>
+
+<body>
+    <header>
+        <div class="inner-header">
+            <div class="header-title">
+                <a href="index.html">SMAAVS</a>
+            </div>
+            <ul class="links">
+                <li><a href="configuracionJ.html">Configuración</a></li>
+                <li><a href="">Contacto</a></li>
+                <li>
+                    <a href="" class="shadow-header-btn">
+                        Manuel
+                        <i class="fa-solid fa-user"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="canjearPuntos.html" class="shadow-header-btn">
+                        300 puntos
+                        <i class="fa-solid fa-shopping-cart"></i>
+                    </a>
+                </li>
+            </ul>
+            <div class="toggle-btn">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+        <div class="dropdown-menu drop-men-logged">
+            <li><a href="configuracionH.html">Configuración</li>
+            <li><a href="">Contacto</li>
+            <li><a href="index.html">Tienda</a></li>
+        </div>
+    </header>
+    <main class="header-main">
+        <section class="carousel">
+            <input type="radio" name="slider" id="carousel-s1" checked>
+            <input type="radio" name="slider" id="carousel-s2">
+            <input type="radio" name="slider" id="carousel-s3">
+            <input type="radio" name="slider" id="carousel-s4">
+            <input type="radio" name="slider" id="carousel-s5">
+            <div class="cards">
+                <label for="carousel-s1" id="slide1">
+                    <div class="card">
+                        <div class="carousel-img">
+                            <img src="images/administrarHeladeras.webp" alt="">
+                            <div class="card-dots">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div class="carousel-info">
+                            <a href="donarViandas.html" class="carousel-btn">Administrar heladeras</a>
+                        </div>
+                    </div>
+                </label>
+                <label for="carousel-s5" id="slide5">
+                    <div class="card">
+                        <div class="carousel-img">
+                            <img src="images/donarDinero.jpg" alt="">
+                        </div>
+                        <div class="carousel-info">
+                            <a href="donarDinero.html" class="carousel-btn">Donar dinero</a>
+                        </div>
+                    </div>
+                </label>
+                <label for="carousel-s2" id="slide2">
+                    <div class="card">
+                        <div class="carousel-img">
+                            <img src="images/publicarProductos.jpg" alt="">
+                            <div class="card-dots">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div class="carousel-info">
+                            <a href="publicarProducto.html" class="carousel-btn">Publicar productos</a>
+                        </div>
+                    </div>
+                </label>
+                
+            </div>
+        </section>
+    </main>
+    <script>
+        const toggleBtn = document.querySelector('.toggle-btn');
+        const toggleBtnIcon = document.querySelector('.toggle-btn i');
+        const dropdownMenu = document.querySelector('.dropdown-menu');
+
+        toggleBtn.onclick = function () {
+            dropdownMenu.classList.toggle('open');
+            const isOpen = dropdownMenu.classList.contains('open');
+
+            toggleBtnIcon.classList = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+        }
+    </script>
+</body>
+
+</html>

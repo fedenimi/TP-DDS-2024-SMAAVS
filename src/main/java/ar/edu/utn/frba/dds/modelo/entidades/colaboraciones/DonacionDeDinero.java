@@ -2,17 +2,32 @@ package ar.edu.utn.frba.dds.modelo.entidades.colaboraciones;
 
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.frecuencia.Frecuencia;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
+import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.FrecuenciaConverter;
+import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateConverter;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
-
-public class DonacionDeDinero implements Puntuable{
+@Getter
+@NoArgsConstructor
+@Entity
+@DiscriminatorValue("donacion_dinero")
+public class DonacionDeDinero extends Puntuable {
+    @Column(name = "fecha_de_inicio")
+    @Convert(converter = LocalDateConverter.class)
     private LocalDate fechaDeInicio;
+
+    @Column(name = "monto", columnDefinition = "int")
     private Integer monto;
+
+    @Convert(converter = FrecuenciaConverter.class)
+    @Column(name = "frecuencia")
     private Frecuencia frecuencia;
-    @Getter private Colaborador colaborador;
-    @Getter private float multiplicador;
+
+    @Column(name = "multiplicador", columnDefinition = "float")
+    @Getter private Double multiplicador;
 
     public DonacionDeDinero(Integer monto, Colaborador colaborador) {
         this.monto = monto;
@@ -20,8 +35,8 @@ public class DonacionDeDinero implements Puntuable{
     }
 
     @Override
-    public float puntaje() {
-        return this.monto * this.frecuencia.puntajePara(this);
+    public Double puntaje() {
+        return this.monto.doubleValue() * this.frecuencia.puntajePara(this);
     }
 
     @Override

@@ -1,0 +1,252 @@
+{{#partial "estilos-map"}}
+    <link rel="stylesheet" href="../../css/registro.css">
+    <style>
+        #map {
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: row;
+            justify-content: start;
+            align-items: center;
+            gap: 0px;
+        }
+
+        .dashboard-arrow {
+            z-index: 1000;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .heladeras-dashboard {
+            z-index: 1000;
+            max-height: 100%;
+            display: none;
+            max-width: 800px;
+        }
+
+        .arrow-opener {
+            z-index: 1000;
+            background-color: #e3e3e3;
+            width: 25px;
+            height: 90px;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+            box-shadow: 2px 3px 5px 1px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: none;
+        }
+
+        .modal-info-heladera-viandas {
+            margin-left: 2rem;
+            margin-right: 2rem;
+        }
+
+
+
+        @media (max-width: 1468px) {
+            .title-mapa-btn {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 960px) {
+            .title-mapa {
+                width: 80%;
+                font-size: 1rem;
+                padding: 20px;
+            }
+
+            .title-mapa-direccion {
+                font-size: 1rem;
+                padding: 20px;
+            }
+
+        }
+
+        @media (max-width: 670px) {
+            .title-mapa-heladera {
+                width: 80%;
+                font-size: 0.8rem;
+                padding: 10px;
+            }
+
+            .title-mapa-direccion {
+                font-size: 0.8rem;
+                padding: 10px;
+            }
+
+            .title-mapa-btn {
+                width: 70%;
+                font-size: 0.8rem;
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 535px) {
+            .title-mapa-heladera {
+                width: 70%;
+                font-size: 0.6rem;
+                padding: 10px;
+            }
+
+            .title-mapa-btn {
+                width: 60%;
+                font-size: 0.6rem;
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 488px) {
+            #map {
+                flex-direction: column;
+                align-items: start;
+                gap: 3rem;
+            }
+
+            .dashboard-arrow {
+                flex-direction: row;
+                align-items: center;
+                height: 50% !important;
+            }
+
+            .heladeras-dashboard-scrollable {
+                height: 200px !important;
+            }
+
+            .modal-info-heladera-viandas {
+                width: 90%;
+                margin-left: 0px;
+                margin-right: 0px;
+            }
+
+            .title-mapa-heladera {
+                width: 80%;
+                font-size: 1rem;
+                padding: 10px;
+            }
+
+            .title-mapa-direccion {
+                font-size: 1rem;
+                padding: 10px;
+            }
+
+            .title-mapa-btn {
+                width: 70%;
+                font-size: 1rem;
+                padding: 10px;
+            }
+        }
+
+        @media (max-height: 718px) {
+            .dashboard-arrow {
+                flex-direction: row;
+                align-items: center;
+                height: 100vh;
+            }
+
+            .heladeras-dashboard {
+                padding-top: 1rem;
+                padding-bottom: 0.5rem;
+            }
+
+        }
+
+        .open {
+            display: flex;
+        }
+
+        .leaflet-left {
+            display: none;
+        }
+    </style>
+{{/partial}}
+{{#partial "main-map"}}
+    <div>
+        <div id="map">
+            <div class="dashboard-arrow">
+                <section class="heladeras-dashboard open">
+                    <section class="heladeras-dashboard-scrollable">
+                        <div class="title">
+                            <div class="title-text">
+                                <h2 class="dist1">ELEGIR HELADERA ORIGEN</h2>
+                                <h2 class="dist2">ELEGIR HELADERA DESTINO</h2>
+                                <h2 class="dist1">1/2</h2>
+                                <h2 class="dist2">2/2</h2>
+                            </div>
+                            <hr>
+                        </div>
+                        <div class="heladeras-fallas-dashboard">
+                            <h2>Heladeras con fallas</h2>
+                            <div>
+                                <div class="heladera">
+                                    <p>Heladera B</p>
+                                    <hr>
+                                    <p>3 viandas</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="heladeras-sin-fallas-dashboard">
+                            <h2>Total de heladeras</h2>
+                            <div>
+                                <div class="heladera">
+                                    <p>Heladera A</p>
+                                    <hr>
+                                    <p>3 viandas</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <div class="btns">
+                        <a class="boton-dashboard volver-btn dist2">Volver</a>
+                        <a href="distribuirViandas.html" class="boton-dashboard volver-btn dist1">Volver</a>
+                        <a class="boton-dashboard sig-btn dist1">Siguiente</a>
+                        <a href="distribuirViandas3.html" class="boton-dashboard dist2">
+                            Confirmar
+                        </a>
+                    </div>
+                </section>
+                <button class="arrow-opener">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+            </div>
+            <div class="modal-info-heladera-viandas">
+                <h1 class="title-mapa-heladera">Heladera A</h1>
+                <div class="title-mapa-direccion">
+                    <p>Medrano 951</p>
+                </div>
+                <a class="title-mapa-btn confirmar-btn dist1">
+                    <p>Confirmar</p>
+                </a>
+                <a class="title-mapa-btn confirmar-btn dist2">
+                    <p>Confirmar</p>
+                </a>
+            </div>
+        </div>
+        <form class="hidden" id="form-mapa-distribuir" method="POST">
+            <input type="text" name="heladera-origen" id="heladera-origen">
+            <input type="text" name="heladera-destino" id="heladera-destino">
+        </form>
+    </div>
+{{/partial}}
+{{#partial "scripts-map"}}
+    <script>
+        function completarHeladerasInput(tipoHeladera, heladera) {
+            switch (tipoHeladera) {
+                case "origen":
+                    document.querySelector('#heladera-origen').value = heladera;
+                    break;
+                case "destino":
+                    document.querySelector('#heladera-destino').value = heladera;
+                    break;
+            }
+        }
+    </script>
+{{/partial}}
+{{>templates/base/mapaBase}}

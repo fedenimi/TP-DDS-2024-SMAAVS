@@ -1,0 +1,29 @@
+package ar.edu.utn.frba.dds.server;
+
+import ar.edu.utn.frba.dds.config.ServiceLocator;
+import ar.edu.utn.frba.dds.controladores.*;
+import io.javalin.Javalin;
+
+public class Router {
+    public static void init(Javalin app) {
+        app.get("/", ServiceLocator.instanceOf(ControladorHome.class)::mostrarLanding);
+        app.get("/registro", ServiceLocator.instanceOf(ControladorRegistro.class)::mostrarRegistro);
+        app.post("/registro", ServiceLocator.instanceOf(ControladorRegistro.class)::guardarCampos);
+
+        app.get("/{id}/home", ServiceLocator.instanceOf(ControladorHome.class)::mostrarHome);
+        app.get("{id}/donar-viandas", ServiceLocator.instanceOf(ControladorDonacionDeViandas.class)::index);
+
+        app.get("{id}/dinero", ServiceLocator.instanceOf(ControladorDonacionDeDinero.class)::index);
+        app.post("{id}/dinero", ServiceLocator.instanceOf(ControladorDonacionDeDinero.class)::save);
+
+        app.get("{id}/distribuir-viandas", ServiceLocator.instanceOf(ControladorDistribuirViandas.class)::index);
+        app.post("{id}/distribuir-viandas", ServiceLocator.instanceOf(ControladorDistribuirViandas.class)::save);
+        app.get("{id}/distribuir-viandas/mapa", ServiceLocator.instanceOf(ControladorDistribuirViandas.class)::abrirMapa);
+        app.post("{id}/distribuir-viandas/mapa", ServiceLocator.instanceOf(ControladorDistribuirViandas.class)::guardarMapa);
+
+
+        app.get("{id}/reportar-falla", ServiceLocator.instanceOf(ControladorReportarFalla.class)::index);
+        app.get("{id}/reportar-falla/mapa", ServiceLocator.instanceOf(ControladorReportarFalla.class)::abrirMapa);
+
+    }
+}

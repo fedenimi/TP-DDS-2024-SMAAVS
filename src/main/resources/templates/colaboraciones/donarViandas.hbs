@@ -1,0 +1,123 @@
+{{#partial "home-estilos"}}
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/heladeras.css">
+    <link rel="stylesheet" href="../css/registro.css">
+    <link rel="stylesheet" href="../css/viandas.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="../css/mapa.css">
+{{/partial}}
+{{#partial "home-main"}}
+    <main class="not-overflow">
+        <main class="admin-heladeras donar-viandas-main">
+            <h1 class="distribuir-viandas-3">Ha elegido "Donar viandas" <br>
+                Complete los datos correspondientes
+            </h1>
+            <div class="heladeras-mapa distribuir-viandas-3">
+                <form class="form-registro2 donar-viandas">
+                    <div class="form-element2 donar-dinero-element">
+                        <label for="form-nombre">Viandas</label>
+                        <div class="form-element-dropdown">
+                            <div class="dropdown-select-btn">
+                                <p>Agregar vianda</p>
+                                <span>
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </span>
+                            </div>
+                            <ul class="dropdown-item-list">
+                                <li class="dropdown-item-only closable agregar-vianda checked">
+                                    <p></p>
+                                    <p>Agregar vianda</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="form-element2 donar-dinero-element">
+                        <label for="form-nombre">Comida</label>
+                        <input type="text" id="form-apellido" placeholder="">
+                    </div>
+                    <div class="form-element2 donar-dinero-element">
+                        <label for="form-nombre">Fecha de caducidad</label>
+                        <input type="date" id="form-apellido">
+                    </div>
+                    <div class="form-element2 donar-dinero-element">
+                        <label for="form-nombre">Peso comida</label>
+                        <input type="text" id="form-apellido">
+                    </div>
+                    <div class="form-element2 donar-dinero-element">
+                        <label for="form-nombre">Calorías comida</label>
+                        <input type="text" id="form-apellido">
+                    </div>
+                    <div class="form-element2 donar-dinero-element">
+                        <label for="form-nombre">Heladera</label>
+                        <input type="text" name="heladera" id="form-heladera">
+                    </div>
+                    <div class="btns-viandas">
+                        <button class="btn-next2 eliminar-vianda" type="button">
+                            <i class="fa-solid fa-trash"></i>
+                            <p>Eliminar vianda</p>
+                        </button>
+                        <button class="btn-next2 guardar-vianda btn-opener-solicitudes-apertura" type="button">
+                            <i class="fa-solid fa-check"></i>
+                            <p>Guardar</p>
+                        </button>
+                    </div>
+                </form>
+                <section class="blurred-map">
+                    <a id="abrir-mapa">ABRIR MAPA</a>
+                </section>
+            </div>
+            <div class="modal-solicitudes-apertura hidden">
+                <div class="modal-solicitudes-apertura-header">
+                    <h1 class="timer"></h1>
+                </div>
+                <div class="heladeras-solicitadas">
+                    <div class="heladeras-solicitadas-text">
+                        <p>Heladera a</p>
+                    </div>
+                    <a class="btn-next2 btn-aceptar-modal-donar">
+                        <p>Finalizar</p>
+                        <i class="fa fa-arrow-right"></i>
+                    </a>
+                </div>
+
+            </div>
+            <div class="btns-next-viandas distribuir-viandas-3">
+                <a class="btn-next2" href="javascript:history.back()">
+                    <p>Atrás</p>
+                    <i class="fa fa-arrow-left"></i>
+                </a>
+                <a class="btn-next2" href="javascript:history.back()">
+                    <p>Finalizar</p>
+                    <i class="fa fa-arrow-right"></i>
+                </a>
+            </div>
+        </main>
+        <div class="map-container transparent">
+            <div id="map">
+                <h1 class="title-mapa">¿En qué heladera dejará la vianda?</h1>
+                <div class="modal-info-heladera-viandas">
+                    <h1 class="title-mapa-heladera">Heladera A</h1>
+                    <div class="title-mapa-direccion">
+                        <p>Almagro, CABA</p><br class="line-jump">
+                        <p>Medrano 951</p>
+                    </div>
+                    <a id="cerrar-mapa" class="title-mapa-btn">
+                        <p>Confirmar</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+{{/partial}}
+{{#partial "home-scripts"}}
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="../js/heladeras.js"></script>
+    <script src="../js/mapViandas.js"></script>
+    <script src="../js/dropdownScript.js"></script>
+    <script src="../js/modalViandas.js"></script>
+    <script src="../js/donarViandas.js"></script>
+    <script src="../js/timer.js"></script>
+{{/partial}}
+
+{{>templates/base/homeBase}}
