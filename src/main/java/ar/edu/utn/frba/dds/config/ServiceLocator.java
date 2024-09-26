@@ -88,6 +88,14 @@ public class ServiceLocator {
                 RepositorioFallasTecnicas instance = new RepositorioFallasTecnicas();
                 instances.put(componentName, instance);
             }
+            else if(componentName.equals((RepositorioPersonasVulnerables.class.getName()))) {
+                RepositorioPersonasVulnerables instance = new RepositorioPersonasVulnerables();
+                instances.put(componentName, instance);
+            }
+            else if(componentName.equals(ControladorPersonaVulnerable.class.getName())) {
+                ControladorPersonaVulnerable instance = new ControladorPersonaVulnerable(instanceOf(RepositorioPersonasVulnerables.class));
+                instances.put(componentName, instance);
+            }
         }
 
         return (T) instances.get(componentName);
