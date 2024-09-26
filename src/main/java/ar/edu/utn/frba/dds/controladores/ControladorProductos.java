@@ -44,7 +44,7 @@ public class ControladorProductos implements ICrudViewsHandler{
 //        }
 
         Map<String, Object> model = new HashMap<>();
-        model.put("producto", posibleProductoBuscado.get());
+        model.put("producto", ServiceProductos.toProductoDTO(posibleProductoBuscado.get()));
 
         context.render("productos/detalle_producto.hbs", model);
     }
