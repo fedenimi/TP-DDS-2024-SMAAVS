@@ -6,11 +6,7 @@ import lombok.Builder;
 @Builder
 public class HeladeraDTO {
     private String id;
-    private String nombre;
     private String direccion;
-    private String latitud;
-    private String longitud;
     private String cantViandas;
     private String capacidad;
-    private String estado;
 }
