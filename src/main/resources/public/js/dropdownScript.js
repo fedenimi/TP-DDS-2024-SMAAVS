@@ -50,6 +50,7 @@ if (selectionBtn) {
             }
         });
     }
+<<<<<<< HEAD
 
     function infoAgregarVianda() {
         let viandaInfo = document.querySelector('.donar-viandas');
@@ -106,4 +107,6 @@ function handleDropdown(heladera) {
             }
         })
     }
+=======
+>>>>>>> 0eaed6e23f88c447c62dadba0b09598740dc275f
 }

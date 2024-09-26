@@ -1,0 +1,64 @@
+{{#partial "home-estilos"}}
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/registro.css">
+{{/partial}}
+{{#partial "home-main"}}
+    <main class="registro2-main">
+        <div class="registro2-title">
+            <h1>Ha elegido “Donación de Dinero”<br>
+                Complete los datos correspondientes
+            </h1>
+        </div>
+        <form class="form-registro2 donar-dinero">
+            <div class="form-element2 donar-dinero-element">
+                <label for="form-nombre">¿Qué monto quiere donar? (Pesos)</label>
+                <input type="number" name="apellido" id="form-apellido" required>
+            </div>
+            <div class="form-element2 donar-dinero-element">
+                <label for="form-nombre">Formas de colaborar</label>
+                <div class="form-element-dropdown">
+                    <div class="dropdown-select-btn">
+                        <p>0 seleccionadas</p>
+                        <span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </span>
+                    </div>
+                    <ul class="dropdown-item-list">
+                        <li class="dropdown-item-only">
+                            <span>
+                                <i class="fa-solid fa-check check-icon"></i>
+                            </span>
+                            <p>Única</p>
+                        </li>
+                        <li class="dropdown-item-only">
+                            <span>
+                                <i class="fa-solid fa-check check-icon"></i>
+                            </span>
+                            <p>Mensual</p>
+                        </li>
+                        <li class="dropdown-item-only">
+                            <span>
+                                <i class="fa-solid fa-check check-icon"></i>
+                            </span>
+                            <p>Anual</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+        <div class="btns-next">
+            <a class="btn-next2" href="mainIniciado.html">
+                <p>Atrás</p>
+                <i class="fa fa-arrow-left"></i>
+            </a>
+            <a class="btn-next2" href="mainIniciado.html">
+                <p>Finalizar</p>
+                <i class="fa fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+{{/partial}}
+{{#partial "home-scripts"}}
+    <script src="../js/dropdownScript.js"></script>
+{{/partial}}
+{{>templates/base/homeBase}}
