@@ -23,16 +23,19 @@ public class ControladorDistribuirViandas implements ICrudViewsHandler{
     @Override
     public void index(Context context) {
         List<Heladera> heladeras = this.repositorioHeladeras.buscarTodos();
-        List<HeladeraDTO> heladerasDTO = (List<HeladeraDTO>) heladeras.stream().
+        System.out.println("Hola");
+        Heladera hel = heladeras.get(0);
+        List<HeladeraDTO> heladerasDTO = heladeras.stream().
                 filter(heladera -> !heladera.tieneFallas()).
-                map(heladera -> ServiceHeladeras.toHeladeraDTO(heladera));
-        List<HeladeraDTO> heladerasConFallasDTO = (List<HeladeraDTO>) heladeras.stream().
+                map(heladera -> ServiceHeladeras.toHeladeraDTO(heladera)).toList();
+        System.out.println("Heladera" + ServiceHeladeras.toHeladeraDTO(hel).getId());
+        List<HeladeraDTO> heladerasConFallasDTO = heladeras.stream().
                 filter(Heladera::tieneFallas).
-                map(heladera -> ServiceHeladeras.toHeladeraDTO(heladera));
+                map(heladera -> ServiceHeladeras.toHeladeraDTO(heladera)).toList();
+
         Map<String, Object> model = new HashMap<>();
         model.put("heladeras", heladerasDTO);
         model.put("heladerasFallas", heladerasConFallasDTO);
-
         context.render("colaboraciones/distribuirViandas.hbs", model);
     }
 
@@ -72,7 +75,21 @@ public class ControladorDistribuirViandas implements ICrudViewsHandler{
     }
 
     public void abrirMapa(Context context) {
-        context.render("colaboraciones/mapa/mapaDistribuirViandas.hbs");
+        List<Heladera> heladeras = this.repositorioHeladeras.buscarTodos();
+        System.out.println("Hola");
+        Heladera hel = heladeras.get(0);
+        List<HeladeraDTO> heladerasDTO = heladeras.stream().
+                filter(heladera -> !heladera.tieneFallas()).
+                map(heladera -> ServiceHeladeras.toHeladeraDTO(heladera)).toList();
+        System.out.println("Heladera" + ServiceHeladeras.toHeladeraDTO(hel).getId());
+        List<HeladeraDTO> heladerasConFallasDTO = heladeras.stream().
+                filter(Heladera::tieneFallas).
+                map(heladera -> ServiceHeladeras.toHeladeraDTO(heladera)).toList();
+
+        Map<String, Object> model = new HashMap<>();
+        model.put("heladeras", heladerasDTO);
+        model.put("heladerasFallas", heladerasConFallasDTO);
+        context.render("colaboraciones/mapa/mapaDistribuirViandas.hbs", model);
     }
 
     public void guardarMapa(Context context) {

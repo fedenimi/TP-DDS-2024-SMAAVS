@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class ControladorReportarFalla implements ICrudViewsHandler{
     private RepositorioFallasTecnicas repositorioFallasTecnicas;
-    private RepositorioHeladeras repositorioHeladeras
+    private RepositorioHeladeras repositorioHeladeras;
 
     public ControladorReportarFalla(RepositorioFallasTecnicas repositorioFallasTecnicas, RepositorioHeladeras repositorioHeladeras) {
         this.repositorioFallasTecnicas = repositorioFallasTecnicas;

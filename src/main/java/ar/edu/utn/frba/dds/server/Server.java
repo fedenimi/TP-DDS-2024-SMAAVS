@@ -29,6 +29,7 @@ public class Server {
             Router.init(app);
 
             if (Boolean.parseBoolean(PrettyProperties.getInstance().propertyFromName("dev_mode"))) {
+                System.out.println("Inicializando datos de prueba...");
                 Initializer.init();
             }
         }

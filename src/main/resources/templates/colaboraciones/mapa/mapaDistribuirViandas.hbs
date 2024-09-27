@@ -184,23 +184,26 @@
                         </div>
                         <div class="heladeras-fallas-dashboard">
                             <h2>Heladeras con fallas</h2>
-                            <div>
+                            {{#each heladerasFallas}}
                                 <div class="heladera">
-                                    <p>Heladera B</p>
+                                    <p>{{this.nombre}}</p>
                                     <hr>
-                                    <p>3 viandas</p>
+                                    <p>{{this.cantidadViandas}} viandas</p>
                                 </div>
-                            </div>
+                            {{/each}}
                         </div>
                         <div class="heladeras-sin-fallas-dashboard">
                             <h2>Total de heladeras</h2>
-                            <div>
-                                <div class="heladera">
-                                    <p>Heladera A</p>
+                            {{#each heladeras}}
+                                <div class="heladera" id="heladeras-en-dashboard">
+                                    <p>{{this.nombre}}</p>
                                     <hr>
-                                    <p>3 viandas</p>
+                                    <p>{{this.cantidadViandas}}viandas</p>
+                                    <p class="hidden">{{this.latitud}}</p>
+                                    <p class="hidden">{{this.longitud}}</p>
+                                    <p class="hidden">{{this.direccion}}</p>
                                 </div>
-                            </div>
+                            {{/each}}
                         </div>
                     </section>
                     <div class="btns">
@@ -237,7 +240,7 @@
 {{/partial}}
 {{#partial "scripts-map"}}
     <script>
-        function completarHeladerasInput(tipoHeladera, heladera) {
+        function completarHeladerasInput(tipoHeladera, heladera, viandas) {
             switch (tipoHeladera) {
                 case "origen":
                     document.querySelector('#heladera-origen').value = heladera;

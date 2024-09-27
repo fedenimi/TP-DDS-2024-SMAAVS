@@ -26,6 +26,7 @@ var mapContainer = document.getElementById('map');
 var map = L.map(mapContainer).setView([-34.6037, -58.3816], 13);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
+definirHeladeras()
 heladerasTotales.forEach(heladera => mostrarPunto(heladera, blueIcon));
 
 function mostrarPunto(heladera, icon) {

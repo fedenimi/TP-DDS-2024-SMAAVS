@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.controladores;
 
+import ar.edu.utn.frba.dds.config.ServiceLocator;
 import ar.edu.utn.frba.dds.dtos.FraudeDTO;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.Alerta;
@@ -28,7 +29,7 @@ public class ControladorMovimiento {
         Heladera heladera = null;
 
         fechaYHora = CalculadorDeFechas.getInstance().stringToLocalDateTime(fraudeDTO.getFechaYHora());
-        Optional<Heladera> heladeraOptional = RepositorioHeladeras.getInstance().buscar(Long.parseLong(fraudeDTO.getIdHeladera()));
+        Optional<Heladera> heladeraOptional = ServiceLocator.instanceOf(RepositorioHeladeras.class).buscar(Long.parseLong(fraudeDTO.getIdHeladera()));
         if (heladeraOptional.isPresent()) {
            heladera = heladeraOptional.get();
         }
