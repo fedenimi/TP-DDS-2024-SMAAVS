@@ -82,7 +82,7 @@ public class ServiceLocator {
                 instances.put(componentName, instance);
             }
             else if(componentName.equals(ControladorReportarFalla.class.getName())) {
-                ControladorReportarFalla instance = new ControladorReportarFalla(instanceOf(RepositorioFallasTecnicas.class));
+                ControladorReportarFalla instance = new ControladorReportarFalla(instanceOf(RepositorioFallasTecnicas.class), instanceOf(RepositorioHeladeras.class));
                 instances.put(componentName, instance);
             }
             else if(componentName.equals(RepositorioFallasTecnicas.class.getName())) {

@@ -185,23 +185,26 @@
                         </div>
                         <div class="heladeras-fallas-dashboard">
                             <h2>Heladeras con fallas</h2>
-                            <div>
+                            {{#each heladerasFallas}}
                                 <div class="heladera">
-                                    <p>Heladera B</p>
+                                    <p>{{this.nombre}}</p>
                                     <hr>
-                                    <p>3 viandas</p>
+                                    <p>{{this.cantidadViandas}} viandas</p>
                                 </div>
-                            </div>
+                            {{/each}}
                         </div>
                         <div class="heladeras-sin-fallas-dashboard">
                             <h2>Total de heladeras</h2>
-                            <div>
-                                <div class="heladera">
-                                    <p>Heladera A</p>
+                            {{#each heladeras}}
+                                <div class="heladera" id="heladeras-en-dashboard">
+                                    <p>{{this.nombre}}</p>
                                     <hr>
-                                    <p>3 viandas</p>
+                                    <p>{{this.cantidadViandas}}viandas</p>
+                                    <p class="hidden">{{this.latitud}}</p>
+                                    <p class="hidden">{{this.longitud}}</p>
+                                    <p class="hidden">{{this.direccion}}</p>
                                 </div>
-                            </div>
+                            {{/each}}
                         </div>
                     </section>
                     <div class="btns">
@@ -317,10 +320,9 @@
 {{#partial "scripts-map"}}
     <script src="../../js/timer.js"></script>
     <script>
-        function completarHeladerasInput(strTipo, nombreHeladera) {
+        function completarHeladerasInput(tipoHeladera, heladera, viandas) {      
             const heladeras = document.querySelectorAll('.info-viandas-3');
-            const timerTexts = document.querySelectorAll('.timer-text');
-            switch (strTipo) {
+            switch (tipoHeladera) {
                 case "origen":
 
                     heladeras[0].querySelector('input').value = nombreHeladera;

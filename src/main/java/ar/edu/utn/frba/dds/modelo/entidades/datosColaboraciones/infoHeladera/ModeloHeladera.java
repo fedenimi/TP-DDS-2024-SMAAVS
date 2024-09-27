@@ -3,12 +3,14 @@ package ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "ModeloHeladera")
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class ModeloHeladera {
     @Id

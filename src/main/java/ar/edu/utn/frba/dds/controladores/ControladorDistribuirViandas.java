@@ -16,68 +16,85 @@ public class ControladorDistribuirViandas implements ICrudViewsHandler{
     private RepositorioHeladeras repositorioHeladeras;
 
     public ControladorDistribuirViandas(RepositorioPuntuables repositorioPuntuables, RepositorioHeladeras repositorioHeladeras) {
-            this.repositorioPuntuables = repositorioPuntuables;
-            this.repositorioHeladeras = repositorioHeladeras;
-        }
-        @Override
-        public void index(Context context) {
-            List<Heladera> heladeras = this.repositorioHeladeras.buscarTodos();
-            System.out.println("heladera:" + heladeras.get(0).getStock().toString());
-            List<HeladeraDTO> heladerasDTO = (List<HeladeraDTO>) heladeras.stream().
-                    filter(heladera -> !heladera.tieneFallas()).
-                    map(heladera -> ServiceHeladeras.toHeladeraDTO(heladera));
-            List<HeladeraDTO> heladerasConFallasDTO = (List<HeladeraDTO>) heladeras.stream().
-                    filter(Heladera::tieneFallas).
-                    map(heladera -> ServiceHeladeras.toHeladeraDTO(heladera));
-            Map<String, Object> model = new HashMap<>();
-            model.put("heladeras", heladerasDTO);
-            model.put("heladerasFallas", heladerasConFallasDTO);
-            context.render("colaboraciones/distribuirViandas.hbs", model);
-        }
-
-        @Override
-        public void show(Context context) {
-
-        }
-
-        @Override
-        public void create(Context context) {
-
-        }
-
-        @Override
-        public void save(Context context) {
-            System.out.println("Distribuir viandas: ");
-            System.out.println("Heladera origen: " + context.formParam("heladera-or"));
-            System.out.println("Heladera destino: " + context.formParam("heladera-dest"));
-            System.out.println("Motivo: " + context.formParam("motivo"));
-            System.out.println("Cantidad de viandas: " + context.formParam("cantidad-viandas"));
-            context.redirect("home");
-        }
-
-        @Override
-        public void edit(Context context) {
-
-        }
-
-        @Override
-        public void update(Context context) {
-
-        }
-
-        @Override
-        public void delete(Context context) {
-
-        }
-
-        public void abrirMapa(Context context) {
-            context.render("colaboraciones/mapa/mapaDistribuirViandas.hbs");
-        }
-
-        public void guardarMapa(Context context) {
-            System.out.println("Mapa guardado");
-            System.out.println("Heladera origen: " + context.formParam("heladera-origen"));
-            System.out.println("Heladera destino: " + context.formParam("heladera-destino"));
-            context.redirect("/" + context.pathParam("id") + "/home");
-        }
+        this.repositorioPuntuables = repositorioPuntuables;
+        this.repositorioHeladeras = repositorioHeladeras;
     }
+    @Override
+    public void index(Context context) {
+        List<Heladera> heladeras = this.repositorioHeladeras.buscarTodos();
+        System.out.println("Hola");
+        Heladera hel = heladeras.get(0);
+        List<HeladeraDTO> heladerasDTO = heladeras.stream().
+                filter(heladera -> !heladera.tieneFallas()).
+                map(heladera -> ServiceHeladeras.toHeladeraDTO(heladera)).toList();
+        System.out.println("Heladera" + ServiceHeladeras.toHeladeraDTO(hel).getId());
+        List<HeladeraDTO> heladerasConFallasDTO = heladeras.stream().
+                filter(Heladera::tieneFallas).
+                map(heladera -> ServiceHeladeras.toHeladeraDTO(heladera)).toList();
+
+        Map<String, Object> model = new HashMap<>();
+        model.put("heladeras", heladerasDTO);
+        model.put("heladerasFallas", heladerasConFallasDTO);
+        context.render("colaboraciones/distribuirViandas.hbs", model);
+    }
+
+    @Override
+    public void show(Context context) {
+
+    }
+
+    @Override
+    public void create(Context context) {
+
+    }
+
+    @Override
+    public void save(Context context) {
+        System.out.println("Distribuir viandas: ");
+        System.out.println("Heladera origen: " + context.formParam("heladera-or"));
+        System.out.println("Heladera destino: " + context.formParam("heladera-dest"));
+        System.out.println("Motivo: " + context.formParam("motivo"));
+        System.out.println("Cantidad de viandas: " + context.formParam("cantidad-viandas"));
+        context.redirect("home");
+    }
+
+    @Override
+    public void edit(Context context) {
+
+    }
+
+    @Override
+    public void update(Context context) {
+
+    }
+
+    @Override
+    public void delete(Context context) {
+
+    }
+
+    public void abrirMapa(Context context) {
+        List<Heladera> heladeras = this.repositorioHeladeras.buscarTodos();
+        System.out.println("Hola");
+        Heladera hel = heladeras.get(0);
+        List<HeladeraDTO> heladerasDTO = heladeras.stream().
+                filter(heladera -> !heladera.tieneFallas()).
+                map(heladera -> ServiceHeladeras.toHeladeraDTO(heladera)).toList();
+        System.out.println("Heladera" + ServiceHeladeras.toHeladeraDTO(hel).getId());
+        List<HeladeraDTO> heladerasConFallasDTO = heladeras.stream().
+                filter(Heladera::tieneFallas).
+                map(heladera -> ServiceHeladeras.toHeladeraDTO(heladera)).toList();
+
+        Map<String, Object> model = new HashMap<>();
+        model.put("heladeras", heladerasDTO);
+        model.put("heladerasFallas", heladerasConFallasDTO);
+        context.render("colaboraciones/mapa/mapaDistribuirViandas.hbs", model);
+    }
+
+    public void guardarMapa(Context context) {
+        System.out.println("Mapa guardado");
+        System.out.println("Heladera origen: " + context.formParam("heladera-origen"));
+        System.out.println("Heladera destino: " + context.formParam("heladera-destino"));
+        context.redirect("home");
+    }
+}

@@ -11,13 +11,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class RepositorioHeladeras implements IRepositorio<Heladera>, WithSimplePersistenceUnit {
-    private List<Heladera> heladeras = new ArrayList<>();
-    private static RepositorioHeladeras instance = null;
-    public static RepositorioHeladeras getInstance() {
-        if(instance == null)
-            instance = new RepositorioHeladeras();
-        return instance;
-    }
 
     @Override
     public Optional<Heladera> buscar(Long id) {

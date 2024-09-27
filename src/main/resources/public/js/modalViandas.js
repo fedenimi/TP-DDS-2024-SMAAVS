@@ -27,8 +27,8 @@ if (titleText) {
         sigBtn.addEventListener('click', () => {
             if (heladeraSelected() != null) {
                 try {
-                    completarHeladerasInput("origen", heladeraSelected())
-
+                    completarHeladerasInput("origen", heladeraSelected(), viandasSelected())
+                    document.querySelector('.form-mapa-distribuir').submit()
                 } catch (e) {}
                 try {document.querySelector('.modal-info-heladera-viandas').classList.remove('open')} catch (e) {
                     console.log(e)}
@@ -43,6 +43,7 @@ if (titleText) {
     }
     if (confirmarBtn) {
         confirmarBtn.addEventListener('click', () => {
+            try {completarHeladerasInput("destino", heladeraSelected(), viandasSelected())} catch (e) {}
             dist1.forEach(dist => dist.classList.remove('dist1'));
             dist1.forEach(dist => dist.classList.add('dist2'));
             dist2.forEach(dist => dist.classList.remove('dist2'));
@@ -60,6 +61,16 @@ if (titleText) {
             }
         })
         return heladera
+    }
+
+    function viandasSelected() {
+        let viandas = null
+        heladeraBtns.forEach(btn => {
+            if (btn.classList.contains('open')) {
+                viandas = btn.children[2].innerText;
+            }
+        })
+        return viandas
     }
 
     if (volverBtnSusc1) {

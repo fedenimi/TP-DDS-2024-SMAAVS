@@ -31,16 +31,6 @@
                                     <p>{{this.cantidadViandas}} viandas</p>
                                 </div>
                             {{/each}}
-                            <div class="heladera">
-                                <p>Heladera 2</p>
-                                <hr>
-                                <p>1 vianda</p>
-                            </div>
-                            <div class="heladera">
-                                <p>Heladera 1</p>
-                                <hr>
-                                <p>2 viandas</p>
-                            </div>
                         </div>
                         <div class="heladeras-sin-fallas-dashboard">
                             <h2>Total de heladeras</h2>
@@ -51,21 +41,6 @@
                                     <p>{{this.cantidadViandas}} viandas</p>
                                 </div>
                             {{/each}}
-                            <div class="heladera">
-                                <p>Heladera 1</p>
-                                <hr>
-                                <p>3 viandas</p>
-                            </div>
-                            <div class="heladera">
-                                <p>Heladera 2</p>
-                                <hr>
-                                <p>0 viandas</p>
-                            </div>
-                            <div class="heladera">
-                                <p>Heladera 3</p>
-                                <hr>
-                                <p>3 viandas</p>
-                            </div>
                         </div>
                     </section>
                     <div class="btns">
@@ -173,7 +148,7 @@
     <script>
         document.querySelector('#confirmar-heladeras-distribucion').addEventListener('click', () => {
             if (heladeraSelected() != null) {
-                completarHeladerasInput("destino", heladeraSelected())
+                completarHeladerasInput("destino", heladeraSelected(), viandasSelected())
                 document.querySelector('.registro2-main').classList.toggle('hidden');
                 document.querySelector('.admin-heladeras').classList.toggle('hidden');
             }
@@ -183,19 +158,21 @@
             document.querySelector('.admin-heladeras').classList.toggle('hidden');
         });
 
-        function completarHeladerasInput(strTipo, nombreHeladera) {
+        function completarHeladerasInput(strTipo, nombreHeladera, viandas) {
             const heladeras = document.querySelectorAll('.info-viandas-3');
-            const timerTexts = document.querySelectorAll('.timer-text');
+            const modal = document.querySelector('.heladeras-solicitadas-text');
             switch (strTipo) {
                 case "origen":
                     heladeras[0].querySelector('input').value = nombreHeladera;
                     heladeras[0].querySelector('p').textContent = nombreHeladera;
-                    timerTexts[0].textContent = nombreHeladera;
+                    heladeras[0].children[3].textContent = viandas;
+                    modal.children[0].textContent = nombreHeladera
                     break;
                 case "destino":
                     heladeras[1].querySelector('input').value = nombreHeladera;
                     heladeras[1].querySelector('p').textContent = nombreHeladera;
-                    timerTexts[1].textContent = nombreHeladera;
+                    heladeras[1].children[3].textContent = viandas;
+                    modal.children[1].textContent = nombreHeladera
                     break;
             }
         }

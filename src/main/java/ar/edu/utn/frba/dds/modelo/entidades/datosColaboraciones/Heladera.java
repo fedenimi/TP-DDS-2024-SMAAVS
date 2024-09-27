@@ -24,14 +24,13 @@ public class Heladera{
     @GeneratedValue
     @Getter private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "modelo_heladera_id")
     private ModeloHeladera modeloHeladera;
+
     @Embedded
     private Direccion direccion;
 
-    @Column(name = "cantidad_viandas", columnDefinition = "int")
-    private Integer cantidadViandas;
 
     @Column(name = "capacidad", columnDefinition = "int")
     private Integer capacidad;
