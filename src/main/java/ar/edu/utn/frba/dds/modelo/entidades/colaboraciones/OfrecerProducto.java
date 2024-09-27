@@ -2,10 +2,7 @@ package ar.edu.utn.frba.dds.modelo.entidades.colaboraciones;
 
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Oferta;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 @Getter
@@ -14,6 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "ofrecer_producto")
+@Builder
 public class OfrecerProducto {
     @Id
     @GeneratedValue
