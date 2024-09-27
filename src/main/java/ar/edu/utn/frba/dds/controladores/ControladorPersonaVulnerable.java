@@ -12,7 +12,7 @@ public class ControladorPersonaVulnerable implements ICrudViewsHandler{
     }
     @Override
     public void index(Context context) {
-
+        context.render("colaboraciones/reg-persona.hbs");
     }
 
     @Override
@@ -27,7 +27,9 @@ public class ControladorPersonaVulnerable implements ICrudViewsHandler{
 
     @Override
     public void save(Context context) {
-
+        System.out.println("TipoDocumento: ");
+        System.out.println(context.formParam("tipo-documento-pv"));
+        context.redirect("home");
     }
 
     @Override

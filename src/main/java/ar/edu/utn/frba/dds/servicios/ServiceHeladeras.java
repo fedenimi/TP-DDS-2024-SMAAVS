@@ -16,7 +16,5 @@ public class ServiceHeladeras {
                 capacidad(heladera.getCapacidad().toString()).
                 estado(heladera.getEstado().toString()).
                 build();
-
-
     }
 }

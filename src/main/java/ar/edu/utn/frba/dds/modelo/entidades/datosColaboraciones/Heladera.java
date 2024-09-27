@@ -81,7 +81,7 @@ public class Heladera{
     public SolicitudApertura buscarSolicitudAperturaPor(TarjetaColaborador tarjetaColaborador, LocalDateTime fechaYHora) {
         return solicitudAperturas.stream()
                 .filter(solicitudApertura -> solicitudApertura.getTarjetaColaborador().equals(tarjetaColaborador) &&
-                solicitudApertura.getFechaYHora().equals(fechaYHora)).findFirst().orElse(null);
+                        solicitudApertura.getFechaYHora().equals(fechaYHora)).findFirst().orElse(null);
     }
 
     public Double obtenerTemperaturaMinima() {
@@ -93,6 +93,6 @@ public class Heladera{
     }
 
     public boolean tieneFallas() {
-    return estado != Estado.ACTIVA;
+        return estado != Estado.ACTIVA;
     }
 }

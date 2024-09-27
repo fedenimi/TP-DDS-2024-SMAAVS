@@ -10,8 +10,8 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
-@Getter
 @Entity
+@Getter
 @Table(name = "persona_vulnerable")
 public class PersonaVulnerable {
     @Id

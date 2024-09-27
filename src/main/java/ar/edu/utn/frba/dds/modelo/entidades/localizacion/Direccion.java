@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
@@ -17,10 +16,8 @@ import javax.persistence.Embedded;
 public class Direccion {
     @Embedded
     private Punto punto;
-
     @Column(name = "direccion", columnDefinition = "TEXT")
     private String direccion;
-
     @Column(name = "nombre_direccion", columnDefinition = "TEXT")
     private String nombre_direccion;
 }

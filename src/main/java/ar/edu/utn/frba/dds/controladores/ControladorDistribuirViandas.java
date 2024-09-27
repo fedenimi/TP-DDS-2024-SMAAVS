@@ -11,7 +11,6 @@ import io.javalin.http.Context;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 public class ControladorDistribuirViandas implements ICrudViewsHandler{
     private RepositorioPuntuables repositorioPuntuables;
     private RepositorioHeladeras repositorioHeladeras;

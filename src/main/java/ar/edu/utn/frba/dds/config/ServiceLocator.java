@@ -58,8 +58,8 @@ public class ServiceLocator {
                 instances.put(componentName, instance);
             }
             else if(componentName.equals(RepositorioPuntuables.class.getName())) {
-               RepositorioPuntuables instance = new RepositorioPuntuables();
-               instances.put(componentName, instance);
+                RepositorioPuntuables instance = new RepositorioPuntuables();
+                instances.put(componentName, instance);
             }
             else if(componentName.equals(ControladorDistribuirViandas.class.getName())) {
                 ControladorDistribuirViandas instance = new ControladorDistribuirViandas(instanceOf(RepositorioPuntuables.class), instanceOf(RepositorioHeladeras.class));

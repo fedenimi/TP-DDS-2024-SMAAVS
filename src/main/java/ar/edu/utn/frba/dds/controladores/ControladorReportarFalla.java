@@ -66,4 +66,11 @@ public class ControladorReportarFalla implements ICrudViewsHandler{
     public void abrirMapa(Context context) {
         context.render("colaboraciones/mapa/mapaFallas.hbs");
     }
+
+    public void guardarMapa(Context context) {
+        System.out.println("Mapa guardado");
+        System.out.println(context.formParam("descripcion"));
+        System.out.println(context.formParam("imagen"));
+        context.redirect("/" + context.pathParam("id") + "/home");
+    }
 }

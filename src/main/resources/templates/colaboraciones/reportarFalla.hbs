@@ -3,15 +3,28 @@
     <link rel="stylesheet" href="../css/heladeras.css">
     <link rel="stylesheet" href="../css/suscripciones.css">
 {{/partial}}
+
 {{#partial "home-main"}}
     <main class="admin-heladeras reportar-falla-main">
-        <h1>Reportar fallas:
-        </h1>
+        <h1>Reportar fallas:</h1>
         <div class="heladeras-mapa">
             <section class="heladeras-dashboard">
                 <section class="heladeras-dashboard-scrollable">
                     <div class="title">
                         <hr>
+                    </div>
+                    <div class="heladeras-fallas-dashboard">
+                        <div class="suscripciones-title">
+                            <h2>Heladera</h2>
+                            <h2>Estado</h2>
+                        </div>
+                        {{#each heladera}}
+                            <div class="heladera">
+                                <p>{{this.nombre}}</p>
+                                <hr>
+                                <p>{{this.estado}}</p>
+                            </div>
+                        {{/each}}
                     </div>
                 </section>
                 <div class="btns">
@@ -20,15 +33,18 @@
                 </div>
             </section>
             <section class="blurred-map">
-                <a href="/mapa">ABRIR MAPA</a>
+                <a href="reportar-falla/mapa">ABRIR MAPA</a>
             </section>
         </div>
     </main>
 {{/partial}}
+
 {{#partial "home-scripts"}}
     <script src="../js/heladeras.js"></script>
     <script src="../js/dropdownScript.js"></script>
-    <script src="../js/reportarFallas.js"></script> <!--TODO-->
     <script src="../js/modalViandas.js"></script>
+
+
 {{/partial}}
-{{>templates/base/homeBase}}
+
+{{> templates/base/homeBase}}
