@@ -21,7 +21,7 @@ public class ControladorProductos implements ICrudViewsHandler{
     @Override
     public void index(Context context) {
         //PRETENDE DEVOLVER UNA VISTA QUE CONTENGA A TODOS LOS PRODUCTOS ALMACENADOS EN MI SISTEMA
-        List<OfrecerProducto> productos = this.repositorioDeProductos.buscarTodos();
+        /*List<OfrecerProducto> productos = this.repositorioDeProductos.buscarTodos();
         List<ProductoDTO> productosDTO = (List<ProductoDTO>) productos.stream().map(ServiceProductos::toProductoDTO);
 
 
@@ -29,7 +29,8 @@ public class ControladorProductos implements ICrudViewsHandler{
         model.put("productos", productosDTO);
         model.put("titulo", "Listado de productos");
 
-        context.render("productos/productos.hbs", model);
+        context.render("productos/productos.hbs", model);*/
+        context.render("productos/productos.hbs");
     }
 
     @Override
@@ -58,15 +59,15 @@ public class ControladorProductos implements ICrudViewsHandler{
     @Override
     public void save(Context context) {
         OfrecerProducto nuevoProducto = new OfrecerProducto();
-
-        //TODO ver bien el seteo del producto
-        //nuevoProducto.setNombre(context.formParam("nombre"));
+        System.out.println("Nombre: " + context.formParam("producto"));
+        System.out.println("Puntaje: " + context.formParam("puntaje"));
+        //nuevoProducto.setNombre(context.formParam("producto"));
         //nuevoProducto.setPuntaje(Float.valueOf(context.formParam("puntaje")));
 
-        this.repositorioDeProductos.guardar(nuevoProducto);
+        //this.repositorioDeProductos.guardar(nuevoProducto);
         //O BIEN LANZO UNA PANTALLA DE EXITO
         //O BIEN REDIRECCIONO AL USER A LA PANTALLA DE LISTADO DE PRODUCTOS
-        context.redirect("/productos");
+        context.redirect("home");
     }
 
     @Override

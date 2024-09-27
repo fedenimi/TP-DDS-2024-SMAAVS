@@ -2,6 +2,12 @@ let selectionBtn = document.querySelector('.dropdown-select-btn'),
     items = document.querySelectorAll('.dropdown-item'),
     itemOnly = document.querySelectorAll('.dropdown-item-only');
 
+function updateTextSeleccionadas() {
+    let checkedItems = document.querySelectorAll('.checked');
+    let btnText = document.querySelector('.dropdown-select-btn p');
+    btnText.innerHTML = checkedItems.length === 1 ? '1 seleccionada' : `${checkedItems.length} seleccionadas`;
+}
+
 if (selectionBtn) {
     selectionBtn.addEventListener('click', () => {
         selectionBtn.classList.toggle('open');
@@ -11,10 +17,7 @@ if (selectionBtn) {
     items.forEach(item => {
         item.addEventListener('click', () => {
             item.classList.toggle('checked');
-            let checkedItems = document.querySelectorAll('.checked');
-            let btnText = document.querySelector('.dropdown-select-btn p');
-            btnText.innerHTML = checkedItems.length === 1 ? '1 seleccionada' : `${checkedItems.length} seleccionadas`;
-
+            updateTextSeleccionadas()
         });
     });
 

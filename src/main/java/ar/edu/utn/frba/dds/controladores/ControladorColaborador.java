@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class ControladorColaborador implements ICrudViewsHandler{
+public class ControladorColaborador implements ICrudViewsHandler {
     private RepositorioColaboradores repositorioColaboradores;
 
     public ControladorColaborador(RepositorioColaboradores repositorioColaboradores) {
@@ -50,6 +50,22 @@ public class ControladorColaborador implements ICrudViewsHandler{
 
     @Override
     public void save(Context context) {
+
+    }
+
+    @Override
+    public void edit(Context context) {
+        context.render("colaboradores/configuracion.hbs");
+    }
+
+    @Override
+    public void update(Context context) {
+
+        System.out.println("Actualizando colaborador");
+        System.out.println(context.formParam("donar-dinero"));
+        System.out.println(context.formParam("donar-viandas"));
+        System.out.println(context.formParam("distribuir-viandas"));
+       /*
         // Guardar lo que se modificó en el formulario de configuración
         Optional<Colaborador> posibleColaborador = this.repositorioColaboradores.buscar(Long.valueOf(context.pathParam("id")));
 
@@ -60,19 +76,8 @@ public class ControladorColaborador implements ICrudViewsHandler{
 //        }
         Colaborador colaborador = posibleColaborador.get();
         // TODO: Setear los atributos del colaborador con los valores del formulario
-        repositorioColaboradores.guardar(colaborador);
-        context.redirect("{id}/home");
-
-    }
-
-    @Override
-    public void edit(Context context) {
-
-    }
-
-    @Override
-    public void update(Context context) {
-
+        repositorioColaboradores.guardar(colaborador);*/
+        context.redirect("/"+context.pathParam("id") +"/home");
     }
 
     @Override
