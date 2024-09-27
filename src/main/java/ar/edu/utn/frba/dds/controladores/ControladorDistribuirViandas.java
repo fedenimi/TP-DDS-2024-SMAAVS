@@ -21,8 +21,8 @@ public class ControladorDistribuirViandas implements ICrudViewsHandler{
         }
         @Override
         public void index(Context context) {
-            context.render("colaboraciones/distribuirViandas.hbs");
             List<Heladera> heladeras = this.repositorioHeladeras.buscarTodos();
+            System.out.println("heladera:" + heladeras.get(0).getStock().toString());
             List<HeladeraDTO> heladerasDTO = (List<HeladeraDTO>) heladeras.stream().
                     filter(heladera -> !heladera.tieneFallas()).
                     map(heladera -> ServiceHeladeras.toHeladeraDTO(heladera));
@@ -78,6 +78,6 @@ public class ControladorDistribuirViandas implements ICrudViewsHandler{
             System.out.println("Mapa guardado");
             System.out.println("Heladera origen: " + context.formParam("heladera-origen"));
             System.out.println("Heladera destino: " + context.formParam("heladera-destino"));
-            context.redirect("home");
+            context.redirect("/" + context.pathParam("id") + "/home");
         }
     }

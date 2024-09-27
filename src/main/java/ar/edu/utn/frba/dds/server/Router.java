@@ -21,9 +21,12 @@ public class Router {
         app.get("{id}/distribuir-viandas/mapa", ServiceLocator.instanceOf(ControladorDistribuirViandas.class)::abrirMapa);
         app.post("{id}/distribuir-viandas/mapa", ServiceLocator.instanceOf(ControladorDistribuirViandas.class)::guardarMapa);
 
-
         app.get("{id}/reportar-falla", ServiceLocator.instanceOf(ControladorReportarFalla.class)::index);
         app.get("{id}/reportar-falla/mapa", ServiceLocator.instanceOf(ControladorReportarFalla.class)::abrirMapa);
+        app.post("{id}/reportar-falla/mapa", ServiceLocator.instanceOf(ControladorReportarFalla.class)::guardarMapa);
+
+        app.get("{id}/reg-persona", ServiceLocator.instanceOf(ControladorPersonaVulnerable.class)::index);
+        app.post("{id}/reg-persona", ServiceLocator.instanceOf(ControladorPersonaVulnerable.class)::save);
 
     }
 }

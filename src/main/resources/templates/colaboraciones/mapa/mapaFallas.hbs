@@ -176,6 +176,11 @@
                         <div class="title">
                             <h2>REPORTAR UNA FALLA</h2>
                             <hr>
+
+                        </div>
+                        <div class="suscripciones-title">
+                            <h2>Heladera</h2>
+                            <h2>Estado</h2>
                         </div>
                         {{#each heladera}}
                             <div class="heladera">
@@ -200,11 +205,12 @@
                     <p></p>
                 </div>
                 <div class="btns-topics-mapa">
-                    <form class="form-registro2">
+                    <form class="form-registro2" id="form-falla" method="POST">
                         <div class="form-element form-element-description">
                             <label for="faltantes">Agregar una descripción...</label>
-                            <textarea></textarea>
-                            <button>Ingrese una imagen</button>
+                            <textarea name="descripcion"></textarea>
+                            <input type="file" id="imagen-falla" name="imagen" accept="image/*" />
+                            <input type="text" name="heladera" id="input-heladera" required class="hidden">
                         </div>
                     </form>
                 </div>
@@ -212,7 +218,7 @@
                     <a href="javascript:history.back()" class="title-mapa-btn">
                         <p>Volver</p>
                     </a>
-                    <a class="title-mapa-btn">
+                    <a class="title-mapa-btn" id="submit-btn-siguiente">
                         <p>Siguiente</p>
                     </a>
                 </div>
@@ -221,5 +227,15 @@
     </main>
 {{/partial}}
 {{#partial "scripts-map"}}
+    <script>
+        document.querySelector("#submit-btn-siguiente").addEventListener("click", function() {
+            console.log("Siguiente");
+            document.querySelector("#input-heladera").value = document.querySelector(".title-mapa-heladera").innerHTML;
+            document.querySelector("#imagen-falla")
+            document.querySelector("#form-falla").submit();
+        });
+
+
+    </script>
 {{/partial}}
 {{>templates/base/mapaBase}}
