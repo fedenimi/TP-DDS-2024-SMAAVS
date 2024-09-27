@@ -1,7 +1,6 @@
 package ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -10,6 +9,9 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Embeddable
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Oferta {
     @Column(name = "puntaje_minimo")
     private Double puntajeMinimo;
@@ -17,7 +19,7 @@ public class Oferta {
     @Column(name = "nombre", columnDefinition = "VARCHAR(255)")
     private String nombre;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "rubro_id")
     private Rubro rubro;
 }
