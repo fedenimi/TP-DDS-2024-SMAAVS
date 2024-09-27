@@ -46,7 +46,7 @@ public class ServiceLocator {
                 instances.put(componentName, instance);
             }
             else if(componentName.equals(ControladorProductos.class.getName())) {
-                ControladorProductos instance = new ControladorProductos(instanceOf(RepositorioOfrecerProductos.class));
+                ControladorProductos instance = new ControladorProductos(instanceOf(RepositorioOfrecerProductos.class), instanceOf(RepositorioRubros.class));
                 instances.put(componentName, instance);
             }
             else if(componentName.equals(RepositorioColaboradores.class.getName())) {
@@ -99,6 +99,10 @@ public class ServiceLocator {
             }
             else if(componentName.equals(ControladorSuscripciones.class.getName())) {
                 ControladorSuscripciones instance = new ControladorSuscripciones(instanceOf(RepositorioHeladeras.class));
+                instances.put(componentName, instance);
+            }
+            else if (componentName.equals(RepositorioRubros.class.getName())) {
+                RepositorioRubros instance = new RepositorioRubros();
                 instances.put(componentName, instance);
             }
         }

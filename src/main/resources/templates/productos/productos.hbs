@@ -22,17 +22,12 @@
                                 <h2>Productos disponibles</h2>
                             </div>
                             {{#each categorias}}
-                                <div class="heladera">
+                                <div class="heladera" id="categoria-producto">
                                     <p>{{nombre}}</p>
                                     <hr>
                                     <p>{{productos.length}} productos</p>
                                 </div>
                             {{/each}}
-                            <div class="heladera">
-                                <p>Gastronomía</p>
-                                <hr>
-                                <p>4 productos</p>
-                            </div>
                         </div>
                     </section>
                     <div class="btns">
@@ -47,18 +42,11 @@
                                 <img src="/img/helado.png">
                                 <div class="producto-info">
                                     <h3>{{nombre}}</h3>
-                                    <p>{{puntos}} puntos</p>
+                                    <p>{{puntaje}} puntos</p>
                                 </div>
                             </div>
                         {{/each}}
                     {{/each}}
-                    <div class="box-producto">
-                        <img src="/img/helado.png">
-                        <div class="producto-info">
-                            <h3>1 KG De Helado</h3>
-                            <p>200 puntos</p>
-                        </div>
-                    </div>
                 </section>
             </div>
         </div>

@@ -1,20 +1,14 @@
 package ar.edu.utn.frba.dds.controladores;
 
 import ar.edu.utn.frba.dds.dtos.ColaboradorDTO;
-import ar.edu.utn.frba.dds.dtos.ProductoDTO;
-import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.OfrecerProducto;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioColaboradores;
-import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioOfrecerProductos;
-import ar.edu.utn.frba.dds.server.Router;
 import ar.edu.utn.frba.dds.servicios.ServiceColaboradores;
-import ar.edu.utn.frba.dds.servicios.ServiceProductos;
 import io.javalin.http.Context;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 public class ControladorColaborador implements ICrudViewsHandler {
     private RepositorioColaboradores repositorioColaboradores;

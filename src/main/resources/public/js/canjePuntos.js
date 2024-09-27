@@ -1,10 +1,15 @@
 
 const gridPuntos = document.querySelector('.grid-puntos');
-
-
-
 const heladeras = document.querySelectorAll('.heladera');
 let boxProductos = document.querySelectorAll('.box-producto');
+
+function cargarCategorias() {
+    document.querySelectorAll('#categoria-producto').forEach(categoria => {
+        const nombre = categoria.children[0].innerHTML;
+        categoriasTotales.push(nombre)
+    })
+}
+cargarCategorias();
 
 heladeras.forEach(heladera => {
     heladera.addEventListener('click', () => {
@@ -12,7 +17,7 @@ heladeras.forEach(heladera => {
             gridPuntos.innerHTML = '';
             iniciarGrid()
         } else {
-            const categoria = categoriasTotales.find(c => c.nombre === heladera.children[0].innerHTML);
+            const categoria = categoriasTotales.find(c => c === heladera.children[0].innerHTML);
             updateGrid(categoria);
         }
         boxProductos = document.querySelectorAll('.box-producto');
