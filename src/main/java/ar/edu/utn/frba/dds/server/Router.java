@@ -36,5 +36,7 @@ public class Router {
         app.get("{id}/productos", ServiceLocator.instanceOf(ControladorProductos.class)::index);
         app.post("{id}/productos", ServiceLocator.instanceOf(ControladorProductos.class)::save);
 
+        app.get("{id}/alertas", ServiceLocator.instanceOf(ControladorAlerta.class)::index);
+
     }
 }

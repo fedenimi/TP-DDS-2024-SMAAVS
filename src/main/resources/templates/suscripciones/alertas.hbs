@@ -1,0 +1,77 @@
+{{#partial "home-estilos"}}
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/heladeras.css">
+    <link rel="stylesheet" href="/css/suscripciones.css">
+{{/partial}}
+
+{{#partial "home-main"}}
+    <main class="admin-heladeras">
+        <h1>Alertas vigentes:
+        </h1>
+        <div class="heladeras-mapa">
+            <section class="heladeras-dashboard">
+                <section class="heladeras-dashboard-scrollable">
+                    <div class="title">
+                        <div class="title-text">
+                            <h2>Alertas</h2>
+                        </div>
+                        <hr>
+                    </div>
+                    {{#if heladerasFraude or heladerasTemp or heladerasFalla}}
+                        <h1 class="grey open">No tiene ninguna alerta</h1>}}
+                    {{/if}}
+                    <div class="heladeras-fallas-dashboard">
+                        <div class="alertas-title">
+                            <h2>Falla de Temperatura</h2>
+                        </div>
+                        {{#each heladeras}}
+                            <div class="heladera">
+                                <p>{{nombre}}</p>
+                                <hr>
+                                <p>{{descripcion}}</p>
+                            </div>
+                        {{/each}}
+                    </div>
+                    <div class="heladeras-fallas-dashboard">
+                        <div class="alertas-title">
+                            <h2>Fraude</h2>
+                        </div>
+                        {{#each heladeras}}
+                            <div class="heladera">
+                                <p>{{nombre}}</p>
+                                <hr>
+                                <p>{{descripcion}}</p>
+                            </div>
+                        {{/each}}
+                    </div>
+                    <div class="heladeras-fallas-dashboard">
+                        <div class="alertas-title">
+                            <h2>Falla Técnica</h2>
+                        </div>
+                        {{#each heladeras}}
+                            <div class="heladera">
+                                <p>{{nombre}}</p>
+                                <hr>
+                                <p>{{descripcion}}</p>
+                            </div>
+                        {{/each}}
+                    </div>
+                </section>
+                <div class="btns">
+                    <a href="javascript:history.back()" class="boton-dashboard">Volver</a>
+                </div>
+            </section>
+            <section class="blurred-map">
+                <a href="mapa">VER ALERTAS</a>
+            </section>
+        </div>
+    </main>
+{{/partial}}
+{{#partial "home-scripts"}}
+    <script src="/js/heladeras.js"></script>
+    <script src="/js/dropdownScript.js"></script>
+    <script src="/js/modalViandas.js"></script>
+    <script src="/js/alertas.js"></script>
+{{/partial}}
+
+{{> templates/base/homeBase}}

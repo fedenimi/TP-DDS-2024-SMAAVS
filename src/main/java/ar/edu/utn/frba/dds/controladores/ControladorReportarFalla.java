@@ -26,11 +26,11 @@ public class ControladorReportarFalla implements ICrudViewsHandler{
     public void index(Context context) {
         System.out.println("Index de reportar falla");
         List<Heladera> heladeras = this.repositorioHeladeras.buscarTodos();
-        List<HeladeraDTO> heladerasDTO = (List<HeladeraDTO>) heladeras.stream().
-                map(ServiceHeladeras::toHeladeraDTO);
+        List<HeladeraDTO> heladerasDTO = heladeras.stream().
+                map(ServiceHeladeras::toHeladeraDTO).toList();
         Map<String, Object> model = new HashMap<>();
         model.put("heladeras", heladerasDTO);
-        context.render("colaboraciones/reportarFalla.hbs");
+        context.render("colaboraciones/reportarFalla.hbs", model);
     }
 
     @Override
@@ -64,7 +64,12 @@ public class ControladorReportarFalla implements ICrudViewsHandler{
     }
 
     public void abrirMapa(Context context) {
-        context.render("colaboraciones/mapa/mapaFallas.hbs");
+        List<Heladera> heladeras = this.repositorioHeladeras.buscarTodos();
+        List<HeladeraDTO> heladerasDTO = heladeras.stream().
+                map(ServiceHeladeras::toHeladeraDTO).toList();
+        Map<String, Object> model = new HashMap<>();
+        model.put("heladeras", heladerasDTO);
+        context.render("colaboraciones/mapa/mapaFallas.hbs", model);
     }
 
     public void guardarMapa(Context context) {

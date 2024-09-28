@@ -85,13 +85,35 @@
             </div>
         </section>
         <section class="suscripciones">
-            <h1>Tiene 1 alerta</h1>
+            <h1>Tiene {{heladerasAlertas.length}} alertas</h1>
             <div class="linea-suscripciones"></div>
             <div class="suscripciones-scrollable">
+                {{#each heladerasAlertas}}
+                    <div class="suscripcion alerta">
+                        <p>{{nombre}}</p>
+                        <div class="right-suscripcion">
+                            <a href="alertas">
+                                <i class="fa-solid fa-warning"></i>
+                                <p>Ver alerta</p>
+                            </a>
+                        </div>
+                    </div>
+                {{/each}}
+                {{#each heladerasSuscriptas}}
+                    <div class="suscripcion">
+                        <p>{{nombre}}</p>
+                        <div class="right-suscripcion">
+                            <a href="suscripciones">
+                                <i class="fa-solid fa-user"></i>
+                                <p>Suscripto</p>
+                            </a>
+                        </div>
+                    </div>
+                {{/each}}
                 <div class="suscripcion alerta">
                     <p>Heladera A</p>
                     <div class="right-suscripcion">
-                        <a href="">
+                        <a href="alertas">
                             <i class="fa-solid fa-warning"></i>
                             <p>Ver alerta</p>
                         </a>
@@ -100,7 +122,7 @@
                 <div class="suscripcion">
                     <p>Heladera A</p>
                     <div class="right-suscripcion">
-                        <a href="">
+                        <a href="suscripciones">
                             <i class="fa-solid fa-user"></i>
                             <p>Suscripto</p>
                         </a>
