@@ -17,52 +17,58 @@
                         </div>
                         <hr>
                     </div>
-                    {{#if heladerasFraude or heladerasTemp or heladerasFalla}}
-                        <h1 class="grey open">No tiene ninguna alerta</h1>}}
+                    {{#unless heladerasFaltan or heladerasQuedan or heladerasDesp}}
+                        <h1 class="grey open">No tiene ninguna alerta</h1>
+                    {{/unless}}
+                    {{#if heladerasFaltan}}
+                        <div class="heladeras-fallas-dashboard">
+                            <div class="alertas-title">
+                                <h2>Faltan N viandas</h2>
+                            </div>
+                            {{#each heladerasFaltan}}
+                                <div class="heladera">
+                                    <p>{{nombre}}</p>
+                                    <hr>
+                                    <p>{{descripcion}}</p>
+                                </div>
+                            {{/each}}
+                        </div>
                     {{/if}}
-                    <div class="heladeras-fallas-dashboard">
-                        <div class="alertas-title">
-                            <h2>Falla de Temperatura</h2>
-                        </div>
-                        {{#each heladeras}}
-                            <div class="heladera">
-                                <p>{{nombre}}</p>
-                                <hr>
-                                <p>{{descripcion}}</p>
+                    {{#if heladerasQuedan}}
+                        <div class="heladeras-fallas-dashboard">
+                            <div class="alertas-title">
+                                <h2>Quedan N viandas</h2>
                             </div>
-                        {{/each}}
-                    </div>
-                    <div class="heladeras-fallas-dashboard">
-                        <div class="alertas-title">
-                            <h2>Fraude</h2>
+                            {{#each heladerasQuedan}}
+                                <div class="heladera">
+                                    <p>{{nombre}}</p>
+                                    <hr>
+                                    <p>{{descripcion}}</p>
+                                </div>
+                            {{/each}}
                         </div>
-                        {{#each heladeras}}
-                            <div class="heladera">
-                                <p>{{nombre}}</p>
-                                <hr>
-                                <p>{{descripcion}}</p>
+                    {{/if}}
+                    {{#if heladerasDesp}}
+                        <div class="heladeras-fallas-dashboard">
+                            <div class="alertas-title">
+                                <h2>Desperfecto</h2>
                             </div>
-                        {{/each}}
-                    </div>
-                    <div class="heladeras-fallas-dashboard">
-                        <div class="alertas-title">
-                            <h2>Falla Técnica</h2>
+                            {{#each heladerasDesp}}
+                                <div class="heladera">
+                                    <p>{{nombre}}</p>
+                                    <hr>
+                                    <p>{{descripcion}}</p>
+                                </div>
+                            {{/each}}
                         </div>
-                        {{#each heladeras}}
-                            <div class="heladera">
-                                <p>{{nombre}}</p>
-                                <hr>
-                                <p>{{descripcion}}</p>
-                            </div>
-                        {{/each}}
-                    </div>
+                    {{/if}}
                 </section>
                 <div class="btns">
                     <a href="javascript:history.back()" class="boton-dashboard">Volver</a>
                 </div>
             </section>
             <section class="blurred-map">
-                <a href="mapa">VER ALERTAS</a>
+                <a href="alertas/mapa">VER ALERTAS</a>
             </section>
         </div>
     </main>

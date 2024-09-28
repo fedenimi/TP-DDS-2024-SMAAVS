@@ -45,4 +45,8 @@ public class ControladorAlerta implements ICrudViewsHandler {
     public void delete(Context context) {
 
     }
+
+    public void abrirMapa(Context context) {
+        context.render("suscripciones/mapa/mapaAlertas.hbs");
+    }
 }

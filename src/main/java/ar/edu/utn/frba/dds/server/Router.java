@@ -37,6 +37,10 @@ public class Router {
         app.post("{id}/productos", ServiceLocator.instanceOf(ControladorProductos.class)::save);
 
         app.get("{id}/alertas", ServiceLocator.instanceOf(ControladorAlerta.class)::index);
+        app.get("{id}/alertas/mapa", ServiceLocator.instanceOf(ControladorAlerta.class)::abrirMapa);
+
+        app.get("{id}/suscripciones", ServiceLocator.instanceOf(ControladorSuscripciones.class)::index);
+        app.get("{id}/suscripciones/mapa", ServiceLocator.instanceOf(ControladorSuscripciones.class)::abrirMapa);
 
     }
 }
