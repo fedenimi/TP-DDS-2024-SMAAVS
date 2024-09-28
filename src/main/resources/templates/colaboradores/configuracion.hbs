@@ -1,0 +1,125 @@
+{{#partial "home-estilos"}}
+    <link rel="stylesheet" href="/css/registro.css">
+    <link rel="stylesheet" href="/css/main.css">
+{{/partial}}
+{{#partial "home-main"}}
+    <main class="registro-main config">
+        <form class="form-registro config-form" method="POST">
+            <div class="form-element config-form-element">
+                <label for="form-nombre">Dirección</label>
+                <input type="text" name="direccion" id="form-apellido" required placeholder={{direccion}}>
+            </div>
+            <div></div>
+            <div class="form-element config-form-element">
+                <label for="form-apellido">Mail</label>
+                <input type="text" name="mail" id="form-apellido" required placeholder={{mail}}>
+            </div>
+            <div class="form-element config-form-element">
+                <label for="form-nombre">Teléfono</label>
+                <input type="text" name="telefono" id="form-apellido" required placeholder={{telefono}}>
+            </div>
+            <div></div>
+            <div class="form-element config-form-element">
+                <label for="form-nombre">Whatsapp</label>
+                <input type="text" name="whatsapp" id="form-apellido" required placeholder={{whatsapp}}>
+            </div>
+            <div class="formas-de-colaborar hidden">
+
+                <input class="hidden" name="donar-dinero" value={{#if donar-dinero}}"donar-dinero"{{else}}"false"{{/if}}>
+                </input>
+                <input class="hidden" name="donar-viandas" value={{#if donar-viandas}}
+                    "donar-viandas"
+                {{else}}
+                        "false"
+                {{/if}}></input>
+                </input>
+                <input class="hidden" name="distribuir-viandas" value={{#if distribuir-viandas}}
+                    "distribuir-viandas"
+                {{else}}
+                        "false"
+                {{/if}}
+                ></input>
+            </div>
+            <div class="form-element config-form-element">
+                <label for="form-nombre">Formas de colaborar</label>
+                <div class="form-element-dropdown">
+                    <div class="dropdown-select-btn">
+                        <p>0 seleccionadas</p>
+                        <span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </span>
+                    </div>
+                    <ul class="dropdown-item-list">
+                        <li class="dropdown-item">
+                            <span>
+                                <i class="fa-solid fa-check check-icon"></i>
+                            </span>
+                            <p>Donar dinero</p>
+                        </li>
+                        <li class="dropdown-item">
+                            <span>
+                                <i class="fa-solid fa-check check-icon"></i>
+                            </span>
+                            <p>Donar viandas</p>
+                        </li>
+                        <li class="dropdown-item">
+                            <span>
+                                <i class="fa-solid fa-check check-icon"></i>
+                            </span>
+                            <p>Distribuir viandas</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+        <div class="btns-next">
+            <a class="btn-next2" href="javascript:history.back()">
+                <p>Volver</p>
+                <i class="fa fa-arrow-left"></i>
+            </a>
+            <a class="btn-next2" id="submit-config">
+                <p>Guardar cambios</p>
+                <i class="fa fa-save"></i>
+            </a>
+        </div>
+    </main>
+{{/partial}}
+{{#partial "home-scripts"}}
+    <script src="/js/dropdownScript.js">
+    </script>
+    <script>
+        if (document.querySelector('.formas-de-colaborar').children[0].value != "false") {
+            document.querySelector('.dropdown-item-list').children[0].classList.add('checked');
+            updateTextSeleccionadas()
+        }
+        if (document.querySelector('.formas-de-colaborar').children[1].value != "false") {
+            document.querySelector('.dropdown-item-list').children[1].classList.add('checked');
+            updateTextSeleccionadas()
+        }
+        if (document.querySelector('.formas-de-colaborar').children[2].value != "false") {
+            document.querySelector('.dropdown-item-list').children[2].classList.add('checked');
+            updateTextSeleccionadas()
+        }
+
+        document.querySelector('#submit-config').addEventListener('click', () => {
+            let formasDeColaborar = document.querySelector('.formas-de-colaborar');
+            if(formaChequeada(1)) {
+                formasDeColaborar.children[0].value = "donar-dinero";
+            }
+            if(formaChequeada(2)) {
+                formasDeColaborar.children[1].value = "donar-viandas";
+            }
+            if(formaChequeada(3)) {
+                formasDeColaborar.children[2].value = "distribuir-viandas";
+            }
+            document.querySelector('.config-form').submit();
+        });
+
+        function formaChequeada(index) {
+            return document.querySelector('.dropdown-item-list').children[index - 1].classList.contains('checked');
+        }
+
+    </script>
+{{/partial}}
+
+{{>templates/base/homeBase}}

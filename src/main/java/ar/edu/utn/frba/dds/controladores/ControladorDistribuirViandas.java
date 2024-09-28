@@ -95,6 +95,6 @@ public class ControladorDistribuirViandas implements ICrudViewsHandler{
         System.out.println("Mapa guardado");
         System.out.println("Heladera origen: " + context.formParam("heladera-origen"));
         System.out.println("Heladera destino: " + context.formParam("heladera-destino"));
-        context.redirect("home");
+        context.redirect("/"+ context.pathParam("id") +"/home");
     }
 }

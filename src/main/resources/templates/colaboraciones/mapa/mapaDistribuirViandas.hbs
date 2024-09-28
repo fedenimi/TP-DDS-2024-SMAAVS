@@ -209,7 +209,7 @@
                     </section>
                     <div class="btns">
                         <a class="boton-dashboard volver-btn dist2">Volver</a>
-                        <a class="boton-dashboard volver-btn dist1">Volver</a>
+                        <a href="javascript:history.back()" class="boton-dashboard volver-btn dist1">Volver</a>
                         <a class="boton-dashboard sig-btn dist1">Siguiente</a>
                         <a class="boton-dashboard dist2 open-form-dist">Confirmar</a>
                     </div>
@@ -320,27 +320,28 @@
 {{#partial "scripts-map"}}
     <script src="../../js/timer.js"></script>
     <script>
-        function completarHeladerasInput(tipoHeladera, heladera, viandas) {      
+        function completarHeladerasInput(strTipo, nombreHeladera, viandas) {
             const heladeras = document.querySelectorAll('.info-viandas-3');
-            switch (tipoHeladera) {
+            const modal = document.querySelector('.heladeras-solicitadas-text');
+            switch (strTipo) {
                 case "origen":
-
                     heladeras[0].querySelector('input').value = nombreHeladera;
                     heladeras[0].querySelector('p').textContent = nombreHeladera;
-                    timerTexts[0].textContent = nombreHeladera;
+                    heladeras[0].children[3].textContent = viandas;
+                    modal.children[0].textContent = nombreHeladera
                     break;
                 case "destino":
                     heladeras[1].querySelector('input').value = nombreHeladera;
                     heladeras[1].querySelector('p').textContent = nombreHeladera;
-                    timerTexts[1].textContent = nombreHeladera;
+                    heladeras[1].children[3].textContent = viandas;
+                    modal.children[1].textContent = nombreHeladera
                     break;
             }
         }
 
         document.querySelectorAll('.open-form-dist').forEach(btn => {
             btn.addEventListener('click', () => {
-                console.log("Selected: " + heladeraSelected())
-                completarHeladerasInput("destino", heladeraSelected())
+                completarHeladerasInput("destino", heladeraSelected(), viandasSelected())
                 document.querySelector('#map').classList.toggle('hidden')
                 document.querySelector('.registro2-main').classList.toggle('hidden')
             });

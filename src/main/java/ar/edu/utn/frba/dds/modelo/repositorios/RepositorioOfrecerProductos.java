@@ -28,7 +28,7 @@ public class RepositorioOfrecerProductos implements IRepositorio<OfrecerProducto
     @Override
     public List<OfrecerProducto> buscarTodos() {
         return entityManager()
-                .createQuery("from " + Alerta.class.getName())
+                .createQuery("from " + OfrecerProducto.class.getName())
                 .getResultList();
     }
 }

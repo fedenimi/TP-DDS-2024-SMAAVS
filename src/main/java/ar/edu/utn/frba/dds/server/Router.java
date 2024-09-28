@@ -8,7 +8,12 @@ public class Router {
     public static void init(Javalin app) {
         app.get("/", ServiceLocator.instanceOf(ControladorHome.class)::mostrarLanding);
         app.get("/registro", ServiceLocator.instanceOf(ControladorRegistro.class)::mostrarRegistro);
-        app.post("/registro", ServiceLocator.instanceOf(ControladorRegistro.class)::guardarCampos);
+        app.post("/registro", ServiceLocator.instanceOf(ControladorRegistro.class)::guardarRegistro);
+        app.get("/inicioSesion", ServiceLocator.instanceOf(ControladorRegistro.class)::mostrarInicioDeSesion);
+        app.post("/inicioSesion", ServiceLocator.instanceOf(ControladorRegistro.class)::guardarInicioDeSesion);
+
+        app.get("{id}/configuracion", ServiceLocator.instanceOf(ControladorColaborador.class)::edit);
+        app.post("{id}/configuracion", ServiceLocator.instanceOf(ControladorColaborador.class)::update);
 
         app.get("/{id}/home", ServiceLocator.instanceOf(ControladorHome.class)::mostrarHome);
         app.get("{id}/donar-viandas", ServiceLocator.instanceOf(ControladorDonacionDeViandas.class)::index);
@@ -27,6 +32,9 @@ public class Router {
 
         app.get("{id}/reg-persona", ServiceLocator.instanceOf(ControladorPersonaVulnerable.class)::index);
         app.post("{id}/reg-persona", ServiceLocator.instanceOf(ControladorPersonaVulnerable.class)::save);
+
+        app.get("{id}/productos", ServiceLocator.instanceOf(ControladorProductos.class)::index);
+        app.post("{id}/productos", ServiceLocator.instanceOf(ControladorProductos.class)::save);
 
     }
 }
