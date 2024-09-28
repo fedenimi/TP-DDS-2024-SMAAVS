@@ -13,25 +13,31 @@ cargarCategorias();
 
 heladeras.forEach(heladera => {
     heladera.addEventListener('click', () => {
-        if (!heladera.classList.contains('open')) {
-            gridPuntos.innerHTML = '';
-            iniciarGrid()
-        } else {
+        if (heladera.classList.contains('open')) {
             const categoria = categoriasTotales.find(c => c === heladera.children[0].innerHTML);
             updateGrid(categoria);
+        } else {
+            productosDisponibles().forEach(producto => {
+                producto.classList.remove('hidden');
+            })
         }
-        boxProductos = document.querySelectorAll('.box-producto');
-        boxProductos.forEach(producto => {
-            productoListener(producto);
-        })
+
     })
 })
 
 function updateGrid(categoria) {
-    gridPuntos.innerHTML = '';
-    categoria.productosDisponibles.forEach(producto => {
-        agregarProducto(producto);
+    productosDisponibles().forEach(producto => {
+        if (producto.children[1].children[2].innerHTML != categoria) {
+            producto.classList.add('hidden');
+        } else {
+            producto.classList.remove('hidden');
+        }
+
     })
+}
+
+function productosDisponibles() {
+    return document.querySelectorAll('.box-producto');
 }
 
 boxProductos.forEach(producto => {

@@ -39,10 +39,11 @@
                     {{#each categorias}}
                         {{#each productos}}
                             <div class="box-producto">
-                                <img src="/img/helado.png">
+                                <img src={{img}}>
                                 <div class="producto-info">
                                     <h3>{{nombre}}</h3>
                                     <p>{{puntaje}} puntos</p>
+                                    <p class="hidden">{{rubro}}</p>
                                 </div>
                             </div>
                         {{/each}}

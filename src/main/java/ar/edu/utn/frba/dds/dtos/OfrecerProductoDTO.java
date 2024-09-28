@@ -8,5 +8,5 @@ import lombok.Getter;
 public class OfrecerProductoDTO {
     private String nombre;
     private String puntaje;
-    private String Rubro;
+    private String rubro;
 }
