@@ -13,7 +13,7 @@ public class ControladorAlerta implements ICrudViewsHandler {
     }
     @Override
     public void index(Context context) {
-
+        context.render("suscripciones/alertas.hbs");
     }
 
     @Override

@@ -12,7 +12,7 @@ public class ControladorPersonaVulnerable implements ICrudViewsHandler{
     }
     @Override
     public void index(Context context) {
-        context.render("colaboraciones/reg-persona.hbs");
+        context.render("colaboraciones/regPersona.hbs");
     }
 
     @Override

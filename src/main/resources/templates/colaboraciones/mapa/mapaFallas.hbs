@@ -1,5 +1,6 @@
 {{#partial "estilos-map"}}
     <link rel="stylesheet" href="../../css/registro.css">
+    <link rel="stylesheet" href="/css/suscripciones.css">
     <style>
         #map {
             width: 100vw;
@@ -46,7 +47,6 @@
             margin-left: 2rem;
             margin-right: 2rem;
         }
-
 
 
         @media (max-width: 1468px) {
@@ -176,19 +176,24 @@
                         <div class="title">
                             <h2>REPORTAR UNA FALLA</h2>
                             <hr>
-
                         </div>
-                        <div class="suscripciones-title">
-                            <h2>Heladera</h2>
-                            <h2>Estado</h2>
-                        </div>
-                        {{#each heladera}}
-                            <div class="heladera">
-                                <p>{{this.nombre}}</p>
-                                <hr>
-                                <p>{{this.estado}}</p>
+                        <div class="heladeras-fallas-dashboard">
+                            <div class="suscripciones-title">
+                                <h2>Heladera</h2>
+                                <h2>estado</h2>
                             </div>
-                        {{/each}}
+                            {{#each heladeras}}
+                                <div class="heladera" id="heladeras-en-dashboard">
+                                    <p>{{this.nombre}}</p>
+                                    <hr>
+                                    <p class="hidden">{{this.cantidadViandas}} viandas</p>
+                                    <p class="hidden">{{this.latitud}}</p>
+                                    <p class="hidden">{{this.longitud}}</p>
+                                    <p class="hidden">{{this.direccion}}</p>
+                                    <p>{{estado}}</p>
+                                </div>
+                            {{/each}}
+                        </div>
                     </section>
                     <div class="btns">
                         <a href="javascript:history.back()" class="boton-dashboard">Volver</a>
@@ -209,7 +214,7 @@
                         <div class="form-element form-element-description">
                             <label for="faltantes">Agregar una descripción...</label>
                             <textarea name="descripcion"></textarea>
-                            <input type="file" id="imagen-falla" name="imagen" accept="image/*" />
+                            <input type="file" id="imagen-falla" name="imagen" accept="image/*"/>
                             <input type="text" name="heladera" id="input-heladera" required class="hidden">
                         </div>
                     </form>
@@ -228,14 +233,13 @@
 {{/partial}}
 {{#partial "scripts-map"}}
     <script>
-        document.querySelector("#submit-btn-siguiente").addEventListener("click", function() {
+        document.querySelector("#submit-btn-siguiente").addEventListener("click", function () {
             console.log("Siguiente");
             document.querySelector("#input-heladera").value = document.querySelector(".title-mapa-heladera").innerHTML;
             document.querySelector("#imagen-falla")
             document.querySelector("#form-falla").submit();
         });
-
-
     </script>
+
 {{/partial}}
 {{>templates/base/mapaBase}}
