@@ -14,7 +14,7 @@ public class ControladorSuscripciones implements ICrudViewsHandler {
     }
     @Override
     public void index(Context context) {
-
+        context.render("suscripciones/suscripciones.hbs");
     }
     @Override
     public void show(Context context) {
@@ -44,5 +44,8 @@ public class ControladorSuscripciones implements ICrudViewsHandler {
     @Override
     public void delete(Context context) {
 
+    }
+
+    public void abrirMapa(Context context) {
     }
 }
