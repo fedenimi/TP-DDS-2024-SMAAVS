@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.controladores;
 
 import ar.edu.utn.frba.dds.dtos.ColaboradorDTO;
+import ar.edu.utn.frba.dds.dtos.FormasDeColaborarDO;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioColaboradores;
 import ar.edu.utn.frba.dds.servicios.ServiceColaboradores;
@@ -9,6 +10,7 @@ import io.javalin.http.Context;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class ControladorColaborador implements ICrudViewsHandler {
     private RepositorioColaboradores repositorioColaboradores;
@@ -59,7 +61,7 @@ public class ControladorColaborador implements ICrudViewsHandler {
         System.out.println(context.formParam("donar-dinero"));
         System.out.println(context.formParam("donar-viandas"));
         System.out.println(context.formParam("distribuir-viandas"));
-       /*
+
         // Guardar lo que se modificó en el formulario de configuración
         Optional<Colaborador> posibleColaborador = this.repositorioColaboradores.buscar(Long.valueOf(context.pathParam("id")));
 
@@ -70,7 +72,19 @@ public class ControladorColaborador implements ICrudViewsHandler {
 //        }
         Colaborador colaborador = posibleColaborador.get();
         // TODO: Setear los atributos del colaborador con los valores del formulario
-        repositorioColaboradores.guardar(colaborador);*/
+
+        //Seteo las formas de colaborar
+        FormasDeColaborarDO formasDeColaborarDO = FormasDeColaborarDO.builder().
+                donarDinero(context.formParam("donar-dinero")).
+                donarViandas(context.formParam("donar-viandas")).
+                distribuirViandas(context.formParam("distribuir-viandas")).
+                build();
+        ServiceColaboradores.setearFormasDeColaborar(colaborador, formasDeColaborarDO);
+
+        // Modificar los medios de contacto
+
+
+        repositorioColaboradores.guardar(colaborador);
         context.redirect("/"+context.pathParam("id") +"/home");
     }
 
