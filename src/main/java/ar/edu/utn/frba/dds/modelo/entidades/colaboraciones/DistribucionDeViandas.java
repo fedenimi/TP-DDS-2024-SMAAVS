@@ -6,10 +6,12 @@ import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateConverter;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 @Getter
+@Setter
 @NoArgsConstructor
 @Entity
 @DiscriminatorValue("distribucion_viandas")

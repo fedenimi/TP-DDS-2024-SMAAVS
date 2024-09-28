@@ -2,7 +2,9 @@ package ar.edu.utn.frba.dds.controladores;
 
 import ar.edu.utn.frba.dds.dtos.RubroDTO;
 import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.OfrecerProducto;
+import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Oferta;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Rubro;
+import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioColaboradores;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioOfrecerProductos;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioRubros;
 import ar.edu.utn.frba.dds.servicios.ServiceProducto;
@@ -17,10 +19,12 @@ import java.util.Optional;
 public class ControladorProductos implements ICrudViewsHandler {
     private RepositorioOfrecerProductos repositorioDeProductos;
     private RepositorioRubros repositorioDeRubros;
+    private RepositorioColaboradores repositorioColaboradores;
 
-    public ControladorProductos(RepositorioOfrecerProductos repositorioDeProductos, RepositorioRubros repositorioDeRubros) {
+    public ControladorProductos(RepositorioOfrecerProductos repositorioDeProductos, RepositorioRubros repositorioDeRubros, RepositorioColaboradores repositorioColaboradores) {
         this.repositorioDeProductos = repositorioDeProductos;
         this.repositorioDeRubros = repositorioDeRubros;
+        this.repositorioColaboradores = repositorioColaboradores;
     }
 
     @Override
@@ -69,21 +73,36 @@ public class ControladorProductos implements ICrudViewsHandler {
     @Override
     public void create(Context context) {
         //PRETENDE DEVOLVER UNA VISTA CON UN FORMULARIO PARA DAR DE ALTA UN NUEVO PRODUCTO.
-        context.render("productos/formulario_producto.hbs");
-    }
+        List<Rubro> rubros = this.repositorioDeRubros.buscarTodos();
+        List<RubroDTO> rubrosDTO = rubros.stream().map(ServiceRubro::toRubroDTO).toList();
 
+        Map<String, Object> model = new HashMap<>();
+        model.put("rubros", rubrosDTO);
+        context.render("productos/ofrecer-producto.hbs");
+    }
     @Override
     public void save(Context context) {
         OfrecerProducto nuevoProducto = new OfrecerProducto();
+        Oferta oferta = new Oferta();
         System.out.println("Nombre: " + context.formParam("producto"));
         System.out.println("Puntaje: " + context.formParam("puntaje"));
+
+        oferta.setNombre(context.formParam("producto"));
+        oferta.setPuntajeMinimo(Double.valueOf(context.formParam("puntaje")));
+        oferta.setRubro(this.repositorioDeRubros.buscar(Long.valueOf(context.formParam("id"))).get());
+
+        nuevoProducto.setOferta(oferta);
+        nuevoProducto.setColaborador(this.repositorioColaboradores.buscar(Long.valueOf(context.pathParam("id"))).get());
+
+        this.repositorioDeProductos.guardar(nuevoProducto);
+
         //nuevoProducto.setNombre(context.formParam("producto"));
         //nuevoProducto.setPuntaje(Float.valueOf(context.formParam("puntaje")));
 
         //this.repositorioDeProductos.guardar(nuevoProducto);
         //O BIEN LANZO UNA PANTALLA DE EXITO
         //O BIEN REDIRECCIONO AL USER A LA PANTALLA DE LISTADO DE PRODUCTOS
-        context.redirect("home");
+        context.redirect("/"+context.pathParam("id")+"home");
     }
 
     @Override

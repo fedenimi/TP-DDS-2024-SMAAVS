@@ -3,10 +3,7 @@ package ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.Estado;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateTimeConverter;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -16,6 +13,7 @@ import java.time.LocalDateTime;
 @Table(name = "alerta")
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Alerta {
    @Getter
    @Id

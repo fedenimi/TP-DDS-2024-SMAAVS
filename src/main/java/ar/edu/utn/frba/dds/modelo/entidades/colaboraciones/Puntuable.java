@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 @Getter
+@Setter
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "puntuable")

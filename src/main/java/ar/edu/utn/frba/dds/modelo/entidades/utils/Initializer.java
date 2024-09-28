@@ -5,6 +5,7 @@ import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.OfrecerProducto;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Oferta;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Rubro;
+import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.Alerta;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.Estado;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.ModeloHeladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.Documento;
@@ -14,6 +15,7 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.TipoDocumento;
 import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Direccion;
 import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Punto;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
+import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioAlertas;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioColaboradores;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioHeladeras;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioOfrecerProductos;
@@ -43,7 +45,7 @@ public class Initializer {
                 .builder()
                 .capacidad(600)
                 .stock(20)
-                .estado(Estado.ACTIVA)
+                .estado(Estado.FALLA_CONEXION)
                 .fechaYHoraInicio(LocalDateTime.now())
                 .tiempoParaVisitarEnMinutos(30)
                 .aperturas(null)
@@ -57,7 +59,7 @@ public class Initializer {
                 .builder()
                 .capacidad(700)
                 .stock(30)
-                .estado(Estado.ACTIVA)
+                .estado(Estado.FRAUDE)
                 .fechaYHoraInicio(LocalDateTime.now())
                 .tiempoParaVisitarEnMinutos(30)
                 .aperturas(null)
@@ -102,6 +104,8 @@ public class Initializer {
                 oferta(Oferta.builder().puntajeMinimo(300D).nombre("Pecera").rubro(rubro2).build()).
                 build();
 
+        Alerta alerta1 = Alerta.builder().tipoAlerta(Estado.FRAUDE).fechaYHora(LocalDateTime.now()).heladera(heladera3).build();
+        Alerta alerta2 = Alerta.builder().tipoAlerta(Estado.FALLA_CONEXION).fechaYHora(LocalDateTime.now()).heladera(heladera2).build();
 
         RepositorioHeladeras repositorioDeHeladeras = ServiceLocator.instanceOf(RepositorioHeladeras.class);
 
@@ -125,6 +129,13 @@ public class Initializer {
         repositorioDeOfrecerProductos.guardar(ofrecerProducto2);
         repositorioDeOfrecerProductos.guardar(ofrecerProducto3);
         repositorioDeOfrecerProductos.commitTransaction();
+
+        RepositorioAlertas repositorioAlertas = ServiceLocator.instanceOf(RepositorioAlertas.class);
+
+        repositorioAlertas.beginTransaction();
+        repositorioAlertas.guardar(alerta1);
+        repositorioAlertas.guardar(alerta2);
+        repositorioAlertas.commitTransaction();
 
 
     }
