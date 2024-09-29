@@ -76,9 +76,11 @@ public class ControladorProductos implements ICrudViewsHandler {
         List<Rubro> rubros = this.repositorioDeRubros.buscarTodos();
         List<RubroDTO> rubrosDTO = rubros.stream().map(ServiceRubro::toRubroDTO).toList();
 
+
+
         Map<String, Object> model = new HashMap<>();
         model.put("rubros", rubrosDTO);
-        context.render("productos/ofrecer-producto.hbs");
+        context.render("productos/ofrecerProducto.hbs", model);
     }
     @Override
     public void save(Context context) {
@@ -86,23 +88,27 @@ public class ControladorProductos implements ICrudViewsHandler {
         Oferta oferta = new Oferta();
         System.out.println("Nombre: " + context.formParam("producto"));
         System.out.println("Puntaje: " + context.formParam("puntaje"));
+        System.out.println("Id: " + context.formParam("id"));
 
         oferta.setNombre(context.formParam("producto"));
         oferta.setPuntajeMinimo(Double.valueOf(context.formParam("puntaje")));
         oferta.setRubro(this.repositorioDeRubros.buscar(Long.valueOf(context.formParam("id"))).get());
 
+        System.out.println("Id2: " + context.formParam("id"));
+
         nuevoProducto.setOferta(oferta);
+        System.out.println("IdColab: " + context.pathParam("id"));
         nuevoProducto.setColaborador(this.repositorioColaboradores.buscar(Long.valueOf(context.pathParam("id"))).get());
-
+        System.out.println("Id3: " + context.formParam("id"));
+        this.repositorioDeProductos.beginTransaction();
         this.repositorioDeProductos.guardar(nuevoProducto);
+        this.repositorioDeProductos.commitTransaction();
+        context.redirect("/"+context.pathParam("id")+"/home");
+    }
 
-        //nuevoProducto.setNombre(context.formParam("producto"));
-        //nuevoProducto.setPuntaje(Float.valueOf(context.formParam("puntaje")));
-
-        //this.repositorioDeProductos.guardar(nuevoProducto);
-        //O BIEN LANZO UNA PANTALLA DE EXITO
-        //O BIEN REDIRECCIONO AL USER A LA PANTALLA DE LISTADO DE PRODUCTOS
-        context.redirect("/"+context.pathParam("id")+"home");
+    public void saveComprado(Context context) {
+        System.out.println("Producto: " + context.formParam("producto"));
+        context.redirect("/"+context.pathParam("id")+"/home");
     }
 
     @Override

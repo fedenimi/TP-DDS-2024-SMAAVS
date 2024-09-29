@@ -34,7 +34,7 @@ if (selectionBtn) {
                 });
                 item.classList.add('checked');
                 let btnText = document.querySelector('.dropdown-select-btn p');
-                btnText.innerHTML = item.children[1].innerHTML;
+                btnText.innerHTML = item.children[0].innerHTML;
             }
             if (item.classList.contains('closable')) {
                 selectionBtn.classList.toggle('open');
