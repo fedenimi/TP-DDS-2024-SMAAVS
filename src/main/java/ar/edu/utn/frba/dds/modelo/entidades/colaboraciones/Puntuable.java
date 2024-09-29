@@ -13,7 +13,7 @@ import javax.persistence.*;
 @DiscriminatorColumn(name = "tipo_puntuable")
 public abstract class Puntuable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne

@@ -6,7 +6,7 @@ import java.util.List;
 @Table(name = "area_de_cobertura")
 public class AreaDeCobertura {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToMany

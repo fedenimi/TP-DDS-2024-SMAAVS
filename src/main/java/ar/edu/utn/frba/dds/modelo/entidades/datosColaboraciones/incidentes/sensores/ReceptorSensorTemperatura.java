@@ -20,7 +20,7 @@ import java.util.*;
 @Table(name = "receptor_sensor_temperatura")
 public class ReceptorSensorTemperatura {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})

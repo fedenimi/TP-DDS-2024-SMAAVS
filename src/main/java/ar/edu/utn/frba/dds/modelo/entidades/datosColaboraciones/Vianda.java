@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Table(name = "vianda")
 public class Vianda {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "fecha_caducidad")

@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Barrio {
     @Getter
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Setter

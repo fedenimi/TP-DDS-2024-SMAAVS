@@ -15,7 +15,7 @@ public class TarjetaColaborador {
 
     @Getter
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "fecha_emision_tarjeta")

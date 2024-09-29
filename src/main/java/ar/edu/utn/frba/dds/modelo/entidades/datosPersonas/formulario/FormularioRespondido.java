@@ -6,7 +6,7 @@ import java.util.List;
 @Table(name = "formulario_respondido")
 public class FormularioRespondido {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne

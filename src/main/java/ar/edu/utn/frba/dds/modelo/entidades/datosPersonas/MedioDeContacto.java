@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Table(name = "medio_de_contacto")
 public class MedioDeContacto {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "valor", columnDefinition = "varchar(255)")

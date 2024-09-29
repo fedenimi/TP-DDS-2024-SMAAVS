@@ -15,7 +15,7 @@ import java.util.List;
 @Table(name = "persona_vulnerable")
 public class PersonaVulnerable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "nombre", columnDefinition = "VARCHAR(255)")
