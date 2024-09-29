@@ -19,7 +19,7 @@ import java.util.Map;
 public class ControladorDistribuirViandas implements ICrudViewsHandler{
     private RepositorioPuntuables repositorioPuntuables;
     private RepositorioHeladeras repositorioHeladeras;
-    private RepositorioColaboradores repositorioColaboradores
+    private RepositorioColaboradores repositorioColaboradores;
 
     public ControladorDistribuirViandas(RepositorioPuntuables repositorioPuntuables, RepositorioHeladeras repositorioHeladeras, RepositorioColaboradores repositorioColaboradores) {
         this.repositorioPuntuables = repositorioPuntuables;

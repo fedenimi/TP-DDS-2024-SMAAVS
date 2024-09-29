@@ -34,7 +34,9 @@ public class Router {
         app.post("{id}/reg-persona", ServiceLocator.instanceOf(ControladorPersonaVulnerable.class)::save);
 
         app.get("{id}/productos", ServiceLocator.instanceOf(ControladorProductos.class)::index);
-        app.post("{id}/productos", ServiceLocator.instanceOf(ControladorProductos.class)::save);
+        app.post("{id}/productos", ServiceLocator.instanceOf(ControladorProductos.class)::saveComprado);
+        app.get("{id}/publicar-producto/", ServiceLocator.instanceOf(ControladorProductos.class)::create);
+        app.post("{id}/publicar-producto/", ServiceLocator.instanceOf(ControladorProductos.class)::save);
 
         app.get("{id}/alertas", ServiceLocator.instanceOf(ControladorAlerta.class)::index);
         app.get("{id}/alertas/mapa", ServiceLocator.instanceOf(ControladorAlerta.class)::abrirMapa);

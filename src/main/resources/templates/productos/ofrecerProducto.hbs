@@ -1,0 +1,70 @@
+{{#partial "home-estilos"}}
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/registro.css">
+{{/partial}}
+{{#partial "home-main"}}
+    <main class="registro-main">
+        <div class="tipo-colab">
+            <h1>Publicar un producto</h1>
+        </div>
+        <form class="form-registro" id="publicar-producto" method="POST">
+            <div class="form-element">
+                <label for="form-nombre">Nombre</label>
+                <input type="text" name="producto" id="form-apellido" required>
+            </div>
+            <div></div>
+            <div class="form-element">
+                <label for="form-apellido">Puntos necesarios</label>
+                <input type="text" name="puntaje" id="form-apellido" required>
+            </div>
+            <div class="form-element">
+                <label for="form-nombre">Categoría</label>
+                <div class="form-element-dropdown form-categoria">
+                    <div class="dropdown-select-btn">
+                        <p>Seleccionar</p>
+                        <span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </span>
+                    </div>
+                    <ul class="dropdown-item-list">
+                        {{#each rubros}}
+                            <li class="dropdown-item-only closable" id="item-categoria">
+                                <p>{{nombre}}</p>
+                                <p class="hidden">{{id}}</p>
+                            </li>
+                        {{/each}}
+                        <input type="hidden" name="id" id="categoria-id" required>
+                    </ul>
+                </div>
+            </div>
+            <div></div>
+            <div class="form-element">
+                <a class="btn-next2">
+                    <p>Agregar foto</p>
+                    <i class="fa-solid fa-image"></i>
+                </a>
+            </div>
+        </form>
+        <div class="btns-next">
+            <a class="btn-next2" href="javascript:history.back()">
+                <p>Atrás</p>
+                <i class="fa fa-arrow-left"></i>
+            </a>
+            <a class="btn-next2" id="publicar-producto-submit">
+                <p>Finalizar</p>
+                <i class="fa fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+{{/partial}}
+{{#partial "home-scripts"}}
+    <script src="/js/dropdownScript.js"></script>
+    <script>
+        document.querySelector('#publicar-producto-submit').addEventListener('click', () => {
+            document.querySelector('#categoria-id').value = document.querySelector('#item-categoria p.hidden').textContent;
+            document.querySelector('#publicar-producto').submit();
+        });
+    </script>
+{{/partial}}
+
+{{>templates/base/homeBase}}
