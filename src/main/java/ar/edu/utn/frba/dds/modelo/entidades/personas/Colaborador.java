@@ -7,6 +7,7 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.*;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.formulario.FormularioRespondido;
 import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Punto;
 import ar.edu.utn.frba.dds.modelo.entidades.localizacion.RecomendadorDePuntos;
+import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.AlertaSuscripcion;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,7 +22,7 @@ import java.util.List;
 @Builder
 public class Colaborador {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "colaborador")
@@ -64,6 +65,10 @@ public class Colaborador {
     @Column(name = "forma_de_colaborar")
     private List<FormaColaboracion> formasDeColaborar;
 
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @JoinColumn(name = "colaborador_id")
+    private List<AlertaSuscripcion> alertaSuscripciones;
+
     public Colaborador(TipoDeColaborador tipoDeColaborador, List<MedioDeContacto> mediosDeContacto,  Documento documento, String nombre, String apellido) {
         this.tipoDeColaborador = tipoDeColaborador;
         this.mediosDeContacto = mediosDeContacto;
@@ -96,5 +101,9 @@ public class Colaborador {
 
     public void sumarPuntos(float puntos){
         this.puntosDisponibles += puntos;
+    }
+
+    public void guardarAlertaSuscripcion(AlertaSuscripcion alertaSuscripcion) {
+        this.getAlertaSuscripciones().add(alertaSuscripcion);
     }
 }

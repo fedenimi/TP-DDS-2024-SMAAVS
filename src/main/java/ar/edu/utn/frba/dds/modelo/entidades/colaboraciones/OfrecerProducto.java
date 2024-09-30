@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Builder
 public class OfrecerProducto {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Embedded

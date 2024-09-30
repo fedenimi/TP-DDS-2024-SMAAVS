@@ -1,9 +1,12 @@
 package ar.edu.utn.frba.dds.modelo.entidades.suscripciones;
 
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
+import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.Alerta;
 import ar.edu.utn.frba.dds.modelo.entidades.enviadores.Llamador;
+import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.condiciones.CondicionSuscripcionHeladera;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.CondicionSuscripcionHeladeraConverter;
+import ar.edu.utn.frba.dds.servicios.ServiceTopics;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -14,7 +17,7 @@ import java.util.List;
 @Getter
 public class Topic {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter private Long id;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
@@ -30,9 +33,15 @@ public class Topic {
     public void notificarSuscriptores(Heladera heladera) {
         suscripciones.forEach(suscripcion -> {
                 if (condicionSuscripcionHeladera.debeEnviar(heladera, suscripcion)){
-                    Llamador.getInstance().llamar(suscripcion.getSuscriptor().getMediosDeContacto(),mensaje, "HELADERA: " + heladera.getId());
+                    this.enviarAlertaSuscripcion(suscripcion.getSuscriptor(), heladera);
                 }
             }
         );
+    }
+
+    public void enviarAlertaSuscripcion(Colaborador suscriptor, Heladera heladera) {
+        Llamador.getInstance().llamar(suscriptor.getMediosDeContacto(),mensaje, "HELADERA: " + heladera.getId());
+        AlertaSuscripcion alertaSuscripcion = ServiceTopics.alertaSuscripcionPara(suscriptor, heladera, this.condicionSuscripcionHeladera);
+        suscriptor.guardarAlertaSuscripcion(alertaSuscripcion);
     }
 }

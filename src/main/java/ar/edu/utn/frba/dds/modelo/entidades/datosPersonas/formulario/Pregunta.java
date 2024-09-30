@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Table(name = "pregunta")
 public class Pregunta {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @JoinColumn(name = "pregunta", columnDefinition = "TEXT")

@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Getter
 public class Suscripcion{
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter private Long id;
 
     @ManyToOne

@@ -14,7 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Rubro {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "nombre", columnDefinition = "VARCHAR(255)")

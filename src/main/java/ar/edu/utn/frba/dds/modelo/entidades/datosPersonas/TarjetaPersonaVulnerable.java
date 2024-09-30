@@ -9,6 +9,7 @@ import java.util.List;
 @Table(name = "tarjeta_persona_vulnerable")
 public class TarjetaPersonaVulnerable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codigo", columnDefinition = "VARCHAR(12)")
     private String codigo;
 

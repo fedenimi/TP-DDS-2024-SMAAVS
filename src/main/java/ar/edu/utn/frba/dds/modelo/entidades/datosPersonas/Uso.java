@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Table(name = "uso")
 public class Uso {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     @JoinColumn(name = "heladera_id")

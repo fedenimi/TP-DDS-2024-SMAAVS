@@ -7,8 +7,10 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.IBusc
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.RegistradorDeIncidentes;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.sensores.ReceptorSensorTemperatura;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.Estado;
+import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.TipoNotificacion;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioAlertas;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioReceptoresTemperatura;
+import ar.edu.utn.frba.dds.servicios.ServiceTopics;
 import lombok.AllArgsConstructor;
 
 import java.time.LocalDateTime;
@@ -26,6 +28,7 @@ public class ControladorFallaConexion {
                 RegistradorDeIncidentes.getInstance().registrarIncidente(Estado.FALLA_CONEXION, heladera, buscadorDeTecnicos);
                 Alerta alerta = CreadorAlerta.getInstance().crearAlerta(heladera, Estado.FALLA_CONEXION);
                 RepositorioAlertas.getInstance().guardar(alerta);
+                ServiceTopics.accionarTopic(heladera, TipoNotificacion.DESPERFECTO);
             }
         }
 

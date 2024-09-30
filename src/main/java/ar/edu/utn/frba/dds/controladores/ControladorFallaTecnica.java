@@ -9,11 +9,13 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.IBusc
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.RegistradorDeIncidentes;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.Estado;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
+import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.TipoNotificacion;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.CalculadorDeFechas;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.TipoDocumentoConverter;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioFallasTecnicas;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioHeladeras;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioColaboradores;
+import ar.edu.utn.frba.dds.servicios.ServiceTopics;
 import lombok.AllArgsConstructor;
 
 import java.time.LocalDateTime;
@@ -37,5 +39,6 @@ public class ControladorFallaTecnica {
 
         FallaTecnica fallaTecnica = CreadorFallaTecnica.getInstance().crearFallaTecnica(heladera, reportador, fallaTecnicaDTO.getDescripcion(), fallaTecnicaDTO.getFoto(), fechaYHora);
         RepositorioFallasTecnicas.getInstance().guardar(fallaTecnica);
+        ServiceTopics.accionarTopic(heladera, TipoNotificacion.DESPERFECTO);
     }
 }

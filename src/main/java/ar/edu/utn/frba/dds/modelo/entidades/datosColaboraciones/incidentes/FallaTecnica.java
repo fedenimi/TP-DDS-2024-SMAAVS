@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Table(name = "falla_tecnica")
 public class FallaTecnica {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne

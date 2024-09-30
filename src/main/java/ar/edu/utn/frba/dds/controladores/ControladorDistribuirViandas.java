@@ -5,12 +5,14 @@ import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.DistribucionDeViandas
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Motivo;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
+import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.TipoNotificacion;
 import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.Topic;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioColaboradores;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioDistribucionesViandas;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioHeladeras;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioPuntuables;
 import ar.edu.utn.frba.dds.servicios.ServiceHeladeras;
+import ar.edu.utn.frba.dds.servicios.ServiceTopics;
 import io.javalin.http.Context;
 
 import java.util.HashMap;
@@ -57,21 +59,28 @@ public class ControladorDistribuirViandas implements ICrudViewsHandler{
 
     @Override
     public void save(Context context) {
+        Heladera heladeraOrigen = this.repositorioHeladeras.buscar(Long.parseLong(context.formParam("heladera-or"))).get();
+        Heladera heladeraDestino = this.repositorioHeladeras.buscar(Long.parseLong(context.formParam("heladera-dest"))).get();
         // Crear la distribución de viandas
         DistribucionDeViandas distribucionDeViandas = new DistribucionDeViandas();
-        distribucionDeViandas.setHeladeraOrigen(this.repositorioHeladeras.buscar(Long.parseLong(context.formParam("heladera-or"))).get());
-        distribucionDeViandas.setHeladeraDestino(this.repositorioHeladeras.buscar(Long.parseLong(context.formParam("heladera-dest"))).get());
+        distribucionDeViandas.setHeladeraOrigen(heladeraOrigen);
+        distribucionDeViandas.setHeladeraDestino(heladeraDestino);
         distribucionDeViandas.setMotivoDistribucion(Motivo.valueOf(context.formParam("motivo")));
         distribucionDeViandas.setCantidadDeViandas(Integer.parseInt(context.formParam("cantidad-viandas")));
 
         Colaborador colaborador = this.repositorioColaboradores.buscar(Long.parseLong(context.pathParam("id"))).get();
         distribucionDeViandas.setColaborador(colaborador);
+
+        this.repositorioPuntuables.beginTransaction();
         this.repositorioPuntuables.guardar(distribucionDeViandas);
+        this.repositorioPuntuables.commitTransaction();
 
         // Guardarla en el colaborador que la realizó
         colaborador.agregarPuntuable(distribucionDeViandas);
 
-        //
+        // Le pido al service que notifique a los suscriptores de las heladeras
+        ServiceTopics.accionarTopic(heladeraOrigen, TipoNotificacion.FALTAN_N_VIANDAS);
+        ServiceTopics.accionarTopic(heladeraDestino, TipoNotificacion.QUEDAN_N_VIANDAS);
 
 
         System.out.println("Distribuir viandas: ");

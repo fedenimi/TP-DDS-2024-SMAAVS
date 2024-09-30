@@ -9,7 +9,15 @@ import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 
 public class ServiceColaboradores {
     public static ColaboradorDTO toColaboradorDTO(Colaborador colaborador) {
-        return null;
+
+        return ColaboradorDTO.builder().
+                id(String.valueOf(colaborador.getId())).
+                nombre(colaborador.getNombre()).
+                puntosDisponibles(String.valueOf(colaborador.getPuntosDisponibles())).
+                tipoColaborador(colaborador.getTipoDeColaborador().toString()).
+                formasDeColaborar(colaborador.getFormasDeColaborar().stream().map(FormaColaboracion::toString).toList()).
+                build();
+
     }
 
     public static void setearFormasDeColaborar(Colaborador colaborador, FormasDeColaborarDO formasDeColaborarDO) {

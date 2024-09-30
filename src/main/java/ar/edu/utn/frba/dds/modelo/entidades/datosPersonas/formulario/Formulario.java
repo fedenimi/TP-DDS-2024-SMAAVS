@@ -9,7 +9,7 @@ import java.util.List;
 @Table(name = "formulario")
 public class Formulario {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToMany
