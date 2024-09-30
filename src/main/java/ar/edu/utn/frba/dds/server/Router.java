@@ -16,7 +16,11 @@ public class Router {
         app.post("{id}/configuracion", ServiceLocator.instanceOf(ControladorColaborador.class)::update);
 
         app.get("/{id}/home", ServiceLocator.instanceOf(ControladorHome.class)::mostrarHome);
-        app.get("{id}/donar-viandas", ServiceLocator.instanceOf(ControladorDonacionDeViandas.class)::index);
+
+        app.get("{id}/donar-viandas/mapa", ServiceLocator.instanceOf(ControladorDonacionDeViandas.class)::abrirMapa);
+        app.post("{id}/donar-viandas/mapa", ServiceLocator.instanceOf(ControladorDonacionDeViandas.class)::guardarMapa);
+        app.get("{id}/donar-viandas/{id-heladera}", ServiceLocator.instanceOf(ControladorDonacionDeViandas.class)::index);
+        app.post("{id}/donar-viandas/{id-heladera}", ServiceLocator.instanceOf(ControladorDonacionDeViandas.class)::save);
 
         app.get("{id}/dinero", ServiceLocator.instanceOf(ControladorDonacionDeDinero.class)::index);
         app.post("{id}/dinero", ServiceLocator.instanceOf(ControladorDonacionDeDinero.class)::save);
