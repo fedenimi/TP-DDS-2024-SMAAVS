@@ -76,6 +76,7 @@ public class ControladorReportarFalla implements ICrudViewsHandler{
         System.out.println("Mapa guardado");
         System.out.println(context.formParam("descripcion"));
         System.out.println(context.formParam("imagen"));
+        System.out.println(context.formParam("heladera"));
         context.redirect("/" + context.pathParam("id") + "/home");
     }
 }
