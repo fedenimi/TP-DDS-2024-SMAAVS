@@ -106,4 +106,11 @@ public class Colaborador {
     public void guardarAlertaSuscripcion(AlertaSuscripcion alertaSuscripcion) {
         this.getAlertaSuscripciones().add(alertaSuscripcion);
     }
+    public void guardarOfrecerProducto(OfrecerProducto ofrecerProducto) {
+        this.getOfrecerProductos().add(ofrecerProducto);
+    }
+    public void modificarPuntosPorCanje(Double puntaje) {
+        this.puntosDisponibles -= puntaje;
+        this.puntosCanjeados += puntaje;
+    }
 }

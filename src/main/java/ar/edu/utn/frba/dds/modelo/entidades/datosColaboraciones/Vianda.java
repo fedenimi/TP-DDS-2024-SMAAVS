@@ -27,10 +27,6 @@ public class Vianda {
     @JoinColumn(name = "colaborador_id")
     @Getter private Colaborador colaborador;
 
-    @ManyToOne
-    @JoinColumn(name = "heladera_id")
-    @Getter private Heladera heladera;
-
     @Column(name = "calorias", columnDefinition = "int")
     private Integer calorias;
 
@@ -40,7 +36,5 @@ public class Vianda {
     @Column(name = "entregada", columnDefinition = "smallint")
     private boolean entregada;
 
-    public Vianda(Heladera heladera) {
-        this.heladera = heladera;
-    }
+
 }

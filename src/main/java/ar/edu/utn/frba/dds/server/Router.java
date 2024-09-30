@@ -44,5 +44,8 @@ public class Router {
         app.get("{id}/suscripciones", ServiceLocator.instanceOf(ControladorSuscripciones.class)::index);
         app.get("{id}/suscripciones/mapa", ServiceLocator.instanceOf(ControladorSuscripciones.class)::abrirMapa);
 
+        app.get("{id}/archivos/cargarCSV", ServiceLocator.instanceOf(ControladorCargaMasivaColaboraciones.class)::create);
+        app.post("{id}/archivos/cargarCSV", ServiceLocator.instanceOf(ControladorCargaMasivaColaboraciones.class)::save);
+
     }
 }

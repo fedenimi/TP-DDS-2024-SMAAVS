@@ -38,8 +38,10 @@ public class ReporteViandasHeladera implements Reporte {
             if (CalculadorDeFechas.getInstance().esEstaSemana(donacionDeViandas.getFecha())) {
                 Integer cantidadDeViandas = donacionDeViandas.cantidadDeViandas();
                 for (int j = 0; j < cantidadDeViandas; j++) {
-                    Heladera heladera = donacionDeViandas.getViandasDonadas().get(j).getHeladera();
+                    /*
+                    Heladera heladera = donacionDeViandas.getViandasDonadas().get(j);
                     this.agregarViandasAMap(1, heladera, heladeraViandaColocadaMap);
+                     */
                 }
             }
         }

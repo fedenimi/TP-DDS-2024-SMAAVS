@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.modelo.entidades.colaboraciones;
 
+import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Vianda;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateConverter;
@@ -27,6 +28,9 @@ public class DonacionDeViandas extends Puntuable{
     @Column(name = "multiplicador", columnDefinition = "float")
     private Double multiplicador;
 
+    @ManyToOne
+    @JoinColumn(name = "heladera_id")
+    @Getter private Heladera heladera;
 
     public DonacionDeViandas(Colaborador colaborador) {
         this.colaborador = colaborador;

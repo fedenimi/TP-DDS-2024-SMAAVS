@@ -20,7 +20,7 @@ public class OfrecerProducto {
     @Embedded
     private Oferta oferta;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.REMOVE})
     @JoinColumn(name = "colaborador_id")
     private Colaborador colaborador;
 
