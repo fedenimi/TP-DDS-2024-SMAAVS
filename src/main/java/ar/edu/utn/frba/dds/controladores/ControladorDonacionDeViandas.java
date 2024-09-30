@@ -15,6 +15,7 @@ import io.javalin.http.Context;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,10 +52,21 @@ public class ControladorDonacionDeViandas implements ICrudViewsHandler{
     public void save(Context context) {
         System.out.println("Guardando donación de viandas");
         System.out.println("Cantidad de viandas: " + context.formParam("cant-viandas"));
-        System.out.println("Peso 1: " + context.formParam("vianda[0][peso]"));
+        System.out.println("Peso 1: " + context.formParam("vianda["+0+"][peso]"));
         System.out.println("Peso 2: " + context.formParam("vianda[1][peso]"));
         Heladera heladera = repositorioHeladeras.buscar(Long.parseLong(context.formParam("heladera"))).get();
-        List<Vianda> viandas = null; // TODO: ver cómo recibo esto
+        List<Vianda> viandas = new ArrayList<>();
+
+        for(int i = 0; i < Integer.parseInt(context.formParam("cant-viandas")); i++){
+            Vianda vianda = new Vianda();
+            vianda.setPeso(Integer.parseInt(context.formParam("vianda["+i+"][peso]")));
+            vianda.setFechaCaducidad(LocalDate.parse(context.formParam("vianda["+i+"][fechaVencimiento]")));
+            vianda.setComida(context.formParam("vianda["+i+"][comida]"));
+            vianda.setCalorias(Integer.parseInt(context.formParam("vianda["+i+"][calorias]")));
+            vianda.setEntregada(false);
+            viandas.add(vianda);
+        }
+
         DonacionDeViandas donacionDeViandas = new DonacionDeViandas();
         donacionDeViandas.setViandasDonadas(viandas);
         donacionDeViandas.setFecha(LocalDate.now());

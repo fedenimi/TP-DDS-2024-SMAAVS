@@ -90,7 +90,7 @@ public class ServiceLocator {
                 instances.put(componentName, instance);
             }
             else if(componentName.equals(ControladorPersonaVulnerable.class.getName())) {
-                ControladorPersonaVulnerable instance = new ControladorPersonaVulnerable(instanceOf(RepositorioPersonasVulnerables.class));
+                ControladorPersonaVulnerable instance = new ControladorPersonaVulnerable(instanceOf(RepositorioPersonasVulnerables.class), instanceOf(RepositorioColaboradores.class), instanceOf(RepositorioPuntuables.class));
                 instances.put(componentName, instance);
             }
             else if(componentName.equals(ControladorSuscripciones.class.getName())) {

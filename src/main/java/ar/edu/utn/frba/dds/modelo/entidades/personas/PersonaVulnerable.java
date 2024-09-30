@@ -3,8 +3,10 @@ package ar.edu.utn.frba.dds.modelo.entidades.personas;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Registro;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.Documento;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.TarjetaPersonaVulnerable;
+import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Direccion;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateConverter;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -12,6 +14,7 @@ import java.time.Period;
 import java.util.List;
 @Entity
 @Getter
+@Setter
 @Table(name = "persona_vulnerable")
 public class PersonaVulnerable {
     @Id
@@ -28,8 +31,9 @@ public class PersonaVulnerable {
     @Column(name = "fecha_de_registro")
     @Convert(converter = LocalDateConverter.class)
     private LocalDate fechaDeRegistro;
-    @Column(name = "domicilio", columnDefinition = "TEXT")
-    private String domicilio;
+
+    @Embedded
+    private Direccion domicilio;
     @Embedded
     private Documento documento;
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
