@@ -4,7 +4,9 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.Alerta;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.CreadorAlerta;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.Estado;
+import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.TipoNotificacion;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioAlertas;
+import ar.edu.utn.frba.dds.servicios.ServiceTopics;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,6 +37,7 @@ public class ReceptorSensorTemperatura {
         if (temperatura.getValor() < heladera.obtenerTemperaturaMinima() || temperatura.getValor() > this.getHeladera().obtenerTemperaturaMaxima()){
             Alerta alerta = this.crearAlerta(heladera, Estado.FALLA_TEMPERATURA);
             RepositorioAlertas.getInstance().guardar(alerta);
+            ServiceTopics.accionarTopic(heladera, TipoNotificacion.DESPERFECTO);
         }
     }
     public void agregarMedicion(Temperatura temperatura) {

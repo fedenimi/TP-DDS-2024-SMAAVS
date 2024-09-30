@@ -8,9 +8,11 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.Cread
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.IBuscadorDeTecnicos;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.RegistradorDeIncidentes;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.Estado;
+import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.TipoNotificacion;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.CalculadorDeFechas;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioAlertas;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioHeladeras;
+import ar.edu.utn.frba.dds.servicios.ServiceTopics;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -39,5 +41,6 @@ public class ControladorMovimiento {
         Alerta fraude = CreadorAlerta.getInstance().crearAlerta(heladera, Estado.FRAUDE);
 
         RepositorioAlertas.getInstance().guardar(fraude);
+        ServiceTopics.accionarTopic(heladera, TipoNotificacion.DESPERFECTO);
     }
 }

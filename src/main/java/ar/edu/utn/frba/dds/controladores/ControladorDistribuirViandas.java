@@ -70,7 +70,10 @@ public class ControladorDistribuirViandas implements ICrudViewsHandler{
 
         Colaborador colaborador = this.repositorioColaboradores.buscar(Long.parseLong(context.pathParam("id"))).get();
         distribucionDeViandas.setColaborador(colaborador);
+
+        this.repositorioPuntuables.beginTransaction();
         this.repositorioPuntuables.guardar(distribucionDeViandas);
+        this.repositorioPuntuables.commitTransaction();
 
         // Guardarla en el colaborador que la realizó
         colaborador.agregarPuntuable(distribucionDeViandas);
