@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.controladores;
 
+import ar.edu.utn.frba.dds.dtos.HeladeraDTO;
 import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.DonacionDeViandas;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Vianda;
@@ -8,12 +9,15 @@ import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.TipoNotificacion;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioColaboradores;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioHeladeras;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioPuntuables;
+import ar.edu.utn.frba.dds.servicios.ServiceHeladeras;
 import ar.edu.utn.frba.dds.servicios.ServiceTopics;
 import io.javalin.http.Context;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ControladorDonacionDeViandas implements ICrudViewsHandler{
     private RepositorioPuntuables repositorioPuntuables;
@@ -27,7 +31,10 @@ public class ControladorDonacionDeViandas implements ICrudViewsHandler{
     }
     @Override
     public void index(Context context) {
-        context.render("colaboraciones/donarViandas.hbs");
+        Heladera heladera = this.repositorioHeladeras.buscar(Long.parseLong(context.pathParam("id-heladera"))).get();
+        Map<String, Object> model = new HashMap<>();
+        model.put("heladera", heladera.getDireccion().getNombre_direccion());
+        context.render("colaboraciones/donarViandas.hbs", model);
     }
 
     @Override
@@ -42,6 +49,10 @@ public class ControladorDonacionDeViandas implements ICrudViewsHandler{
 
     @Override
     public void save(Context context) {
+        System.out.println("Guardando donación de viandas");
+        System.out.println("Cantidad de viandas: " + context.formParam("cant-viandas"));
+        System.out.println("Peso 1: " + context.formParam("vianda[0][peso]"));
+        System.out.println("Peso 2: " + context.formParam("vianda[1][peso]"));
         Heladera heladera = repositorioHeladeras.buscar(Long.parseLong(context.formParam("heladera"))).get();
         List<Vianda> viandas = null; // TODO: ver cómo recibo esto
         DonacionDeViandas donacionDeViandas = new DonacionDeViandas();
@@ -74,5 +85,20 @@ public class ControladorDonacionDeViandas implements ICrudViewsHandler{
     @Override
     public void delete(Context context) {
 
+    }
+
+    public void abrirMapa(Context context) {
+        //PRETENDE DEVOLVER UNA VISTA QUE CONTENGA A TODOS LOS PRODUCTOS ALMACENADOS EN MI SISTEMA
+        List<Heladera> heladeras = this.repositorioHeladeras.buscarTodos();
+        List<HeladeraDTO> heladerasDTO = heladeras.stream().
+                filter(heladera -> !heladera.tieneFallas()).
+                map(heladera -> ServiceHeladeras.toHeladeraDTO(heladera)).toList();
+        Map<String, Object> model = new HashMap<>();
+        model.put("heladeras", heladerasDTO);
+        context.render("colaboraciones/mapa/mapaDonarViandas.hbs", model);
+    }
+
+    public void guardarMapa(Context context) {
+        context.redirect(context.formParam("heladera"));
     }
 }
