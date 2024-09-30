@@ -191,6 +191,7 @@
                                     <p class="hidden">{{this.longitud}}</p>
                                     <p class="hidden">{{this.direccion}}</p>
                                     <p>{{estado}}</p>
+                                    <p class="hidden" id="id-heladera-form">{{id}}</p>
                                 </div>
                             {{/each}}
                         </div>
@@ -235,7 +236,7 @@
     <script>
         document.querySelector("#submit-btn-siguiente").addEventListener("click", function () {
             console.log("Siguiente");
-            document.querySelector("#input-heladera").value = document.querySelector(".title-mapa-heladera").innerHTML;
+            document.querySelector("#input-heladera").value = document.querySelector(".heladera.open").children[7].innerHTML;
             document.querySelector("#imagen-falla")
             document.querySelector("#form-falla").submit();
         });
