@@ -27,7 +27,6 @@ if (selectionBtn) {
 
     function addListenerDropdown(item) {
         item.addEventListener('click', () => {
-            console.log(item.classList);
             if (!item.classList.contains('checked')) {
                 itemOnly.forEach(i => {
                     i.classList.remove('checked');
@@ -40,27 +39,41 @@ if (selectionBtn) {
                 selectionBtn.classList.toggle('open');
             }
             if (item.classList.contains('es-vianda')) {
-                let vianda = Object.values(viandas).find(vianda => vianda.name === item.children[1].innerHTML);
-                let viandaInfo = document.querySelector('.donar-viandas');
-                viandaInfo.children[1].children[1].value = vianda.comida;
-                viandaInfo.children[2].children[1].value = vianda.fechaCaducidad;
-                viandaInfo.children[3].children[1].value = vianda.peso;
-                viandaInfo.children[4].children[1].value = vianda.calorias;
-                viandaInfo.children[5].children[1].value = vianda.heladera;
+                let nro_vianda = item.children[1].innerHTML.split(' ')[1] - 1;
+                document.querySelector(`input[name="vianda[${nro_vianda}][comida]"]`).classList.remove('hidden');
+                document.querySelector(`input[name="vianda[${nro_vianda}][fecha_caducidad]"]`).classList.remove('hidden');
+                document.querySelector(`input[name="vianda[${nro_vianda}][peso]"]`).classList.remove('hidden');
+                document.querySelector(`input[name="vianda[${nro_vianda}][calorias]"]`).classList.remove('hidden');
+                for (let i = 0; i <= viandaCount; i++) {
+                    if (i !== nro_vianda) {
+                        console.log(i);
+                        document.querySelector(`input[name="vianda[${i}][comida]"]`).classList.add('hidden');
+                        document.querySelector(`input[name="vianda[${i}][fecha_caducidad]"]`).classList.add('hidden');
+                        document.querySelector(`input[name="vianda[${i}][peso]"]`).classList.add('hidden');
+                        document.querySelector(`input[name="vianda[${i}][calorias]"]`).classList.add('hidden');
+                    }
+                }
+                let btnText = document.querySelector('.dropdown-select-btn p');
+                btnText.innerHTML = item.children[1].innerHTML;
             }
             if (item.classList.contains('agregar-vianda')) {
-                infoAgregarVianda();
+                agregarVianda()
             }
         });
     }
 
-    function infoAgregarVianda() {
-        let viandaInfo = document.querySelector('.donar-viandas');
-        viandaInfo.children[1].children[1].value = '';
-        viandaInfo.children[2].children[1].value = '';
-        viandaInfo.children[3].children[1].value = '';
-        viandaInfo.children[4].children[1].value = '';
-        viandaInfo.children[5].children[1].value = '';
+    function agregarVianda() {
+        document.querySelector(`input[name="vianda[${viandaCount}][comida]"]`).classList.remove('hidden');
+        document.querySelector(`input[name="vianda[${viandaCount}][fecha_caducidad]"]`).classList.remove('hidden');
+        document.querySelector(`input[name="vianda[${viandaCount}][peso]"]`).classList.remove('hidden');
+        document.querySelector(`input[name="vianda[${viandaCount}][calorias]"]`).classList.remove('hidden');
+        for (let i = 0; i < viandaCount; i++) {
+            console.log(i);
+            document.querySelector(`input[name="vianda[${i}][comida]"]`).classList.add('hidden');
+            document.querySelector(`input[name="vianda[${i}][fecha_caducidad]"]`).classList.add('hidden');
+            document.querySelector(`input[name="vianda[${i}][peso]"]`).classList.add('hidden');
+            document.querySelector(`input[name="vianda[${i}][calorias]"]`).classList.add('hidden');
+        }
     }
 }
 

@@ -1,31 +1,12 @@
 let viandas = {}
 
 const dropdownItemList = document.getElementsByClassName('dropdown-item-list');
-const eliminarViandaBtn = document.querySelector('.eliminar-vianda');
 const guardarViadnaBtn = document.querySelector('.guardar-vianda');
 
 Object.values(viandas).forEach(vianda => {
     agregarViandaAlDropdown(vianda);
 });
 
-eliminarViandaBtn.addEventListener('click', () => {
-        itemOnly.forEach(item => {
-            if (item.classList.contains('checked') && !item.classList.contains('agregar-vianda')) {
-                eliminarVianda(item);
-                item.remove()
-                viandas = Object.fromEntries(Object.entries(viandas).filter(([key, value]) => value.name !== item.children[1].innerHTML));
-            }
-        });
-        const btnAgregar = document.getElementsByClassName('agregar-vianda')[0];
-        btnAgregar.classList.toggle('checked');
-        infoAgregarVianda();
-});
-
-function eliminarVianda(item) {
-    item.classList.remove('checked');
-    let btnText = document.querySelector('.dropdown-select-btn p');
-    btnText.innerHTML = 'Agregar vianda';
-}
 
 guardarViadnaBtn.addEventListener('click', () => {
     itemOnly.forEach(item => {
@@ -50,8 +31,8 @@ function guardarVianda(vianda) {
         [newVianda.name]: newVianda,
     }
     agregarViandaAlDropdown(newVianda);
-    console.log('Guardando vianda');    
-    infoAgregarVianda();
+    console.log('Guardando vianda');
+    agregarVianda();
 }
 
 function agregarViandaAlDropdown(vianda) {
