@@ -106,4 +106,27 @@ public class Colaborador {
     public void guardarAlertaSuscripcion(AlertaSuscripcion alertaSuscripcion) {
         this.getAlertaSuscripciones().add(alertaSuscripcion);
     }
+    public void guardarOfrecerProducto(OfrecerProducto ofrecerProducto) {
+        this.getOfrecerProductos().add(ofrecerProducto);
+    }
+    public void modificarPuntosPorCanje(Double puntaje) {
+        this.puntosDisponibles -= puntaje;
+        this.puntosCanjeados += puntaje;
+    }
+
+    public boolean tiene(TipoDeContacto tipoDeContacto) {
+        return this.mediosDeContacto.stream().anyMatch(medioDeContacto -> medioDeContacto.getTipo().equals(tipoDeContacto));
+    }
+
+    public String getValorDeContacto(TipoDeContacto tipoDeContacto) {
+        return this.mediosDeContacto.stream().filter(medioDeContacto -> medioDeContacto.getTipo().equals(tipoDeContacto)).findFirst().get().getValor();
+    }
+
+    public void agregarMedioDeContacto(MedioDeContacto medioDeContacto) {
+        this.mediosDeContacto.add(medioDeContacto);
+    }
+
+    public void quitarContactoDeTipo(TipoDeContacto tipoDeContacto) {
+        this.mediosDeContacto.removeIf(medioDeContacto -> medioDeContacto.getTipo().equals(tipoDeContacto));
+    }
 }

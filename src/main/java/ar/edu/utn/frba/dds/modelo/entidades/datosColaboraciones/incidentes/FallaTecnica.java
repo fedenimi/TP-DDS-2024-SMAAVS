@@ -6,6 +6,7 @@ import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateTimeConver
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Entity
 @Table(name = "falla_tecnica")
+@Setter
 public class FallaTecnica {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

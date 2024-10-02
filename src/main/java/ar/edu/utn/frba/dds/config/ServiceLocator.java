@@ -29,10 +29,6 @@ public class ServiceLocator {
                 ControladorHome instance = new ControladorHome();
                 instances.put(componentName, instance);
             }
-            else if (componentName.equals(ControladorFallaTecnica.class.getName())) {
-                ControladorFallaTecnica instance = new ControladorFallaTecnica(instanceOf(BuscadorDeTecnicos.class));
-                instances.put(componentName, instance);
-            }
             else if (componentName.equals(BuscadorDeTecnicos.class.getName())) {
                 BuscadorDeTecnicos instance = new BuscadorDeTecnicos();
                 instances.put(componentName, instance);
@@ -66,7 +62,7 @@ public class ServiceLocator {
                 instances.put(componentName, instance);
             }
             else if(componentName.equals(ControladorDonacionDeDinero.class.getName())) {
-                ControladorDonacionDeDinero instance = new ControladorDonacionDeDinero(instanceOf(RepositorioPuntuables.class));
+                ControladorDonacionDeDinero instance = new ControladorDonacionDeDinero(instanceOf(RepositorioPuntuables.class), instanceOf(RepositorioColaboradores.class));
                 instances.put(componentName, instance);
             }
             else if(componentName.equals(ControladorDonacionDeViandas.class.getName())) {
@@ -82,7 +78,7 @@ public class ServiceLocator {
                 instances.put(componentName, instance);
             }
             else if(componentName.equals(ControladorReportarFalla.class.getName())) {
-                ControladorReportarFalla instance = new ControladorReportarFalla(instanceOf(RepositorioFallasTecnicas.class), instanceOf(RepositorioHeladeras.class));
+                ControladorReportarFalla instance = new ControladorReportarFalla(instanceOf(RepositorioFallasTecnicas.class), instanceOf(RepositorioHeladeras.class), instanceOf(RepositorioColaboradores.class), instanceOf(BuscadorDeTecnicos.class));
                 instances.put(componentName, instance);
             }
             else if(componentName.equals(RepositorioFallasTecnicas.class.getName())) {
@@ -94,11 +90,11 @@ public class ServiceLocator {
                 instances.put(componentName, instance);
             }
             else if(componentName.equals(ControladorPersonaVulnerable.class.getName())) {
-                ControladorPersonaVulnerable instance = new ControladorPersonaVulnerable(instanceOf(RepositorioPersonasVulnerables.class));
+                ControladorPersonaVulnerable instance = new ControladorPersonaVulnerable(instanceOf(RepositorioPersonasVulnerables.class), instanceOf(RepositorioColaboradores.class), instanceOf(RepositorioPuntuables.class));
                 instances.put(componentName, instance);
             }
             else if(componentName.equals(ControladorSuscripciones.class.getName())) {
-                ControladorSuscripciones instance = new ControladorSuscripciones(instanceOf(RepositorioHeladeras.class));
+                ControladorSuscripciones instance = new ControladorSuscripciones(instanceOf(RepositorioHeladeras.class), instanceOf(RepositorioColaboradores.class));
                 instances.put(componentName, instance);
             }
             else if (componentName.equals(RepositorioRubros.class.getName())) {

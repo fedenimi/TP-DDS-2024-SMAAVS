@@ -1,9 +1,11 @@
 package ar.edu.utn.frba.dds.dtos;
 
 import lombok.Builder;
+import lombok.Setter;
 
 import java.util.List;
 @Builder
+@Setter
 public class ColaboradorDTO {
     private String id;
     private String tipoColaborador;

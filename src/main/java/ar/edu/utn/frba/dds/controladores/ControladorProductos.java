@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.dtos.RubroDTO;
 import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.OfrecerProducto;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Oferta;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Rubro;
+import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioColaboradores;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioOfrecerProductos;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioRubros;
@@ -98,16 +99,30 @@ public class ControladorProductos implements ICrudViewsHandler {
 
         nuevoProducto.setOferta(oferta);
         System.out.println("IdColab: " + context.pathParam("id"));
-        nuevoProducto.setColaborador(this.repositorioColaboradores.buscar(Long.valueOf(context.pathParam("id"))).get());
+        Colaborador colaborador = this.repositorioColaboradores.buscar(Long.valueOf(context.pathParam("id"))).get();
+        nuevoProducto.setColaborador(colaborador);
         System.out.println("Id3: " + context.formParam("id"));
+
         this.repositorioDeProductos.beginTransaction();
         this.repositorioDeProductos.guardar(nuevoProducto);
         this.repositorioDeProductos.commitTransaction();
+
+        colaborador.guardarOfrecerProducto(nuevoProducto);
+
         context.redirect("/"+context.pathParam("id")+"/home");
     }
 
     public void saveComprado(Context context) {
         System.out.println("Producto: " + context.formParam("producto"));
+
+        Colaborador colaborador = this.repositorioColaboradores.buscar(Long.valueOf(context.pathParam("id"))).get();
+        OfrecerProducto producto = this.repositorioDeProductos.buscar(Long.valueOf(context.formParam("producto"))).get();
+        colaborador.modificarPuntosPorCanje(producto.getOferta().getPuntajeMinimo());
+
+        repositorioDeProductos.beginTransaction();
+        repositorioDeProductos.eliminar(producto);
+        repositorioDeProductos.commitTransaction();
+
         context.redirect("/"+context.pathParam("id")+"/home");
     }
 

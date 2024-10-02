@@ -44,12 +44,12 @@ public class MainReportar {
         RepositorioDistribucionesViandas repoDist = new RepositorioDistribucionesViandas(distribucionesDeViandas);
 
         List<DonacionDeViandas> donacionesDeViandas = new ArrayList<>();
-        Vianda vianda1 = new Vianda(hel3);
-        Vianda vianda2 = new Vianda(hel3);
-        Vianda vianda3 = new Vianda(hel3);
-        Vianda vianda4 = new Vianda(hel3);
-        Vianda vianda5 = new Vianda(hel3);
-        Vianda vianda6 = new Vianda(hel3);
+        Vianda vianda1 = new Vianda();
+        Vianda vianda2 = new Vianda();
+        Vianda vianda3 = new Vianda();
+        Vianda vianda4 = new Vianda();
+        Vianda vianda5 = new Vianda();
+        Vianda vianda6 = new Vianda();
         donacionesDeViandas.add(new DonacionDeViandas(martin, Arrays.asList(vianda1, vianda1, vianda1, vianda1, vianda1), LocalDate.now()));
         donacionesDeViandas.add(new DonacionDeViandas(nico, Arrays.asList(vianda2, vianda3), LocalDate.now()));
         donacionesDeViandas.add(new DonacionDeViandas(juan, Arrays.asList(vianda4, vianda5), LocalDate.now()));

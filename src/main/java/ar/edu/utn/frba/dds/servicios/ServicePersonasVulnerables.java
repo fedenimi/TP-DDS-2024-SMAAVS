@@ -9,7 +9,7 @@ public class ServicePersonasVulnerables {
         return PersonaVulnerableDTO.builder().
                 id(personaVulnerable.getId().toString()).
                 nombre(personaVulnerable.getNombre()).
-                domicilio(personaVulnerable.getDomicilio()).
+                domicilio(personaVulnerable.getDomicilio().getDireccion()).
                 tipo_documento(personaVulnerable.getDocumento().getTipo().toString()).
                 num_documento(personaVulnerable.getDocumento().getNumero()).
                 fecha_de_nacimiento(personaVulnerable.getFechaDeNacimiento().toString()).

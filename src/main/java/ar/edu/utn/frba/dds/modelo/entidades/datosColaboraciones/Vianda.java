@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateConverter;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -11,6 +12,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Entity
 @Table(name = "vianda")
+@Setter
 public class Vianda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,10 +29,6 @@ public class Vianda {
     @JoinColumn(name = "colaborador_id")
     @Getter private Colaborador colaborador;
 
-    @ManyToOne
-    @JoinColumn(name = "heladera_id")
-    @Getter private Heladera heladera;
-
     @Column(name = "calorias", columnDefinition = "int")
     private Integer calorias;
 
@@ -40,7 +38,5 @@ public class Vianda {
     @Column(name = "entregada", columnDefinition = "smallint")
     private boolean entregada;
 
-    public Vianda(Heladera heladera) {
-        this.heladera = heladera;
-    }
+
 }
