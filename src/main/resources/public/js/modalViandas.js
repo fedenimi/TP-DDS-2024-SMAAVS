@@ -27,8 +27,12 @@ if (titleText) {
                     completarHeladerasInput("origen", heladeraSelected(), viandasSelected())
                     document.querySelector('.form-mapa-distribuir').submit()
                 } catch (e) {}
-                try {document.querySelector('.modal-info-heladera-viandas').classList.remove('open')} catch (e) {
-                    console.log(e)}
+                try {
+                    document.querySelector('.modal-info-heladera-viandas').classList.remove('open')
+                }
+                catch (e) {
+                    console.log(e)
+                }
                 dist1.forEach(dist => dist.classList.remove('dist1'));
                 dist1.forEach(dist => dist.classList.add('dist2'));
                 dist2.forEach(dist => dist.classList.remove('dist2'));

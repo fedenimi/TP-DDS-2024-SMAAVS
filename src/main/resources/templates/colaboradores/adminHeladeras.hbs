@@ -1,0 +1,106 @@
+{{#partial "home-estilos"}}
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/heladeras.css">
+{{/partial}}
+{{#partial "home-main"}}
+    <main class="admin-heladeras">
+        <h1>Usted tiene estas heladeras:</h1>
+        <div class="heladeras-mapa">
+            <section class="heladeras-dashboard">
+                <section class="heladeras-dashboard-scrollable">
+                    <div class="title">
+                        <h2>HELADERAS</h2>
+                        <hr>
+                    </div>
+                    <div class="heladeras-fallas-dashboard">
+                        <h2>Heladeras con fallas</h2>
+                        {{#each heladerasFallas}}
+                            <div>
+                                <div class="heladera">
+                                    <p>{{nombre}}</p>
+                                    <hr>
+                                    <p>{{cantidadViandas}}</p>
+                                    <p class="hidden">{{id}}</p>
+                                </div>
+                                <div class="dropdown-heladera">
+                                    <li>
+                                        <a href="">
+                                            <i class="fa-solid fa-pencil"></i>
+                                            <p>Modificar</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="eliminar-heladera">
+                                            <i class="fa-solid fa-trash"></i>
+                                            <p>Eliminar</p>
+                                        </a>
+                                    </li>
+                                </div>
+                            </div>
+                        {{/each}}
+                    </div>
+                    <div class="heladeras-sin-fallas-dashboard">
+                        <h2>Heladeras sin fallas</h2>
+                        {{#each heladeras}}
+                            <div>
+                                <div class="heladera">
+                                    <p>{{nombre}}</p>
+                                    <hr>
+                                    <p>{{cantidadViandas}}</p>
+                                    <p class="hidden">{{id}}</p>
+                                </div>
+                                <div class="dropdown-heladera">
+                                    <li>
+                                        <a href="">
+                                            <i class="fa-solid fa-pencil"></i>
+                                            <p>Modificar</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="eliminar-heladera">
+                                            <i class="fa-solid fa-trash"></i>
+                                            <p>Eliminar</p>
+                                        </a>
+                                    </li>
+                                </div>
+                            </div>
+                        {{/each}}
+                    </div>
+                </section>
+                <div class="boton-dashboard">
+                    <a href="home">
+                        Confirmar
+                    </a>
+                </div>
+            </section>
+            <section class="blurred-map">
+                <a href="/adminHeladeras">ABRIR MAPA</a>
+            </section>
+            <form class="hidden" method="POST" id="form-eliminar-heladera">
+                <input type="hidden" name="heladera" value="">
+            </form>
+        </div>
+    </main>
+{{/partial}}
+{{#partial "home-scripts"}}
+    <script src="/js/dropdownScript.js">
+    </script>
+    <script>
+        const heladeras = document.querySelectorAll('.heladera')
+        heladeras.forEach(heladera => {
+            heladera.addEventListener('click', () => {
+                handleDropdown(heladera)
+                document.querySelector('input[name=heladera]').value = heladera.children[3].innerText
+            });
+        });
+
+        document.querySelectorAll('.eliminar-heladera').forEach(eliminar => {
+            eliminar.addEventListener('click', () => {
+                document.querySelector('#form-eliminar-heladera').submit()
+            });
+        });
+
+    </script>
+{{/partial}}
+
+{{>templates/base/homeBase}}

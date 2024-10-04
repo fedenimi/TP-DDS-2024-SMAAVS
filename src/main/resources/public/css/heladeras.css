@@ -291,3 +291,11 @@ h1 {
         font-size: 30px;
     }
 }
+
+.hidden {
+    display: none;
+}
+
+.eliminar-heladera:hover {
+    cursor: pointer;
+}

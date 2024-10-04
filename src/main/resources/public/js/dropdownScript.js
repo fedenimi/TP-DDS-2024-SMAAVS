@@ -33,7 +33,7 @@ if (selectionBtn) {
                 });
                 item.classList.add('checked');
                 let btnText = document.querySelector('.dropdown-select-btn p');
-                btnText.innerHTML = item.children[0].innerHTML;
+                btnText.innerHTML = item.children[1].innerHTML;
             }
             if (item.classList.contains('closable')) {
                 selectionBtn.classList.toggle('open');
@@ -115,7 +115,7 @@ function listenerHeladeraBtn(heladera) {
 function handleDropdown(heladera) {
     if (dropdownsHeladera.length > 0) {
         dropdownsHeladera.forEach((dropdown, i) => {
-            if (dropdownsHeladera[i].previousElementSibling.children[0].innerHTML === heladera) {
+            if (dropdownsHeladera[i].previousElementSibling.children[0].innerHTML === heladera.children[0].innerHTML) {
                 dropdownsHeladera[i].classList.toggle('open');
             } else {
                 dropdownsHeladera[i].classList.remove('open');
