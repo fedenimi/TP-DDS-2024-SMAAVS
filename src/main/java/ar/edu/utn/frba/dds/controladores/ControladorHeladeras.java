@@ -12,6 +12,7 @@ import io.javalin.http.Context;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class ControladorHeladeras implements ICrudViewsHandler{
     private RepositorioHeladeras repositorioHeladeras;
@@ -23,12 +24,12 @@ public class ControladorHeladeras implements ICrudViewsHandler{
     public void index(Context context) {
         //PRETENDE DEVOLVER UNA VISTA QUE CONTENGA A TODOS LOS PRODUCTOS ALMACENADOS EN MI SISTEMA
         List<Heladera> heladeras = this.repositorioHeladeras.buscarTodos();
-        List<HeladeraDTO> heladerasDTO = (List<HeladeraDTO>) heladeras.stream().
+        List<HeladeraDTO> heladerasDTO = heladeras.stream().
                 filter(heladera -> !heladera.tieneFallas()).
-                map(heladera -> ServiceHeladeras.toHeladeraDTO(heladera));
-        List<HeladeraDTO> heladerasConFallasDTO = (List<HeladeraDTO>) heladeras.stream().
+                map(ServiceHeladeras::toHeladeraDTO).toList();
+        List<HeladeraDTO> heladerasConFallasDTO = heladeras.stream().
                 filter(Heladera::tieneFallas).
-                map(heladera -> ServiceHeladeras.toHeladeraDTO(heladera));
+                map(ServiceHeladeras::toHeladeraDTO).toList();
 
 
         Map<String, Object> model = new HashMap<>();
@@ -36,7 +37,7 @@ public class ControladorHeladeras implements ICrudViewsHandler{
         model.put("heladerasFallas", heladerasConFallasDTO);
         model.put("titulo", "Listado de heladeras");
 
-        context.render("heladeras/heladeras.hbs", model);
+        context.render("colaboradores/adminHeladeras.hbs", model);
     }
 
     @Override
@@ -66,6 +67,28 @@ public class ControladorHeladeras implements ICrudViewsHandler{
 
     @Override
     public void delete(Context context) {
+        //PRETENDE ELIMINAR UNA HELADERA DE MI SISTEMA
+        String id = context.formParam("heladera");
+        Optional<Heladera> heladera = this.repositorioHeladeras.buscar(Long.parseLong(id));
+        if(heladera.isEmpty()){
+            context.status(404);
+            return;
+        }
+        //TODO: eliminar las que tienen alertas
+        this.repositorioHeladeras.beginTransaction();
+        this.repositorioHeladeras.eliminar(heladera.get());
+        this.repositorioHeladeras.commitTransaction();
+        context.redirect("adminHeladeras");
+    }
 
+    public void abrirMapa(Context context) {
+        List<Heladera> heladeras = this.repositorioHeladeras.buscarTodos();
+        List<HeladeraDTO> heladerasDTO = heladeras.stream().
+                filter(heladera -> !heladera.tieneFallas()).
+                map(ServiceHeladeras::toHeladeraDTO).toList();
+        Map<String, Object> model = new HashMap<>();
+        model.put("heladeras", heladerasDTO);
+        model.put("titulo", "Listado de heladeras");
+        context.render("colaboradores/mapa/mapaAdminHeladeras.hbs", model);
     }
 }

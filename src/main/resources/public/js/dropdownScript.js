@@ -115,7 +115,7 @@ function listenerHeladeraBtn(heladera) {
 function handleDropdown(heladera) {
     if (dropdownsHeladera.length > 0) {
         dropdownsHeladera.forEach((dropdown, i) => {
-            if (dropdownsHeladera[i].previousElementSibling.children[0].innerHTML === heladera) {
+            if (dropdownsHeladera[i].previousElementSibling.children[0].innerHTML === heladera.children[0].innerHTML) {
                 dropdownsHeladera[i].classList.toggle('open');
             } else {
                 dropdownsHeladera[i].classList.remove('open');
