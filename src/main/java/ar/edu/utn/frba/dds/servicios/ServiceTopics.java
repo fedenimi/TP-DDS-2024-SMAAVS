@@ -36,17 +36,27 @@ public class ServiceTopics {
     }
 
     public static AlertaSuscripcion alertaSuscripcionPara(Colaborador suscriptor, Heladera heladera, CondicionSuscripcionHeladera condicionSuscripcionHeladera) {
-        AlertaSuscripcion.AlertaSuscripcionBuilder alertaSuscripcionBuilder = AlertaSuscripcion.builder().heladera(heladera);
         if (condicionSuscripcionHeladera instanceof FaltanNViandas) {
-            alertaSuscripcionBuilder.tipoNotificacion(TipoNotificacion.FALTAN_N_VIANDAS)
-                    .cantidad(heladera.getCapacidad() - heladera.getStock());
-        } else if (condicionSuscripcionHeladera instanceof QuedanNViandas) {
-            alertaSuscripcionBuilder.tipoNotificacion(TipoNotificacion.QUEDAN_N_VIANDAS)
-                    .cantidad(heladera.getStock());
-        } else if (condicionSuscripcionHeladera instanceof Desperfecto) {
-            alertaSuscripcionBuilder.tipoNotificacion(TipoNotificacion.DESPERFECTO);
-        }
-        return alertaSuscripcionBuilder.build();
+            int cantidad = heladera.getCapacidad() - heladera.getStock();
+            return AlertaSuscripcion.builder().
+              suscripcionHumana(ServiceSuscripcionesHumanas.suscripcionHumanaDe(suscriptor, heladera, TipoNotificacion.FALTAN_N_VIANDAS)).
+              descripcion_alerta("Faltan" + cantidad + "viandas para que se llene la heladera").
+              build();
 
+        } else if (condicionSuscripcionHeladera instanceof QuedanNViandas) {
+            return AlertaSuscripcion.builder().
+                suscripcionHumana(ServiceSuscripcionesHumanas.suscripcionHumanaDe(suscriptor, heladera, TipoNotificacion.QUEDAN_N_VIANDAS)).
+                descripcion_alerta("Quedan solamente" + heladera.getStock() + "viandas en la heladera").
+                build();
+
+        } else if (condicionSuscripcionHeladera instanceof Desperfecto) {
+            return AlertaSuscripcion.builder().
+                suscripcionHumana(ServiceSuscripcionesHumanas.suscripcionHumanaDe(suscriptor, heladera, TipoNotificacion.DESPERFECTO)).
+                descripcion_alerta("La heladera presenta un desperfecto de tipo" + heladera.getEstado().toString()).
+                build();
+        }
+        return null;
     }
+
+
 }

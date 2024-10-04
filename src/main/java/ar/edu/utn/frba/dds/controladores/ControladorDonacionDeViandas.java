@@ -5,6 +5,7 @@ import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.DonacionDeViandas;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Vianda;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
+import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.Suscripcion;
 import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.TipoNotificacion;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioColaboradores;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioHeladeras;
@@ -109,7 +110,6 @@ public class ControladorDonacionDeViandas implements ICrudViewsHandler{
         model.put("heladeras", heladerasDTO);
         context.render("colaboraciones/mapa/mapaDonarViandas.hbs", model);
     }
-
     public void guardarMapa(Context context) {
         context.redirect(context.formParam("heladera"));
     }

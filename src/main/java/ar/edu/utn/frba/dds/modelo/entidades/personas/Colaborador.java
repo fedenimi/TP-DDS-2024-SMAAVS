@@ -8,6 +8,7 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.formulario.FormularioR
 import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Punto;
 import ar.edu.utn.frba.dds.modelo.entidades.localizacion.RecomendadorDePuntos;
 import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.AlertaSuscripcion;
+import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.SuscripcionHumana;
 import lombok.*;
 
 import javax.persistence.*;
@@ -68,6 +69,10 @@ public class Colaborador {
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "colaborador_id")
     private List<AlertaSuscripcion> alertaSuscripciones;
+
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @JoinColumn(name = "colaborador_id")
+    private List<SuscripcionHumana> suscripciones;
 
     public Colaborador(TipoDeColaborador tipoDeColaborador, List<MedioDeContacto> mediosDeContacto,  Documento documento, String nombre, String apellido) {
         this.tipoDeColaborador = tipoDeColaborador;

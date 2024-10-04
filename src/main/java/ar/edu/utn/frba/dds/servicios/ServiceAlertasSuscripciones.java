@@ -5,11 +5,15 @@ import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.AlertaSuscripcion;
 
 public class ServiceAlertasSuscripciones {
     public static AlertaSuscripcionDTO toAlertaSuscripcionDTO(AlertaSuscripcion alertaSuscripcion) {
-        return AlertaSuscripcionDTO.builder()
+        AlertaSuscripcionDTO.AlertaSuscripcionDTOBuilder alertaSuscripcionBuilderDTO = AlertaSuscripcionDTO.builder()
                 .id(String.valueOf(alertaSuscripcion.getId()))
-                .tipoNotificacion(String.valueOf(alertaSuscripcion.getTipoNotificacion()))
-                .nombre_heladera(alertaSuscripcion.getHeladera().getDireccion().getNombre_direccion())
-                .cantidad(String.valueOf(alertaSuscripcion.getCantidad()))
-                .build();
+                .tipoNotificacion(alertaSuscripcion.getSuscripcionHumana().getTipoNotificacion().name())
+                .nombre_heladera(alertaSuscripcion.getSuscripcionHumana().getHeladera().getDireccion().getNombre_direccion())
+                .descripcion(alertaSuscripcion.getDescripcion_alerta());
+
+        if (alertaSuscripcion.getSuscripcionHumana().getCantidad() != null) {
+            alertaSuscripcionBuilderDTO.cantidad(String.valueOf(alertaSuscripcion.getSuscripcionHumana().getCantidad()));
+        }
+        return alertaSuscripcionBuilderDTO.build();
     }
 }

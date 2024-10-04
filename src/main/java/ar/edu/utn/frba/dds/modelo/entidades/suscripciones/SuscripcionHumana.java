@@ -9,20 +9,24 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Builder
-@Table(name= "alerta_suscripcion")
+@Table(name= "suscripcion_humana")
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class AlertaSuscripcion {
+public class SuscripcionHumana {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "topic_id")
-    private SuscripcionHumana suscripcionHumana;
+    @Enumerated(EnumType.STRING)
+    private TipoNotificacion tipoNotificacion;
 
-    @Column(name = "descripcion_alerta", columnDefinition = "TEXT")
-    private String descripcion_alerta;
+    @ManyToOne
+    @JoinColumn(name = "heladera_id")
+    private Heladera heladera;
+
+    @Column(name = "cantidad", columnDefinition = "int")
+    private Integer cantidad;
 }
+

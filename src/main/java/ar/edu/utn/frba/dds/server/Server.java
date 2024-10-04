@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.server;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.Initializer;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.JavalinRenderer;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.PrettyProperties;
+import ar.edu.utn.frba.dds.server.handlers.AppHandlers;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
 import io.javalin.Javalin;
@@ -26,6 +27,9 @@ public class Server {
             Integer port = Integer.parseInt(PrettyProperties.getInstance().propertyFromName("server_port"));
             System.out.println("Iniciando servidor en puerto " + port);
             app = Javalin.create(config()).start(port);
+
+            //AuthMiddleware.apply(app);
+            AppHandlers.applyHandlers(app);
             Router.init(app);
 
             if (Boolean.parseBoolean(PrettyProperties.getInstance().propertyFromName("dev_mode"))) {
