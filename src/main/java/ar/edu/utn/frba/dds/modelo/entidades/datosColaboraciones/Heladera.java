@@ -21,7 +21,7 @@ import java.util.List;
 @Getter
 public class Heladera{
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter private Long id;
 
     @ManyToOne(cascade = {CascadeType.PERSIST})

@@ -27,22 +27,26 @@ public class InstanciadorColaborador {
         if (colaboradorOptional.isPresent()) {
             colaborador = colaboradorOptional.get();
         } else {
-            colaborador = new Colaborador(TipoDeColaborador.HUMANA, mediosDeContacto, new Documento("12123123", TipoDocumento.DNI), colaboradorDO.getNombre(), colaboradorDO.getApellido());
+            colaborador = new Colaborador(TipoDeColaborador.HUMANA, mediosDeContacto, new Documento(colaboradorDO.getDoc(), TipoDocumento.DNI), colaboradorDO.getNombre(), colaboradorDO.getApellido());
             colaboradores.add(colaborador);
             enviador.enviar(colaboradorDO.getMedioDeContacto().getValor(), "Nuevo Registro",
                     "Hola " + colaboradorDO.getNombre() + ", muchas gracias por colaborar!\n" +
                             "Tu contraseña de ingreso es "+"password"+" y tu usuario es " + colaboradorDO.getNombre()
             );
-            ServiceLocator.instanceOf(RepositorioColaboradores.class).guardar(colaborador);
-        }
+            colaboradores.add(colaborador);
+            RepositorioColaboradores repositorioColaboradores = ServiceLocator.instanceOf(RepositorioColaboradores.class);
+            repositorioColaboradores.beginTransaction();
+            repositorioColaboradores.guardar(colaborador);
+            repositorioColaboradores.commitTransaction();
+            }
         return colaborador;
     }
 
 
     private Optional<Colaborador> colaboradorCon(String tipoDoc, String doc, List<Colaborador> colaboradores) {
         return colaboradores.stream()
-                .filter(colaborador -> colaborador.getDocumento().getTipo().equals(tipoDoc) &&
-                        colaborador.getDocumento().equals(doc))
+                .filter(colaborador -> colaborador.getDocumento().getNumero().equals(doc) &&
+                        colaborador.getDocumento().getTipo().toString().equals(tipoDoc))
                 .findFirst();
     }
 

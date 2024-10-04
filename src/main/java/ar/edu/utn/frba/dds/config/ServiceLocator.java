@@ -33,7 +33,7 @@ public class ServiceLocator {
                 instances.put(componentName, instance);
             }
             else if (componentName.equals(ControladorRegistro.class.getName())) {
-                ControladorRegistro instance = new ControladorRegistro();
+                ControladorRegistro instance = new ControladorRegistro(instanceOf(RepositorioColaboradores.class));
                 instances.put(componentName, instance);
             }
             else if(componentName.equals(RepositorioOfrecerProductos.class.getName())) {

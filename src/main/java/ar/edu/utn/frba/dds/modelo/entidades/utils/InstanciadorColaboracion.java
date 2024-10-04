@@ -1,25 +1,52 @@
 package ar.edu.utn.frba.dds.modelo.entidades.utils;
 
+import ar.edu.utn.frba.dds.config.ServiceLocator;
 import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.*;
+import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.frecuencia.Frecuencia;
+import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.frecuencia.Unica;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
+import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioPuntuables;
 
 import java.util.ArrayList;
 
 public class InstanciadorColaboracion {
+
     public void agregarColaboracion(ArrayList<Puntuable> contribuciones, String formaColaboracion, Colaborador colaborador, int cantidad) {
+        RepositorioPuntuables repositorioPuntuables = ServiceLocator.instanceOf(RepositorioPuntuables.class);
         switch(formaColaboracion) {
             case "DINERO":
-                contribuciones.add(new DonacionDeDinero(cantidad, colaborador));
+                DonacionDeDinero donacionDeDinero = DonacionDeDinero.builder().monto(cantidad).frecuencia(new Unica()).build();
+                donacionDeDinero.setColaborador(colaborador);
+                contribuciones.add(donacionDeDinero);
+                repositorioPuntuables.beginTransaction();
+                repositorioPuntuables.guardar(donacionDeDinero);
+                repositorioPuntuables.commitTransaction();
+                colaborador.agregarPuntuable(donacionDeDinero);
                 break;
             case "DONACION_VIANDAS":
-                contribuciones.add(new DonacionDeViandas(colaborador));
+                DonacionDeViandas donacionDeViandas = new DonacionDeViandas(colaborador);
+                contribuciones.add(donacionDeViandas);
+                repositorioPuntuables.beginTransaction();
+                repositorioPuntuables.guardar(donacionDeViandas);
+                repositorioPuntuables.commitTransaction();
+                colaborador.agregarPuntuable(donacionDeViandas);
                 break;
             case "REDISTRIBUCION_VIANDAS":
-                contribuciones.add(new DistribucionDeViandas(cantidad, colaborador));
+                DistribucionDeViandas distribucionDeViandas = new DistribucionDeViandas(cantidad, colaborador);
+                contribuciones.add(distribucionDeViandas);
+                repositorioPuntuables.beginTransaction();
+                repositorioPuntuables.guardar(distribucionDeViandas);
+                repositorioPuntuables.commitTransaction();
+                colaborador.agregarPuntuable(distribucionDeViandas);
                 break;
             case "ENTREGA_TARJETAS":
                 for (int i = 0; i < cantidad; i++) {
-                    contribuciones.add(new RegistroDePersonasVulnerables(colaborador));
+                    RegistroDePersonasVulnerables registroDePersonasVulnerables = new RegistroDePersonasVulnerables(colaborador);
+                    contribuciones.add(registroDePersonasVulnerables);
+                    repositorioPuntuables.beginTransaction();
+                    repositorioPuntuables.guardar(registroDePersonasVulnerables);
+                    repositorioPuntuables.commitTransaction();
+                    colaborador.agregarPuntuable(registroDePersonasVulnerables);
                 }
                 break;
         }

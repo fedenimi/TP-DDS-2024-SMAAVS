@@ -3,10 +3,16 @@ package ar.edu.utn.frba.dds.servicios;
 import ar.edu.utn.frba.dds.dtos.ColaboradorDTO;
 import ar.edu.utn.frba.dds.dtos.FormasDeColaborarDO;
 import ar.edu.utn.frba.dds.dtos.MediosDeContactoDO;
-import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.FormaColaboracion;
-import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.MedioDeContacto;
-import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.TipoDeContacto;
+import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.*;
+import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.formulario.Formulario;
+import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.formulario.FormularioRespondido;
+import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.formulario.Pregunta;
+import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.formulario.Respuesta;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
+import io.javalin.http.Context;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ServiceColaboradores {
     public static ColaboradorDTO toColaboradorDTO(Colaborador colaborador) {
@@ -54,5 +60,62 @@ public class ServiceColaboradores {
             colaborador.quitarContactoDeTipo(TipoDeContacto.WHATSAPP);
             colaborador.agregarMedioDeContacto(new MedioDeContacto(mediosDeContactoDO.getWhatsapp(), TipoDeContacto.WHATSAPP));
         }
+        }
+
+        public static void setearFormularioRespondido(Colaborador colaborador, Context context) {
+            //Setear el formulario
+            Formulario formulario = new Formulario();
+            List<Respuesta> respuestas = new ArrayList<>();
+            if(context.formParam("fechaDeNacimiento") != null) {
+                Pregunta preguntaFechaNac = new Pregunta("Fecha de nacimiento");
+                formulario.agregarPregunta(preguntaFechaNac);
+                Respuesta respuestaFechaNac = Respuesta.builder().pregunta(preguntaFechaNac).respuesta(context.formParam("fechaDeNacimiento")).build();
+                respuestas.add(respuestaFechaNac);
+            }
+            if(context.formParam("direccion") != null) {
+                Pregunta preguntaDireccion = new Pregunta("Direccion");
+                formulario.agregarPregunta(preguntaDireccion);
+                Respuesta respuestaDireccion = Respuesta.builder().pregunta(preguntaDireccion).respuesta(context.formParam("direccion")).build();
+                respuestas.add(respuestaDireccion);
+            }
+            FormularioRespondido formularioRespondido = FormularioRespondido.builder().
+                    formulario(formulario).
+                    respuestas(respuestas).
+                    build();
+            colaborador.setFormularioRespondido(formularioRespondido);
+        }
+
+        public static Colaborador crearColaboradorHumano(Context context) {
+            Colaborador colaborador = new Colaborador();
+            // Setear valores básicos
+            colaborador.setNombre(context.formParam("nombre"));
+            colaborador.setApellido(context.formParam("apellido"));
+            //colaborador.setDocumento(Documento.builder().numero(context.formParam("documento")).tipo(TipoDocumento.valueOf(context.formParam("tipoDocumento"))).build());
+            colaborador.setTipoDeColaborador(TipoDeColaborador.HUMANA);
+            if(context.formParam("telefono") != null) {
+                colaborador.agregarMedioDeContacto(MedioDeContacto.builder().tipo(TipoDeContacto.TELEFONO).valor(context.formParam("telefono")).build());
+            }
+            if(context.formParam("email") != null) {
+                colaborador.agregarMedioDeContacto(MedioDeContacto.builder().tipo(TipoDeContacto.MAIL).valor(context.formParam("email")).build());
+            }
+            if(context.formParam("whatsapp") != null) {
+                colaborador.agregarMedioDeContacto(MedioDeContacto.builder().tipo(TipoDeContacto.WHATSAPP).valor(context.formParam("whatsapp")).build());
+            }
+            if(context.formParam("donarDinero") != null) {
+                colaborador.agregarFormaDeColaborar(FormaColaboracion.DONACION_DINERO);
+            }
+            if(context.formParam("donarViandas") != null) {
+                colaborador.agregarFormaDeColaborar(FormaColaboracion.DONACION_VIANDAS);
+            }
+            if(context.formParam("distribuirViandas") != null) {
+                colaborador.agregarFormaDeColaborar(FormaColaboracion.DISTRIBUCION_VIANDAS);
+            }
+
+            ServiceColaboradores.setearFormularioRespondido(colaborador, context);
+            return colaborador;
+        }
+
+        public static Colaborador crearColaboradorJuridico(Context context) {
+        return null;
         }
 }
