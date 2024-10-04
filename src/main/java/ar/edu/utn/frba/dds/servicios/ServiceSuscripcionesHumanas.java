@@ -15,7 +15,10 @@ public class ServiceSuscripcionesHumanas {
         SuscripcionHumanaDTO.SuscripcionHumanaDTOBuilder suscripcionHumanaBuilderDTO = SuscripcionHumanaDTO.builder()
                 .id(String.valueOf(suscripcionHumana.getId()))
                 .tipoNotificacion(suscripcionHumana.getTipoNotificacion().name())
-                .nombre_heladera(suscripcionHumana.getHeladera().getDireccion().getNombre_direccion());
+                .nombreHeladera(suscripcionHumana.getHeladera().getDireccion().getNombre_direccion())
+                .direccion(suscripcionHumana.getHeladera().getDireccion().getNombre_direccion())
+                .latitud(suscripcionHumana.getHeladera().getDireccion().getPunto().getLatitud().toString())
+                .longitud(suscripcionHumana.getHeladera().getDireccion().getPunto().getLongitud().toString());
 
         if (suscripcionHumana.getCantidad() != null) {
             suscripcionHumanaBuilderDTO.cantidad(String.valueOf(suscripcionHumana.getCantidad()));

@@ -15,10 +15,10 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.TipoDocumento;
 import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Direccion;
 import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Punto;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
-import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioAlertas;
-import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioColaboradores;
-import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioHeladeras;
-import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioOfrecerProductos;
+import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.AlertaSuscripcion;
+import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.SuscripcionHumana;
+import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.TipoNotificacion;
+import ar.edu.utn.frba.dds.modelo.repositorios.*;
 
 import javax.print.Doc;
 import java.time.LocalDateTime;
@@ -65,9 +65,16 @@ public class Initializer {
                 .aperturas(null)
                 .solicitudAperturas(null)
                 .visitaTecnicas(null)
-                .direccion(Direccion.builder().nombre_direccion("Av. Belgrano 1234").punto(Punto.builder().latitud(-34.6037).longitud(-58.3816).build()).direccion("Av. Belgrano 1234").build())
+                .direccion(Direccion.builder().nombre_direccion("Av. Belgrano 1234").punto(Punto.builder().latitud(-35.1234).longitud(-58.3016).build()).direccion("Av. Belgrano 1234").build())
                 .modeloHeladera(ModeloHeladera.builder().nombre("Heladera Whirlpool").temperaturaMinima(0.0).temperaturaMaxima(10.0).build())
                 .build();
+
+        SuscripcionHumana suscripcionHumana1 = SuscripcionHumana.builder().cantidad(5).heladera(heladera1).tipoNotificacion(TipoNotificacion.FALTAN_N_VIANDAS).build();
+        SuscripcionHumana suscripcionHumana2 = SuscripcionHumana.builder().cantidad(3).heladera(heladera2).tipoNotificacion(TipoNotificacion.QUEDAN_N_VIANDAS).build();
+        SuscripcionHumana suscripcionHumana3 = SuscripcionHumana.builder().heladera(heladera3).tipoNotificacion(TipoNotificacion.DESPERFECTO).build();
+        AlertaSuscripcion alertaSuscripcion1 = AlertaSuscripcion.builder().suscripcionHumana(suscripcionHumana1).descripcion_alerta("Faltan 5 viandas").build();
+        AlertaSuscripcion alertaSuscripcion2 = AlertaSuscripcion.builder().suscripcionHumana(suscripcionHumana2).descripcion_alerta("Quedan 3 viandas").build();
+        AlertaSuscripcion alertaSuscripcion3 = AlertaSuscripcion.builder().suscripcionHumana(suscripcionHumana3).descripcion_alerta("Sufrió un desperfecto").build();
 
         Colaborador colaborador1 = Colaborador.builder().
                 nombre("Juan").
@@ -77,6 +84,8 @@ public class Initializer {
                 documento(Documento.builder().numero("12345678").tipo(TipoDocumento.DNI).build()).
                 tipoDeColaborador(TipoDeColaborador.HUMANA).
                 formasDeColaborar(Arrays.asList(FormaColaboracion.DISTRIBUCION_VIANDAS, FormaColaboracion.DONACION_VIANDAS)).
+                suscripciones(Arrays.asList(suscripcionHumana1, suscripcionHumana2,suscripcionHumana3)).
+                alertaSuscripciones(Arrays.asList(alertaSuscripcion1, alertaSuscripcion2, alertaSuscripcion3)).
                 build();
 
         Rubro rubro1 = Rubro.builder().nombre("Gastronomia").build();
@@ -108,7 +117,6 @@ public class Initializer {
         Alerta alerta2 = Alerta.builder().tipoAlerta(Estado.FALLA_CONEXION).fechaYHora(LocalDateTime.now()).heladera(heladera2).build();
 
         RepositorioHeladeras repositorioDeHeladeras = ServiceLocator.instanceOf(RepositorioHeladeras.class);
-
         repositorioDeHeladeras.beginTransaction();
         repositorioDeHeladeras.guardar(heladera1);
         repositorioDeHeladeras.guardar(heladera2);
@@ -116,14 +124,12 @@ public class Initializer {
         repositorioDeHeladeras.commitTransaction();
 
         RepositorioColaboradores repositorioDeColaboradores = ServiceLocator.instanceOf(RepositorioColaboradores.class);
-
         repositorioDeColaboradores.beginTransaction();
         repositorioDeColaboradores.guardar(colaborador1);
         repositorioDeColaboradores.guardar(colaborador2);
         repositorioDeColaboradores.commitTransaction();
 
         RepositorioOfrecerProductos repositorioDeOfrecerProductos = ServiceLocator.instanceOf(RepositorioOfrecerProductos.class);
-
         repositorioDeOfrecerProductos.beginTransaction();
         repositorioDeOfrecerProductos.guardar(ofrecerProducto1);
         repositorioDeOfrecerProductos.guardar(ofrecerProducto2);
@@ -131,12 +137,17 @@ public class Initializer {
         repositorioDeOfrecerProductos.commitTransaction();
 
         RepositorioAlertas repositorioAlertas = ServiceLocator.instanceOf(RepositorioAlertas.class);
-
         repositorioAlertas.beginTransaction();
         repositorioAlertas.guardar(alerta1);
         repositorioAlertas.guardar(alerta2);
         repositorioAlertas.commitTransaction();
 
+        RepositorioAlertaSuscripciones repositorioAlertaSuscripciones = ServiceLocator.instanceOf(RepositorioAlertaSuscripciones.class);
+        repositorioAlertaSuscripciones.beginTransaction();
+        repositorioAlertaSuscripciones.guardar(alertaSuscripcion1);
+        repositorioAlertaSuscripciones.guardar(alertaSuscripcion2);
+        repositorioAlertaSuscripciones.guardar(alertaSuscripcion3);
+        repositorioAlertaSuscripciones.commitTransaction();
 
     }
 }

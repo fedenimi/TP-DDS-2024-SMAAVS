@@ -8,8 +8,11 @@ public class ServiceAlertasSuscripciones {
         AlertaSuscripcionDTO.AlertaSuscripcionDTOBuilder alertaSuscripcionBuilderDTO = AlertaSuscripcionDTO.builder()
                 .id(String.valueOf(alertaSuscripcion.getId()))
                 .tipoNotificacion(alertaSuscripcion.getSuscripcionHumana().getTipoNotificacion().name())
-                .nombre_heladera(alertaSuscripcion.getSuscripcionHumana().getHeladera().getDireccion().getNombre_direccion())
-                .descripcion(alertaSuscripcion.getDescripcion_alerta());
+                .nombreHeladera(alertaSuscripcion.getSuscripcionHumana().getHeladera().getDireccion().getNombre_direccion())
+                .descripcion(alertaSuscripcion.getDescripcion_alerta())
+                .direccion(alertaSuscripcion.getSuscripcionHumana().getHeladera().getDireccion().getDireccion())
+                .latitud(String.valueOf(alertaSuscripcion.getSuscripcionHumana().getHeladera().getDireccion().getPunto().getLatitud()))
+                .longitud(String.valueOf(alertaSuscripcion.getSuscripcionHumana().getHeladera().getDireccion().getPunto().getLongitud()));
 
         if (alertaSuscripcion.getSuscripcionHumana().getCantidad() != null) {
             alertaSuscripcionBuilderDTO.cantidad(String.valueOf(alertaSuscripcion.getSuscripcionHumana().getCantidad()));

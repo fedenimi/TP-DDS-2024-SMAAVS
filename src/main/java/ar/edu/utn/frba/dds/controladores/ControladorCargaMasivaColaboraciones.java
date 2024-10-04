@@ -1,14 +1,25 @@
 package ar.edu.utn.frba.dds.controladores;
 
+import ar.edu.utn.frba.dds.config.ServiceLocator;
+import ar.edu.utn.frba.dds.modelo.entidades.enviadores.EnviadorDeMail;
+import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
+import ar.edu.utn.frba.dds.modelo.entidades.utils.InstanciadorColaborador;
+import ar.edu.utn.frba.dds.modelo.entidades.utils.archivos.LectorCSV;
+import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioColaboradores;
+import ar.edu.utn.frba.dds.modelo.repositorios.interfaces.IRepositorioColaboradores;
 import ar.edu.utn.frba.dds.server.Router;
 import io.javalin.http.Context;
 import io.javalin.http.UploadedFile;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
+import java.util.List;
 
-public class ControladorCargaMasivaColaboraciones implements ICrudViewsHandler{
+public class ControladorCargaMasivaColaboraciones implements ICrudViewsHandler {
+    RepositorioColaboradores repositorioColaboradores;
+
+    public ControladorCargaMasivaColaboraciones(RepositorioColaboradores repositorioColaboradores) {
+        this.repositorioColaboradores = repositorioColaboradores;
+    }
     @Override
     public void index(Context context) {
 
@@ -25,18 +36,28 @@ public class ControladorCargaMasivaColaboraciones implements ICrudViewsHandler{
     }
 
     @Override
-    public void save(Context context) {
-        UploadedFile file = context.uploadedFile("file");
-        File file1 = new File("src/main/resources/" + file.filename());
+    public void save(Context context) throws Exception {
+        UploadedFile uploadedFile = context.uploadedFile("csv");
+        File file = new File("src/main/resources/" + uploadedFile.filename());
         try {
-            file1.createNewFile();
-            OutputStream os = context.outputStream();
-            os.write(file.content().readAllBytes());
-            os.close();
+            saveUploadedFile(uploadedFile.content(), file);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Error al guardar el archivo: " + e.getMessage());
         }
+        List<Colaborador> colaboradores = ServiceLocator.instanceOf(RepositorioColaboradores.class).buscarTodos();
+        LectorCSV lectorCSV = new LectorCSV(new InstanciadorColaborador(new EnviadorDeMail()));
+        lectorCSV.cargarContribuciones(colaboradores, file);
+        file.delete();
+    }
 
+    private void saveUploadedFile(InputStream uploadedFileStream, File fileToSave) throws IOException {
+        try (FileOutputStream fos = new FileOutputStream(fileToSave)) {
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = uploadedFileStream.read(buffer)) != -1) {
+                fos.write(buffer, 0, bytesRead);
+            }
+        }
     }
 
     @Override

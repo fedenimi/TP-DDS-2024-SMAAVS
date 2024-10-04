@@ -21,7 +21,7 @@
                         <h1 class="grey open">No tiene ninguna suscripción</h1>
                     {{/unless}}
                     <div class="heladeras-fallas-dashboard">
-                        {{#if heladeraQuedan}}
+                        {{#if heladerasQuedan}}
                             <div class="suscripciones-title">
                                 <h2>Heladera</h2>
                                 <h2>Viandas restantes</h2>
@@ -29,9 +29,10 @@
                         {{/if}}
                         {{#each heladerasQuedan}}
                             <div class="heladera">
-                                <p>{{nombre}}</p>
+                                <p>{{this.nombreHeladera}}</p>
                                 <hr>
-                                <p>{{descripcion}}</p>
+                                <p>Quedan {{this.cantidad}} viandas</p>
+                                <p class="hidden">{{this.id}}</p>
                             </div>
                             <div class="dropdown-heladera">
                                 <li>
@@ -42,7 +43,7 @@
                                 </li>
                                 <li>
                                     <a href="">
-                                        <i class="fa-solid fa-trash"></i>
+                                        <i class="fa-solid fa-trash eliminar-suscripcion"></i>
                                         <p>Eliminar</p>
                                     </a>
                                 </li>
@@ -58,9 +59,10 @@
                         {{/if}}
                         {{#each heladerasFaltan}}
                             <div class="heladera">
-                                <p>{{nombre}}</p>
+                                <p>{{nombreHeladera}}</p>
                                 <hr>
-                                <p>{{descripcion}}</p>
+                                <p>Faltan {{this.cantidad}} viandas</p>
+                                <p class="hidden">{{this.id}}</p>
                             </div>
                             <div class="dropdown-heladera">
                                 <li>
@@ -71,7 +73,7 @@
                                 </li>
                                 <li>
                                     <a href="">
-                                        <i class="fa-solid fa-trash"></i>
+                                        <i class="fa-solid fa-trash eliminar-suscripcion"></i>
                                         <p>Eliminar</p>
                                     </a>
                                 </li>
@@ -87,9 +89,10 @@
                         {{/if}}
                         {{#each heladerasDesp}}
                             <div class="heladera">
-                                <p>{{nombre}}</p>
+                                <p>{{nombreHeladera}}</p>
                                 <hr>
-                                <p>{{descripcion}}</p>
+                                <p>Desperfecto</p>
+                                <p class="hidden">{{this.id}}</p>
                             </div>
                             <div class="dropdown-heladera">
                                 <li>
@@ -100,7 +103,7 @@
                                 </li>
                                 <li>
                                     <a href="">
-                                        <i class="fa-solid fa-trash"></i>
+                                        <i class="fa-solid fa-trash eliminar-suscripcion"></i>
                                         <p>Eliminar</p>
                                     </a>
                                 </li>
@@ -115,6 +118,9 @@
             <section class="blurred-map">
                 <a href="suscripciones/mapa">AGREGAR SUSCRIPCIONES</a>
             </section>
+            <form class="hidden" method="POST" id="form-eliminar-suscripcion">
+                <input type="hidden" name="suscripcion" value="">
+            </form>
         </div>
     </main>
 {{/partial}}
@@ -122,7 +128,22 @@
     <script src="/js/heladeras.js"></script>
     <script src="/js/dropdownScript.js"></script>
     <script src="/js/modalViandas.js"></script>
-    <script src="/js/alertas.js"></script>
+    <script>
+        const heladeras = document.querySelectorAll('.heladera')
+        heladeras.forEach(heladera => {
+            heladera.addEventListener('click', () => {
+                handleDropdown(heladera)
+                document.querySelector('input[name=suscripcion]').value = heladera.children[3].innerText
+            });
+        });
+
+        document.querySelectorAll('.eliminar-suscripcion').forEach(eliminar => {
+            eliminar.addEventListener('click', () => {
+                document.querySelector('#form-eliminar-suscripcion').submit()
+            });
+        });
+
+    </script>
 {{/partial}}
 
 {{> templates/base/homeBase}}
