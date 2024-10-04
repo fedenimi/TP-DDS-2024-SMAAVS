@@ -101,6 +101,10 @@ public class ServiceLocator {
                 RepositorioRubros instance = new RepositorioRubros();
                 instances.put(componentName, instance);
             }
+            else if(componentName.equals(RepositorioSuscripciones.class.getName())) {
+                RepositorioSuscripciones instance = new RepositorioSuscripciones();
+                instances.put(componentName, instance);
+            }
         }
 
         return (T) instances.get(componentName);

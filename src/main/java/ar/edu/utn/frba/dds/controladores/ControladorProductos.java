@@ -8,6 +8,7 @@ import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioColaboradores;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioOfrecerProductos;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioRubros;
+import ar.edu.utn.frba.dds.server.Router;
 import ar.edu.utn.frba.dds.servicios.ServiceProducto;
 import ar.edu.utn.frba.dds.servicios.ServiceRubro;
 import io.javalin.http.Context;

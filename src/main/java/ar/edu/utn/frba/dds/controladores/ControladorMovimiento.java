@@ -40,7 +40,7 @@ public class ControladorMovimiento {
 
         Alerta fraude = CreadorAlerta.getInstance().crearAlerta(heladera, Estado.FRAUDE);
 
-        RepositorioAlertas.getInstance().guardar(fraude);
+        ServiceLocator.instanceOf(RepositorioAlertas.class).guardar(fraude);
         ServiceTopics.accionarTopic(heladera, TipoNotificacion.DESPERFECTO);
     }
 }

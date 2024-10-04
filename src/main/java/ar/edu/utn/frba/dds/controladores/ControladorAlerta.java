@@ -26,9 +26,9 @@ public class ControladorAlerta implements ICrudViewsHandler {
         Colaborador colaborador = repositorioColaboradores.buscar(Long.valueOf(context.pathParam("id"))).get();
         ColaboradorDTO colaboradorDTO = ServiceColaboradores.toColaboradorDTO(colaborador);
         //colaboradorDTO.setAlertasSuscripcionDTO(colaborador.getAlertaSuscripciones().stream().map(ServiceAlertasSuscripciones::toAlertaSuscripcionDTO).toList());
-        List<AlertaSuscripcion> faltanNViandas = colaborador.getAlertaSuscripciones().stream().filter(alerta -> alerta.getTipoNotificacion().equals(TipoNotificacion.FALTAN_N_VIANDAS)).toList();
-        List<AlertaSuscripcion> quedanNViandas = colaborador.getAlertaSuscripciones().stream().filter(alerta -> alerta.getTipoNotificacion().equals(TipoNotificacion.QUEDAN_N_VIANDAS)).toList();
-        List<AlertaSuscripcion> desperfectos= colaborador.getAlertaSuscripciones().stream().filter(alerta -> alerta.getTipoNotificacion().equals(TipoNotificacion.DESPERFECTO)).toList();
+        List<AlertaSuscripcion> faltanNViandas = colaborador.getAlertaSuscripciones().stream().filter(alerta -> alerta.getSuscripcionHumana().getTipoNotificacion().equals(TipoNotificacion.FALTAN_N_VIANDAS)).toList();
+        List<AlertaSuscripcion> quedanNViandas = colaborador.getAlertaSuscripciones().stream().filter(alerta -> alerta.getSuscripcionHumana().getTipoNotificacion().equals(TipoNotificacion.QUEDAN_N_VIANDAS)).toList();
+        List<AlertaSuscripcion> desperfectos= colaborador.getAlertaSuscripciones().stream().filter(alerta -> alerta.getSuscripcionHumana().getTipoNotificacion().equals(TipoNotificacion.DESPERFECTO)).toList();
 
         Map<String, Object> model = new HashMap<>();
         model.put("colaborador", colaboradorDTO);
