@@ -45,7 +45,7 @@ public class Router {
         app.get("{id}/alertas", ServiceLocator.instanceOf(ControladorAlerta.class)::index);
         app.get("{id}/alertas/mapa", ServiceLocator.instanceOf(ControladorAlerta.class)::abrirMapa);
 
-        app.get("{id}/suscripciones", ServiceLocator.instanceOf(ControladorSuscripciones.class)::index);
+        app.get("{id}/suscripciones", ServiceLocator.instanceOf(ControladorSuscripciones.class)::show);
         app.get("{id}/suscripciones/mapa", ServiceLocator.instanceOf(ControladorSuscripciones.class)::abrirMapa);
 
         //app.get("{id}/archivos/cargarCSV", ServiceLocator.instanceOf(ControladorCargaMasivaColaboraciones.class)::create);

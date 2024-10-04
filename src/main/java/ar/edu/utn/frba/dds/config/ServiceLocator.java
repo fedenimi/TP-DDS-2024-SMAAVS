@@ -26,7 +26,7 @@ public class ServiceLocator {
                 instances.put(componentName, instance);
             }
             else if (componentName.equals(ControladorHome.class.getName())) {
-                ControladorHome instance = new ControladorHome();
+                ControladorHome instance = new ControladorHome(instanceOf(RepositorioColaboradores.class));
                 instances.put(componentName, instance);
             }
             else if (componentName.equals(BuscadorDeTecnicos.class.getName())) {
@@ -74,7 +74,7 @@ public class ServiceLocator {
                 instances.put(componentName, instance);
             }
             else if(componentName.equals(ControladorAlerta.class.getName())) {
-                ControladorAlerta instance = new ControladorAlerta(instanceOf(RepositorioAlertas.class));
+                ControladorAlerta instance = new ControladorAlerta(instanceOf(RepositorioColaboradores.class));
                 instances.put(componentName, instance);
             }
             else if(componentName.equals(ControladorReportarFalla.class.getName())) {
