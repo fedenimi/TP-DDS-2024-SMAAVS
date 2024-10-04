@@ -9,4 +9,5 @@ function definirHeladeras() {
             direccion: heladera.children[5].innerText
         }
     })
+    console.log(heladerasTotales)
 }

@@ -70,7 +70,7 @@ public class MainReportar {
         alertas.add(alerta3);
         RepositorioFallasTecnicas repositorioFallasTecnicas = new RepositorioFallasTecnicas();
         RepositorioAlertas repositorioAlertas = new RepositorioAlertas();
-
+        //TODO: deshardcodear los reportes
         ReporteViandasColaborador reporteViandasColaborador = new ReporteViandasColaborador(repoDona, repoDist, "reporteViandasColaborador", new ReporteStringViandasColaborador());
         creadoresDeReporte.add(reporteViandasColaborador);
         ReporteViandasHeladera reporteViandasHeladera = new ReporteViandasHeladera(repoDona, repoDist, "reporteViandasHeladera", new ReporteStringViandasHeladera());

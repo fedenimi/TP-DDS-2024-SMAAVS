@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds;
 
+import ar.edu.utn.frba.dds.config.ServiceLocator;
 import ar.edu.utn.frba.dds.controladores.ControladorFallaConexion;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.IBuscadorDeTecnicos;
@@ -48,7 +49,7 @@ public class TestMQTT {
         clientId = "JavaSample";
         persistence = new MemoryPersistence();
         heladera = new Heladera(123L, LocalDateTime.of(2021, 1, 1, 0, 0));
-        RepositorioHeladeras.getInstance().guardar(heladera);
+        ServiceLocator.instanceOf(RepositorioHeladeras.class).guardar(heladera);
         receptorTemperatura = new ReceptorSensorTemperatura(1L,new ArrayList<>(), heladera);
        RepositorioReceptoresTemperatura.getInstance().guardar(receptorTemperatura);
     }

@@ -1,7 +1,6 @@
 package ar.edu.utn.frba.dds.config;
 
 import ar.edu.utn.frba.dds.controladores.*;
-import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.BuscadorDeTecnicos;
 import ar.edu.utn.frba.dds.modelo.repositorios.*;
 
@@ -73,8 +72,8 @@ public class ServiceLocator {
                 RepositorioAlertas instance = new RepositorioAlertas();
                 instances.put(componentName, instance);
             }
-            else if(componentName.equals(ControladorAlerta.class.getName())) {
-                ControladorAlerta instance = new ControladorAlerta(instanceOf(RepositorioColaboradores.class));
+            else if(componentName.equals(ControladorAlertaSuscripcion.class.getName())) {
+                ControladorAlertaSuscripcion instance = new ControladorAlertaSuscripcion(instanceOf(RepositorioColaboradores.class));
                 instances.put(componentName, instance);
             }
             else if(componentName.equals(ControladorReportarFalla.class.getName())) {
@@ -103,6 +102,18 @@ public class ServiceLocator {
             }
             else if(componentName.equals(RepositorioSuscripciones.class.getName())) {
                 RepositorioSuscripciones instance = new RepositorioSuscripciones();
+                instances.put(componentName, instance);
+            }
+            else if(componentName.equals(ControladorReportes.class.getName())) {
+                ControladorReportes instance = new ControladorReportes();
+                instances.put(componentName, instance);
+            }
+            else if(componentName.equals(ControladorCargaMasivaColaboraciones.class.getName())) {
+                ControladorCargaMasivaColaboraciones instance = new ControladorCargaMasivaColaboraciones(instanceOf(RepositorioColaboradores.class));
+                instances.put(componentName, instance);
+            }
+            else if(componentName.equals(RepositorioAlertaSuscripciones.class.getName())) {
+                RepositorioAlertaSuscripciones instance = new RepositorioAlertaSuscripciones();
                 instances.put(componentName, instance);
             }
         }

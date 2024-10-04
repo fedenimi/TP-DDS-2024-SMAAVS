@@ -1,12 +1,17 @@
 package ar.edu.utn.frba.dds.controladores;
 
 import ar.edu.utn.frba.dds.config.ServiceLocator;
+import ar.edu.utn.frba.dds.dtos.AlertaSuscripcionDTO;
 import ar.edu.utn.frba.dds.dtos.ColaboradorDTO;
+import ar.edu.utn.frba.dds.dtos.SuscripcionHumanaDTO;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.AlertaSuscripcion;
+import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.SuscripcionHumana;
 import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.TipoNotificacion;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioColaboradores;
+import ar.edu.utn.frba.dds.servicios.ServiceAlertasSuscripciones;
 import ar.edu.utn.frba.dds.servicios.ServiceColaboradores;
+import ar.edu.utn.frba.dds.servicios.ServiceSuscripcionesHumanas;
 import io.javalin.http.Context;
 
 import java.util.HashMap;
@@ -26,18 +31,14 @@ public class ControladorHome {
     public void mostrarHome(Context context) {
         Colaborador colaborador = repositorioColaboradores.buscar(Long.valueOf(context.pathParam("id"))).get();
         ColaboradorDTO colaboradorDTO = ServiceColaboradores.toColaboradorDTO(colaborador);
-        List<AlertaSuscripcion> faltanNViandas = colaborador.getAlertaSuscripciones().stream().filter(alerta -> alerta.getSuscripcionHumana().getTipoNotificacion().equals(TipoNotificacion.FALTAN_N_VIANDAS)).toList();
-        List<AlertaSuscripcion> quedanNViandas = colaborador.getAlertaSuscripciones().stream().filter(alerta -> alerta.getSuscripcionHumana().getTipoNotificacion().equals(TipoNotificacion.QUEDAN_N_VIANDAS)).toList();
-        List<AlertaSuscripcion> desperfectos= colaborador.getAlertaSuscripciones().stream().filter(alerta -> alerta.getSuscripcionHumana().getTipoNotificacion().equals(TipoNotificacion.DESPERFECTO)).toList();
-
+        List<SuscripcionHumanaDTO> suscripcionHumanas = colaborador.getSuscripciones().stream().map(ServiceSuscripcionesHumanas::toSuscripcionHumanaDTO).toList();
+        List<AlertaSuscripcionDTO> alertas = colaborador.getAlertaSuscripciones().stream().map(ServiceAlertasSuscripciones::toAlertaSuscripcionDTO).toList();
         Map<String, Object> model = new HashMap<>();
-        String id = context.pathParam("id");
-        //Colaborador colaborador = ServiceLocator.instanceOf(RepositorioColaboradores.class).buscar(Long.parseLong(id)).get();
-        //model.put("nombre", colaborador.getNombre());
-        //model.put("puntos", colaborador.getPuntosDisponibles());
+        model.put("nombre", colaborador.getNombre());
+        model.put("puntos", colaborador.getPuntosDisponibles());
         model.put("colaborador", colaboradorDTO);
-        model.put("nombre", "Juan");
-        model.put("puntos", "300");
+        model.put("suscripciones", suscripcionHumanas);
+        model.put("alertas", alertas);
         context.render("main/home.hbs", model);
     }
 

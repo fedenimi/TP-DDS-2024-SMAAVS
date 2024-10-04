@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds;
 
 import ar.edu.utn.frba.dds.modelo.entidades.localizacion.AdapterRecomendadorApi;
 import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Punto;
+import ar.edu.utn.frba.dds.modelo.entidades.localizacion.RecomendadorApi;
 import ar.edu.utn.frba.dds.modelo.entidades.localizacion.RecomendadorDePuntos;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import org.junit.Assert;
@@ -24,7 +25,8 @@ public class TestRecomendador {
     public void dosPuntosEsperados () throws IOException {
         Colaborador colaborador = new Colaborador();
 
-        AdapterRecomendadorApi adapter = mock(AdapterRecomendadorApi.class);
+        //AdapterRecomendadorApi adapter = mock(AdapterRecomendadorApi.class);
+        RecomendadorApi adapter = new RecomendadorApi();
         RecomendadorDePuntos recomendador = RecomendadorDePuntos.getInstance();
         recomendador.setAdapter(adapter);
         Punto punto1 = new Punto(80D, 100D);

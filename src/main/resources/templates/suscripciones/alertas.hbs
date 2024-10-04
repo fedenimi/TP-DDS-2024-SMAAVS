@@ -27,9 +27,9 @@
                             </div>
                             {{#each heladerasFaltan}}
                                 <div class="heladera">
-                                    <p>{{nombre}}</p>
+                                    <p>{{this.nombreHeladera}}</p>
                                     <hr>
-                                    <p>{{descripcion}}</p>
+                                    <p>{{this.descripcion}}</p>
                                 </div>
                             {{/each}}
                         </div>
@@ -41,7 +41,7 @@
                             </div>
                             {{#each heladerasQuedan}}
                                 <div class="heladera">
-                                    <p>{{nombre}}</p>
+                                    <p>{{nombreHeladera}}</p>
                                     <hr>
                                     <p>{{descripcion}}</p>
                                 </div>
@@ -55,7 +55,7 @@
                             </div>
                             {{#each heladerasDesp}}
                                 <div class="heladera">
-                                    <p>{{nombre}}</p>
+                                    <p>{{nombreHeladera}}</p>
                                     <hr>
                                     <p>{{descripcion}}</p>
                                 </div>
@@ -77,7 +77,6 @@
     <script src="/js/heladeras.js"></script>
     <script src="/js/dropdownScript.js"></script>
     <script src="/js/modalViandas.js"></script>
-    <script src="/js/alertas.js"></script>
 {{/partial}}
 
 {{> templates/base/homeBase}}

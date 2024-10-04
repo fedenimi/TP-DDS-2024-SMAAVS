@@ -19,7 +19,7 @@ public class AlertaSuscripcion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "topic_id")
     private SuscripcionHumana suscripcionHumana;
 

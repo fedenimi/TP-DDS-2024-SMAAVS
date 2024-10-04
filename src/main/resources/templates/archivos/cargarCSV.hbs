@@ -1,71 +1,55 @@
-<!DOCTYPE html>
-<html lang="es">
+{{#partial "home-estilos"}}
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/registro.css">
+    <style>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMAAVS</title>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-          crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/registro.css">
-</head>
+        .cargar-csv-btn {
+            background-color: #A0C6FF;
+            border: none;
+            padding: 20px 60px;
+            cursor: pointer;
+            border-radius: 5px;
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
 
-<body>
-<header>
-    <div class="inner-header">
-        <div class="header-title">
-            <a href="index.html">SMAAVS</a>
+    </style>
+{{/partial}}
+
+{{#partial "home-main"}}
+    <main class="registro2-main">
+        <div class="registro2-title">
+            <h1>Hola Ramón <br>
+                Ya falta poco! </h1>
         </div>
-        <ul class="links">
-            <li><a href="configuracionH.html">Configuración</a></li>
-            <li><a href="">Contacto</a></li>
-            <li>
-                <a href="" class="shadow-header-btn">
-                    Admin
-                    <i class="fa-solid fa-user"></i>
-                </a>
-            </li>
-        </ul>
-        <div class="toggle-btn">
-            <i class="fa-solid fa-bars"></i>
+        <form method="POST" id="form-cargar-csv" enctype="multipart/form-data">
+            <label for="cargar-csv" class="cargar-csv-btn">
+                Cargar archivo .csv
+                <input name="csv" id="cargar-csv" type="file"/>
+            </label>
+        </form>
+        <div class="btns-next">
+            <a class="btn-next2" href="mainAdmin.html">
+                <p>Cancelar</p>
+                <i class="fa fa-arrow-left"></i>
+            </a>
+            <a class="btn-next2" id="confirmar-csv">
+                <p>Confirmar</p>
+                <i class="fa fa-arrow-right"></i>
+            </a>
         </div>
-    </div>
-    <div class="dropdown-menu drop-men-logged">
-        <li><a href="configuracionH.html">Configuración</li>
-        <li><a href="">Contacto</li>
-        <li><a href="index.html">Tienda</a></li>
-    </div>
-</header>
-<main class="registro2-main">
-    <div class="registro2-title">
-        <h1>Hola Ramón <br>
-            Ya falta poco! </h1>
-    </div>
-    <button class="btn-next2 btn-csv">Cargar archivo .csv</button>
-    <div class="btns-next">
-        <a class="btn-next2" href="mainAdmin.html">
-            <p>Cancelar</p>
-            <i class="fa fa-arrow-left"></i>
-        </a>
-    </div>
-</main>
-<script>
-    const toggleBtn = document.querySelector('.toggle-btn');
-    const toggleBtnIcon = document.querySelector('.toggle-btn i');
-    const dropdownMenu = document.querySelector('.dropdown-menu');
+    </main>
+{{/partial}}
+{{#partial "home-scripts"}}
+    <script src="/js/dropdownScript.js">
+    </script>
+    <script>
+        document.querySelector('#confirmar-csv').addEventListener('click', function () {
+            document.getElementById('form-cargar-csv').submit();
+        });
+    </script>
+{{/partial}}
 
-
-
-    toggleBtn.onclick = function () {
-        dropdownMenu.classList.toggle('open');
-        const isOpen = dropdownMenu.classList.contains('open');
-
-        toggleBtnIcon.classList = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
-    }
-</script>
-</body>
-
-</html>
+{{> templates/base/homeAdminBase}}

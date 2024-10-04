@@ -22,7 +22,7 @@ public class SuscripcionHumana {
     @Enumerated(EnumType.STRING)
     private TipoNotificacion tipoNotificacion;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.REMOVE})
     @JoinColumn(name = "heladera_id")
     private Heladera heladera;
 

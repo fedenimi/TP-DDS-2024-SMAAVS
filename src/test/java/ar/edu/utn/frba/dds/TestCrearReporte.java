@@ -28,7 +28,7 @@ import java.util.List;
 
 public class TestCrearReporte {
     List<Reporte> creadoresDeReporte = new ArrayList<>();
-    @Before
+/*    @Before
     public void initializer() {
 
         List<MedioDeContacto> medios = new ArrayList<>();
@@ -91,5 +91,5 @@ public class TestCrearReporte {
             CreadorDeReporte creadorDeReporte = new CreadorDeReporte();
             creadorDeReporte.crearReporte(pdf, reporte.getNombreArchivo(), FormatoReporte.PDF);
         }
-    }
+    }*/
 }

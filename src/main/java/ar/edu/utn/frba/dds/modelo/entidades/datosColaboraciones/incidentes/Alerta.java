@@ -28,7 +28,7 @@ public class Alerta {
    @Convert(converter = LocalDateTimeConverter.class)
    @Getter private LocalDateTime fechaYHora;
 
-   @ManyToOne
+   @ManyToOne(cascade = {CascadeType.REMOVE})
    @JoinColumn(name = "heladera_id")
    @Getter private Heladera heladera;
 }

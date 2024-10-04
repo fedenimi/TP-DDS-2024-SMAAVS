@@ -49,7 +49,6 @@
         }
 
 
-
         @media (max-width: 1468px) {
             .title-mapa-btn {
                 padding: 1rem 2rem;
@@ -179,7 +178,60 @@
                         </div>
                         <hr>
                     </div>
-                    <h1 class="grey open">No tiene ninguna suscripción</h1>
+                    {{#unless heladerasFaltan or heladerasQuedan or heladerasDesp}}
+                        <h1 class="grey open">No tiene ninguna suscripción</h1>
+                    {{/unless}}
+                    {{#if heladerasFaltan}}
+                        <div class="heladeras-fallas-dashboard">
+                            <div class="alertas-title">
+                                <h2>Faltan N viandas</h2>
+                            </div>
+                            {{#each heladerasFaltan}}
+                                <div class="heladera" id="heladeras-en-dashboard">
+                                    <p>{{this.nombreHeladera}}</p>
+                                    <hr>
+                                    <p>{{this.descripcion}}</p>
+                                    <p class="hidden">{{this.latitud}}</p>
+                                    <p class="hidden">{{this.longitud}}</p>
+                                    <p class="hidden">{{this.direccion}}</p>
+                                </div>
+                            {{/each}}
+                        </div>
+                    {{/if}}
+                    {{#if heladerasQuedan}}
+                        <div class="heladeras-fallas-dashboard">
+                            <div class="alertas-title">
+                                <h2>Quedan N viandas</h2>
+                            </div>
+                            {{#each heladerasQuedan}}
+                                <div class="heladera" id="heladeras-en-dashboard">
+                                    <p>{{nombreHeladera}}</p>
+                                    <hr>
+                                    <p>{{descripcion}}</p>
+                                    <p class="hidden">{{this.latitud}}</p>
+                                    <p class="hidden">{{this.longitud}}</p>
+                                    <p class="hidden">{{this.direccion}}</p>
+                                </div>
+                            {{/each}}
+                        </div>
+                    {{/if}}
+                    {{#if heladerasDesp}}
+                        <div class="heladeras-fallas-dashboard">
+                            <div class="alertas-title">
+                                <h2>Quedan N viandas</h2>
+                            </div>
+                            {{#each heladerasDesp}}
+                                <div class="heladera" id="heladeras-en-dashboard">
+                                    <p>{{nombreHeladera}}</p>
+                                    <hr>
+                                    <p>{{descripcion}}</p>
+                                    <p class="hidden">{{this.latitud}}</p>
+                                    <p class="hidden">{{this.longitud}}</p>
+                                    <p class="hidden">{{this.direccion}}</p>
+                                </div>
+                            {{/each}}
+                        </div>
+                    {{/if}}
                 </section>
                 <div class="btns">
                     <a class="boton-dashboard volver-btn-susc dist2">Volver</a>
@@ -201,7 +253,7 @@
             <div class="btns-topics-mapa">
                 <form class="form-registro suscripcion-form dist2">
                     <div class="form-element dist2">
-                        <label for="faltantes" >N viandas faltantes</label>
+                        <label for="faltantes">N viandas faltantes</label>
                         <input type="number" name="faltantes" required>
                     </div>
                     <div></div>
@@ -230,6 +282,6 @@
     </div>
 {{/partial}}
 {{#partial "scripts-map"}}
-    <script src="/js/alertas.js"></script>
+
 {{/partial}}
 {{>templates/base/mapaBase}}

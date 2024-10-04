@@ -42,18 +42,21 @@ public class Router {
         app.get("{id}/publicar-producto/", ServiceLocator.instanceOf(ControladorProductos.class)::create);
         app.post("{id}/publicar-producto/", ServiceLocator.instanceOf(ControladorProductos.class)::save);
 
-        app.get("{id}/alertas", ServiceLocator.instanceOf(ControladorAlerta.class)::index);
-        app.get("{id}/alertas/mapa", ServiceLocator.instanceOf(ControladorAlerta.class)::abrirMapa);
+        app.get("{id}/alertas", ServiceLocator.instanceOf(ControladorAlertaSuscripcion.class)::index);
+        app.get("{id}/alertas/mapa", ServiceLocator.instanceOf(ControladorAlertaSuscripcion.class)::abrirMapa);
 
         app.get("{id}/suscripciones", ServiceLocator.instanceOf(ControladorSuscripciones.class)::show);
+        app.post("{id}/suscripciones", ServiceLocator.instanceOf(ControladorSuscripciones.class)::delete);
         app.get("{id}/suscripciones/mapa", ServiceLocator.instanceOf(ControladorSuscripciones.class)::abrirMapa);
 
         app.get("{id}/adminHeladeras", ServiceLocator.instanceOf(ControladorHeladeras.class)::index);
         app.post("{id}/adminHeladeras", ServiceLocator.instanceOf(ControladorHeladeras.class)::delete);
         app.get("{id}/adminHeladeras/mapa", ServiceLocator.instanceOf(ControladorHeladeras.class)::abrirMapa);
 
-        //app.get("{id}/archivos/cargarCSV", ServiceLocator.instanceOf(ControladorCargaMasivaColaboraciones.class)::create);
-        //app.post("{id}/archivos/cargarCSV", ServiceLocator.instanceOf(ControladorCargaMasivaColaboraciones.class)::save);
+        app.get("{id}/cargarCSV", ServiceLocator.instanceOf(ControladorCargaMasivaColaboraciones.class)::create);
+        app.post("{id}/cargarCSV", ServiceLocator.instanceOf(ControladorCargaMasivaColaboraciones.class)::save);
+
+        app.get("{id}/reportes", ServiceLocator.instanceOf(ControladorReportes.class)::index);
 
     }
 }
