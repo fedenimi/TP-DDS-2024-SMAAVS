@@ -3,6 +3,8 @@ package ar.edu.utn.frba.dds.servicios;
 import ar.edu.utn.frba.dds.dtos.ColaboradorDTO;
 import ar.edu.utn.frba.dds.dtos.FormasDeColaborarDO;
 import ar.edu.utn.frba.dds.dtos.MediosDeContactoDO;
+import ar.edu.utn.frba.dds.modelo.entidades.acceso.Permiso;
+import ar.edu.utn.frba.dds.modelo.entidades.acceso.Usuario;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.*;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.formulario.Formulario;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.formulario.FormularioRespondido;
@@ -62,35 +64,13 @@ public class ServiceColaboradores {
         }
         }
 
-        public static void setearFormularioRespondido(Colaborador colaborador, Context context) {
-            //Setear el formulario
-            Formulario formulario = new Formulario();
-            List<Respuesta> respuestas = new ArrayList<>();
-            if(context.formParam("fechaDeNacimiento") != null) {
-                Pregunta preguntaFechaNac = new Pregunta("Fecha de nacimiento");
-                formulario.agregarPregunta(preguntaFechaNac);
-                Respuesta respuestaFechaNac = Respuesta.builder().pregunta(preguntaFechaNac).respuesta(context.formParam("fechaDeNacimiento")).build();
-                respuestas.add(respuestaFechaNac);
-            }
-            if(context.formParam("direccion") != null) {
-                Pregunta preguntaDireccion = new Pregunta("Direccion");
-                formulario.agregarPregunta(preguntaDireccion);
-                Respuesta respuestaDireccion = Respuesta.builder().pregunta(preguntaDireccion).respuesta(context.formParam("direccion")).build();
-                respuestas.add(respuestaDireccion);
-            }
-            FormularioRespondido formularioRespondido = FormularioRespondido.builder().
-                    formulario(formulario).
-                    respuestas(respuestas).
-                    build();
-            colaborador.setFormularioRespondido(formularioRespondido);
-        }
 
-        public static Colaborador crearColaboradorHumano(Context context) {
+        public static Colaborador crearColaboradorHumano(Context context, Usuario usuario) {
             Colaborador colaborador = new Colaborador();
             // Setear valores básicos
             colaborador.setNombre(context.formParam("nombre"));
             colaborador.setApellido(context.formParam("apellido"));
-            //colaborador.setDocumento(Documento.builder().numero(context.formParam("documento")).tipo(TipoDocumento.valueOf(context.formParam("tipoDocumento"))).build());
+            colaborador.setDocumento(Documento.builder().numero(context.formParam("documento")).tipo(TipoDocumento.valueOf(context.formParam("tipoDocumento"))).build());
             colaborador.setTipoDeColaborador(TipoDeColaborador.HUMANA);
             if(context.formParam("telefono") != null) {
                 colaborador.agregarMedioDeContacto(MedioDeContacto.builder().tipo(TipoDeContacto.TELEFONO).valor(context.formParam("telefono")).build());
@@ -103,19 +83,100 @@ public class ServiceColaboradores {
             }
             if(context.formParam("donarDinero") != null) {
                 colaborador.agregarFormaDeColaborar(FormaColaboracion.DONACION_DINERO);
+                usuario.agregarPermiso(Permiso.DONAR_DINERO);
             }
             if(context.formParam("donarViandas") != null) {
                 colaborador.agregarFormaDeColaborar(FormaColaboracion.DONACION_VIANDAS);
+                usuario.agregarPermiso(Permiso.DONAR_VIANDAS);
             }
             if(context.formParam("distribuirViandas") != null) {
                 colaborador.agregarFormaDeColaborar(FormaColaboracion.DISTRIBUCION_VIANDAS);
+                usuario.agregarPermiso(Permiso.DISTRIBUIR_VIANDAS);
             }
 
-            ServiceColaboradores.setearFormularioRespondido(colaborador, context);
+            ServiceColaboradores.setearFormularioRespondidoHumana(colaborador, context);
             return colaborador;
         }
 
-        public static Colaborador crearColaboradorJuridico(Context context) {
-        return null;
+    public static void setearFormularioRespondidoHumana(Colaborador colaborador, Context context) {
+        //Setear el formulario
+        Formulario formulario = new Formulario();
+        List<Respuesta> respuestas = new ArrayList<>();
+        if(context.formParam("fechaDeNacimiento") != null) {
+            Pregunta preguntaFechaNac = new Pregunta("Fecha de nacimiento");
+            formulario.agregarPregunta(preguntaFechaNac);
+            Respuesta respuestaFechaNac = Respuesta.builder().pregunta(preguntaFechaNac).respuesta(context.formParam("fechaDeNacimiento")).build();
+            respuestas.add(respuestaFechaNac);
         }
+        if(context.formParam("direccion") != null) {
+            Pregunta preguntaDireccion = new Pregunta("Direccion");
+            formulario.agregarPregunta(preguntaDireccion);
+            Respuesta respuestaDireccion = Respuesta.builder().pregunta(preguntaDireccion).respuesta(context.formParam("direccion")).build();
+            respuestas.add(respuestaDireccion);
+        }
+        FormularioRespondido formularioRespondido = FormularioRespondido.builder().
+                formulario(formulario).
+                respuestas(respuestas).
+                build();
+        colaborador.setFormularioRespondido(formularioRespondido);
+    }
+
+        public static Colaborador crearColaboradorJuridico(Context context, Usuario usuario) {
+        Colaborador colaborador = new Colaborador();
+        colaborador.setTipoDeColaborador(TipoDeColaborador.JURIDICA);
+        if(context.formParam("telefono") != null) {
+            colaborador.agregarMedioDeContacto(MedioDeContacto.builder().tipo(TipoDeContacto.TELEFONO).valor(context.formParam("telefono")).build());
+        }
+        if(context.formParam("email") != null) {
+            colaborador.agregarMedioDeContacto(MedioDeContacto.builder().tipo(TipoDeContacto.MAIL).valor(context.formParam("email")).build());
+        }
+        if(context.formParam("whatsapp") != null) {
+            colaborador.agregarMedioDeContacto(MedioDeContacto.builder().tipo(TipoDeContacto.WHATSAPP).valor(context.formParam("whatsapp")).build());
+        }
+        if(context.formParam("donarDinero") != null) {
+            colaborador.agregarFormaDeColaborar(FormaColaboracion.DONACION_DINERO);
+            usuario.agregarPermiso(Permiso.DONAR_DINERO);
+        }
+        if(context.formParam("administrarHeladeras") != null) {
+            colaborador.agregarFormaDeColaborar(FormaColaboracion.DONACION_VIANDAS);
+            usuario.agregarPermiso(Permiso.ADMINISTRAR_HELADERA);
+        }
+        ServiceColaboradores.setearFormularioRespondidoJuridica(colaborador, context);
+
+        return null;
+}
+
+public static void setearFormularioRespondidoJuridica(Colaborador colaborador, Context context) {
+        //Setear el formulario
+        Formulario formulario = new Formulario();
+        List<Respuesta> respuestas = new ArrayList<>();
+
+            Pregunta preguntaRazonSocial = new Pregunta("Razon social");
+            formulario.agregarPregunta(preguntaRazonSocial);
+            Respuesta respuestaRazonSocial = Respuesta.builder().pregunta(preguntaRazonSocial).respuesta(context.formParam("razonSocial")).build();
+            respuestas.add(respuestaRazonSocial);
+
+            Pregunta preguntaTipoJuridico = new Pregunta("Tipo juridico");
+            formulario.agregarPregunta(preguntaTipoJuridico);
+            Respuesta respuestaTipoJuridico = Respuesta.builder().pregunta(preguntaTipoJuridico).respuesta(context.formParam("tipoJuridico")).build();
+            respuestas.add(respuestaTipoJuridico);
+
+            Pregunta preguntaRubro = new Pregunta("Rubro");
+            formulario.agregarPregunta(preguntaRubro);
+            Respuesta respuestaRubro = Respuesta.builder().pregunta(preguntaRubro).respuesta(context.formParam("rubro")).build();
+            respuestas.add(respuestaRubro);
+
+            if(context.formParam("direccion") != null) {
+                Pregunta preguntaDireccion = new Pregunta("Direccion");
+                formulario.agregarPregunta(preguntaDireccion);
+                Respuesta respuestaDireccion = Respuesta.builder().pregunta(preguntaDireccion).respuesta(context.formParam("direccion")).build();
+                respuestas.add(respuestaDireccion);
+            }
+
+        FormularioRespondido formularioRespondido = FormularioRespondido.builder().
+                formulario(formulario).
+                respuestas(respuestas).
+                build();
+        colaborador.setFormularioRespondido(formularioRespondido);
+    }
 }

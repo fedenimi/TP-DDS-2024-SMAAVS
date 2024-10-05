@@ -1,5 +1,7 @@
 package ar.edu.utn.frba.dds.controladores;
 
+import ar.edu.utn.frba.dds.modelo.entidades.acceso.Permiso;
+import ar.edu.utn.frba.dds.modelo.entidades.acceso.Usuario;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.*;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioColaboradores;
@@ -46,12 +48,20 @@ public class ControladorRegistro {
         System.out.println(context.formParam("nro-documento"));
         //TODO: el 3 está hardcodeado, tiene q dirigir a el id posta -->
 
+        Usuario usuario = new Usuario();
+        usuario.setNombre(context.formParam("usuario"));
+        usuario.setContrasenia(context.formParam("contrasenia"));
+
+
         Colaborador colaborador = null;
         if(context.formParam("nombre") != null) {
-            colaborador = ServiceColaboradores.crearColaboradorHumano(context);
+            colaborador = ServiceColaboradores.crearColaboradorHumano(context, usuario);
+            usuario.agregarPermiso(Permiso.HUMANA);
         } else {
-            colaborador = ServiceColaboradores.crearColaboradorJuridico(context);
+            colaborador = ServiceColaboradores.crearColaboradorJuridico(context, usuario);
+            usuario.agregarPermiso(Permiso.JURIDICA);
         }
+        usuario.setColaboradorAsociado(colaborador);
 
         repositorioColaboradores.beginTransaction();
         repositorioColaboradores.guardar(colaborador);
