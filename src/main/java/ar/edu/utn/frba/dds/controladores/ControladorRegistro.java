@@ -1,8 +1,17 @@
 package ar.edu.utn.frba.dds.controladores;
 
+import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.*;
+import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
+import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioColaboradores;
+import ar.edu.utn.frba.dds.servicios.ServiceColaboradores;
 import io.javalin.http.Context;
 
 public class ControladorRegistro {
+    private final RepositorioColaboradores repositorioColaboradores;
+
+    public ControladorRegistro(RepositorioColaboradores repositorioColaboradores) {
+        this.repositorioColaboradores = repositorioColaboradores;
+    }
 
     public void mostrarInicioDeSesion(Context context) {
         context.render("registro/inicioSesion.hbs");
@@ -34,6 +43,19 @@ public class ControladorRegistro {
         System.out.println(context.formParam("distribuir-viandas"));
         System.out.println(context.formParam("administrar-heladeras"));
         //TODO: el 3 está hardcodeado, tiene q dirigir a el id posta -->
-        context.redirect("/3/home");
+
+        Colaborador colaborador = null;
+        if(context.formParam("nombre") != null) {
+            colaborador = ServiceColaboradores.crearColaboradorHumano(context);
+        } else {
+            colaborador = ServiceColaboradores.crearColaboradorJuridico(context);
+        }
+
+        repositorioColaboradores.beginTransaction();
+        repositorioColaboradores.guardar(colaborador);
+        repositorioColaboradores.commitTransaction();
+
+       context.redirect("/"+colaborador.getId()+"/home");
+
     }
 }

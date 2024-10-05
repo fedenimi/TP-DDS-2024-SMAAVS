@@ -33,6 +33,6 @@ public class ServicioPuntos {
         Call<ListadoDePuntos> requestPuntos = puntosService.puntos();
         Response<ListadoDePuntos> responsePuntos = requestPuntos.execute();
         return responsePuntos.body();*/
-        
+        return null;
     }
 }

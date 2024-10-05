@@ -1,15 +1,22 @@
 package ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.formulario;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.List;
 @Entity
 @Table(name = "formulario_respondido")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class FormularioRespondido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "formulario_id")
     private Formulario formulario;
 

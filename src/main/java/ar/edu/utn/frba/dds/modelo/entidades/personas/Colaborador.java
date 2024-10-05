@@ -5,14 +5,19 @@ import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.Puntuable;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.Apertura;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.*;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.formulario.FormularioRespondido;
+import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Direccion;
 import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Punto;
 import ar.edu.utn.frba.dds.modelo.entidades.localizacion.RecomendadorDePuntos;
 import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.AlertaSuscripcion;
 import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.SuscripcionHumana;
+import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateConverter;
 import lombok.*;
 
 import javax.persistence.*;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 @Setter
 @NoArgsConstructor
@@ -42,7 +47,7 @@ public class Colaborador {
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "colaborador_id")
-    private List<MedioDeContacto> mediosDeContacto;
+    private List<MedioDeContacto> mediosDeContacto = new ArrayList<>();
 
     @Column(name = "puntos_disponibles")
     private Double puntosDisponibles;
@@ -64,15 +69,15 @@ public class Colaborador {
     @ElementCollection
     @CollectionTable(name = "colaborador_forma_de_colaborar", joinColumns= @JoinColumn(name= "colaborador_id"))
     @Column(name = "forma_de_colaborar")
-    private List<FormaColaboracion> formasDeColaborar;
+    private List<FormaColaboracion> formasDeColaborar = new ArrayList<>();
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "colaborador_id")
-    private List<AlertaSuscripcion> alertaSuscripciones;
+    private List<AlertaSuscripcion> alertaSuscripciones = new ArrayList<>();
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "colaborador_id")
-    private List<SuscripcionHumana> suscripciones;
+    private List<SuscripcionHumana> suscripciones = new ArrayList<>();
 
     public Colaborador(TipoDeColaborador tipoDeColaborador, List<MedioDeContacto> mediosDeContacto,  Documento documento, String nombre, String apellido) {
         this.tipoDeColaborador = tipoDeColaborador;
@@ -81,6 +86,7 @@ public class Colaborador {
         this.nombre = nombre;
         this.apellido = apellido;
         this.puntosDisponibles = 0D;
+        this.puntuables = new ArrayList<>();
     }
 
     public void agregarPuntuable(Puntuable puntuable) {
@@ -133,5 +139,9 @@ public class Colaborador {
 
     public void quitarContactoDeTipo(TipoDeContacto tipoDeContacto) {
         this.mediosDeContacto.removeIf(medioDeContacto -> medioDeContacto.getTipo().equals(tipoDeContacto));
+    }
+
+    public void agregarFormaDeColaborar(FormaColaboracion formaColaboracion) {
+        this.formasDeColaborar.add(formaColaboracion);
     }
 }

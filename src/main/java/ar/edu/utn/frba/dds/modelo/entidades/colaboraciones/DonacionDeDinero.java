@@ -4,9 +4,7 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.frecuencia.Frecu
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.FrecuenciaConverter;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateConverter;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -15,6 +13,8 @@ import java.time.Period;
 @NoArgsConstructor
 @Entity
 @DiscriminatorValue("donacion_dinero")
+@Builder
+@AllArgsConstructor
 @Setter
 public class DonacionDeDinero extends Puntuable {
     @Column(name = "fecha_de_inicio")

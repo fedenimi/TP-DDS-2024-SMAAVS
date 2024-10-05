@@ -96,6 +96,7 @@ public class Initializer {
                 puntosDisponibles(0.0).
                 tipoDeColaborador(TipoDeColaborador.JURIDICA).
                 formasDeColaborar(List.of(FormaColaboracion.OFRECER_PRODUCTOS)).
+                documento(Documento.builder().numero("123456789").tipo(TipoDocumento.DNI).build()).
                 build();
 
         OfrecerProducto ofrecerProducto1 = OfrecerProducto.builder().

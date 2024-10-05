@@ -2,15 +2,19 @@ package ar.edu.utn.frba.dds.controladores;
 
 import ar.edu.utn.frba.dds.dtos.ColaboradorDTO;
 import ar.edu.utn.frba.dds.dtos.FormasDeColaborarDO;
+import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.*;
+import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.formulario.Formulario;
+import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.formulario.FormularioRespondido;
+import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.formulario.Pregunta;
+import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.formulario.Respuesta;
+import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Direccion;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioColaboradores;
 import ar.edu.utn.frba.dds.servicios.ServiceColaboradores;
 import io.javalin.http.Context;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.time.LocalDate;
+import java.util.*;
 
 public class ControladorColaborador implements ICrudViewsHandler {
     private RepositorioColaboradores repositorioColaboradores;
@@ -40,8 +44,7 @@ public class ControladorColaborador implements ICrudViewsHandler {
 
     @Override
     public void create(Context context) {
-        // Formulario para modificar la configuración de un colaborador
-        context.render("colaboradores/configuracion.hbs");
+
     }
 
     @Override

@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.formulario;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 @NoArgsConstructor
 @Entity
@@ -19,12 +20,14 @@ public class Formulario {
                     referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "pregunta_id", referencedColumnName = "id")
     )
-    private List<Pregunta> preguntas;
+    private List<Pregunta> preguntas = new ArrayList<>();
 
     public Formulario(List<Pregunta> preguntas) {
         this.preguntas = preguntas;
     }
 
-
+    public void agregarPregunta(Pregunta pregunta) {
+        this.preguntas.add(pregunta);
+    }
 
 }

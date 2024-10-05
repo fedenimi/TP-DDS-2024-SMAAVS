@@ -14,14 +14,14 @@ public class FrecuenciaConverter implements AttributeConverter<Frecuencia, Strin
     @Override
     public String convertToDatabaseColumn(Frecuencia frecuencia) {
         String frecuenciaString = null;
-        if (frecuencia.getClass().getName().equals("Anual")) {
-            return "Anual";
+        if (frecuencia instanceof Anual) {
+           frecuenciaString = "Anual";
         }
-        if (frecuencia.getClass().getName().equals("Mensual")) {
-            return "Mensual";
+        if (frecuencia instanceof Mensual) {
+            frecuenciaString = "Mensual";
         }
-        if (frecuencia.getClass().getName().equals("Unica")) {
-            return "Unica";
+        if (frecuencia instanceof Unica) {
+            frecuenciaString = "Unica";
         }
         return frecuenciaString;
     }

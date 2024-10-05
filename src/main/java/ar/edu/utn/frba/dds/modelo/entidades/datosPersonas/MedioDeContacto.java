@@ -1,9 +1,6 @@
 package ar.edu.utn.frba.dds.modelo.entidades.datosPersonas;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 @Setter
@@ -11,6 +8,8 @@ import javax.persistence.*;
 @Getter
 @Entity
 @Table(name = "medio_de_contacto")
+@Builder
+@AllArgsConstructor
 public class MedioDeContacto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
