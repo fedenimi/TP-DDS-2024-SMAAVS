@@ -200,7 +200,8 @@
 
 
 .dropdown-item,
-.dropdown-item-only {
+.dropdown-item-only,
+.item-tipo-doc{
     display: flex;
     align-items: center;
     height: 50px;
@@ -215,7 +216,8 @@
 }
 
 .dropdown-item span,
-.dropdown-item-only span {
+.dropdown-item-only span,
+.item-tipo-doc span{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -228,20 +230,23 @@
 }
 
 .dropdown-item span .check-icon,
-.dropdown-item-only span .check-icon {
+.dropdown-item-only span .check-icon,
+.item-tipo-doc span .check-icon{
     font-size: 11px;
     transform: scale(0);
     transition: all 0.3s ease-in-out;
 }
 
 .dropdown-item.checked span,
-.dropdown-item-only.checked span {
+.dropdown-item-only.checked span,
+.item-tipo-doc.checked2 span{
     background-color: #A0C6FF;
     border: 1.5px solid #A0C6FF;
 }
 
 .dropdown-item.checked .check-icon,
-.dropdown-item-only.checked .check-icon {
+.dropdown-item-only.checked .check-icon,
+.item-tipo-doc.checked2 .check-icon{
     color: white;
     transform: scale(1);
 }

@@ -80,6 +80,43 @@
                         </ul>
                     </div>
                 </div>
+                <input type="hidden" name="tipo-documento" id="form-apellido" />
+                <div class="form-element tipo-doc-input">
+                    <label for="form-nombre">Tipo de documento</label>
+                    <div class="form-element-dropdown">
+                        <div class="dropdown-select-btn dropdown-select-btn2">
+                            <p>0 seleccionadas</p>
+                            <span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </span>
+                        </div>
+                        <ul class="dropdown-item-list item-list-tipo-doc">
+                            <li class="item-tipo-doc">
+                            <span>
+                                <i class="fa-solid fa-check check-icon"></i>
+                            </span>
+                                <p>DNI</p>
+                            </li>
+                            <li class="item-tipo-doc">
+                            <span>
+                                <i class="fa-solid fa-check check-icon"></i>
+                            </span>
+                                <p>Pasaporte</p>
+                            </li>
+                            <li class="item-tipo-doc">
+                            <span>
+                                <i class="fa-solid fa-check check-icon"></i>
+                            </span>
+                                <p>Libreta</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div></div>
+                <div class="form-element nro-doc-input">
+                    <label for="whatsapp">Número de documento</label>
+                    <input type="text" name="nro-documento" id="form-apellido" required>
+                </div>
                 <div class="form-element2 hidden">
                     <label for="form-nombre">Usuario</label>
                     <input type="text" name="usuario" id="form-usuario" required>
@@ -140,5 +177,30 @@
 {{#partial "landing-scripts"}}
     <script src="js/registro.js"></script>
     <script src="js/dropdownScript.js"></script>
+    <script>
+        document.querySelector('.dropdown-select-btn2').addEventListener('click', () => {
+            document.querySelector('.dropdown-select-btn2').classList.toggle('open');
+        });
+
+        let itemTipoDoc = document.querySelectorAll('.item-tipo-doc');
+
+        itemTipoDoc.forEach(item => {
+            addListenerDropdown(item);
+        });
+
+        function addListenerDropdown(item) {
+            item.addEventListener('click', () => {
+                if (!item.classList.contains('checked2')) {
+                    itemTipoDoc.forEach(i => {
+                        i.classList.remove('checked2');
+                    });
+                    item.classList.add('checked2');
+                    let btnText = document.querySelector('.dropdown-select-btn2 p');
+                    btnText.innerHTML = item.children[1].innerHTML;
+                }
+            });
+        }
+
+    </script>
 {{/partial}}
 {{> templates/base/landingBase }}

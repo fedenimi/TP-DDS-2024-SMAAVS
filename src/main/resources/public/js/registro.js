@@ -11,6 +11,7 @@ function cambiarTipoColab(btn) {
     });
     btn.classList.add('pressed-btn');
     cambiarPrimerosTextosA(btn.innerHTML[0])
+    sacarDocumentoYTipo()
 }
 
 function cambiarPrimerosTextosA(tipo) {
@@ -50,6 +51,11 @@ function cambiarPrimerosTextosA(tipo) {
     }
 }
 
+function sacarDocumentoYTipo() {
+    document.querySelector('.tipo-doc-input').classList.toggle('hidden');
+    document.querySelector('.nro-doc-input').classList.toggle('hidden');
+}
+
 //CAMBIAR DE PÁGINA DE FORM
 document.querySelector('#siguiente-registro-btn').addEventListener('click', () => {
     document.querySelectorAll('.registro-main')[0].classList.toggle('hidden');
@@ -69,6 +75,9 @@ document.querySelector('#submit-btn').addEventListener('click', () => {
     document.querySelector('#form-adm-hel').value = estaPresionado("adm-hel") ? "true" : null;
     document.querySelector('#form-don-din').value = estaPresionado("don-din") ? "true" : null;
     document.querySelector('#form-dist-via').value = estaPresionado("dist-via") ? "true" : null;
+    if (document.querySelector('#elemento-nombre').children[1].name === 'nombre') {
+        document.querySelector('input[name="tipo-documento"]').value = document.querySelector('.item-tipo-doc.checked2').children[1].innerHTML.toUpperCase();
+    }
     document.querySelector('#registro-form').submit();
 })
 
