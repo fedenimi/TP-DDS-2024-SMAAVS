@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.modelo.repositorios;
 
 import ar.edu.utn.frba.dds.modelo.entidades.acceso.Usuario;
+import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.repositorios.interfaces.IRepositorio;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 
@@ -21,6 +22,14 @@ public class RepositorioUsuarios implements IRepositorio<Usuario>, WithSimplePer
     @Override
     public Optional<Usuario> buscar(Long id) {
         return Optional.ofNullable(entityManager().find(Usuario.class, id));
+    }
+
+    public Optional<Usuario> buscarPorNombre(String nombre) {
+        Usuario usuario = entityManager()
+                .createQuery("from Usuario c where c.nombre = :nombre", Usuario.class)
+                .setParameter("nombre", nombre)
+                .getSingleResult();
+        return Optional.of(usuario);
     }
 
     @Override

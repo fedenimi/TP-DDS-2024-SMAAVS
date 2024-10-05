@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -29,7 +30,7 @@ public class Usuario {
     @ElementCollection
     @CollectionTable(name = "usuario_permisos", joinColumns= @JoinColumn(name= "usuario_id"))
     @Column(name = "permiso")
-    private List<Permiso> permisos;
+    private List<Permiso> permisos = new ArrayList<>();
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "colaborador_asociado_id", referencedColumnName = "id")
