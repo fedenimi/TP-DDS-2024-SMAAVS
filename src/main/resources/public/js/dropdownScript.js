@@ -46,7 +46,6 @@ if (selectionBtn) {
                 document.querySelector(`input[name="vianda[${nro_vianda}][calorias]"]`).classList.remove('hidden');
                 for (let i = 0; i <= viandaCount; i++) {
                     if (i !== nro_vianda) {
-                        console.log(i);
                         document.querySelector(`input[name="vianda[${i}][comida]"]`).classList.add('hidden');
                         document.querySelector(`input[name="vianda[${i}][fecha_caducidad]"]`).classList.add('hidden');
                         document.querySelector(`input[name="vianda[${i}][peso]"]`).classList.add('hidden');

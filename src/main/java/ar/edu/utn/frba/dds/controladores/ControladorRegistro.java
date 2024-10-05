@@ -67,6 +67,8 @@ public class ControladorRegistro {
         System.out.println(context.formParam("donar-dinero"));
         System.out.println(context.formParam("distribuir-viandas"));
         System.out.println(context.formParam("administrar-heladeras"));
+        System.out.println(context.formParam("tipo-documento"));
+        System.out.println(context.formParam("nro-documento"));
         //TODO: el 3 está hardcodeado, tiene q dirigir a el id posta -->
 
         Usuario usuario = new Usuario();
