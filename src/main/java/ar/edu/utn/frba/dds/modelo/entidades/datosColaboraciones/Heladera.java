@@ -5,6 +5,7 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.TarjetaColaborador;
 import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Direccion;
 import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Punto;
 import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.Topic;
+import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.condiciones.CondicionSuscripcionHeladera;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateTimeConverter;
 import lombok.*;
 
@@ -94,5 +95,9 @@ public class Heladera{
 
     public boolean tieneFallas() {
         return estado != Estado.ACTIVA;
+    }
+
+    public Topic getTopicPorCondicion(CondicionSuscripcionHeladera condicionSuscripcionHeladera) {
+        return topics.stream().filter(topic -> topic.getCondicionSuscripcionHeladera().getClass().equals(condicionSuscripcionHeladera.getClass())).findFirst().orElse(null);
     }
 }

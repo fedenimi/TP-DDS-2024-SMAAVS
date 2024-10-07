@@ -50,7 +50,6 @@ public class LectorCSV {
                 Colaborador colaborador = instanciadorColaborador.crearColaborador(colaboradorDO, colaboradores);
                 instanciadorColaboracion.agregarColaboracion(contribuciones, formaColaboracion, colaborador, cantidad);
                 lineaActual++;
-                //TODO: guardarse el colaborador y las contribuciones
             }
         } finally {
             if (lectorCSV != null) {

@@ -56,4 +56,10 @@ public class RepositorioColaboradores implements IRepositorio<Colaborador>, With
     public void guardar(Colaborador colaborador) {
         withTransaction(() -> entityManager().persist(colaborador));
     }
+
+    public void modificar(Colaborador colaborador) {
+        withTransaction(() -> {
+            entityManager().merge(colaborador);//UPDATE
+        });
+    }
 }

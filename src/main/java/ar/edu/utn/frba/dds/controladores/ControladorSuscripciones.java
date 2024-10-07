@@ -6,10 +6,10 @@ import ar.edu.utn.frba.dds.dtos.HeladeraDTO;
 import ar.edu.utn.frba.dds.dtos.SuscripcionHumanaDTO;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
-import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.AlertaSuscripcion;
-import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.SuscripcionHumana;
-import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.TipoNotificacion;
-import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.Topic;
+import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.*;
+import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.condiciones.Desperfecto;
+import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.condiciones.FaltanNViandas;
+import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.condiciones.QuedanNViandas;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioAlertas;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioColaboradores;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioHeladeras;
@@ -64,6 +64,59 @@ public class ControladorSuscripciones implements ICrudViewsHandler {
         System.out.println("Viandas restantes: " + context.formParam("restantes"));
         System.out.println("Desperfectos: " + context.formParam("desperfectos"));
         //TODO: fede all yours
+
+        Colaborador colaborador = repositorioColaboradores.buscar(Long.valueOf(context.pathParam("id"))).get();
+        Heladera heladera = repositorioHeladeras.buscar(Long.valueOf(context.formParam("id-heladera"))).get();
+
+        if(context.formParam("faltantes") != "") {
+            SuscripcionHumana suscripcion = SuscripcionHumana.builder()
+                    .tipoNotificacion(TipoNotificacion.FALTAN_N_VIANDAS)
+                    .heladera(heladera)
+                    .cantidad(Integer.valueOf(context.formParam("faltantes")))
+                    .build();
+            colaborador.agregarSuscripcion(suscripcion);
+
+            Topic topicHeladera = heladera.getTopicPorCondicion(new FaltanNViandas());
+            topicHeladera.agregarSuscripcion(Suscripcion.
+                    builder()
+                    .suscriptor(colaborador)
+                    .configurableN(Integer.valueOf(context.formParam("faltantes")))
+                    .build());
+
+        }
+        if(context.formParam("restantes") != "") {
+            SuscripcionHumana suscripcion = SuscripcionHumana.builder()
+                    .tipoNotificacion(TipoNotificacion.QUEDAN_N_VIANDAS)
+                    .heladera(heladera)
+                    .cantidad(Integer.valueOf(context.formParam("restantes")))
+                    .build();
+            colaborador.agregarSuscripcion(suscripcion);
+
+            Topic topicHeladera = heladera.getTopicPorCondicion(new QuedanNViandas());
+            topicHeladera.agregarSuscripcion(Suscripcion.
+                    builder()
+                    .suscriptor(colaborador)
+                    .configurableN(Integer.valueOf(context.formParam("restantes")))
+                    .build());
+
+
+        }
+        if(context.formParam("desperfectos") != "") {
+            SuscripcionHumana suscripcion = SuscripcionHumana.builder()
+                    .tipoNotificacion(TipoNotificacion.DESPERFECTO)
+                    .heladera(heladera)
+                    .build();
+            colaborador.agregarSuscripcion(suscripcion);
+
+            Topic topicHeladera = heladera.getTopicPorCondicion(new Desperfecto());
+            topicHeladera.agregarSuscripcion(Suscripcion.
+                    builder()
+                    .suscriptor(colaborador)
+                    .build());
+        }
+
+        repositorioColaboradores.modificar(colaborador);
+        context.redirect("/" + context.pathParam("id") + "/suscripciones");
     }
 
     @Override
