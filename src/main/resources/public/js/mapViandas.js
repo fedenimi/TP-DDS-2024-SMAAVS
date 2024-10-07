@@ -86,6 +86,7 @@ function openInfoHeladera(heladera) {
             modalDonarViandas.classList.add('open');
             modalDonarViandas.children[0].innerHTML = heladera.nombre;
             modalDonarViandas.children[1].children[0].innerHTML = heladera.direccion;
+            modalDonarViandas.children[6].innerHTML = heladera.id;
             if (heladeraBtns.length > 0) {
                 heladeraBtns.forEach(btn => {
                     if (btn.children[0].innerHTML === heladera.nombre) {

@@ -58,7 +58,12 @@ public class ControladorSuscripciones implements ICrudViewsHandler {
 
     @Override
     public void create(Context context) {
-
+        System.out.println("Creando suscripcion");
+        System.out.println("id heladera: " + context.formParam("id-heladera"));
+        System.out.println("Viandas faltantes: " + context.formParam("faltantes"));
+        System.out.println("Viandas restantes: " + context.formParam("restantes"));
+        System.out.println("Desperfectos: " + context.formParam("desperfectos"));
+        //TODO: fede all yours
     }
 
     @Override
@@ -89,9 +94,8 @@ public class ControladorSuscripciones implements ICrudViewsHandler {
 
         Colaborador colaborador = repositorioColaboradores.buscar(Long.valueOf(context.pathParam("id"))).get();
         ColaboradorDTO colaboradorDTO = ServiceColaboradores.toColaboradorDTO(colaborador);
-
         Map<String, Object> model = new HashMap<>();
         model.put("heladeras", heladerasDTO);
-        context.render("suscripciones/mapa/mapaAlertas.hbs");
+        context.render("suscripciones/mapa/mapaSuscripciones.hbs", model);
     }
 }

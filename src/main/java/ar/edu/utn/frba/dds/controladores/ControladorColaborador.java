@@ -54,7 +54,11 @@ public class ControladorColaborador implements ICrudViewsHandler {
 
     @Override
     public void edit(Context context) {
-        context.render("colaboradores/configuracion.hbs");
+        Colaborador colaborador = this.repositorioColaboradores.buscar(Long.valueOf(context.pathParam("id"))).get();
+        ColaboradorDTO colaboradorDTO = ServiceColaboradores.toColaboradorDTO(colaborador);
+        Map<String, Object> model = new HashMap<>();
+        model.put("colaborador", colaboradorDTO);
+        context.render("colaboradores/configuracion.hbs", model);
     }
 
     @Override

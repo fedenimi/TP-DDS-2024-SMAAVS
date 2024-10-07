@@ -48,7 +48,8 @@ public class Router {
 
         app.get("{id}/suscripciones", ServiceLocator.instanceOf(ControladorSuscripciones.class)::show, Permiso.HUMANA);
         app.post("{id}/suscripciones", ServiceLocator.instanceOf(ControladorSuscripciones.class)::delete, Permiso.HUMANA);
-        app.get("{id}/suscripciones/mapa", ServiceLocator.instanceOf(ControladorSuscripciones.class)::abrirMapa, Permiso.HUMANA);
+        app.get("{id}/suscripciones/mapa", ServiceLocator.instanceOf(ControladorSuscripciones.class)::abrirMapa/*, Permiso.HUMANA*/);
+        app.post("{id}/suscripciones/mapa", ServiceLocator.instanceOf(ControladorSuscripciones.class)::create/*, Permiso.HUMANA*/);
 
         app.get("{id}/adminHeladeras", ServiceLocator.instanceOf(ControladorHeladeras.class)::index, Permiso.ADMINISTRAR_HELADERA);
         app.post("{id}/adminHeladeras", ServiceLocator.instanceOf(ControladorHeladeras.class)::delete, Permiso.ADMINISTRAR_HELADERA);

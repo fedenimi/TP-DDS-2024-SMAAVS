@@ -4,9 +4,8 @@ const confirmarBtn = document.querySelector('.confirmar-btn');
 const volverBtn = document.querySelector('.volver-btn');
 
 const confirmarBtnSusc1 = document.querySelectorAll('.confirmar-btn-susc')[0];
-const volverBtnSusc1 = document.querySelectorAll('.volver-btn-susc')[0];
-const confirmarBtnSusc2 = document.querySelectorAll('.confirmar-btn-susc')[2];
-const volverBtnSusc2 = document.querySelectorAll('.volver-btn-susc')[3];
+const volverBtnSusc1 = document.querySelectorAll('.volver-btn-susc')[1];
+const confirmarBtnSusc2 = document.querySelectorAll('.confirmar-btn-susc')[1];
 let quedanN = false;
 let faltanN = false;
 
@@ -26,11 +25,11 @@ if (titleText) {
                 try {
                     completarHeladerasInput("origen", heladeraSelected(), viandasSelected())
                     document.querySelector('.form-mapa-distribuir').submit()
-                } catch (e) {}
+                } catch (e) {
+                }
                 try {
                     document.querySelector('.modal-info-heladera-viandas').classList.remove('open')
-                }
-                catch (e) {
+                } catch (e) {
                     console.log(e)
                 }
                 dist1.forEach(dist => dist.classList.remove('dist1'));
@@ -44,7 +43,10 @@ if (titleText) {
     }
     if (confirmarBtn) {
         confirmarBtn.addEventListener('click', () => {
-            try {completarHeladerasInput("destino", heladeraSelected(), viandasSelected())} catch (e) {}
+            try {
+                completarHeladerasInput("destino", heladeraSelected(), viandasSelected())
+            } catch (e) {
+            }
             dist1.forEach(dist => dist.classList.remove('dist1'));
             dist1.forEach(dist => dist.classList.add('dist2'));
             dist2.forEach(dist => dist.classList.remove('dist2'));
@@ -100,10 +102,12 @@ if (titleText) {
                     dist.classList.add('dist1')
                 } else {
                     if (quedanN && dist.children[1].name === 'restantes') {
+                        console.log("DistAA: " + dist);
                         dist.classList.remove('dist2')
                         dist.classList.add('dist1')
                     }
                     if (faltanN && dist.children[1].name === 'faltantes') {
+                        console.log("DistBB: " + dist);
                         dist.classList.remove('dist2')
                         dist.classList.add('dist1')
                     }
@@ -113,18 +117,8 @@ if (titleText) {
         })
     }
 
-    if (volverBtnSusc2) {
-        volverBtnSusc2.addEventListener('click', () => {
-            dist1.forEach(dist => dist.classList.remove('dist2'));
-            dist1.forEach(dist => dist.classList.add('dist1'));
-            dist2.forEach(dist => dist.classList.remove('dist1'));
-            dist2.forEach(dist => dist.classList.add('dist2'));
-            quedanN = false;
-            faltanN = false;
-        })
-    }
-
     if (confirmarBtnSusc2) {
+        console.log(confirmarBtnSusc2);
         confirmarBtnSusc2.addEventListener('click', () => {
             const btns = document.querySelectorAll('.btn-topic');
             if (btns[0].classList.contains('pressed')) quedanN = true;
@@ -139,10 +133,12 @@ if (titleText) {
                     dist.classList.add('dist1')
                 } else {
                     if (quedanN && dist.children[1].name === 'restantes') {
+                        console.log("DistAA: " + dist);
                         dist.classList.remove('dist2')
                         dist.classList.add('dist1')
                     }
                     if (faltanN && dist.children[1].name === 'faltantes') {
+                        console.log("DistBB: " + dist);
                         dist.classList.remove('dist2')
                         dist.classList.add('dist1')
                     }
@@ -170,7 +166,7 @@ if (btnOpenerSolicitudesApertura && distribuirViandas3) {
             dist.classList.add('opacity-low');
         })
         const modal = document.querySelector('.modal-solicitudes-apertura');
-        modal.classList.contains('hidden') ? modal.classList.remove('hidden') : modal.classList.add('hidden'); 
+        modal.classList.contains('hidden') ? modal.classList.remove('hidden') : modal.classList.add('hidden');
         modal.classList.add('show-modal');
     })
 }
