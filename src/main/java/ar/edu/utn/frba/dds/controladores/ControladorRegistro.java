@@ -85,7 +85,8 @@ public class ControladorRegistro {
             usuario.agregarPermiso(Permiso.JURIDICA);
         }
         usuario.setColaboradorAsociado(colaborador);
-
+        System.out.println("Roles del usuario: " + usuario.getPermisos());
+        System.out.println("Formas de colaborar: " + usuario.getColaboradorAsociado().getFormasDeColaborar());
         repositorioColaboradores.beginTransaction();
         repositorioColaboradores.guardar(colaborador);
         repositorioColaboradores.commitTransaction();
