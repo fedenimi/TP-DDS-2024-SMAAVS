@@ -169,92 +169,30 @@
 {{/partial}}
 {{#partial "main-map"}}
     <div id="map">
-        <div class="dashboard-arrow">
-            <section class="heladeras-dashboard">
-                <section class="heladeras-dashboard-scrollable">
-                    <div class="title">
-                        <div class="title-text">
-                            <h2>ALERTAS</h2>
-                        </div>
-                        <hr>
-                    </div>
-                    {{#unless heladerasFaltan or heladerasQuedan or heladerasDesp}}
-                        <h1 class="grey open">No tiene ninguna suscripción</h1>
-                    {{/unless}}
-                    {{#if heladerasFaltan}}
-                        <div class="heladeras-fallas-dashboard">
-                            <div class="alertas-title">
-                                <h2>Faltan N viandas</h2>
-                            </div>
-                            {{#each heladerasFaltan}}
-                                <div class="heladera" id="heladeras-en-dashboard">
-                                    <p>{{this.nombreHeladera}}</p>
-                                    <hr>
-                                    <p>{{this.descripcion}}</p>
-                                    <p class="hidden">{{this.latitud}}</p>
-                                    <p class="hidden">{{this.longitud}}</p>
-                                    <p class="hidden">{{this.direccion}}</p>
-                                    <p class="hidden">{{this.id}}</p>
-                                </div>
-                            {{/each}}
-                        </div>
-                    {{/if}}
-                    {{#if heladerasQuedan}}
-                        <div class="heladeras-fallas-dashboard">
-                            <div class="alertas-title">
-                                <h2>Quedan N viandas</h2>
-                            </div>
-                            {{#each heladerasQuedan}}
-                                <div class="heladera" id="heladeras-en-dashboard">
-                                    <p>{{nombreHeladera}}</p>
-                                    <hr>
-                                    <p>{{descripcion}}</p>
-                                    <p class="hidden">{{this.latitud}}</p>
-                                    <p class="hidden">{{this.longitud}}</p>
-                                    <p class="hidden">{{this.direccion}}</p>
-                                    <p class="hidden">{{this.id}}</p>
-                                </div>
-                            {{/each}}
-                        </div>
-                    {{/if}}
-                    {{#if heladerasDesp}}
-                        <div class="heladeras-fallas-dashboard">
-                            <div class="alertas-title">
-                                <h2>Quedan N viandas</h2>
-                            </div>
-                            {{#each heladerasDesp}}
-                                <div class="heladera" id="heladeras-en-dashboard">
-                                    <p>{{nombreHeladera}}</p>
-                                    <hr>
-                                    <p>{{descripcion}}</p>
-                                    <p class="hidden">{{this.latitud}}</p>
-                                    <p class="hidden">{{this.longitud}}</p>
-                                    <p class="hidden">{{this.direccion}}</p>
-                                    <p class="hidden">{{this.id}}</p>
-                                </div>
-                            {{/each}}
-                        </div>
-                    {{/if}}
-                </section>
-                <div class="btns">
-                    <a class="boton-dashboard volver-btn-susc dist2">Volver</a>
-                    <a href="javascript:history.back()" class="boton-dashboard volver-btn-susc dist1">Volver</a>
-                    <a href="distribuirViandas3.html" class="boton-dashboard dist2 confirmar-btn-susc">
-                        Confirmar
-                    </a>
+        {{#each heladeras}}
+                <div class="heladera hidden" id="heladeras-en-dashboard">
+                    <p  class="hidden">{{this.nombreHeladera}}</p>
+                    <hr class="hidden">
+                    <p  class="hidden">{{this.descripcion}}</p>
+                    <p  class="hidden">{{this.latitud}}</p>
+                    <p  class="hidden">{{this.longitud}}</p>
+                    <p  class="hidden">{{this.direccion}}</p>
+                    <p  class="hidden">{{this.id}}</p>
+                    <p  class="title-text hidden"></p>
                 </div>
-            </section>
-            <button class="arrow-opener">
-                <i class="fa-solid fa-chevron-left"></i>
-            </button>
-        </div>
+        {{/each}}
         <div class="modal-info-heladera-viandas">
             <h1 class="title-mapa-heladera">Heladera A</h1>
             <div class="title-mapa-direccion">
                 <p></p>
             </div>
             <div class="btns-topics-mapa">
-                <form class="form-registro suscripcion-form dist2">
+                <a class="btn-topic dist1">Viandas restantes</a>
+                <a class="btn-topic dist1">Viandas faltantes</a>
+                <a class="btn-topic dist1">Desperfectos</a>
+            </div>
+            <div class="btns-topics-mapa">
+                <form class="form-registro suscripcion-form dist2" method="POST">
                     <div class="form-element dist2">
                         <label for="faltantes">N viandas faltantes</label>
                         <input type="number" name="faltantes" required>
@@ -264,6 +202,8 @@
                         <label for="restantes">N viandas restantes</label>
                         <input type="number" name="restantes" required>
                     </div>
+                    <input type="hidden" name="id-heladera" value="">
+                    <input type="hidden" name="desperfectos" value="">
                 </form>
             </div>
             <div class="btns-modal-mapa">
@@ -271,20 +211,31 @@
                    class="title-mapa-btn volver-btn-susc btn-suscripcion-modal dist1">
                     <p>Volver</p>
                 </a>
+                <a class="title-mapa-btn confirmar-btn-susc btn-suscripcion-modal dist1">
+                    <p>Siguiente</p>
+                </a>
             </div>
-
             <div class="btns-modal-mapa">
                 <a class="title-mapa-btn volver-btn-susc btn-suscripcion-modal dist2">
                     <p>Volver</p>
                 </a>
-                <a class="title-mapa-btn confirmar-btn-susc btn-suscripcion-modal dist2">
+                <a class="title-mapa-btn confirmar-btn-susc btn-suscripcion-modal dist2" id="submit-form">
                     <p>Siguiente</p>
                 </a>
             </div>
+            <p class="hidden"></p>
         </div>
     </div>
 {{/partial}}
 {{#partial "scripts-map"}}
-
+    <script src="/js/suscripciones.js"></script>
+    <script>
+        document.querySelector('#submit-form').addEventListener('click', function () {
+            document.querySelector('input[name="id-heladera"]').value = document.querySelector('.modal-info-heladera-viandas').children[6].textContent;
+            document.querySelector('input[name="desperfectos"]').value = document.querySelectorAll('.btns-topics-mapa')[0].children[2].classList.contains('pressed')
+                    ? "true" : null;
+            document.querySelector('.suscripcion-form').submit();
+        });
+    </script>
 {{/partial}}
 {{>templates/base/mapaBase}}

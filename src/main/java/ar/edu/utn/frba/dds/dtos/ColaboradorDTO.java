@@ -15,4 +15,9 @@ public class ColaboradorDTO {
     private String puntosDisponibles;
     private List<String> formasDeColaborar;
     private List<AlertaSuscripcionDTO> alertasSuscripcionDTO;
+    private String mail;
+    private String direccion;
+    private String telefono;
+    private String whatsapp;
+    private String juridica;
 }

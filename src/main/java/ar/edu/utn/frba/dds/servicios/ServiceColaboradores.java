@@ -19,14 +19,21 @@ import java.util.List;
 public class ServiceColaboradores {
     public static ColaboradorDTO toColaboradorDTO(Colaborador colaborador) {
 
-        return ColaboradorDTO.builder().
+        ColaboradorDTO colaboradorDTO = ColaboradorDTO.builder().
                 id(String.valueOf(colaborador.getId())).
                 nombre(colaborador.getNombre()).
                 puntosDisponibles(String.valueOf(colaborador.getPuntosDisponibles())).
                 tipoColaborador(colaborador.getTipoDeColaborador().toString()).
                 formasDeColaborar(colaborador.getFormasDeColaborar().stream().map(FormaColaboracion::toString).toList()).
+                mail(colaborador.getValorDeContacto(TipoDeContacto.MAIL)).
+                telefono(colaborador.getValorDeContacto(TipoDeContacto.TELEFONO)).
+                whatsapp(colaborador.getValorDeContacto(TipoDeContacto.WHATSAPP)).
                 build();
 
+        if (colaborador.getTipoDeColaborador().equals(TipoDeColaborador.JURIDICA)) {
+            colaboradorDTO.setJuridica("true");
+        }
+        return colaboradorDTO;
     }
 
     public static void setearFormasDeColaborar(Colaborador colaborador, FormasDeColaborarDO formasDeColaborarDO) {

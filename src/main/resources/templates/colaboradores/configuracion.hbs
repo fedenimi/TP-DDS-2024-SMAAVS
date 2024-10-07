@@ -7,21 +7,21 @@
         <form class="form-registro config-form" method="POST">
             <div class="form-element config-form-element">
                 <label for="form-nombre">Dirección</label>
-                <input type="text" name="direccion" id="form-apellido" required placeholder={{direccion}}>
+                <input type="text" name="direccion" id="form-apellido" required placeholder={{colaborador.direccion}}>
             </div>
             <div></div>
             <div class="form-element config-form-element">
                 <label for="form-apellido">Mail</label>
-                <input type="text" name="mail" id="form-apellido" required placeholder={{mail}}>
+                <input type="text" name="mail" id="form-apellido" required placeholder={{colaborador.mail}}>
             </div>
             <div class="form-element config-form-element">
                 <label for="form-nombre">Teléfono</label>
-                <input type="text" name="telefono" id="form-apellido" required placeholder={{telefono}}>
+                <input type="text" name="telefono" id="form-apellido" required placeholder={{colaborador.telefono}}>
             </div>
             <div></div>
             <div class="form-element config-form-element">
                 <label for="form-nombre">Whatsapp</label>
-                <input type="text" name="whatsapp" id="form-apellido" required placeholder={{whatsapp}}>
+                <input type="text" name="whatsapp" id="form-apellido" required placeholder={{colaborador.whatsapp}}>
             </div>
             <div class="formas-de-colaborar hidden">
                 <input class="hidden" name="donar-dinero" value={{#if donar-dinero}}
@@ -71,15 +71,15 @@
                     </ul>
                 </div>
             </div>
-            {{#unless juridica}}
+            {{#if juridica}}
                 <div></div>
                 <div class="form-element config-form-element">
-                    <label>‎ </label>
+                    <label> </label>
                     <a class="btn-admin-heladeras btn-form" href="adminHeladeras">
                         <p>Administrar heladeras</p>
                     </a>
                 </div>
-            {{/unless}}
+            {{/if}}
         </form>
         <div class="btns-next">
             <a class="btn-next2" href="javascript:history.back()">
