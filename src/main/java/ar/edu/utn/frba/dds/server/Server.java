@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.server;
 
+import ar.edu.utn.frba.dds.middlewares.AuthMiddleWare;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.Initializer;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.JavalinRenderer;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.PrettyProperties;
@@ -28,7 +29,7 @@ public class Server {
             System.out.println("Iniciando servidor en puerto " + port);
             app = Javalin.create(config()).start(port);
 
-            //AuthMiddleware.apply(app);
+            AuthMiddleWare.apply(app);
             AppHandlers.applyHandlers(app);
             Router.init(app);
 

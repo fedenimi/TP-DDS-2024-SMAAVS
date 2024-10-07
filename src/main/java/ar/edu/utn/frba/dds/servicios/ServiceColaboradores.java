@@ -70,26 +70,26 @@ public class ServiceColaboradores {
             // Setear valores básicos
             colaborador.setNombre(context.formParam("nombre"));
             colaborador.setApellido(context.formParam("apellido"));
-            colaborador.setDocumento(Documento.builder().numero(context.formParam("documento")).tipo(TipoDocumento.valueOf(context.formParam("tipoDocumento"))).build());
+            //colaborador.setDocumento(Documento.builder().numero(context.formParam("nro-documento")).tipo(TipoDocumento.valueOf(context.formParam("tipo-documento"))).build());
             colaborador.setTipoDeColaborador(TipoDeColaborador.HUMANA);
             if(context.formParam("telefono") != null) {
                 colaborador.agregarMedioDeContacto(MedioDeContacto.builder().tipo(TipoDeContacto.TELEFONO).valor(context.formParam("telefono")).build());
             }
-            if(context.formParam("email") != null) {
+            if(context.formParam("mail") != null) {
                 colaborador.agregarMedioDeContacto(MedioDeContacto.builder().tipo(TipoDeContacto.MAIL).valor(context.formParam("email")).build());
             }
             if(context.formParam("whatsapp") != null) {
                 colaborador.agregarMedioDeContacto(MedioDeContacto.builder().tipo(TipoDeContacto.WHATSAPP).valor(context.formParam("whatsapp")).build());
             }
-            if(context.formParam("donarDinero") != null) {
+            if(context.formParam("donar-dinero") != null) {
                 colaborador.agregarFormaDeColaborar(FormaColaboracion.DONACION_DINERO);
                 usuario.agregarPermiso(Permiso.DONAR_DINERO);
             }
-            if(context.formParam("donarViandas") != null) {
+            if(context.formParam("donar-viandas") != null) {
                 colaborador.agregarFormaDeColaborar(FormaColaboracion.DONACION_VIANDAS);
                 usuario.agregarPermiso(Permiso.DONAR_VIANDAS);
             }
-            if(context.formParam("distribuirViandas") != null) {
+            if(context.formParam("distribuir-viandas") != null) {
                 colaborador.agregarFormaDeColaborar(FormaColaboracion.DISTRIBUCION_VIANDAS);
                 usuario.agregarPermiso(Permiso.DISTRIBUIR_VIANDAS);
             }
@@ -127,17 +127,17 @@ public class ServiceColaboradores {
         if(context.formParam("telefono") != null) {
             colaborador.agregarMedioDeContacto(MedioDeContacto.builder().tipo(TipoDeContacto.TELEFONO).valor(context.formParam("telefono")).build());
         }
-        if(context.formParam("email") != null) {
+        if(context.formParam("mail") != null) {
             colaborador.agregarMedioDeContacto(MedioDeContacto.builder().tipo(TipoDeContacto.MAIL).valor(context.formParam("email")).build());
         }
         if(context.formParam("whatsapp") != null) {
             colaborador.agregarMedioDeContacto(MedioDeContacto.builder().tipo(TipoDeContacto.WHATSAPP).valor(context.formParam("whatsapp")).build());
         }
-        if(context.formParam("donarDinero") != null) {
+        if(context.formParam("donar-dinero") != null) {
             colaborador.agregarFormaDeColaborar(FormaColaboracion.DONACION_DINERO);
             usuario.agregarPermiso(Permiso.DONAR_DINERO);
         }
-        if(context.formParam("administrarHeladeras") != null) {
+        if(context.formParam("administrar-heladeras") != null) {
             colaborador.agregarFormaDeColaborar(FormaColaboracion.DONACION_VIANDAS);
             usuario.agregarPermiso(Permiso.ADMINISTRAR_HELADERA);
         }

@@ -33,7 +33,7 @@ public class ServiceLocator {
                 instances.put(componentName, instance);
             }
             else if (componentName.equals(ControladorRegistro.class.getName())) {
-                ControladorRegistro instance = new ControladorRegistro(instanceOf(RepositorioColaboradores.class));
+                ControladorRegistro instance = new ControladorRegistro(instanceOf(RepositorioColaboradores.class), instanceOf(RepositorioUsuarios.class));
                 instances.put(componentName, instance);
             }
             else if(componentName.equals(RepositorioOfrecerProductos.class.getName())) {
@@ -116,6 +116,11 @@ public class ServiceLocator {
                 RepositorioAlertaSuscripciones instance = new RepositorioAlertaSuscripciones();
                 instances.put(componentName, instance);
             }
+            else if(componentName.equals(RepositorioUsuarios.class.getName())) {
+                RepositorioUsuarios instance = new RepositorioUsuarios();
+                instances.put(componentName, instance);
+            }
+
         }
 
         return (T) instances.get(componentName);
