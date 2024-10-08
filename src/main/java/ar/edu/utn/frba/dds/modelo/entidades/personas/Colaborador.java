@@ -144,4 +144,8 @@ public class Colaborador {
     public void agregarFormaDeColaborar(FormaColaboracion formaColaboracion) {
         this.formasDeColaborar.add(formaColaboracion);
     }
+
+    public void agregarSuscripcion(SuscripcionHumana suscripcionHumana) {
+        this.suscripciones.add(suscripcionHumana);
+    }
 }

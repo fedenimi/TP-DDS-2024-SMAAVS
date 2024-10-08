@@ -60,12 +60,6 @@ public class ControladorProductos implements ICrudViewsHandler {
         //RECIBE POR PATH PARAM EL ID DE UN PRODUCTO Y PRETENDE DEVOLVER UNA VISTA CON EL DETALLE DE ESE PRODUCTO
         Optional<OfrecerProducto> posibleProductoBuscado = this.repositorioDeProductos.buscar(Long.valueOf(context.pathParam("id")));
 
-        //TODO
-//        if(posibleProductoBuscado.isEmpty()) {
-//            context.status(HttpStatus.NOT_FOUND);
-//            return;
-//        }
-
         Map<String, Object> model = new HashMap<>();
         //model.put("producto", ServiceRubro.toProductoDTO(posibleProductoBuscado.get()));
 
@@ -132,11 +126,6 @@ public class ControladorProductos implements ICrudViewsHandler {
         //PRETENDE DEVOLVER UNA VISTA CON UN FORMULARIO QUE PERMITA EDITAR AL RECURSO QUE LLEGA POR PATH PARAM
         Optional<OfrecerProducto> posibleProductoBuscado = this.repositorioDeProductos.buscar(Long.valueOf(context.pathParam("id")));
 
-        //TODO
-//        if(posibleProductoBuscado.isEmpty()) {
-//            context.status(HttpStatus.NOT_FOUND);
-//            return;
-//        }
 
         Map<String, Object> model = new HashMap<>();
         model.put("producto", posibleProductoBuscado.get());
@@ -147,11 +136,11 @@ public class ControladorProductos implements ICrudViewsHandler {
 
     @Override
     public void update(Context context) {
-        //TODO
+
     }
 
     @Override
     public void delete(Context context) {
-        //TODO
+
     }
 }

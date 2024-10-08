@@ -15,13 +15,13 @@ public class CondicionSuscripcionHeladeraConverter implements AttributeConverter
     public String convertToDatabaseColumn(CondicionSuscripcionHeladera condicionSuscripcionHeladera) {
         String condicion = null;
 
-        if (condicionSuscripcionHeladera.getClass().getName().equals("QuedanNViandas")) {
+        if (condicionSuscripcionHeladera instanceof QuedanNViandas) {
             condicion = "QuedanNViandas";
         }
-        if (condicionSuscripcionHeladera.getClass().getName().equals("FaltanNViandas")) {
+        if (condicionSuscripcionHeladera instanceof FaltanNViandas) {
             condicion = "FaltanNViandas";
         }
-        if (condicionSuscripcionHeladera.getClass().getName().equals("Desperfecto")) {
+        if (condicionSuscripcionHeladera instanceof Desperfecto) {
             condicion = "Desperfecto";
         }
         return condicion;

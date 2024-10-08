@@ -99,6 +99,10 @@ public class ControladorReportarFalla implements ICrudViewsHandler{
 
         RegistradorDeIncidentes.getInstance().registrarIncidente(Estado.FALLA_TECNICA, heladera, buscadorDeTecnicos);
 
+        repositorioHeladeras.beginTransaction();
+        repositorioHeladeras.modificar(heladera);
+        repositorioHeladeras.commitTransaction();
+
         ServiceTopics.accionarTopic(heladera, TipoNotificacion.DESPERFECTO);
         context.redirect("/" + context.pathParam("id") + "/home");
     }

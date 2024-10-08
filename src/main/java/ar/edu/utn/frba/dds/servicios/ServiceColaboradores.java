@@ -83,7 +83,7 @@ public class ServiceColaboradores {
                 colaborador.agregarMedioDeContacto(MedioDeContacto.builder().tipo(TipoDeContacto.TELEFONO).valor(context.formParam("telefono")).build());
             }
             if(context.formParam("mail") != null) {
-                colaborador.agregarMedioDeContacto(MedioDeContacto.builder().tipo(TipoDeContacto.MAIL).valor(context.formParam("email")).build());
+                colaborador.agregarMedioDeContacto(MedioDeContacto.builder().tipo(TipoDeContacto.MAIL).valor(context.formParam("mail")).build());
             }
             if(context.formParam("whatsapp") != null) {
                 colaborador.agregarMedioDeContacto(MedioDeContacto.builder().tipo(TipoDeContacto.WHATSAPP).valor(context.formParam("whatsapp")).build());

@@ -18,10 +18,15 @@ import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.AlertaSuscripcion;
 import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.SuscripcionHumana;
 import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.TipoNotificacion;
+import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.Topic;
+import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.condiciones.Desperfecto;
+import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.condiciones.FaltanNViandas;
+import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.condiciones.QuedanNViandas;
 import ar.edu.utn.frba.dds.modelo.repositorios.*;
 
 import javax.print.Doc;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -39,6 +44,10 @@ public class Initializer {
                 .solicitudAperturas(null)
                 .visitaTecnicas(null)
                 .modeloHeladera(ModeloHeladera.builder().nombre("Heladera Samsung").temperaturaMinima(0.0).temperaturaMaxima(10.0).build())
+                .topics(Arrays.asList(Topic.builder().condicionSuscripcionHeladera(new FaltanNViandas()).suscripciones(new ArrayList<>()).mensaje("Faltan pocas viandas para que la heladera se llene").build(),
+                                Topic.builder().condicionSuscripcionHeladera(new QuedanNViandas()).suscripciones(new ArrayList<>()).mensaje("Quedan pocas viandas en la heladera").build(),
+                                Topic.builder().condicionSuscripcionHeladera(new Desperfecto()).suscripciones(new ArrayList<>()).mensaje("La heladera sufrió un desperfecto").build())
+                        )
                 .build();
 
         Heladera heladera2 = Heladera
@@ -53,6 +62,10 @@ public class Initializer {
                 .visitaTecnicas(null)
                 .direccion(Direccion.builder().nombre_direccion("Av. Rivadavia 1234").punto(Punto.builder().latitud(-34.6037).longitud(-58.3816).build()).direccion("Av. Rivadavia 1234").build())
                 .modeloHeladera(ModeloHeladera.builder().nombre("Heladera LG").temperaturaMinima(0.0).temperaturaMaxima(10.0).build())
+                .topics(Arrays.asList(Topic.builder().condicionSuscripcionHeladera(new FaltanNViandas()).suscripciones(new ArrayList<>()).mensaje("Faltan pocas viandas para que la heladera se llene").build(),
+                        Topic.builder().condicionSuscripcionHeladera(new QuedanNViandas()).suscripciones(new ArrayList<>()).mensaje("Quedan pocas viandas en la heladera").build(),
+                        Topic.builder().condicionSuscripcionHeladera(new Desperfecto()).suscripciones(new ArrayList<>()).mensaje("La heladera sufrió un desperfecto").build())
+                )
                 .build();
 
         Heladera heladera3 = Heladera
@@ -67,6 +80,10 @@ public class Initializer {
                 .visitaTecnicas(null)
                 .direccion(Direccion.builder().nombre_direccion("Av. Belgrano 1234").punto(Punto.builder().latitud(-35.1234).longitud(-58.3016).build()).direccion("Av. Belgrano 1234").build())
                 .modeloHeladera(ModeloHeladera.builder().nombre("Heladera Whirlpool").temperaturaMinima(0.0).temperaturaMaxima(10.0).build())
+                .topics(Arrays.asList(Topic.builder().condicionSuscripcionHeladera(new FaltanNViandas()).suscripciones(new ArrayList<>()).mensaje("Faltan pocas viandas para que la heladera se llene").build(),
+                        Topic.builder().condicionSuscripcionHeladera(new QuedanNViandas()).suscripciones(new ArrayList<>()).mensaje("Quedan pocas viandas en la heladera").build(),
+                        Topic.builder().condicionSuscripcionHeladera(new Desperfecto()).suscripciones(new ArrayList<>()).mensaje("La heladera sufrió un desperfecto").build())
+                )
                 .build();
 
         SuscripcionHumana suscripcionHumana1 = SuscripcionHumana.builder().cantidad(5).heladera(heladera1).tipoNotificacion(TipoNotificacion.FALTAN_N_VIANDAS).build();
