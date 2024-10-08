@@ -17,7 +17,7 @@ import java.util.List;
 @Entity
 @DiscriminatorValue("donacion_viandas")
 public class DonacionDeViandas extends Puntuable{
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "vianda_id")
     private List<Vianda> viandasDonadas;
 

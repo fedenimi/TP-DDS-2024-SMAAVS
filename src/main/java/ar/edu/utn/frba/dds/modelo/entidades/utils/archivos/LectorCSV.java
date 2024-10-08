@@ -48,6 +48,7 @@ public class LectorCSV {
                 int cantidad = Integer.parseInt(linea[7]);
                 ColaboradorDO colaboradorDO = ColaboradorDO.of(tipoDoc, doc,nombre,apellido,medioDeContacto,fechaColaboracion,formaColaboracion,cantidad);
                 Colaborador colaborador = instanciadorColaborador.crearColaborador(colaboradorDO, colaboradores);
+                colaboradores.add(colaborador);
                 instanciadorColaboracion.agregarColaboracion(contribuciones, formaColaboracion, colaborador, cantidad);
                 lineaActual++;
             }

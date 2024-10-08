@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.controladores;
 
 import ar.edu.utn.frba.dds.config.ServiceLocator;
+import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.TipoDeColaborador;
 import ar.edu.utn.frba.dds.modelo.entidades.enviadores.EnviadorDeMail;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.InstanciadorColaborador;
@@ -11,6 +12,7 @@ import ar.edu.utn.frba.dds.server.Router;
 import io.javalin.http.Context;
 import io.javalin.http.UploadedFile;
 
+import javax.validation.constraints.Null;
 import java.io.*;
 import java.util.List;
 
@@ -44,7 +46,9 @@ public class ControladorCargaMasivaColaboraciones implements ICrudViewsHandler {
         } catch (IOException e) {
             System.err.println("Error al guardar el archivo: " + e.getMessage());
         }
-        List<Colaborador> colaboradores = ServiceLocator.instanceOf(RepositorioColaboradores.class).buscarTodos();
+        List<Colaborador> colaboradores = ServiceLocator.instanceOf(RepositorioColaboradores.class).buscarTodos().stream().
+                filter(colaborador -> colaborador.getTipoDeColaborador().equals(TipoDeColaborador.HUMANA)).
+                toList();
         LectorCSV lectorCSV = new LectorCSV(new InstanciadorColaborador(new EnviadorDeMail()));
         lectorCSV.cargarContribuciones(colaboradores, file);
         file.delete();

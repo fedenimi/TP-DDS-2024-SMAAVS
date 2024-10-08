@@ -36,6 +36,7 @@ public class ControladorDonacionDeViandas implements ICrudViewsHandler{
         Heladera heladera = this.repositorioHeladeras.buscar(Long.parseLong(context.pathParam("id-heladera"))).get();
         Map<String, Object> model = new HashMap<>();
         model.put("heladera", heladera.getDireccion().getNombre_direccion());
+        model.put("id", heladera.getId());
         context.render("colaboraciones/donarViandas.hbs", model);
     }
 
@@ -52,16 +53,13 @@ public class ControladorDonacionDeViandas implements ICrudViewsHandler{
     @Override
     public void save(Context context) {
         System.out.println("Guardando donación de viandas");
-        System.out.println("Cantidad de viandas: " + context.formParam("cant-viandas"));
-        System.out.println("Peso 1: " + context.formParam("vianda["+0+"][peso]"));
-        System.out.println("Peso 2: " + context.formParam("vianda[1][peso]"));
         Heladera heladera = repositorioHeladeras.buscar(Long.parseLong(context.formParam("heladera"))).get();
         List<Vianda> viandas = new ArrayList<>();
 
         for(int i = 0; i < Integer.parseInt(context.formParam("cant-viandas")); i++){
             Vianda vianda = new Vianda();
             vianda.setPeso(Integer.parseInt(context.formParam("vianda["+i+"][peso]")));
-            vianda.setFechaCaducidad(LocalDate.parse(context.formParam("vianda["+i+"][fechaVencimiento]")));
+            vianda.setFechaCaducidad(LocalDate.parse(context.formParam("vianda["+i+"][fecha_caducidad]")));
             vianda.setComida(context.formParam("vianda["+i+"][comida]"));
             vianda.setCalorias(Integer.parseInt(context.formParam("vianda["+i+"][calorias]")));
             vianda.setEntregada(false);
@@ -78,11 +76,12 @@ public class ControladorDonacionDeViandas implements ICrudViewsHandler{
         repositorioPuntuables.beginTransaction();
         repositorioPuntuables.guardar(donacionDeViandas);
         repositorioPuntuables.commitTransaction();
-
         colaborador.agregarPuntuable(donacionDeViandas);
-
+        repositorioColaboradores.beginTransaction();
+        repositorioColaboradores.modificar(colaborador);
+        repositorioColaboradores.commitTransaction();
         ServiceTopics.accionarTopic(heladera, TipoNotificacion.FALTAN_N_VIANDAS);
-
+        context.redirect("/"+context.pathParam("id")+"/home");
     }
 
     @Override

@@ -11,12 +11,12 @@
         <form class="form-registro" id="form-registro-pv" method="POST">
             <div class="form-element">
                 <label for="form-nombre">Nombre</label>
-                <input type="text" name="apellido" id="form-apellido" required>
+                <input type="text" name="nombre" id="form-apellido" required>
             </div>
             <div></div>
             <div class="form-element">
                 <label for="form-apellido">Número de documento</label>
-                <input type="text" name="apellido" id="form-apellido" required>
+                <input type="text" name="documento" id="form-apellido" required>
             </div>
             <div class="form-element">
                 <label for="form-nombre">Apellido</label>
@@ -25,7 +25,7 @@
             <div></div>
             <div class="form-element">
                 <label for="form-nombre">Fecha de nacimiento</label>
-                <input type="date" name="apellido" id="form-apellido" required>
+                <input type="date" name="fechaDeNacimiento" id="form-apellido" required>
             </div>
             <div class="form-element">
                 <label for="form-nombre"> Tipo de documento</label>
@@ -51,8 +51,9 @@
             <div></div>
             <div class="form-element">
                 <label for="form-apellido">Es hijo/a de:</label>
-                <input type="text" name="apellido" id="form-apellido" required>
+                <input type="text" name="padre" id="form-apellido" required>
             </div>
+            <input type="hidden" name="tipoDocumento" id="tipoDocumento">
         </form>
         <div class="btns-next">
 
@@ -73,7 +74,7 @@
 
     <script>
         document.querySelector("#submit-btn-finalizar").addEventListener("click", function() {
-            console.log("Finalizar");
+            document.querySelector("#tipoDocumento").value = document.querySelector(".dropdown-item-only.checked").children[1].innerHTML;
             document.querySelector("#form-registro-pv").submit();
         });
 

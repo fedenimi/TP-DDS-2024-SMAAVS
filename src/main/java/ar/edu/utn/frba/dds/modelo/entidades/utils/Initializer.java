@@ -1,6 +1,8 @@
 package ar.edu.utn.frba.dds.modelo.entidades.utils;
 
 import ar.edu.utn.frba.dds.config.ServiceLocator;
+import ar.edu.utn.frba.dds.modelo.entidades.acceso.Permiso;
+import ar.edu.utn.frba.dds.modelo.entidades.acceso.Usuario;
 import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.OfrecerProducto;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Oferta;
@@ -45,9 +47,9 @@ public class Initializer {
                 .visitaTecnicas(null)
                 .modeloHeladera(ModeloHeladera.builder().nombre("Heladera Samsung").temperaturaMinima(0.0).temperaturaMaxima(10.0).build())
                 .topics(Arrays.asList(Topic.builder().condicionSuscripcionHeladera(new FaltanNViandas()).suscripciones(new ArrayList<>()).mensaje("Faltan pocas viandas para que la heladera se llene").build(),
-                                Topic.builder().condicionSuscripcionHeladera(new QuedanNViandas()).suscripciones(new ArrayList<>()).mensaje("Quedan pocas viandas en la heladera").build(),
-                                Topic.builder().condicionSuscripcionHeladera(new Desperfecto()).suscripciones(new ArrayList<>()).mensaje("La heladera sufrió un desperfecto").build())
-                        )
+                        Topic.builder().condicionSuscripcionHeladera(new QuedanNViandas()).suscripciones(new ArrayList<>()).mensaje("Quedan pocas viandas en la heladera").build(),
+                        Topic.builder().condicionSuscripcionHeladera(new Desperfecto()).suscripciones(new ArrayList<>()).mensaje("La heladera sufrió un desperfecto").build())
+                )
                 .build();
 
         Heladera heladera2 = Heladera
@@ -101,7 +103,7 @@ public class Initializer {
                 documento(Documento.builder().numero("12345678").tipo(TipoDocumento.DNI).build()).
                 tipoDeColaborador(TipoDeColaborador.HUMANA).
                 formasDeColaborar(Arrays.asList(FormaColaboracion.DISTRIBUCION_VIANDAS, FormaColaboracion.DONACION_VIANDAS)).
-                suscripciones(Arrays.asList(suscripcionHumana1, suscripcionHumana2,suscripcionHumana3)).
+                suscripciones(Arrays.asList(suscripcionHumana1, suscripcionHumana2, suscripcionHumana3)).
                 alertaSuscripciones(Arrays.asList(alertaSuscripcion1, alertaSuscripcion2, alertaSuscripcion3)).
                 build();
 
@@ -133,6 +135,10 @@ public class Initializer {
 
         Alerta alerta1 = Alerta.builder().tipoAlerta(Estado.FRAUDE).fechaYHora(LocalDateTime.now()).heladera(heladera3).build();
         Alerta alerta2 = Alerta.builder().tipoAlerta(Estado.FALLA_CONEXION).fechaYHora(LocalDateTime.now()).heladera(heladera2).build();
+
+        Usuario admin = Usuario.builder().nombre("admin").contrasenia("admin").permisos(List.of(Permiso.ADMIN)).colaboradorAsociado(
+                Colaborador.builder().tipoDeColaborador(TipoDeColaborador.JURIDICA).build()
+        ).build();
 
         RepositorioHeladeras repositorioDeHeladeras = ServiceLocator.instanceOf(RepositorioHeladeras.class);
         repositorioDeHeladeras.beginTransaction();
@@ -166,6 +172,11 @@ public class Initializer {
         repositorioAlertaSuscripciones.guardar(alertaSuscripcion2);
         repositorioAlertaSuscripciones.guardar(alertaSuscripcion3);
         repositorioAlertaSuscripciones.commitTransaction();
+
+        RepositorioUsuarios repositorioUsuarios = ServiceLocator.instanceOf(RepositorioUsuarios.class);
+        repositorioUsuarios.beginTransaction();
+        repositorioUsuarios.guardar(admin);
+        repositorioUsuarios.commitTransaction();
 
     }
 }

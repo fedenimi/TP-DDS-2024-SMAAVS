@@ -88,7 +88,7 @@ public class ControladorDistribuirViandas implements ICrudViewsHandler{
         System.out.println("Heladera destino: " + context.formParam("heladera-dest"));
         System.out.println("Motivo: " + context.formParam("motivo"));
         System.out.println("Cantidad de viandas: " + context.formParam("cantidad-viandas"));
-        context.redirect("/"+ context.pathParam("id") +"home");
+        context.redirect("/"+ context.pathParam("id") +"/home");
     }
 
     @Override

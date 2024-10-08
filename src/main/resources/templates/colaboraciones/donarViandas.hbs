@@ -47,7 +47,8 @@
                 </div>
                 <div class="form-element2 donar-dinero-element">
                     <label for="form-nombre">Heladera</label>
-                    <input type="text" name="heladera" id="form-heladera" placeholder="{{heladera}}" disabled>
+                    <input type="text" name="" id="form-heladera" placeholder="{{heladera}}" disabled>
+                    <input type="hidden" name="heladera" id="form-heladera" placeholder="{{id}}">
                 </div>
                 <div class="btns-viandas">
                     <button class="btn-next2 guardar-vianda" type="button">
@@ -128,6 +129,7 @@
 
         document.querySelector('.btn-aceptar-modal-donar').addEventListener('click', () => {
             document.querySelector('input[name="cant-viandas"]').value = viandaCount;
+            document.querySelector('input[name="heladera"]').value = document.querySelector('input[name="heladera"]').placeholder;
             document.querySelector('.form-registro2').submit();
         })
 

@@ -35,8 +35,8 @@ public class Router {
         app.get("{id}/reportar-falla/mapa", ServiceLocator.instanceOf(ControladorReportarFalla.class)::abrirMapa, Permiso.HUMANA);
         app.post("{id}/reportar-falla/mapa", ServiceLocator.instanceOf(ControladorReportarFalla.class)::guardarMapa, Permiso.HUMANA);
 
-        app.get("{id}/reg-persona", ServiceLocator.instanceOf(ControladorPersonaVulnerable.class)::index, Permiso.REGISTRAR_PERSONA_VULNERABLE);
-        app.post("{id}/reg-persona", ServiceLocator.instanceOf(ControladorPersonaVulnerable.class)::save, Permiso.REGISTRAR_PERSONA_VULNERABLE);
+        app.get("{id}/reg-persona", ServiceLocator.instanceOf(ControladorPersonaVulnerable.class)::index, Permiso.HUMANA);
+        app.post("{id}/reg-persona", ServiceLocator.instanceOf(ControladorPersonaVulnerable.class)::save, Permiso.HUMANA);
 
         app.get("{id}/productos", ServiceLocator.instanceOf(ControladorProductos.class)::index);
         app.post("{id}/productos", ServiceLocator.instanceOf(ControladorProductos.class)::saveComprado);

@@ -45,7 +45,7 @@ public class ControladorPersonaVulnerable implements ICrudViewsHandler{
     public void save(Context context) {
         PersonaVulnerable personaVulnerable = new PersonaVulnerable();
         RegistroDePersonasVulnerables registroDePersonasVulnerables = new RegistroDePersonasVulnerables();
-        personaVulnerable.setNombre(context.formParam("nombre"));
+        personaVulnerable.setNombre(context.formParam("nombre") + " " + context.formParam("apellido"));
         personaVulnerable.setFechaDeNacimiento(LocalDate.parse(context.formParam("fechaDeNacimiento")));
         personaVulnerable.setFechaDeRegistro(LocalDate.now());
         personaVulnerable.setDocumento(Documento.builder().numero(context.formParam("documento")).tipo(TipoDocumento.valueOf(context.formParam("tipoDocumento"))).build());
@@ -56,16 +56,18 @@ public class ControladorPersonaVulnerable implements ICrudViewsHandler{
         repositorioPersonasVulnerables.guardar(personaVulnerable);
         repositorioPersonasVulnerables.commitTransaction();
 
-        Colaborador colaborador = repositorioColaboradores.buscar(Long.parseLong(context.formParam("colaborador"))).get();
+        Colaborador colaborador = repositorioColaboradores.buscar(Long.parseLong(context.pathParam("id"))).get();
         registroDePersonasVulnerables.setColaborador(colaborador);
         registroDePersonasVulnerables.setRegistro(Registro.builder().personaVulnerable(personaVulnerable).fechaDeRegistro(LocalDate.now()).build());
 
         repositorioPuntuables.beginTransaction();
         repositorioPuntuables.guardar(registroDePersonasVulnerables);
         repositorioPuntuables.commitTransaction();
-
         colaborador.agregarPuntuable(registroDePersonasVulnerables);
-
+        repositorioColaboradores.beginTransaction();
+        repositorioColaboradores.modificar(colaborador);
+        repositorioColaboradores.commitTransaction();
+        
         context.redirect("/"+context.pathParam("id")+"/home");
     }
 

@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.controladores;
 import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.DonacionDeDinero;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.frecuencia.Frecuencia;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
+import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.FrecuenciaConverter;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioColaboradores;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioHeladeras;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioPuntuables;
@@ -43,7 +44,7 @@ public class ControladorDonacionDeDinero implements ICrudViewsHandler{
 
         Colaborador colaborador = repositorioColaboradores.buscar(Long.valueOf(context.pathParam("id"))).get();
         DonacionDeDinero donacionDeDinero = new DonacionDeDinero();
-        donacionDeDinero.setFrecuencia(Frecuencia.class.cast(context.formParam("frecuencia").toUpperCase()));
+        donacionDeDinero.setFrecuencia(new FrecuenciaConverter().convertToEntityAttribute(context.formParam("frecuencia")));
         donacionDeDinero.setMonto(Integer.parseInt(context.formParam("monto")));
         donacionDeDinero.setFechaDeInicio(LocalDate.now());
         donacionDeDinero.setColaborador(colaborador);

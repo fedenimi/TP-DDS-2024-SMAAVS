@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.config.ServiceLocator;
 import ar.edu.utn.frba.dds.dtos.AlertaSuscripcionDTO;
 import ar.edu.utn.frba.dds.dtos.ColaboradorDTO;
 import ar.edu.utn.frba.dds.dtos.SuscripcionHumanaDTO;
+import ar.edu.utn.frba.dds.modelo.entidades.acceso.Permiso;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.AlertaSuscripcion;
 import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.SuscripcionHumana;
@@ -29,17 +30,27 @@ public class ControladorHome {
     }
 
     public void mostrarHome(Context context) {
+        List<Permiso> permisos = context.sessionAttribute("permisos");
+        if (permisos.contains(Permiso.ADMIN)) {
+            context.render("main/homeAdmin.hbs");
+            return;
+        }
         Colaborador colaborador = repositorioColaboradores.buscar(Long.valueOf(context.pathParam("id"))).get();
         ColaboradorDTO colaboradorDTO = ServiceColaboradores.toColaboradorDTO(colaborador);
-        List<SuscripcionHumanaDTO> suscripcionHumanas = colaborador.getSuscripciones().stream().map(ServiceSuscripcionesHumanas::toSuscripcionHumanaDTO).toList();
-        List<AlertaSuscripcionDTO> alertas = colaborador.getAlertaSuscripciones().stream().map(ServiceAlertasSuscripciones::toAlertaSuscripcionDTO).toList();
         Map<String, Object> model = new HashMap<>();
         model.put("nombre", colaborador.getNombre());
         model.put("puntos", colaborador.getPuntosDisponibles());
         model.put("colaborador", colaboradorDTO);
-        model.put("suscripciones", suscripcionHumanas);
-        model.put("alertas", alertas);
-        context.render("main/home.hbs", model);
+
+        if (permisos.contains(Permiso.HUMANA)) {
+            List<SuscripcionHumanaDTO> suscripcionHumanas = colaborador.getSuscripciones().stream().map(ServiceSuscripcionesHumanas::toSuscripcionHumanaDTO).toList();
+            List<AlertaSuscripcionDTO> alertas = colaborador.getAlertaSuscripciones().stream().map(ServiceAlertasSuscripciones::toAlertaSuscripcionDTO).toList();
+            model.put("suscripciones", suscripcionHumanas);
+            model.put("alertas", alertas);
+            context.render("main/homeHumana.hbs", model);
+        } else if (permisos.contains(Permiso.JURIDICA)) {
+            context.render("main/homeJuridica.hbs", model);
+        }
     }
 
     public void mostrarDonacionViandas(Context context) {

@@ -321,21 +321,21 @@
 {{#partial "scripts-map"}}
     <script src="../../js/timer.js"></script>
     <script>
-        function completarHeladerasInput(strTipo, nombreHeladera, viandas) {
+        function completarHeladerasInput(strTipo, heladera, viandas) {
             const heladeras = document.querySelectorAll('.info-viandas-3');
             const modal = document.querySelector('.heladeras-solicitadas-text');
             switch (strTipo) {
                 case "origen":
-                    heladeras[0].querySelector('input').value = nombreHeladera;
-                    heladeras[0].querySelector('p').textContent = nombreHeladera;
+                    heladeras[0].querySelector('input').value = heladera.id;
+                    heladeras[0].querySelector('p').textContent = heladera.nombre;
                     heladeras[0].children[3].textContent = viandas;
-                    modal.children[0].textContent = nombreHeladera
+                    modal.children[0].textContent = heladera.nombre
                     break;
                 case "destino":
-                    heladeras[1].querySelector('input').value = nombreHeladera;
-                    heladeras[1].querySelector('p').textContent = nombreHeladera;
+                    heladeras[1].querySelector('input').value = heladera.id;
+                    heladeras[1].querySelector('p').textContent = heladera.nombre;
                     heladeras[1].children[3].textContent = viandas;
-                    modal.children[1].textContent = nombreHeladera
+                    modal.children[1].textContent = heladera.nombre
                     break;
             }
         }

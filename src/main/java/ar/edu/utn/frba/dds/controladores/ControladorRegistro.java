@@ -9,6 +9,7 @@ import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioUsuarios;
 import ar.edu.utn.frba.dds.servicios.ServiceColaboradores;
 import io.javalin.http.Context;
 
+import java.util.List;
 import java.util.Optional;
 
 public class ControladorRegistro {
@@ -42,10 +43,9 @@ public class ControladorRegistro {
             return;
         }
         System.out.println(context.formParam("contrasenia"));
-
-        context.sessionAttribute("colaborador_id", usuario.getColaboradorAsociado().getId());
         context.sessionAttribute("permisos", usuario.getPermisos());
-
+        List<Permiso> permisos = usuario.getPermisos();
+        context.sessionAttribute("colaborador_id", usuario.getColaboradorAsociado().getId());
         context.redirect("/"+context.sessionAttribute("colaborador_id")+"/home");
     }
     public void mostrarRegistro(Context context) {
@@ -53,23 +53,6 @@ public class ControladorRegistro {
     }
 
     public void guardarRegistro(Context context) {
-        System.out.println("Llegó esto: ");
-        //PREGUNTAR:
-        // SI EL NOMBRE ESTÁ EN NULL ==> ES JURÍDICA
-        // SI NO                     ==> ES HUMANA
-        System.out.println(context.formParam("nombre"));
-        System.out.println(context.formParam("apellido"));
-        System.out.println(context.formParam("mail"));
-        System.out.println(context.formParam("usuario"));
-        System.out.println(context.formParam("direccion"));
-        System.out.println(context.formParam("whatsapp"));
-        System.out.println(context.formParam("donar-viandas"));
-        System.out.println(context.formParam("donar-dinero"));
-        System.out.println(context.formParam("distribuir-viandas"));
-        System.out.println(context.formParam("administrar-heladeras"));
-        System.out.println(context.formParam("tipo-documento"));
-        System.out.println(context.formParam("nro-documento"));
-
         Usuario usuario = new Usuario();
         usuario.setNombre(context.formParam("usuario"));
         usuario.setContrasenia(context.formParam("contrasenia"));
