@@ -63,7 +63,6 @@ public class ControladorSuscripciones implements ICrudViewsHandler {
         System.out.println("Viandas faltantes: " + context.formParam("faltantes"));
         System.out.println("Viandas restantes: " + context.formParam("restantes"));
         System.out.println("Desperfectos: " + context.formParam("desperfectos"));
-        //TODO: fede all yours
 
         Colaborador colaborador = repositorioColaboradores.buscar(Long.valueOf(context.pathParam("id"))).get();
         Heladera heladera = repositorioHeladeras.buscar(Long.valueOf(context.formParam("id-heladera"))).get();

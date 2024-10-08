@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.controladores;
 
 import ar.edu.utn.frba.dds.dtos.ColaboradorDTO;
 import ar.edu.utn.frba.dds.dtos.FormasDeColaborarDO;
+import ar.edu.utn.frba.dds.dtos.MediosDeContactoDO;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.*;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.formulario.Formulario;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.formulario.FormularioRespondido;
@@ -72,11 +73,6 @@ public class ControladorColaborador implements ICrudViewsHandler {
         // Guardar lo que se modificó en el formulario de configuración
         Optional<Colaborador> posibleColaborador = this.repositorioColaboradores.buscar(Long.valueOf(context.pathParam("id")));
 
-        //TODO
-//        if(posibleProductoBuscado.isEmpty()) {
-//            context.status(HttpStatus.NOT_FOUND);
-//            return;
-//        }
         Colaborador colaborador = posibleColaborador.get();
         // TODO: Setear los atributos del colaborador con los valores del formulario
 
@@ -89,9 +85,17 @@ public class ControladorColaborador implements ICrudViewsHandler {
         ServiceColaboradores.setearFormasDeColaborar(colaborador, formasDeColaborarDO);
 
         // Modificar los medios de contacto
+        MediosDeContactoDO mediosDeContactoDO = MediosDeContactoDO.builder().
+                telefono(context.formParam("telefono")).
+                email(context.formParam("mail")).
+                whatsapp(context.formParam("whatsapp")).
+                build();
+        ServiceColaboradores.setearMediosDeContacto(colaborador, mediosDeContactoDO);
 
-
-        repositorioColaboradores.guardar(colaborador);
+        repositorioColaboradores.beginTransaction();
+        repositorioColaboradores.modificar(colaborador);
+        repositorioColaboradores.commitTransaction();
+        
         context.redirect("/"+context.pathParam("id") +"/home");
     }
 
