@@ -29,6 +29,7 @@
                                     <p>{{this.nombre}}</p>
                                     <hr>
                                     <p>{{this.cantidadViandas}} viandas</p>
+                                    <p class="hidden">{{this.id}}</p>
                                 </div>
                             {{/each}}
                         </div>
@@ -39,6 +40,7 @@
                                     <p>{{this.nombre}}</p>
                                     <hr>
                                     <p>{{this.cantidadViandas}} viandas</p>
+                                    <p class="hidden">{{this.id}}</p>
                                 </div>
                             {{/each}}
                         </div>
@@ -80,10 +82,7 @@
                 </div>
                 <div class="form-element2 donar-dinero-element">
                     <label for="form-nombre">Motivo</label>
-                    <select name="motivo" id="motivo" class="hidden">
-                        <option value="falla"></option>
-                        <option value="falta-de-viandas"></option>
-                    </select>
+                    <input name="motivo" id="motivo" class="hidden" />
                     <div class="form-element-dropdown">
                         <div class="dropdown-select-btn">
                             <p>Seleccionar</p>
@@ -158,21 +157,21 @@
             document.querySelector('.admin-heladeras').classList.toggle('hidden');
         });
 
-        function completarHeladerasInput(strTipo, nombreHeladera, viandas) {
+        function completarHeladerasInput(strTipo, heladera, viandas) {
             const heladeras = document.querySelectorAll('.info-viandas-3');
             const modal = document.querySelector('.heladeras-solicitadas-text');
             switch (strTipo) {
                 case "origen":
-                    heladeras[0].querySelector('input').value = nombreHeladera;
-                    heladeras[0].querySelector('p').textContent = nombreHeladera;
+                    heladeras[0].querySelector('input').value = heladera.id
+                    heladeras[0].querySelector('p').textContent = heladera.nombre;
                     heladeras[0].children[3].textContent = viandas;
-                    modal.children[0].textContent = nombreHeladera
+                    modal.children[0].textContent = heladera.nombre
                     break;
                 case "destino":
-                    heladeras[1].querySelector('input').value = nombreHeladera;
-                    heladeras[1].querySelector('p').textContent = nombreHeladera;
+                    heladeras[1].querySelector('input').value = heladera.id
+                    heladeras[1].querySelector('p').textContent = heladera.nombre;
                     heladeras[1].children[3].textContent = viandas;
-                    modal.children[1].textContent = nombreHeladera
+                    modal.children[1].textContent = heladera.nombre
                     break;
             }
         }
@@ -184,9 +183,9 @@
 
         function motivoSegun(str) {
             if (str === "Falla") {
-                return "falla";
+                return "DESPERFECTO";
             } else if (str === "Falta de viandas") {
-                return "falta-de-viandas";
+                return "FALTADEVIANDAS";
             }
         }
 

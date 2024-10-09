@@ -60,7 +60,10 @@ if (titleText) {
         let heladera = null
         heladeraBtns.forEach(btn => {
             if (btn.classList.contains('open')) {
-                heladera = btn.children[0].innerText;
+                heladera = {
+                    id: btn.children[3].innerText,
+                    nombre: btn.children[0].innerText
+                }
             }
         })
         return heladera

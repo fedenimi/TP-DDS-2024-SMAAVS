@@ -150,7 +150,7 @@ public class ServiceColaboradores {
         }
         ServiceColaboradores.setearFormularioRespondidoJuridica(colaborador, context);
 
-        return null;
+        return colaborador;
 }
 
 public static void setearFormularioRespondidoJuridica(Colaborador colaborador, Context context) {
