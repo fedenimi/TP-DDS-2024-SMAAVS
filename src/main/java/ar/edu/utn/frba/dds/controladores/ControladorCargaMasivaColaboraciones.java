@@ -14,6 +14,7 @@ import io.javalin.http.UploadedFile;
 
 import javax.validation.constraints.Null;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ControladorCargaMasivaColaboraciones implements ICrudViewsHandler {
@@ -46,9 +47,10 @@ public class ControladorCargaMasivaColaboraciones implements ICrudViewsHandler {
         } catch (IOException e) {
             System.err.println("Error al guardar el archivo: " + e.getMessage());
         }
-        List<Colaborador> colaboradores = ServiceLocator.instanceOf(RepositorioColaboradores.class).buscarTodos().stream().
+        List<Colaborador> colaboradoresHumanos = ServiceLocator.instanceOf(RepositorioColaboradores.class).buscarTodos().stream().
                 filter(colaborador -> colaborador.getTipoDeColaborador().equals(TipoDeColaborador.HUMANA)).
                 toList();
+        List<Colaborador> colaboradores = new ArrayList<>(colaboradoresHumanos);
         LectorCSV lectorCSV = new LectorCSV(new InstanciadorColaborador(new EnviadorDeMail()));
         lectorCSV.cargarContribuciones(colaboradores, file);
         file.delete();

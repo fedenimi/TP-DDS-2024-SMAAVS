@@ -77,8 +77,10 @@ public class ServiceColaboradores {
             // Setear valores básicos
             colaborador.setNombre(context.formParam("nombre"));
             colaborador.setApellido(context.formParam("apellido"));
-            //colaborador.setDocumento(Documento.builder().numero(context.formParam("nro-documento")).tipo(TipoDocumento.valueOf(context.formParam("tipo-documento"))).build());
+            colaborador.setDocumento(Documento.builder().numero(context.formParam("nro-documento")).tipo(TipoDocumento.valueOf(context.formParam("tipo-documento"))).build());
             colaborador.setTipoDeColaborador(TipoDeColaborador.HUMANA);
+            colaborador.setPuntosCanjeados(0D);
+            colaborador.setPuntosDisponibles(0D);
             if(context.formParam("telefono") != null) {
                 colaborador.agregarMedioDeContacto(MedioDeContacto.builder().tipo(TipoDeContacto.TELEFONO).valor(context.formParam("telefono")).build());
             }

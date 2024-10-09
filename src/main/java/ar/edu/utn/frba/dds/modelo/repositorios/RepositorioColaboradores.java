@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.modelo.repositorios;
 
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.Alerta;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.MedioDeContacto;
+import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.TipoDeColaborador;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.TipoDocumento;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.repositorios.interfaces.IRepositorio;
@@ -59,7 +60,11 @@ public class RepositorioColaboradores implements IRepositorio<Colaborador>, With
 
     public void modificar(Colaborador colaborador) {
         withTransaction(() -> {
-            entityManager().merge(colaborador);//UPDATE
+            entityManager().merge(colaborador);
         });
+    }
+
+    public List<Colaborador> getColaboradoresHumanos() {
+        return this.buscarTodos().stream().filter(colaborador -> colaborador.getTipoDeColaborador().equals(TipoDeColaborador.HUMANA)).toList();
     }
 }

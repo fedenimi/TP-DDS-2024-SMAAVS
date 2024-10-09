@@ -44,7 +44,6 @@ public class ControladorRegistro {
         }
         System.out.println(context.formParam("contrasenia"));
         context.sessionAttribute("permisos", usuario.getPermisos());
-        List<Permiso> permisos = usuario.getPermisos();
         context.sessionAttribute("colaborador_id", usuario.getColaboradorAsociado().getId());
         context.redirect("/"+context.sessionAttribute("colaborador_id")+"/home");
     }
@@ -76,7 +75,15 @@ public class ControladorRegistro {
         repositorioUsuarios.beginTransaction();
         repositorioUsuarios.guardar(usuario);
         repositorioUsuarios.commitTransaction();
-       context.redirect("/"+colaborador.getId()+"/home");
+
+        context.sessionAttribute("permisos", usuario.getPermisos());
+        context.sessionAttribute("colaborador_id", usuario.getColaboradorAsociado().getId());
+        List<Permiso> permisos = usuario.getPermisos();
+        if(permisos.contains(Permiso.HUMANA)) {
+            context.render("main/homeHumana.hbs");
+        } else {
+            context.render("main/homeJuridica.hbs");
+        }
 
     }
 }

@@ -111,12 +111,15 @@ public class ControladorProductos implements ICrudViewsHandler {
         System.out.println("Producto: " + context.formParam("producto"));
 
         Colaborador colaborador = this.repositorioColaboradores.buscar(Long.valueOf(context.pathParam("id"))).get();
+        System.out.println("PRODUCTO ID:" + context.formParam("producto"));
         OfrecerProducto producto = this.repositorioDeProductos.buscar(Long.valueOf(context.formParam("producto"))).get();
         colaborador.modificarPuntosPorCanje(producto.getOferta().getPuntajeMinimo());
 
         repositorioDeProductos.beginTransaction();
         repositorioDeProductos.eliminar(producto);
         repositorioDeProductos.commitTransaction();
+
+        repositorioColaboradores.modificar(colaborador);
 
         context.redirect("/"+context.pathParam("id")+"/home");
     }

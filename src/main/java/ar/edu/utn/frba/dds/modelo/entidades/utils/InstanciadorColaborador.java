@@ -34,6 +34,11 @@ public class InstanciadorColaborador {
                     documento(new Documento(colaboradorDO.getDoc(), TipoDocumento.DNI)).
                     nombre(colaboradorDO.getNombre()).
                     apellido(colaboradorDO.getApellido()).
+                    puntuables(new ArrayList<>()).
+                    alertaSuscripciones(new ArrayList<>()).
+                    suscripciones(new ArrayList<>()).
+                    puntosDisponibles(0D).
+                    puntosCanjeados(0D).
                     build();
             System.out.println("Colaborador creado: " + colaborador.getNombre());
             enviador.enviar(colaboradorDO.getMedioDeContacto().getValor(), "Nuevo Registro",

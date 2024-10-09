@@ -14,7 +14,7 @@ public class Calculador {
         return instance;
     }
 
-    public Double puntaje(List<Puntuable> contribuciones, float puntosCanjeados) {
+    public Double puntaje(List<Puntuable> contribuciones, Double puntosCanjeados) {
         if(!contribuciones.isEmpty()){
             return this.mapToPuntaje(contribuciones).reduce(Double::sum).get() - puntosCanjeados;
         }
