@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.modelo.entidades.colaboraciones;
 
+import ar.edu.utn.frba.dds.modelo.entidades.ColaboracionesProperties;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Registro;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import lombok.*;
@@ -16,9 +17,6 @@ public class RegistroDePersonasVulnerables extends Puntuable {
     @Embedded
     private Registro registro;
 
-    @Column(name = "multiplicador", columnDefinition = "float")
-    @Getter private Double multiplicador;
-
     public RegistroDePersonasVulnerables(Colaborador colaborador) {
         this.colaborador = colaborador;
     }
@@ -31,5 +29,10 @@ public class RegistroDePersonasVulnerables extends Puntuable {
     @Override
     public int cantidadDeMesesSiendoHeladera() {
         return 0;
+    }
+
+    @Override
+    public Double getMultiplicador() {
+        return Double.parseDouble(ColaboracionesProperties.getInstance().propertyFromName("registro_personas_vulnerables"));
     }
 }

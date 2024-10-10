@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.modelo.entidades.colaboraciones;
 
+import ar.edu.utn.frba.dds.modelo.entidades.ColaboracionesProperties;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Vianda;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
@@ -24,9 +25,6 @@ public class DonacionDeViandas extends Puntuable{
     @Column(name = "fecha")
     @Convert(converter = LocalDateConverter.class)
     private LocalDate fecha;
-
-    @Column(name = "multiplicador", columnDefinition = "float")
-    private Double multiplicador;
 
     @ManyToOne
     @JoinColumn(name = "heladera_id")
@@ -56,5 +54,10 @@ public class DonacionDeViandas extends Puntuable{
 
     public Integer cantidadDeViandas() {
         return viandasDonadas.size();
+    }
+
+    @Override
+    public Double getMultiplicador() {
+        return Double.parseDouble(ColaboracionesProperties.getInstance().propertyFromName("donacion_viandas"));
     }
 }

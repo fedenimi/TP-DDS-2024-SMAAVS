@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.modelo.entidades.colaboraciones;
 
+import ar.edu.utn.frba.dds.modelo.entidades.ColaboracionesProperties;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.frecuencia.Frecuencia;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.FrecuenciaConverter;
@@ -28,9 +29,6 @@ public class DonacionDeDinero extends Puntuable {
     @Column(name = "frecuencia")
     private Frecuencia frecuencia;
 
-    @Column(name = "multiplicador", columnDefinition = "float")
-    @Getter private Double multiplicador;
-
     public DonacionDeDinero(Integer monto, Colaborador colaborador) {
         this.monto = monto;
         this.colaborador = colaborador;
@@ -52,5 +50,9 @@ public class DonacionDeDinero extends Puntuable {
     public float anios() {
         return Period.between(this.fechaDeInicio, LocalDate.now()).getYears();
     }
-    
+
+    @Override
+    public Double getMultiplicador() {
+        return Double.parseDouble(ColaboracionesProperties.getInstance().propertyFromName("donacion_dinero"));
+    }
 }
