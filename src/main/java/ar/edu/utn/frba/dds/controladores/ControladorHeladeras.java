@@ -92,4 +92,8 @@ public class ControladorHeladeras implements ICrudViewsHandler{
         model.put("titulo", "Listado de heladeras");
         context.render("colaboradores/mapa/mapaAdminHeladeras.hbs", model);
     }
+
+    public void guardarHeladera(Context context) {
+        //TODO: hacelo fede, tiro goool
+    }
 }

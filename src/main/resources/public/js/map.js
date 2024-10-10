@@ -42,12 +42,22 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
 heladeras.forEach(heladera => mostrarPunto(heladera, blueIcon));
 
+
 function mostrarPunto(heladera, icon) {
     var marker = L.marker([heladera.latitud, heladera.longitud], {icon: icon}).addTo(map);
-    marker.bindPopup(heladera.nombre);
+    var popupContent =
+        `Latitud: ${heladera.latitud} <br>
+        Longitud: ${heladera.longitud}`
+    
+    marker.bindPopup(popupContent);
+
     if (icon === blueIcon) marker.on('click', showHeladera);
     if (icon === redIcon) marker.on('click', showHeladeraForConfirmation);
+    marker.on('mouseover', function (e) {
+        this.openPopup();
+    })
 }
+
 
 modalOpenerBtn.addEventListener('click', () => {
     if (isOpen) {
