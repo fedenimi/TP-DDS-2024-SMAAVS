@@ -46,10 +46,6 @@ public class ControladorProductos implements ICrudViewsHandler {
                     .toList());
         });
 
-        System.out.println(rubrosDTO.get(0).getId());
-        System.out.println(rubrosDTO.get(1).getId());
-        System.out.println(rubrosDTO.get(0).getProductos().get(0).getNombre());
-
         Map<String, Object> model = new HashMap<>();
         model.put("categorias", rubrosDTO);
         context.render("productos/productos.hbs", model);

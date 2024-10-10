@@ -54,6 +54,7 @@ public class Router {
         app.get("{id}/adminHeladeras", ServiceLocator.instanceOf(ControladorHeladeras.class)::index, Permiso.ADMINISTRAR_HELADERA);
         app.post("{id}/adminHeladeras", ServiceLocator.instanceOf(ControladorHeladeras.class)::delete, Permiso.ADMINISTRAR_HELADERA);
         app.get("{id}/adminHeladeras/mapa", ServiceLocator.instanceOf(ControladorHeladeras.class)::abrirMapa, Permiso.ADMINISTRAR_HELADERA);
+        app.post("{id}/adminHeladeras/mapa", ServiceLocator.instanceOf(ControladorHeladeras.class)::guardarHeladera, Permiso.ADMINISTRAR_HELADERA);
 
         app.get("{id}/cargarCSV", ServiceLocator.instanceOf(ControladorCargaMasivaColaboraciones.class)::create, Permiso.ADMIN);
         app.post("{id}/cargarCSV", ServiceLocator.instanceOf(ControladorCargaMasivaColaboraciones.class)::save, Permiso.ADMIN);

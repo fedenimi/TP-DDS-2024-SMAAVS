@@ -12,6 +12,7 @@ public class ServiceProducto {
                 nombre(ofrecerProducto.getOferta().getNombre()).
                 puntaje(ofrecerProducto.getOferta().getPuntajeMinimo().toString()).
                 rubro(ofrecerProducto.getOferta().getRubro().getNombre()).
+                id(ofrecerProducto.getId().toString()).
                 build();
     }
 }

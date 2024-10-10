@@ -44,6 +44,7 @@
                                     <h3>{{nombre}}</h3>
                                     <p>{{puntaje}} puntos</p>
                                     <p class="hidden">{{rubro}}</p>
+                                    <h2 class="hidden">{{this.id}}</h2>
                                 </div>
                             </div>
                         {{/each}}
@@ -102,7 +103,7 @@
         });
 
         document.querySelector('#canjear-producto').addEventListener('click', () => {
-            document.querySelector('#producto').value = document.querySelector('.box-producto.selected h3').textContent;
+            document.querySelector('#producto').value = document.querySelector('.box-producto.selected h2').textContent;
             document.querySelector('#puntaje').value = document.querySelector('.box-producto.selected div p').textContent.split(' ')[0];
             document.querySelector('#form-producto').submit();
         });
