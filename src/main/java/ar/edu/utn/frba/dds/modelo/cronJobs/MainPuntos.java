@@ -10,9 +10,9 @@ import java.util.List;
 public class MainPuntos {
     public static void main(String[] args) {
         RepositorioColaboradores repositorioColaboradores = ServiceLocator.instanceOf(RepositorioColaboradores.class);
-        List<Colaborador> colaboradoresHumanos = repositorioColaboradores.getColaboradoresHumanos();
+        List<Colaborador> colaboradores = repositorioColaboradores.buscarTodos();
 
-        colaboradoresHumanos.forEach(colaborador -> actualizarPuntosDe(colaborador, repositorioColaboradores));
+        colaboradores.forEach(colaborador -> actualizarPuntosDe(colaborador, repositorioColaboradores));
     }
 
     public static void actualizarPuntosDe(Colaborador colaborador, RepositorioColaboradores repositorio) {

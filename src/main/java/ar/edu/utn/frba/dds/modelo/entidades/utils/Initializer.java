@@ -137,7 +137,7 @@ public class Initializer {
         Alerta alerta2 = Alerta.builder().tipoAlerta(Estado.FALLA_CONEXION).fechaYHora(LocalDateTime.now()).heladera(heladera2).build();
 
         Usuario admin = Usuario.builder().nombre("admin").contrasenia("admin").permisos(List.of(Permiso.ADMIN)).colaboradorAsociado(
-                Colaborador.builder().tipoDeColaborador(TipoDeColaborador.JURIDICA).build()
+                Colaborador.builder().tipoDeColaborador(TipoDeColaborador.JURIDICA).puntosCanjeados(0D).puntosDisponibles(0D).build()
         ).build();
 
         RepositorioHeladeras repositorioDeHeladeras = ServiceLocator.instanceOf(RepositorioHeladeras.class);

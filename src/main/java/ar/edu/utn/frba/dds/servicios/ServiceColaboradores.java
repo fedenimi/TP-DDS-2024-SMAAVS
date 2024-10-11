@@ -133,6 +133,8 @@ public class ServiceColaboradores {
         public static Colaborador crearColaboradorJuridico(Context context, Usuario usuario) {
         Colaborador colaborador = new Colaborador();
         colaborador.setTipoDeColaborador(TipoDeColaborador.JURIDICA);
+        colaborador.setPuntosDisponibles(0D);
+        colaborador.setPuntosCanjeados(0D);
         if(context.formParam("telefono") != null) {
             colaborador.agregarMedioDeContacto(MedioDeContacto.builder().tipo(TipoDeContacto.TELEFONO).valor(context.formParam("telefono")).build());
         }

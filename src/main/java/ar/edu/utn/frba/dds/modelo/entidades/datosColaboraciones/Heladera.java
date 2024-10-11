@@ -20,6 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Getter
+@Setter
 public class Heladera{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
