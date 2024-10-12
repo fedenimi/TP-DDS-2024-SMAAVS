@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.formulario;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 public class FormularioRespondido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

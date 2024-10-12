@@ -15,6 +15,7 @@ import java.time.Period;
 public class HacerseCargoDeHeladera extends Puntuable{
 
     @OneToOne(cascade = {CascadeType.PERSIST})
+    @JoinColumn(name = "heladera_id", referencedColumnName = "id")
     @Getter private Heladera heladera;
 
     @Override

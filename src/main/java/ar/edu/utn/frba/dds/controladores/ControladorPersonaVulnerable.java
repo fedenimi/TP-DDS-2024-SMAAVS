@@ -12,6 +12,7 @@ import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioColaboradores;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioHeladeras;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioPersonasVulnerables;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioPuntuables;
+import ar.edu.utn.frba.dds.servicios.ServicePersonasVulnerables;
 import io.javalin.http.Context;
 
 import java.time.LocalDate;
@@ -50,6 +51,7 @@ public class ControladorPersonaVulnerable implements ICrudViewsHandler{
         personaVulnerable.setFechaDeRegistro(LocalDate.now());
         personaVulnerable.setDocumento(Documento.builder().numero(context.formParam("documento")).tipo(TipoDocumento.valueOf(context.formParam("tipoDocumento"))).build());
         personaVulnerable.setDomicilio(Direccion.builder().build());
+        ServicePersonasVulnerables.asignarTarjetaA(personaVulnerable, repositorioPersonasVulnerables);
         // TODO: ver domicilio en form y lista de personas a cargo
 
         repositorioPersonasVulnerables.beginTransaction();
@@ -63,10 +65,10 @@ public class ControladorPersonaVulnerable implements ICrudViewsHandler{
         repositorioPuntuables.beginTransaction();
         repositorioPuntuables.guardar(registroDePersonasVulnerables);
         repositorioPuntuables.commitTransaction();
+
         colaborador.agregarPuntuable(registroDePersonasVulnerables);
-        repositorioColaboradores.beginTransaction();
         repositorioColaboradores.modificar(colaborador);
-        repositorioColaboradores.commitTransaction();
+
         
         context.redirect("/"+context.pathParam("id")+"/home");
     }

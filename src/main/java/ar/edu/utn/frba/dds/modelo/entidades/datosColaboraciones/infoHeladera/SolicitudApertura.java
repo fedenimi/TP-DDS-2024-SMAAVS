@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.TarjetaColaborador;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateTimeConverter;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Entity
+@Builder
 @Table (name = "solicitud_apertura")
 public class SolicitudApertura {
     @Id

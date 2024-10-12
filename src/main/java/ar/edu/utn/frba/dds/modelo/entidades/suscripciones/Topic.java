@@ -52,7 +52,6 @@ public class Topic {
         AlertaSuscripcion alertaSuscripcion = ServiceTopics.alertaSuscripcionPara(suscriptor, heladera, this.condicionSuscripcionHeladera);
         suscriptor.guardarAlertaSuscripcion(alertaSuscripcion);
 
-        System.out.println("LLEGUE");
         RepositorioColaboradores repositorioColaboradores = ServiceLocator.instanceOf(RepositorioColaboradores.class);
         repositorioColaboradores.beginTransaction();
         repositorioColaboradores.modificar(suscriptor);

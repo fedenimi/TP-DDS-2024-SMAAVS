@@ -71,7 +71,7 @@ public class ControladorRegistro {
                 mostrarErrorAgregarMedioDeContacto(context);
                 return;
             }
-            colaborador = ServiceColaboradores.crearColaboradorHumano(context, usuario);
+            colaborador = ServiceColaboradores.crearColaboradorHumano(context, usuario, repositorioColaboradores);
             usuario.agregarPermiso(Permiso.HUMANA);
         } else {
             colaborador = ServiceColaboradores.crearColaboradorJuridico(context, usuario);

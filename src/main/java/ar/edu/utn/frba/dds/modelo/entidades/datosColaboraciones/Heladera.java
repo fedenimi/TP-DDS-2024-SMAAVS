@@ -101,4 +101,5 @@ public class Heladera{
     public Topic getTopicPorCondicion(CondicionSuscripcionHeladera condicionSuscripcionHeladera) {
         return topics.stream().filter(topic -> topic.getCondicionSuscripcionHeladera().getClass().equals(condicionSuscripcionHeladera.getClass())).findFirst().orElse(null);
     }
+
 }

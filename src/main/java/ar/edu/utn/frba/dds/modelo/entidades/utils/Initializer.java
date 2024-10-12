@@ -10,10 +10,7 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Rubro;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.Alerta;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.Estado;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.ModeloHeladera;
-import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.Documento;
-import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.FormaColaboracion;
-import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.TipoDeColaborador;
-import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.TipoDocumento;
+import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.*;
 import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Direccion;
 import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Punto;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
@@ -105,6 +102,7 @@ public class Initializer {
                 formasDeColaborar(Arrays.asList(FormaColaboracion.DISTRIBUCION_VIANDAS, FormaColaboracion.DONACION_VIANDAS)).
                 suscripciones(Arrays.asList(suscripcionHumana1, suscripcionHumana2, suscripcionHumana3)).
                 alertaSuscripciones(Arrays.asList(alertaSuscripcion1, alertaSuscripcion2, alertaSuscripcion3)).
+                tarjetaColaborador(TarjetaColaborador.builder().fechaEmision(LocalDateTime.now()).codigoAlfanumerico("1234567890").build()).
                 build();
 
         Rubro rubro1 = Rubro.builder().nombre("Gastronomia").build();

@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.formulario;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Getter
 public class Respuesta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

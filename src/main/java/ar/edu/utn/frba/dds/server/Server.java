@@ -35,7 +35,7 @@ public class Server {
 
             if (Boolean.parseBoolean(PrettyProperties.getInstance().propertyFromName("dev_mode"))) {
                 System.out.println("Inicializando datos de prueba...");
-                Initializer.init();
+                //Initializer.init();
             }
         }
     }

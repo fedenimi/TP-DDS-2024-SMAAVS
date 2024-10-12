@@ -11,8 +11,10 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.formulario.FormularioR
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.formulario.Pregunta;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.formulario.Respuesta;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
+import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioColaboradores;
 import io.javalin.http.Context;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,31 +50,34 @@ public class ServiceColaboradores {
         }
     }
         public static void setearMediosDeContacto(Colaborador colaborador, MediosDeContactoDO mediosDeContactoDO) {
-        if(mediosDeContactoDO.getTelefono() != null && !colaborador.tiene(TipoDeContacto.TELEFONO)) {
-            colaborador.agregarMedioDeContacto(new MedioDeContacto(mediosDeContactoDO.getTelefono(), TipoDeContacto.TELEFONO));
+        if(mediosDeContactoDO.getTelefono() != "") {
+            if (!colaborador.tiene(TipoDeContacto.TELEFONO)) {
+                colaborador.agregarMedioDeContacto(new MedioDeContacto(mediosDeContactoDO.getTelefono(), TipoDeContacto.TELEFONO));
+            } else if (!colaborador.getValorDeContacto(TipoDeContacto.TELEFONO).equals(mediosDeContactoDO.getTelefono())) {
+                colaborador.quitarContactoDeTipo(TipoDeContacto.TELEFONO);
+                colaborador.agregarMedioDeContacto(new MedioDeContacto(mediosDeContactoDO.getTelefono(), TipoDeContacto.TELEFONO));
+            }
         }
-        else if(!colaborador.getValorDeContacto(TipoDeContacto.TELEFONO).equals(mediosDeContactoDO.getTelefono())) {
-            colaborador.quitarContactoDeTipo(TipoDeContacto.TELEFONO);
-            colaborador.agregarMedioDeContacto(new MedioDeContacto(mediosDeContactoDO.getTelefono(), TipoDeContacto.TELEFONO));
+        if(mediosDeContactoDO.getEmail() != "") {
+        if (!colaborador.tiene(TipoDeContacto.MAIL)) {
+                colaborador.agregarMedioDeContacto(new MedioDeContacto(mediosDeContactoDO.getEmail(), TipoDeContacto.MAIL));
+            } else if (!colaborador.getValorDeContacto(TipoDeContacto.MAIL).equals(mediosDeContactoDO.getEmail())) {
+                colaborador.quitarContactoDeTipo(TipoDeContacto.MAIL);
+                colaborador.agregarMedioDeContacto(new MedioDeContacto(mediosDeContactoDO.getEmail(), TipoDeContacto.MAIL));
+            }
         }
-        else if(mediosDeContactoDO.getEmail() != null && !colaborador.tiene(TipoDeContacto.MAIL)) {
-            colaborador.agregarMedioDeContacto(new MedioDeContacto(mediosDeContactoDO.getEmail(), TipoDeContacto.MAIL));
-        }
-        else if(!colaborador.getValorDeContacto(TipoDeContacto.MAIL).equals(mediosDeContactoDO.getEmail())) {
-            colaborador.quitarContactoDeTipo(TipoDeContacto.MAIL);
-            colaborador.agregarMedioDeContacto(new MedioDeContacto(mediosDeContactoDO.getEmail(), TipoDeContacto.MAIL));
-        }
-        else if(mediosDeContactoDO.getWhatsapp() != null && !colaborador.tiene(TipoDeContacto.WHATSAPP)) {
-            colaborador.agregarMedioDeContacto(new MedioDeContacto(mediosDeContactoDO.getWhatsapp(), TipoDeContacto.WHATSAPP));
-        }
-        else if(!colaborador.getValorDeContacto(TipoDeContacto.WHATSAPP).equals(mediosDeContactoDO.getWhatsapp())) {
-            colaborador.quitarContactoDeTipo(TipoDeContacto.WHATSAPP);
-            colaborador.agregarMedioDeContacto(new MedioDeContacto(mediosDeContactoDO.getWhatsapp(), TipoDeContacto.WHATSAPP));
+        if(mediosDeContactoDO.getWhatsapp() != "") {
+            if (mediosDeContactoDO.getWhatsapp() != "" && !colaborador.tiene(TipoDeContacto.WHATSAPP)) {
+                colaborador.agregarMedioDeContacto(new MedioDeContacto(mediosDeContactoDO.getWhatsapp(), TipoDeContacto.WHATSAPP));
+            } else if (!colaborador.getValorDeContacto(TipoDeContacto.WHATSAPP).equals(mediosDeContactoDO.getWhatsapp())) {
+                colaborador.quitarContactoDeTipo(TipoDeContacto.WHATSAPP);
+                colaborador.agregarMedioDeContacto(new MedioDeContacto(mediosDeContactoDO.getWhatsapp(), TipoDeContacto.WHATSAPP));
+            }
         }
         }
 
 
-        public static Colaborador crearColaboradorHumano(Context context, Usuario usuario) {
+        public static Colaborador crearColaboradorHumano(Context context, Usuario usuario, RepositorioColaboradores repositorioColaboradores) {
             Colaborador colaborador = new Colaborador();
             // Setear valores básicos
             colaborador.setNombre(context.formParam("nombre"));
@@ -81,6 +86,11 @@ public class ServiceColaboradores {
             colaborador.setTipoDeColaborador(TipoDeColaborador.HUMANA);
             colaborador.setPuntosCanjeados(0D);
             colaborador.setPuntosDisponibles(0D);
+            colaborador.setPuntuables(new ArrayList<>());
+            colaborador.setSuscripciones(new ArrayList<>());
+            colaborador.setAlertaSuscripciones(new ArrayList<>());
+            asignarTarjetaA(colaborador, repositorioColaboradores);
+
             if(context.formParam("telefono") != null) {
                 colaborador.agregarMedioDeContacto(MedioDeContacto.builder().tipo(TipoDeContacto.TELEFONO).valor(context.formParam("telefono")).build());
             }
@@ -135,6 +145,8 @@ public class ServiceColaboradores {
         colaborador.setTipoDeColaborador(TipoDeColaborador.JURIDICA);
         colaborador.setPuntosDisponibles(0D);
         colaborador.setPuntosCanjeados(0D);
+        colaborador.setPuntuables(new ArrayList<>());
+        colaborador.setOfrecerProductos(new ArrayList<>());
         if(context.formParam("telefono") != null) {
             colaborador.agregarMedioDeContacto(MedioDeContacto.builder().tipo(TipoDeContacto.TELEFONO).valor(context.formParam("telefono")).build());
         }
@@ -189,5 +201,18 @@ public static void setearFormularioRespondidoJuridica(Colaborador colaborador, C
                 respuestas(respuestas).
                 build();
         colaborador.setFormularioRespondido(formularioRespondido);
+    }
+
+    public static void asignarTarjetaA(Colaborador colaborador, RepositorioColaboradores repositorioColaboradores) {
+        List<Colaborador> colaboradoresHumanos = repositorioColaboradores.getColaboradoresHumanos();
+        List<String> codigosAlfanumericos = colaboradoresHumanos.stream().map(colab -> colab.getTarjetaColaborador().getCodigoAlfanumerico()).toList();
+        String codigoAlfanumerico = ServiceTarjetas.codigoAlfaNumericoTarjetaColaborador();
+        if (codigosAlfanumericos.contains(codigoAlfanumerico)) {
+            asignarTarjetaA(colaborador, repositorioColaboradores);
+        } else {
+            TarjetaColaborador tarjetaColaborador = TarjetaColaborador.builder().codigoAlfanumerico(codigoAlfanumerico).fechaEmision(LocalDateTime.now()).build();
+            colaborador.setTarjetaColaborador(tarjetaColaborador);
+        }
+
     }
 }

@@ -4,16 +4,22 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.Ape
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateConverter;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateTimeConverter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table (name = "tarjeta_colaborador")
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class TarjetaColaborador {
 
-    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,8 +28,7 @@ public class TarjetaColaborador {
     @Convert(converter = LocalDateTimeConverter.class)
     private LocalDateTime fechaEmision;
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
-    private Colaborador colaborador;
+    @Column(name = "codigo_alfanumerico", columnDefinition = "VARCHAR(11)")
+    private String codigoAlfanumerico;
 
 }

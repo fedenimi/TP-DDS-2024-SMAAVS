@@ -52,9 +52,13 @@ public class ServiceTopics {
         } else if (condicionSuscripcionHeladera instanceof Desperfecto) {
             return AlertaSuscripcion.builder().
                 suscripcionHumana(ServiceSuscripcionesHumanas.suscripcionHumanaDe(suscriptor, heladera, TipoNotificacion.DESPERFECTO)).
-                descripcion_alerta("La heladera presenta un desperfecto de tipo" + heladera.getEstado().toString()).
+                descripcion_alerta(ServiceHeladeras.presentarDistribucionesPosiblesPara(heladera)).
                 build();
         }
+        /*
+        descripcion_alerta("La heladera presenta un desperfecto de tipo " + heladera.getEstado().toString() + ". \n" +
+                        ServiceHeladeras.presentarDistribucionesPosiblesPara(heladera)).
+         */
         return null;
     }
 
