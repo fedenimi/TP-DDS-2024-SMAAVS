@@ -23,7 +23,7 @@ import java.util.List;
 public class Heladera{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter private Long id;
+    private Long id;
 
     @ManyToOne(cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "modelo_heladera_id")
