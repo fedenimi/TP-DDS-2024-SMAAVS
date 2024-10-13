@@ -17,7 +17,7 @@ public class ServiceLocator {
 
         if (!instances.containsKey(componentName)) {
             if(componentName.equals(ControladorHeladeras.class.getName())) {
-                ControladorHeladeras instance = new ControladorHeladeras(instanceOf(RepositorioHeladeras.class));
+                ControladorHeladeras instance = new ControladorHeladeras(instanceOf(RepositorioHeladeras.class), instanceOf(RepositorioColaboradores.class), instanceOf(RepositorioPuntuables.class));
                 instances.put(componentName, instance);
             }
             else if (componentName.equals(RepositorioHeladeras.class.getName())) {

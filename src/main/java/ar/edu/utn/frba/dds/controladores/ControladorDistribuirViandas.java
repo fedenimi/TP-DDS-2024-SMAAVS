@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.dtos.HeladeraDTO;
 import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.DistribucionDeViandas;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Motivo;
+import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.SolicitudApertura;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.TipoNotificacion;
 import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.Topic;
@@ -15,6 +16,7 @@ import ar.edu.utn.frba.dds.servicios.ServiceHeladeras;
 import ar.edu.utn.frba.dds.servicios.ServiceTopics;
 import io.javalin.http.Context;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -79,9 +81,21 @@ public class ControladorDistribuirViandas implements ICrudViewsHandler{
         colaborador.agregarPuntuable(distribucionDeViandas);
 
         // Le pido al service que notifique a los suscriptores de las heladeras
-        ServiceTopics.accionarTopic(heladeraOrigen, TipoNotificacion.FALTAN_N_VIANDAS);
-        ServiceTopics.accionarTopic(heladeraDestino, TipoNotificacion.QUEDAN_N_VIANDAS);
+        ServiceTopics.accionarTopic(heladeraOrigen, TipoNotificacion.QUEDAN_N_VIANDAS);
+        heladeraOrigen.agregarSolicitudApertura(SolicitudApertura.builder()
+                .tarjetaColaborador(colaborador.getTarjetaColaborador())
+                .fechaYHora(LocalDateTime.now())
+                .build());
+        heladeraOrigen.setStock(heladeraOrigen.getStock() - distribucionDeViandas.getCantidadDeViandas());
+        repositorioHeladeras.modificar(heladeraOrigen);
 
+        ServiceTopics.accionarTopic(heladeraDestino, TipoNotificacion.FALTAN_N_VIANDAS);
+        heladeraDestino.agregarSolicitudApertura(SolicitudApertura.builder()
+                .tarjetaColaborador(colaborador.getTarjetaColaborador())
+                .fechaYHora(LocalDateTime.now())
+                .build());
+        heladeraDestino.setStock(heladeraDestino.getStock() + distribucionDeViandas.getCantidadDeViandas());
+        repositorioHeladeras.modificar(heladeraDestino);
 
         System.out.println("Distribuir viandas: ");
         System.out.println("Heladera origen: " + context.formParam("heladera-or"));

@@ -10,6 +10,7 @@ public class Router {
         app.get("/", ServiceLocator.instanceOf(ControladorHome.class)::mostrarLanding);
         app.get("/registro", ServiceLocator.instanceOf(ControladorRegistro.class)::mostrarRegistro);
         app.post("/registro", ServiceLocator.instanceOf(ControladorRegistro.class)::guardarRegistro);
+        app.get("/registro/documentoRepetido", ServiceLocator.instanceOf(ControladorRegistro.class)::mostrarErrorDocumentoRepetido);
         app.get("/inicioSesion", ServiceLocator.instanceOf(ControladorRegistro.class)::mostrarInicioDeSesion);
         app.post("/inicioSesion", ServiceLocator.instanceOf(ControladorRegistro.class)::guardarInicioDeSesion);
 

@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.controladores;
 
+import ar.edu.utn.frba.dds.exceptions.DocumentoRepetidoException;
 import ar.edu.utn.frba.dds.modelo.entidades.acceso.Permiso;
 import ar.edu.utn.frba.dds.modelo.entidades.acceso.Usuario;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.*;
@@ -7,6 +8,7 @@ import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioColaboradores;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioUsuarios;
 import ar.edu.utn.frba.dds.servicios.ServiceColaboradores;
+import ar.edu.utn.frba.dds.servicios.ServiceRegistroSesion;
 import io.javalin.http.Context;
 
 import java.util.List;
@@ -31,15 +33,13 @@ public class ControladorRegistro {
 
         Optional<Usuario> usuarioPosible = repositorioUsuarios.buscarPorNombre(context.formParam("usuario"));
         if(usuarioPosible.isEmpty()) {
-            context.redirect("/inicioSesion");
+            this.mostrarErrorUsuarioInexistente(context);
             return;
         }
 
         Usuario usuario = usuarioPosible.get();
         if(!usuario.getContrasenia().equals(context.formParam("contrasenia"))) {
-            System.out.println("Contraseña guardada: " + usuario.getContrasenia());
-            System.out.println("Contraseña ingresada: " + context.formParam("contrasenia"));
-            context.redirect("/inicioSesion");
+            this.mostrarErrorContraseniaIncorrecta(context);
             return;
         }
         System.out.println(context.formParam("contrasenia"));
@@ -53,13 +53,25 @@ public class ControladorRegistro {
 
     public void guardarRegistro(Context context) {
         Usuario usuario = new Usuario();
+        if(ServiceRegistroSesion.esUsuarioRepetido(context, repositorioUsuarios)) {
+            mostrarErrorUsuarioRepetido(context);
+            return;
+        }
         usuario.setNombre(context.formParam("usuario"));
         usuario.setContrasenia(context.formParam("contrasenia"));
 
 
         Colaborador colaborador = null;
         if(context.formParam("nombre") != null) {
-            colaborador = ServiceColaboradores.crearColaboradorHumano(context, usuario);
+            if(!ServiceRegistroSesion.esDocumentoUnico(context, repositorioColaboradores)) {
+                mostrarErrorDocumentoRepetido(context);
+                return;
+            }
+            if(ServiceRegistroSesion.sinMediosDeContacto(context)) {
+                mostrarErrorAgregarMedioDeContacto(context);
+                return;
+            }
+            colaborador = ServiceColaboradores.crearColaboradorHumano(context, usuario, repositorioColaboradores);
             usuario.agregarPermiso(Permiso.HUMANA);
         } else {
             colaborador = ServiceColaboradores.crearColaboradorJuridico(context, usuario);
@@ -76,14 +88,29 @@ public class ControladorRegistro {
         repositorioUsuarios.guardar(usuario);
         repositorioUsuarios.commitTransaction();
 
-        context.sessionAttribute("permisos", usuario.getPermisos());
-        context.sessionAttribute("colaborador_id", usuario.getColaboradorAsociado().getId());
-        List<Permiso> permisos = usuario.getPermisos();
-        if(permisos.contains(Permiso.HUMANA)) {
-            context.render("main/homeHumana.hbs");
-        } else {
-            context.render("main/homeJuridica.hbs");
-        }
+        context.redirect("/inicioSesion");
 
     }
+
+    public void mostrarErrorDocumentoRepetido(Context context) {
+        context.render("registro/errorDocumentoRepetido.hbs");
+    }
+
+    public void mostrarErrorUsuarioInexistente(Context context) {
+        context.render("registro/errorUsuarioInexistente.hbs.hbs");
+    }
+
+    public void mostrarErrorContraseniaIncorrecta(Context context) {
+        context.render("registro/errorContraseniaIncorrecta.hbs");
+    }
+
+    public void mostrarErrorUsuarioRepetido(Context context) {
+        context.render("registro/errorUsuarioRepetido.hbs");
+    }
+
+    public void mostrarErrorAgregarMedioDeContacto(Context context) {
+        context.render("registro/errorAgregarMedioDeContacto.hbs");
+    }
+
+
 }

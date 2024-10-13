@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.controladores;
 
 import ar.edu.utn.frba.dds.dtos.RubroDTO;
 import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.OfrecerProducto;
+import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Oferta;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Rubro;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
@@ -105,15 +106,10 @@ public class ControladorProductos implements ICrudViewsHandler {
 
     public void saveComprado(Context context) {
         System.out.println("Producto: " + context.formParam("producto"));
-
         Colaborador colaborador = this.repositorioColaboradores.buscar(Long.valueOf(context.pathParam("id"))).get();
         System.out.println("PRODUCTO ID:" + context.formParam("producto"));
         OfrecerProducto producto = this.repositorioDeProductos.buscar(Long.valueOf(context.formParam("producto"))).get();
         colaborador.modificarPuntosPorCanje(producto.getOferta().getPuntajeMinimo());
-
-        repositorioDeProductos.beginTransaction();
-        repositorioDeProductos.eliminar(producto);
-        repositorioDeProductos.commitTransaction();
 
         repositorioColaboradores.modificar(colaborador);
 

@@ -25,11 +25,16 @@ public class RepositorioUsuarios implements IRepositorio<Usuario>, WithSimplePer
     }
 
     public Optional<Usuario> buscarPorNombre(String nombre) {
-        Usuario usuario = entityManager()
-                .createQuery("from Usuario c where c.nombre = :nombre", Usuario.class)
-                .setParameter("nombre", nombre)
-                .getSingleResult();
-        return Optional.of(usuario);
+        try {
+            Usuario usuario = entityManager()
+                    .createQuery("from Usuario c where c.nombre = :nombre", Usuario.class)
+                    .setParameter("nombre", nombre)
+                    .getSingleResult();
+            return Optional.of(usuario);
+        }
+        catch (Exception e) {
+            return Optional.empty();
+        }
     }
 
     @Override

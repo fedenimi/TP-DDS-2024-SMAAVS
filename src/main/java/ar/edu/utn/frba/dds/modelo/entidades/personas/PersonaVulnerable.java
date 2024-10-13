@@ -41,7 +41,7 @@ public class PersonaVulnerable {
     private List<PersonaVulnerable> menoresACargo;
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
-    @JoinColumn(name = "tarjeta_persona_vulnerable_id", referencedColumnName = "codigo")
+    @JoinColumn(name = "tarjeta_persona_vulnerable_id", referencedColumnName = "id")
     private TarjetaPersonaVulnerable tarjeta;
 
     public int edad(LocalDate fecha) { return Period.between(this.fechaDeNacimiento, fecha).getYears(); }

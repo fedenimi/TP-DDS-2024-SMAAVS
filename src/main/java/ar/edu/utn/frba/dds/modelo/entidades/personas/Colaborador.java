@@ -80,6 +80,10 @@ public class Colaborador {
     @JoinColumn(name = "colaborador_id")
     private List<SuscripcionHumana> suscripciones = new ArrayList<>();
 
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @JoinColumn(name = "tarjeta_colaborador_id", referencedColumnName = "id")
+    private TarjetaColaborador tarjetaColaborador;
+
     public Colaborador(TipoDeColaborador tipoDeColaborador, List<MedioDeContacto> mediosDeContacto,  Documento documento, String nombre, String apellido) {
         this.tipoDeColaborador = tipoDeColaborador;
         this.mediosDeContacto = mediosDeContacto;
@@ -105,14 +109,6 @@ public class Colaborador {
 
     public Integer sumatoriaDeMesesDeHeladerasActivas() {
         return this.puntuables.stream().mapToInt(puntuable -> puntuable.cantidadDeMesesSiendoHeladera()).sum();
-    }
-
-    public void intercambiarPuntos(float puntos){
-        this.puntosDisponibles -= puntos;
-    }
-
-    public void sumarPuntos(float puntos){
-        this.puntosDisponibles += puntos;
     }
 
     public void guardarAlertaSuscripcion(AlertaSuscripcion alertaSuscripcion) {

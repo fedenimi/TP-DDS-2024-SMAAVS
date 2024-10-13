@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.dtos.HeladeraDTO;
 import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.DonacionDeViandas;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Vianda;
+import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.SolicitudApertura;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.Suscripcion;
 import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.TipoNotificacion;
@@ -80,7 +81,15 @@ public class ControladorDonacionDeViandas implements ICrudViewsHandler{
         repositorioColaboradores.beginTransaction();
         repositorioColaboradores.modificar(colaborador);
         repositorioColaboradores.commitTransaction();
+
         ServiceTopics.accionarTopic(heladera, TipoNotificacion.FALTAN_N_VIANDAS);
+        heladera.agregarSolicitudApertura(SolicitudApertura.builder()
+                .tarjetaColaborador(colaborador.getTarjetaColaborador())
+                .fechaYHora(LocalDateTime.now())
+                .build());
+        heladera.setStock(heladera.getStock() + viandas.size());
+        repositorioHeladeras.modificar(heladera);
+
         context.redirect("/"+context.pathParam("id")+"/home");
     }
 

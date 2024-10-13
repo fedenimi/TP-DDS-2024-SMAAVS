@@ -33,7 +33,6 @@ public class ControladorColaborador implements ICrudViewsHandler {
 
         Map<String, Object> model = new HashMap<>();
         model.put("colaboradores", colaboradoresDTO);
-        model.put("titulo", "Listado de productos");
 
         context.render("colaboradores/colaboradores.hbs", model);
     }
@@ -92,9 +91,7 @@ public class ControladorColaborador implements ICrudViewsHandler {
                 build();
         ServiceColaboradores.setearMediosDeContacto(colaborador, mediosDeContactoDO);
 
-        repositorioColaboradores.beginTransaction();
         repositorioColaboradores.modificar(colaborador);
-        repositorioColaboradores.commitTransaction();
         
         context.redirect("/"+context.pathParam("id") +"/home");
     }

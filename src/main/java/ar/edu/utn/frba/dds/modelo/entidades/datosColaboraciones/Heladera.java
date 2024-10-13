@@ -20,6 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Getter
+@Setter
 public class Heladera{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -100,4 +101,5 @@ public class Heladera{
     public Topic getTopicPorCondicion(CondicionSuscripcionHeladera condicionSuscripcionHeladera) {
         return topics.stream().filter(topic -> topic.getCondicionSuscripcionHeladera().getClass().equals(condicionSuscripcionHeladera.getClass())).findFirst().orElse(null);
     }
+
 }
