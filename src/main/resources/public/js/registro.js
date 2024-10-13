@@ -58,6 +58,10 @@ function sacarDocumentoYTipo() {
 
 //CAMBIAR DE PÁGINA DE FORM
 document.querySelector('#siguiente-registro-btn').addEventListener('click', () => {
+    document.querySelector('#registro-persona').innerHTML =
+       "Hola " + document.querySelector('#elemento-nombre').children[1].value +"!<br>Ya falta poco!"
+    ;
+
     document.querySelectorAll('.registro-main')[0].classList.toggle('hidden');
     document.querySelectorAll('.registro2-main')[0].classList.toggle('hidden');
 })
