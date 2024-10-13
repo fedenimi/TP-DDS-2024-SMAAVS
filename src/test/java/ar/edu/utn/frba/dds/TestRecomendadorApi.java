@@ -20,10 +20,10 @@ public class TestRecomendadorApi {
         RecomendadorApi adapter = new RecomendadorApi();
         RecomendadorDePuntos recomendador = RecomendadorDePuntos.getInstance();
         recomendador.setAdapter(adapter);
-        Assert.assertEquals(1, adapter.puntosDeHeladeraRecomendados(Punto.builder().latitud(-34.632d).longitud(-58.425d).build(), 1000).size());
+        Assert.assertEquals(2, adapter.puntosDeHeladeraRecomendados(Punto.builder().latitud(-34.632d).longitud(-58.425d).build(), 1000).size());
         try {
             List<PuntoDonacionCreate> nuevoPunto = ServicioPuntos.instancia("http://127.0.0.1:8001/")
-                    .agregarNuevoPunto("Parque Central", -34.600d, -58.450d, "Av. Siempre Viva 123");
+                    .agregarNuevoPunto("Parque Huron", -34.600d, -58.450d, "Av. Huron 123");
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Error al agregar el punto: " + e.getMessage());

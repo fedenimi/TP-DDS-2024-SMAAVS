@@ -15,7 +15,7 @@ public class RecomendadorApi implements AdapterRecomendadorApi{
     public List<Punto> puntosDeHeladeraRecomendados(Punto punto, int radioEnMetros) throws IOException {
         String baseUrl = "http://127.0.0.1:8001/";
                 ///recomendaciones/?lat=" + punto.getLatitud() + "&long=" + punto.getLongitud() + "&limit=2";
-        return ServicioPuntos.instancia(baseUrl).listadoDePuntos(punto.getLatitud(), punto.getLongitud(), 2);
+        return ServicioPuntos.instancia(baseUrl).listadoDePuntos(punto.getLatitud(), punto.getLongitud(), 20);
 
         //http://127.0.0.1:8001/recomendaciones/?lat=90&long=90&limit=5
        // return ServicioPuntos.
