@@ -5,11 +5,21 @@ import ar.edu.utn.frba.dds.dtos.HeladeraDTO;
 import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.HacerseCargoDeHeladera;
 import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.Puntuable;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
+import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.Estado;
+import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Direccion;
+import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Punto;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
+import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.Topic;
+import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.condiciones.Desperfecto;
+import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.condiciones.FaltanNViandas;
+import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.condiciones.QuedanNViandas;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioHeladeras;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioPuntuables;
+import io.javalin.http.Context;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,5 +76,26 @@ public class ServiceHeladeras {
 
     public static boolean coordenadasCercanas(Double latitud1, Double longitud1, Double latitud2, Double longitud2) {
         return Math.abs(latitud1 - latitud2) < 0.01 && Math.abs(longitud1 - longitud2) < 0.015;
+    }
+
+    public static Heladera crearHeladera(Context context) {
+        Heladera heladera = new Heladera();
+        heladera.setFechaYHoraInicio(LocalDateTime.now());
+        heladera.setEstado(Estado.ACTIVA);
+        heladera.setAperturas(new ArrayList<>());
+        heladera.setSolicitudAperturas(new ArrayList<>());
+        heladera.setVisitaTecnicas(new ArrayList<>());
+        heladera.setDireccion(Direccion.builder().direccion(context.formParam("direccion"))
+                .punto(Punto.builder().latitud(Double.valueOf(context.formParam("latitud"))).longitud(Double.valueOf(context.formParam("longitud"))).build())
+                .nombre_direccion(context.formParam("direccion"))
+                .build());
+        heladera.setTopics(Arrays.asList(
+                Topic.builder().condicionSuscripcionHeladera(new Desperfecto()).suscripciones(new ArrayList<>()).mensaje("Hubo un desperfecto en la heladera").build(),
+                Topic.builder().condicionSuscripcionHeladera(new FaltanNViandas()).suscripciones(new ArrayList<>()).mensaje("La heladera está cerca de llenarse").build(),
+                Topic.builder().condicionSuscripcionHeladera(new QuedanNViandas()).suscripciones(new ArrayList<>()).mensaje("La heladera está por quedarse vacía").build()
+        ));
+        heladera.setStock(0);
+        heladera.setCapacidad(50);
+        return heladera;
     }
 }

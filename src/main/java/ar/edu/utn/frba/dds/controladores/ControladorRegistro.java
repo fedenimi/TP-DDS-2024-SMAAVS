@@ -28,9 +28,6 @@ public class ControladorRegistro {
     }
 
     public void guardarInicioDeSesion(Context context) {
-        System.out.println("Inicio de sesión...");
-        System.out.println(context.formParam("usuario"));
-
         Optional<Usuario> usuarioPosible = repositorioUsuarios.buscarPorNombre(context.formParam("usuario"));
         if(usuarioPosible.isEmpty()) {
             this.mostrarErrorUsuarioInexistente(context);
@@ -42,7 +39,6 @@ public class ControladorRegistro {
             this.mostrarErrorContraseniaIncorrecta(context);
             return;
         }
-        System.out.println(context.formParam("contrasenia"));
         context.sessionAttribute("permisos", usuario.getPermisos());
         context.sessionAttribute("colaborador_id", usuario.getColaboradorAsociado().getId());
         context.redirect("/"+context.sessionAttribute("colaborador_id")+"/home");
@@ -59,7 +55,6 @@ public class ControladorRegistro {
         }
         usuario.setNombre(context.formParam("usuario"));
         usuario.setContrasenia(context.formParam("contrasenia"));
-
 
         Colaborador colaborador = null;
         if(context.formParam("nombre") != null) {
@@ -78,18 +73,11 @@ public class ControladorRegistro {
             usuario.agregarPermiso(Permiso.JURIDICA);
         }
         usuario.setColaboradorAsociado(colaborador);
-        System.out.println("Roles del usuario: " + usuario.getPermisos());
-        System.out.println("Formas de colaborar: " + usuario.getColaboradorAsociado().getFormasDeColaborar());
-        repositorioColaboradores.beginTransaction();
         repositorioColaboradores.guardar(colaborador);
-        repositorioColaboradores.commitTransaction();
 
-        repositorioUsuarios.beginTransaction();
         repositorioUsuarios.guardar(usuario);
-        repositorioUsuarios.commitTransaction();
 
         context.redirect("/inicioSesion");
-
     }
 
     public void mostrarErrorDocumentoRepetido(Context context) {
@@ -97,7 +85,7 @@ public class ControladorRegistro {
     }
 
     public void mostrarErrorUsuarioInexistente(Context context) {
-        context.render("registro/errorUsuarioInexistente.hbs.hbs");
+        context.render("registro/errorUsuarioInexistente.hbs");
     }
 
     public void mostrarErrorContraseniaIncorrecta(Context context) {

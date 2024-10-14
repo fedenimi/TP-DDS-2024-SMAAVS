@@ -38,10 +38,6 @@ public class ControladorDonacionDeDinero implements ICrudViewsHandler{
     @Override
     public void save(Context context) {
         // Guardar los datos de la donación de dinero
-        System.out.println("Paramétros: ");
-        System.out.println(context.formParam("frecuencia"));
-        System.out.println(context.formParam("monto"));
-
         Colaborador colaborador = repositorioColaboradores.buscar(Long.valueOf(context.pathParam("id"))).get();
         DonacionDeDinero donacionDeDinero = new DonacionDeDinero();
         donacionDeDinero.setFrecuencia(new FrecuenciaConverter().convertToEntityAttribute(context.formParam("frecuencia")));
@@ -49,9 +45,7 @@ public class ControladorDonacionDeDinero implements ICrudViewsHandler{
         donacionDeDinero.setFechaDeInicio(LocalDate.now());
         donacionDeDinero.setColaborador(colaborador);
 
-        repositorioPuntuables.beginTransaction();
         repositorioPuntuables.guardar(donacionDeDinero);
-        repositorioPuntuables.commitTransaction();
 
         colaborador.agregarPuntuable(donacionDeDinero);
 

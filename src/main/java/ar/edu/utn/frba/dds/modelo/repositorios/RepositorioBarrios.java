@@ -11,13 +11,19 @@ import java.util.Optional;
 public class RepositorioBarrios implements IRepositorio<Barrio>, WithSimplePersistenceUnit {
     @Override
     public void guardar(Barrio barrio) {
+        beginTransaction();
         entityManager().persist(barrio);
+        commitTransaction();
     }
+
 
     @Override
     public void eliminar(Barrio barrio) {
+        beginTransaction();
         entityManager().remove(barrio);
+        commitTransaction();
     }
+
 
     @Override
     public Optional<Barrio> buscar(Long id) {

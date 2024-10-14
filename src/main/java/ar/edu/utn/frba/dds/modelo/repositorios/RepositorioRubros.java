@@ -10,12 +10,16 @@ import java.util.Optional;
 public class RepositorioRubros implements IRepositorio<Rubro>, WithSimplePersistenceUnit {
     @Override
     public void guardar(Rubro rubro) {
+        beginTransaction();
         entityManager().persist(rubro);
+        commitTransaction();
     }
 
     @Override
     public void eliminar(Rubro rubro) {
+        beginTransaction();
         entityManager().remove(rubro);
+        commitTransaction();
     }
 
     @Override

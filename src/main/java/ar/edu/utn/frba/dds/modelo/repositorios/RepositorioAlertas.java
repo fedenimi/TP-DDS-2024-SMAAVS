@@ -25,12 +25,16 @@ public class RepositorioAlertas implements IRepositorio<Alerta>, WithSimplePersi
     }
     @Override
     public void guardar(Alerta alerta) {
+        beginTransaction();
         entityManager().persist(alerta);
+        commitTransaction();
     }
 
     @Override
     public void eliminar(Alerta alerta) {
+        beginTransaction();
         entityManager().remove(alerta);
+        commitTransaction();
     }
 
     @Override

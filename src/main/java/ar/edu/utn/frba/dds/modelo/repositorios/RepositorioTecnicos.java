@@ -12,12 +12,16 @@ import java.util.Optional;
 public class RepositorioTecnicos implements IRepositorio<Tecnico>, WithSimplePersistenceUnit {
     @Override
     public void guardar(Tecnico tecnico) {
+        beginTransaction();
         entityManager().persist(tecnico);
+        commitTransaction();
     }
 
     @Override
     public void eliminar(Tecnico tecnico) {
+        beginTransaction();
         entityManager().remove(tecnico);
+        commitTransaction();
     }
 
     @Override

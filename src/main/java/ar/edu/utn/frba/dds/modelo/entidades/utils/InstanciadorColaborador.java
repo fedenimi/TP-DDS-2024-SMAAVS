@@ -46,9 +46,9 @@ public class InstanciadorColaborador {
                             "Tu contraseña de ingreso es "+"password"+" y tu usuario es " + colaboradorDO.getNombre()
             );
             RepositorioColaboradores repositorioColaboradores = ServiceLocator.instanceOf(RepositorioColaboradores.class);
-            repositorioColaboradores.beginTransaction();
+
             repositorioColaboradores.guardar(colaborador);
-            repositorioColaboradores.commitTransaction();
+
             }
         return colaborador;
     }
