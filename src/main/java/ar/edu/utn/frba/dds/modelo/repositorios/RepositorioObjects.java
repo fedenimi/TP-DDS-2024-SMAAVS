@@ -12,13 +12,19 @@ import java.util.Optional;
 @NoArgsConstructor
 public class RepositorioObjects implements WithSimplePersistenceUnit {
     public void guardar(MedioDeContacto o) {
+        beginTransaction();
         entityManager().persist(o);
+        commitTransaction();
     }
+
 
 
     public void eliminar(MedioDeContacto o) {
+        beginTransaction();
         entityManager().remove(o);
+        commitTransaction();
     }
+
 
 
     public Optional<MedioDeContacto> buscar(Long id) {

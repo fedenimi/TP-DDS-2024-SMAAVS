@@ -11,12 +11,16 @@ import java.util.Optional;
 public class RepositorioSolicitudesAperturas implements IRepositorio<SolicitudApertura>, WithSimplePersistenceUnit {
     @Override
     public void guardar(SolicitudApertura solicitudApertura) {
+        beginTransaction();
         entityManager().persist(solicitudApertura);
+        commitTransaction();
     }
 
     @Override
     public void eliminar(SolicitudApertura solicitudApertura) {
+        beginTransaction();
         entityManager().remove(solicitudApertura);
+        commitTransaction();
     }
 
     @Override

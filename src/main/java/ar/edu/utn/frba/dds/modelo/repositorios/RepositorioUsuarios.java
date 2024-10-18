@@ -11,12 +11,16 @@ import java.util.Optional;
 public class RepositorioUsuarios implements IRepositorio<Usuario>, WithSimplePersistenceUnit {
     @Override
     public void guardar(Usuario usuario) {
+        beginTransaction();
         entityManager().persist(usuario);
+        commitTransaction();
     }
 
     @Override
     public void eliminar(Usuario usuario) {
+        beginTransaction();
         entityManager().remove(usuario);
+        commitTransaction();
     }
 
     @Override

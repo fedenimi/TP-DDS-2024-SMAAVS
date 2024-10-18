@@ -63,17 +63,10 @@ public class ControladorColaborador implements ICrudViewsHandler {
 
     @Override
     public void update(Context context) {
-
-        System.out.println("Actualizando colaborador");
-        System.out.println(context.formParam("donar-dinero"));
-        System.out.println(context.formParam("donar-viandas"));
-        System.out.println(context.formParam("distribuir-viandas"));
-
         // Guardar lo que se modificó en el formulario de configuración
         Optional<Colaborador> posibleColaborador = this.repositorioColaboradores.buscar(Long.valueOf(context.pathParam("id")));
 
         Colaborador colaborador = posibleColaborador.get();
-        // TODO: Setear los atributos del colaborador con los valores del formulario
 
         //Seteo las formas de colaborar
         FormasDeColaborarDO formasDeColaborarDO = FormasDeColaborarDO.builder().

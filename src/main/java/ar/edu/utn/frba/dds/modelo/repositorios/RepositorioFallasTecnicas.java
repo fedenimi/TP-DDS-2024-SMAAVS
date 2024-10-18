@@ -26,12 +26,17 @@ public class RepositorioFallasTecnicas implements IRepositorio<FallaTecnica>, Wi
 
     @Override
     public void guardar(FallaTecnica fallaTecnica) {
+        beginTransaction();
         entityManager().persist(fallaTecnica);
+        commitTransaction();
     }
+
 
     @Override
     public void eliminar(FallaTecnica fallaTecnica) {
+        beginTransaction();
         entityManager().remove(fallaTecnica);
+        commitTransaction();
     }
 
     @Override

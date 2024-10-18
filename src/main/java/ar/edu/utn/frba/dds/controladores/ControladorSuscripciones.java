@@ -58,12 +58,6 @@ public class ControladorSuscripciones implements ICrudViewsHandler {
 
     @Override
     public void create(Context context) {
-        System.out.println("Creando suscripcion");
-        System.out.println("id heladera: " + context.formParam("id-heladera"));
-        System.out.println("Viandas faltantes: " + context.formParam("faltantes"));
-        System.out.println("Viandas restantes: " + context.formParam("restantes"));
-        System.out.println("Desperfectos: " + context.formParam("desperfectos"));
-
         Colaborador colaborador = repositorioColaboradores.buscar(Long.valueOf(context.pathParam("id"))).get();
         Heladera heladera = repositorioHeladeras.buscar(Long.valueOf(context.formParam("id-heladera"))).get();
 
@@ -81,8 +75,8 @@ public class ControladorSuscripciones implements ICrudViewsHandler {
                     .suscriptor(colaborador)
                     .configurableN(Integer.valueOf(context.formParam("faltantes")))
                     .build());
-
         }
+
         if(context.formParam("restantes") != "") {
             SuscripcionHumana suscripcion = SuscripcionHumana.builder()
                     .tipoNotificacion(TipoNotificacion.QUEDAN_N_VIANDAS)
@@ -97,9 +91,8 @@ public class ControladorSuscripciones implements ICrudViewsHandler {
                     .suscriptor(colaborador)
                     .configurableN(Integer.valueOf(context.formParam("restantes")))
                     .build());
-
-
         }
+
         if(context.formParam("desperfectos") != "") {
             SuscripcionHumana suscripcion = SuscripcionHumana.builder()
                     .tipoNotificacion(TipoNotificacion.DESPERFECTO)
@@ -115,6 +108,7 @@ public class ControladorSuscripciones implements ICrudViewsHandler {
         }
 
         repositorioColaboradores.modificar(colaborador);
+        repositorioHeladeras.modificar(heladera);
         context.redirect("/" + context.pathParam("id") + "/suscripciones");
     }
 
@@ -136,7 +130,6 @@ public class ControladorSuscripciones implements ICrudViewsHandler {
     @Override
     public void delete(Context context) {
         String id = context.formParam("suscripcion");
-        System.out.println(id);
         context.redirect("suscripciones");
     }
 

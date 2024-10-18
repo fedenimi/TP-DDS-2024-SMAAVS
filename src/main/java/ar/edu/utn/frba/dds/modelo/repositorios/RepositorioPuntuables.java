@@ -11,12 +11,16 @@ import java.util.Optional;
 public class RepositorioPuntuables implements IRepositorio<Puntuable>, WithSimplePersistenceUnit {
     @Override
     public void guardar(Puntuable puntuable) {
+        beginTransaction();
         entityManager().persist(puntuable);
+        commitTransaction();
     }
 
     @Override
     public void eliminar(Puntuable puntuable) {
+        beginTransaction();
         entityManager().remove(puntuable);
+        commitTransaction();
     }
 
     @Override

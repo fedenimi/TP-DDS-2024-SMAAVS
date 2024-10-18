@@ -11,12 +11,16 @@ import java.util.Optional;
 public class RepositorioPersonasVulnerables implements IRepositorio<PersonaVulnerable>, WithSimplePersistenceUnit {
     @Override
     public void guardar(PersonaVulnerable personaVulnerable) {
+        beginTransaction();
         entityManager().persist(personaVulnerable);
+        commitTransaction();
     }
 
     @Override
     public void eliminar(PersonaVulnerable personaVulnerable) {
+        beginTransaction();
         entityManager().remove(personaVulnerable);
+        commitTransaction();
     }
 
     @Override

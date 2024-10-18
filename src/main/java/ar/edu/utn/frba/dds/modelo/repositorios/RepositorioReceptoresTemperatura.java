@@ -33,11 +33,15 @@ public class RepositorioReceptoresTemperatura implements IRepositorio<ReceptorSe
 
     @Override
     public void guardar(ReceptorSensorTemperatura sensorTemperatura) {
+        beginTransaction();
         entityManager().persist(sensorTemperatura);
+        commitTransaction();
     }
 
     @Override
     public void eliminar(ReceptorSensorTemperatura receptorSensorTemperatura) {
+        beginTransaction();
         entityManager().remove(receptorSensorTemperatura);
+        commitTransaction();
     }
 }

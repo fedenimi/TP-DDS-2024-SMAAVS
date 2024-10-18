@@ -10,12 +10,16 @@ import java.util.Optional;
 public class RepositorioSuscripciones implements IRepositorio<SuscripcionHumana>, WithSimplePersistenceUnit {
     @Override
     public void guardar(SuscripcionHumana suscripcionHumana) {
+        beginTransaction();
         entityManager().persist(suscripcionHumana);
+        commitTransaction();
     }
 
     @Override
     public void eliminar(SuscripcionHumana suscripcionHumana) {
+        beginTransaction();
         entityManager().remove(suscripcionHumana);
+        commitTransaction();
     }
 
     @Override

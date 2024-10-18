@@ -81,11 +81,6 @@ public class ControladorReportarFalla implements ICrudViewsHandler{
     }
 
     public void guardarMapa(Context context) {
-        System.out.println("Mapa guardado");
-        System.out.println(context.formParam("descripcion"));
-        System.out.println(context.formParam("imagen"));
-        System.out.println(context.formParam("heladera"));
-
         Heladera heladera = this.repositorioHeladeras.buscar(Long.parseLong(context.formParam("heladera"))).get();
 
         FallaTecnica fallaTecnica = new FallaTecnica();
@@ -93,15 +88,11 @@ public class ControladorReportarFalla implements ICrudViewsHandler{
         fallaTecnica.setFoto(context.formParam("imagen"));
         fallaTecnica.setHeladera(heladera);
         fallaTecnica.setReportador(this.repositorioColaboradores.buscar(Long.parseLong(context.pathParam("id"))).get());
-        this.repositorioFallasTecnicas.beginTransaction();
         this.repositorioFallasTecnicas.guardar(fallaTecnica);
-        this.repositorioFallasTecnicas.commitTransaction();
 
         RegistradorDeIncidentes.getInstance().registrarIncidente(Estado.FALLA_TECNICA, heladera, buscadorDeTecnicos);
 
-        repositorioHeladeras.beginTransaction();
         repositorioHeladeras.modificar(heladera);
-        repositorioHeladeras.commitTransaction();
 
         ServiceTopics.accionarTopic(heladera, TipoNotificacion.DESPERFECTO);
         context.redirect("/" + context.pathParam("id") + "/home");

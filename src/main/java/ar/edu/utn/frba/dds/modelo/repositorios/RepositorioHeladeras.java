@@ -20,13 +20,19 @@ public class RepositorioHeladeras implements IRepositorio<Heladera>, WithSimpleP
 
     @Override
     public void guardar(Heladera heladera) {
+        beginTransaction();
         entityManager().persist(heladera);
+        commitTransaction();
     }
+
 
     @Override
     public void eliminar(Heladera heladera) {
+        beginTransaction();
         entityManager().remove(heladera);
+        commitTransaction();
     }
+
 
     @Override
     public List<Heladera> buscarTodos() {

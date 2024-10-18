@@ -53,7 +53,6 @@ public class ControladorDonacionDeViandas implements ICrudViewsHandler{
 
     @Override
     public void save(Context context) {
-        System.out.println("Guardando donación de viandas");
         Heladera heladera = repositorioHeladeras.buscar(Long.parseLong(context.formParam("heladera"))).get();
         List<Vianda> viandas = new ArrayList<>();
 
@@ -74,13 +73,9 @@ public class ControladorDonacionDeViandas implements ICrudViewsHandler{
         Colaborador colaborador = repositorioColaboradores.buscar(Long.parseLong(context.pathParam("id"))).get();
         donacionDeViandas.setColaborador(colaborador);
 
-        repositorioPuntuables.beginTransaction();
         repositorioPuntuables.guardar(donacionDeViandas);
-        repositorioPuntuables.commitTransaction();
         colaborador.agregarPuntuable(donacionDeViandas);
-        repositorioColaboradores.beginTransaction();
         repositorioColaboradores.modificar(colaborador);
-        repositorioColaboradores.commitTransaction();
 
         ServiceTopics.accionarTopic(heladera, TipoNotificacion.FALTAN_N_VIANDAS);
         heladera.agregarSolicitudApertura(SolicitudApertura.builder()

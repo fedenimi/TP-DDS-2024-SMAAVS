@@ -1,11 +1,17 @@
 package ar.edu.utn.frba.dds.servicios;
 
 import ar.edu.utn.frba.dds.dtos.PersonaVulnerableDTO;
+import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.RegistroDePersonasVulnerables;
+import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.Documento;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.TarjetaPersonaVulnerable;
+import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.TipoDocumento;
+import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Direccion;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.PersonaVulnerable;
 import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.Suscripcion;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioPersonasVulnerables;
+import io.javalin.http.Context;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,5 +41,15 @@ public class ServicePersonasVulnerables {
                     .usos(new ArrayList<>())
                     .build());
         }
+    }
+
+    public static PersonaVulnerable crearPersonaVulnerable(Context context) {
+        PersonaVulnerable personaVulnerable = new PersonaVulnerable();
+        personaVulnerable.setNombre(context.formParam("nombre") + " " + context.formParam("apellido"));
+        personaVulnerable.setFechaDeNacimiento(LocalDate.parse(context.formParam("fechaDeNacimiento")));
+        personaVulnerable.setFechaDeRegistro(LocalDate.now());
+        personaVulnerable.setDocumento(Documento.builder().numero(context.formParam("documento")).tipo(TipoDocumento.valueOf(context.formParam("tipoDocumento"))).build());
+        personaVulnerable.setDomicilio(Direccion.builder().build());
+        return personaVulnerable;
     }
 }

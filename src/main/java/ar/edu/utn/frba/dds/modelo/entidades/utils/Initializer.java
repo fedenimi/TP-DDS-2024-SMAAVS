@@ -139,42 +139,30 @@ public class Initializer {
         ).build();
 
         RepositorioHeladeras repositorioDeHeladeras = ServiceLocator.instanceOf(RepositorioHeladeras.class);
-        repositorioDeHeladeras.beginTransaction();
         repositorioDeHeladeras.guardar(heladera1);
         repositorioDeHeladeras.guardar(heladera2);
         repositorioDeHeladeras.guardar(heladera3);
-        repositorioDeHeladeras.commitTransaction();
 
         RepositorioColaboradores repositorioDeColaboradores = ServiceLocator.instanceOf(RepositorioColaboradores.class);
-        repositorioDeColaboradores.beginTransaction();
         repositorioDeColaboradores.guardar(colaborador1);
         repositorioDeColaboradores.guardar(colaborador2);
-        repositorioDeColaboradores.commitTransaction();
 
         RepositorioOfrecerProductos repositorioDeOfrecerProductos = ServiceLocator.instanceOf(RepositorioOfrecerProductos.class);
-        repositorioDeOfrecerProductos.beginTransaction();
         repositorioDeOfrecerProductos.guardar(ofrecerProducto1);
         repositorioDeOfrecerProductos.guardar(ofrecerProducto2);
         repositorioDeOfrecerProductos.guardar(ofrecerProducto3);
-        repositorioDeOfrecerProductos.commitTransaction();
 
         RepositorioAlertas repositorioAlertas = ServiceLocator.instanceOf(RepositorioAlertas.class);
-        repositorioAlertas.beginTransaction();
         repositorioAlertas.guardar(alerta1);
         repositorioAlertas.guardar(alerta2);
-        repositorioAlertas.commitTransaction();
 
         RepositorioAlertaSuscripciones repositorioAlertaSuscripciones = ServiceLocator.instanceOf(RepositorioAlertaSuscripciones.class);
-        repositorioAlertaSuscripciones.beginTransaction();
         repositorioAlertaSuscripciones.guardar(alertaSuscripcion1);
         repositorioAlertaSuscripciones.guardar(alertaSuscripcion2);
         repositorioAlertaSuscripciones.guardar(alertaSuscripcion3);
-        repositorioAlertaSuscripciones.commitTransaction();
 
         RepositorioUsuarios repositorioUsuarios = ServiceLocator.instanceOf(RepositorioUsuarios.class);
-        repositorioUsuarios.beginTransaction();
         repositorioUsuarios.guardar(admin);
-        repositorioUsuarios.commitTransaction();
 
     }
 }
