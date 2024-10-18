@@ -17,12 +17,16 @@ public class RepositorioAlertaSuscripciones implements IRepositorio<AlertaSuscri
     List<AlertaSuscripcion> alertaSuscripcion = new ArrayList<>();
     @Override
     public void guardar(AlertaSuscripcion alertaSuscripcion) {
+        beginTransaction();
         entityManager().persist(alertaSuscripcion);
+        commitTransaction();
     }
 
     @Override
     public void eliminar(AlertaSuscripcion alertaSuscripcion) {
+        beginTransaction();
         entityManager().remove(alertaSuscripcion);
+        commitTransaction();
     }
 
     @Override

@@ -44,27 +44,17 @@ public class ControladorPersonaVulnerable implements ICrudViewsHandler{
 
     @Override
     public void save(Context context) {
-        PersonaVulnerable personaVulnerable = new PersonaVulnerable();
+        PersonaVulnerable personaVulnerable = ServicePersonasVulnerables.crearPersonaVulnerable(context);
         RegistroDePersonasVulnerables registroDePersonasVulnerables = new RegistroDePersonasVulnerables();
-        personaVulnerable.setNombre(context.formParam("nombre") + " " + context.formParam("apellido"));
-        personaVulnerable.setFechaDeNacimiento(LocalDate.parse(context.formParam("fechaDeNacimiento")));
-        personaVulnerable.setFechaDeRegistro(LocalDate.now());
-        personaVulnerable.setDocumento(Documento.builder().numero(context.formParam("documento")).tipo(TipoDocumento.valueOf(context.formParam("tipoDocumento"))).build());
-        personaVulnerable.setDomicilio(Direccion.builder().build());
         ServicePersonasVulnerables.asignarTarjetaA(personaVulnerable, repositorioPersonasVulnerables);
-        // TODO: ver domicilio en form y lista de personas a cargo
 
-        repositorioPersonasVulnerables.beginTransaction();
         repositorioPersonasVulnerables.guardar(personaVulnerable);
-        repositorioPersonasVulnerables.commitTransaction();
 
         Colaborador colaborador = repositorioColaboradores.buscar(Long.parseLong(context.pathParam("id"))).get();
         registroDePersonasVulnerables.setColaborador(colaborador);
         registroDePersonasVulnerables.setRegistro(Registro.builder().personaVulnerable(personaVulnerable).fechaDeRegistro(LocalDate.now()).build());
 
-        repositorioPuntuables.beginTransaction();
         repositorioPuntuables.guardar(registroDePersonasVulnerables);
-        repositorioPuntuables.commitTransaction();
 
         colaborador.agregarPuntuable(registroDePersonasVulnerables);
         repositorioColaboradores.modificar(colaborador);

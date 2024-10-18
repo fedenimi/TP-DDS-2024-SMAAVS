@@ -12,12 +12,16 @@ public class RepositorioOfrecerProductos implements IRepositorio<OfrecerProducto
 
     @Override
     public void guardar(OfrecerProducto ofrecerProducto) {
+        beginTransaction();
         entityManager().persist(ofrecerProducto);
+        commitTransaction();
     }
 
     @Override
     public void eliminar(OfrecerProducto ofrecerProducto) {
+        beginTransaction();
         entityManager().remove(ofrecerProducto);
+        commitTransaction();
     }
 
     @Override

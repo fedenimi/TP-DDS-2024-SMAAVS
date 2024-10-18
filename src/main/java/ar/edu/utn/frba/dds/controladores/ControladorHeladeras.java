@@ -91,9 +91,9 @@ public class ControladorHeladeras implements ICrudViewsHandler{
             return;
         }
         //TODO: eliminar las que tienen alertas
-        this.repositorioHeladeras.beginTransaction();
+
         this.repositorioHeladeras.eliminar(heladera.get());
-        this.repositorioHeladeras.commitTransaction();
+
         context.redirect("adminHeladeras");
     }
 
@@ -111,27 +111,9 @@ public class ControladorHeladeras implements ICrudViewsHandler{
     public void guardarHeladera(Context context) {
         //TODO: hacelo fede, tiro goool
         Colaborador colaborador = this.repositorioColaboradores.buscar(Long.parseLong(context.pathParam("id"))).get();
-        Heladera heladera = new Heladera();
-        heladera.setFechaYHoraInicio(LocalDateTime.now());
-        heladera.setEstado(Estado.ACTIVA);
-        heladera.setAperturas(new ArrayList<>());
-        heladera.setSolicitudAperturas(new ArrayList<>());
-        heladera.setVisitaTecnicas(new ArrayList<>());
-        heladera.setDireccion(Direccion.builder().direccion(context.formParam("direccion"))
-                .punto(Punto.builder().latitud(Double.valueOf(context.formParam("latitud"))).longitud(Double.valueOf(context.formParam("longitud"))).build())
-                .nombre_direccion(context.formParam("direccion"))
-                .build());
-        heladera.setTopics(Arrays.asList(
-                Topic.builder().condicionSuscripcionHeladera(new Desperfecto()).suscripciones(new ArrayList<>()).mensaje("Hubo un desperfecto en la heladera").build(),
-                Topic.builder().condicionSuscripcionHeladera(new FaltanNViandas()).suscripciones(new ArrayList<>()).mensaje("La heladera está cerca de llenarse").build(),
-                Topic.builder().condicionSuscripcionHeladera(new QuedanNViandas()).suscripciones(new ArrayList<>()).mensaje("La heladera está por quedarse vacía").build()
-        ));
-        heladera.setStock(0);
-        heladera.setCapacidad(50);
+        Heladera heladera = ServiceHeladeras.crearHeladera(context);
 
-        this.repositorioHeladeras.beginTransaction();
         this.repositorioHeladeras.guardar(heladera);
-        this.repositorioHeladeras.commitTransaction();
 
         HacerseCargoDeHeladera hacerseCargoDeHeladera = new HacerseCargoDeHeladera();
         hacerseCargoDeHeladera.setColaborador(colaborador);
@@ -139,13 +121,9 @@ public class ControladorHeladeras implements ICrudViewsHandler{
 
         colaborador.agregarPuntuable(hacerseCargoDeHeladera);
 
-        this.repositorioColaboradores.beginTransaction();
         this.repositorioColaboradores.modificar(colaborador);
-        this.repositorioColaboradores.commitTransaction();
 
-        this.repositorioPuntuables.beginTransaction();
         this.repositorioPuntuables.guardar(hacerseCargoDeHeladera);
-        this.repositorioPuntuables.commitTransaction();
 
         context.redirect("/"+colaborador.getId()+"/adminHeladeras");
     }

@@ -73,9 +73,7 @@ public class ControladorDistribuirViandas implements ICrudViewsHandler{
         Colaborador colaborador = this.repositorioColaboradores.buscar(Long.parseLong(context.pathParam("id"))).get();
         distribucionDeViandas.setColaborador(colaborador);
 
-        this.repositorioPuntuables.beginTransaction();
         this.repositorioPuntuables.guardar(distribucionDeViandas);
-        this.repositorioPuntuables.commitTransaction();
 
         // Guardarla en el colaborador que la realizó
         colaborador.agregarPuntuable(distribucionDeViandas);
@@ -97,11 +95,6 @@ public class ControladorDistribuirViandas implements ICrudViewsHandler{
         heladeraDestino.setStock(heladeraDestino.getStock() + distribucionDeViandas.getCantidadDeViandas());
         repositorioHeladeras.modificar(heladeraDestino);
 
-        System.out.println("Distribuir viandas: ");
-        System.out.println("Heladera origen: " + context.formParam("heladera-or"));
-        System.out.println("Heladera destino: " + context.formParam("heladera-dest"));
-        System.out.println("Motivo: " + context.formParam("motivo"));
-        System.out.println("Cantidad de viandas: " + context.formParam("cantidad-viandas"));
         context.redirect("/"+ context.pathParam("id") +"/home");
     }
 

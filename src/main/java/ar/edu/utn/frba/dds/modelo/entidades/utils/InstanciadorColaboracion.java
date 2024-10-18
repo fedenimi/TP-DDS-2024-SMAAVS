@@ -18,34 +18,26 @@ public class InstanciadorColaboracion {
                 DonacionDeDinero donacionDeDinero = DonacionDeDinero.builder().monto(cantidad).frecuencia(new Unica()).build();
                 donacionDeDinero.setColaborador(colaborador);
                 contribuciones.add(donacionDeDinero);
-                repositorioPuntuables.beginTransaction();
                 repositorioPuntuables.guardar(donacionDeDinero);
-                repositorioPuntuables.commitTransaction();
                 colaborador.agregarPuntuable(donacionDeDinero);
                 break;
             case "DONACION_VIANDAS":
                 DonacionDeViandas donacionDeViandas = new DonacionDeViandas(colaborador);
                 contribuciones.add(donacionDeViandas);
-                repositorioPuntuables.beginTransaction();
                 repositorioPuntuables.guardar(donacionDeViandas);
-                repositorioPuntuables.commitTransaction();
                 colaborador.agregarPuntuable(donacionDeViandas);
                 break;
             case "REDISTRIBUCION_VIANDAS":
                 DistribucionDeViandas distribucionDeViandas = new DistribucionDeViandas(cantidad, colaborador);
                 contribuciones.add(distribucionDeViandas);
-                repositorioPuntuables.beginTransaction();
                 repositorioPuntuables.guardar(distribucionDeViandas);
-                repositorioPuntuables.commitTransaction();
                 colaborador.agregarPuntuable(distribucionDeViandas);
                 break;
             case "ENTREGA_TARJETAS":
                 for (int i = 0; i < cantidad; i++) {
                     RegistroDePersonasVulnerables registroDePersonasVulnerables = new RegistroDePersonasVulnerables(colaborador);
                     contribuciones.add(registroDePersonasVulnerables);
-                    repositorioPuntuables.beginTransaction();
                     repositorioPuntuables.guardar(registroDePersonasVulnerables);
-                    repositorioPuntuables.commitTransaction();
                     colaborador.agregarPuntuable(registroDePersonasVulnerables);
                 }
                 break;

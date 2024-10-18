@@ -79,35 +79,25 @@ public class ControladorProductos implements ICrudViewsHandler {
     public void save(Context context) {
         OfrecerProducto nuevoProducto = new OfrecerProducto();
         Oferta oferta = new Oferta();
-        System.out.println("Nombre: " + context.formParam("producto"));
-        System.out.println("Puntaje: " + context.formParam("puntaje"));
-        System.out.println("Id: " + context.formParam("id"));
 
         oferta.setNombre(context.formParam("producto"));
         oferta.setPuntajeMinimo(Double.valueOf(context.formParam("puntaje")));
         oferta.setRubro(this.repositorioDeRubros.buscar(Long.valueOf(context.formParam("id"))).get());
 
-        System.out.println("Id2: " + context.formParam("id"));
-
         nuevoProducto.setOferta(oferta);
-        System.out.println("IdColab: " + context.pathParam("id"));
         Colaborador colaborador = this.repositorioColaboradores.buscar(Long.valueOf(context.pathParam("id"))).get();
         nuevoProducto.setColaborador(colaborador);
-        System.out.println("Id3: " + context.formParam("id"));
 
-        this.repositorioDeProductos.beginTransaction();
         this.repositorioDeProductos.guardar(nuevoProducto);
-        this.repositorioDeProductos.commitTransaction();
 
         colaborador.guardarOfrecerProducto(nuevoProducto);
+        repositorioColaboradores.modificar(colaborador);
 
         context.redirect("/"+context.pathParam("id")+"/home");
     }
 
     public void saveComprado(Context context) {
-        System.out.println("Producto: " + context.formParam("producto"));
         Colaborador colaborador = this.repositorioColaboradores.buscar(Long.valueOf(context.pathParam("id"))).get();
-        System.out.println("PRODUCTO ID:" + context.formParam("producto"));
         OfrecerProducto producto = this.repositorioDeProductos.buscar(Long.valueOf(context.formParam("producto"))).get();
         colaborador.modificarPuntosPorCanje(producto.getOferta().getPuntajeMinimo());
 

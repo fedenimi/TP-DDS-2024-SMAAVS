@@ -53,9 +53,7 @@ public class Topic {
         suscriptor.guardarAlertaSuscripcion(alertaSuscripcion);
 
         RepositorioColaboradores repositorioColaboradores = ServiceLocator.instanceOf(RepositorioColaboradores.class);
-        repositorioColaboradores.beginTransaction();
         repositorioColaboradores.modificar(suscriptor);
-        repositorioColaboradores.commitTransaction();
     }
 
     public void agregarSuscripcion(Suscripcion suscripcion){
