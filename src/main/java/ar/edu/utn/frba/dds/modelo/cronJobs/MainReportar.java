@@ -37,10 +37,10 @@ public class MainReportar {
 
 
         List<DistribucionDeViandas> distribucionesDeViandas = new ArrayList<>();
-        distribucionesDeViandas.add(new DistribucionDeViandas(3, martin, hel1, hel2, LocalDate.now()));
-        distribucionesDeViandas.add(new DistribucionDeViandas(1, nico, hel1, hel2, LocalDate.ofYearDay(2013, 2)));
-        distribucionesDeViandas.add(new DistribucionDeViandas(10, juan, hel1, hel2, LocalDate.now()));
-        distribucionesDeViandas.add(new DistribucionDeViandas(8, nico, hel1, hel2, LocalDate.now()));
+        distribucionesDeViandas.add(new DistribucionDeViandas(3, martin, hel1, hel2, LocalDateTime.now()));
+        distribucionesDeViandas.add(new DistribucionDeViandas(1, nico, hel1, hel2, LocalDateTime.now()));
+        distribucionesDeViandas.add(new DistribucionDeViandas(10, juan, hel1, hel2, LocalDateTime.now()));
+        distribucionesDeViandas.add(new DistribucionDeViandas(8, nico, hel1, hel2, LocalDateTime.now()));
         RepositorioDistribucionesViandas repoDist = new RepositorioDistribucionesViandas(distribucionesDeViandas);
 
         List<DonacionDeViandas> donacionesDeViandas = new ArrayList<>();
@@ -50,10 +50,10 @@ public class MainReportar {
         Vianda vianda4 = new Vianda();
         Vianda vianda5 = new Vianda();
         Vianda vianda6 = new Vianda();
-        donacionesDeViandas.add(new DonacionDeViandas(martin, Arrays.asList(vianda1, vianda1, vianda1, vianda1, vianda1), LocalDate.now()));
-        donacionesDeViandas.add(new DonacionDeViandas(nico, Arrays.asList(vianda2, vianda3), LocalDate.now()));
-        donacionesDeViandas.add(new DonacionDeViandas(juan, Arrays.asList(vianda4, vianda5), LocalDate.now()));
-        donacionesDeViandas.add(new DonacionDeViandas(nico, Arrays.asList(vianda6, vianda6), LocalDate.now()));
+        donacionesDeViandas.add(new DonacionDeViandas(martin, Arrays.asList(vianda1, vianda1, vianda1, vianda1, vianda1), LocalDateTime.now()));
+        donacionesDeViandas.add(new DonacionDeViandas(nico, Arrays.asList(vianda2, vianda3), LocalDateTime.now()));
+        donacionesDeViandas.add(new DonacionDeViandas(juan, Arrays.asList(vianda4, vianda5), LocalDateTime.now()));
+        donacionesDeViandas.add(new DonacionDeViandas(nico, Arrays.asList(vianda6, vianda6), LocalDateTime.now()));
         RepositorioDonacionesViandas repoDona = new RepositorioDonacionesViandas(donacionesDeViandas);
 
         Alerta alerta1 = new Alerta(1L,Estado.FRAUDE , LocalDateTime.now(), hel1);

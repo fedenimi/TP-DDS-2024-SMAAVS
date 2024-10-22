@@ -5,6 +5,10 @@ import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioColaboradores;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioUsuarios;
 import io.javalin.http.Context;
+import validadorContrasenias.Condicion.CoincidenciaUsuario;
+import validadorContrasenias.Condicion.ContraseniaDebil;
+import validadorContrasenias.Condicion.LongitudContrasenia;
+import validadorContrasenias.Validador;
 
 import java.util.Optional;
 
@@ -24,5 +28,10 @@ public class ServiceRegistroSesion {
 
     public static boolean esUsuarioRepetido(Context context, RepositorioUsuarios repositorioUsuarios) {
         return repositorioUsuarios.buscarPorNombre(context.formParam("usuario")).isPresent();
+    }
+
+    public static String errorContrasenia(String contrasenia, String usuario) {
+        Validador validador = new Validador(new CoincidenciaUsuario(usuario), new LongitudContrasenia(8), new ContraseniaDebil());
+        return validador.validarContrasenia(contrasenia);
     }
 }

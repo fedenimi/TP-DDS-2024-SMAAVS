@@ -11,6 +11,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -33,10 +35,9 @@ public class DistribucionDeViandas extends Puntuable {
     private Motivo motivoDistribucion;
 
     @Column(name = "fecha")
-    @Convert(converter = LocalDateConverter.class)
-    private LocalDate fecha;
-
-    public DistribucionDeViandas(Integer cantidadDeViandas, Colaborador colaborador, Heladera heladeraDestino, Heladera heladeraOrigen, LocalDate fecha) {
+    private LocalDateTime fecha;
+    // TODO: cambiar a localdatetime
+    public DistribucionDeViandas(Integer cantidadDeViandas, Colaborador colaborador, Heladera heladeraDestino, Heladera heladeraOrigen, LocalDateTime fecha) {
         this.cantidadDeViandas = cantidadDeViandas;
         this.heladeraDestino = heladeraDestino;
         this.fecha = fecha;

@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.temporal.WeekFields;
 import java.util.*;
 
@@ -37,7 +38,7 @@ public class ReporteFallas implements Reporte {
         List <Alerta> alertas = repositorioAlertas.getAlertas();
         for(int i = 0; i < alertas.size(); i++) {
             Alerta alerta = alertas.get(i);
-            if(CalculadorDeFechas.getInstance().esEstaSemana(LocalDate.from(alerta.getFechaYHora()))) {
+            if(CalculadorDeFechas.getInstance().esEstaSemana(LocalDateTime.from(alerta.getFechaYHora()))) {
                 Heladera heladera = alerta.getHeladera();
                 this.agregarFallaAHeladera(heladera);
             }
@@ -45,7 +46,7 @@ public class ReporteFallas implements Reporte {
         List <FallaTecnica> fallasTecnicas = repositorioFallasTecnicas.getFallasTecnicas();
         for(int i = 0; i < fallasTecnicas.size(); i++) {
             FallaTecnica fallaTecnica = fallasTecnicas.get(i);
-            if(CalculadorDeFechas.getInstance().esEstaSemana(LocalDate.from(fallaTecnica.getFechaYHora()))) {
+            if(CalculadorDeFechas.getInstance().esEstaSemana(LocalDateTime.from(fallaTecnica.getFechaYHora()))) {
                 Heladera heladera = fallaTecnica.getHeladera();
                 this.agregarFallaAHeladera(heladera);
             }

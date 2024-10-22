@@ -10,9 +10,7 @@ public class Usuario {
     }
 
     public void validarContrasenia(String contrasenia) {
-        if(validador.validarContrasenia(contrasenia)) {
             this.contrasenia = contrasenia;
-        }
     }
     public String getContrasenia() {
         return contrasenia;

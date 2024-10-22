@@ -11,7 +11,9 @@ import ar.edu.utn.frba.dds.servicios.ServiceColaboradores;
 import ar.edu.utn.frba.dds.servicios.ServiceRegistroSesion;
 import io.javalin.http.Context;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class ControladorRegistro {
@@ -54,6 +56,11 @@ public class ControladorRegistro {
             return;
         }
         usuario.setNombre(context.formParam("usuario"));
+
+        if(!ServiceRegistroSesion.errorContrasenia(context.formParam("contrasenia"), context.formParam("usuario")).isEmpty()) {
+            mostrarErrorContraseniaInvalida(context, ServiceRegistroSesion.errorContrasenia(context.formParam("contrasenia"), context.formParam("usuario")));
+            return;
+        }
         usuario.setContrasenia(context.formParam("contrasenia"));
 
         Colaborador colaborador = null;
@@ -98,6 +105,13 @@ public class ControladorRegistro {
 
     public void mostrarErrorAgregarMedioDeContacto(Context context) {
         context.render("registro/errorAgregarMedioDeContacto.hbs");
+    }
+
+    public void mostrarErrorContraseniaInvalida(Context context, String error) {
+        Map<String, Object> model = new HashMap<>();
+        model.put("error", error);
+        System.out.println(error);
+        context.render("registro/errorContraseniaInvalida.hbs", model);
     }
 
 

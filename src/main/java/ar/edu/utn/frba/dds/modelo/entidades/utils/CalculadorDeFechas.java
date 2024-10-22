@@ -15,7 +15,7 @@ public class CalculadorDeFechas {
         return instance;
     }
 
-    public boolean esEstaSemana(LocalDate fecha) {
+    public boolean esEstaSemana(LocalDateTime fecha) {
         LocalDate today = LocalDate.now();
         WeekFields weekFields = WeekFields.of(Locale.getDefault());
 

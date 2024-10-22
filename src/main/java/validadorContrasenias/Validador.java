@@ -16,8 +16,13 @@ public class Validador {
     this.condicionesAValidar.addAll(List.of(condiciones));
     };
 
-    public boolean validarContrasenia(String contrasenia) {
-        return this.condicionesAValidar.stream().allMatch(c -> c.validarCondicion(contrasenia));
-    }
+    public String validarContrasenia(String contrasenia) {
+        try {
+            this.condicionesAValidar.stream().allMatch(c -> c.validarCondicion(contrasenia));
+            return null;
+        } catch (RuntimeException e) {
+            return e.getMessage();
+        }
 
+    }
 }
