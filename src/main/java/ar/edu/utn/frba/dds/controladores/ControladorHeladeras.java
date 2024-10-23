@@ -90,7 +90,7 @@ public class ControladorHeladeras implements ICrudViewsHandler{
             context.status(404);
             return;
         }
-        //TODO: eliminar las que tienen alertas
+
 
         this.repositorioHeladeras.eliminar(heladera.get());
 
@@ -109,7 +109,6 @@ public class ControladorHeladeras implements ICrudViewsHandler{
     }
 
     public void guardarHeladera(Context context) {
-        //TODO: hacelo fede, tiro goool
         Colaborador colaborador = this.repositorioColaboradores.buscar(Long.parseLong(context.pathParam("id"))).get();
         Heladera heladera = ServiceHeladeras.crearHeladera(context);
 

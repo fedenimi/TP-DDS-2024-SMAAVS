@@ -6,6 +6,7 @@ import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.HacerseCargoDeHelader
 import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.Puntuable;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.Estado;
+import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.ModeloHeladera;
 import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Direccion;
 import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Punto;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
@@ -87,7 +88,7 @@ public class ServiceHeladeras {
         heladera.setVisitaTecnicas(new ArrayList<>());
         heladera.setDireccion(Direccion.builder().direccion(context.formParam("direccion"))
                 .punto(Punto.builder().latitud(Double.valueOf(context.formParam("latitud"))).longitud(Double.valueOf(context.formParam("longitud"))).build())
-                .nombre_direccion(context.formParam("direccion"))
+                .nombre_direccion(context.formParam("nombre"))
                 .build());
         heladera.setTopics(Arrays.asList(
                 Topic.builder().condicionSuscripcionHeladera(new Desperfecto()).suscripciones(new ArrayList<>()).mensaje("Hubo un desperfecto en la heladera").build(),
@@ -95,7 +96,9 @@ public class ServiceHeladeras {
                 Topic.builder().condicionSuscripcionHeladera(new QuedanNViandas()).suscripciones(new ArrayList<>()).mensaje("La heladera está por quedarse vacía").build()
         ));
         heladera.setStock(0);
-        heladera.setCapacidad(50);
+        heladera.setCapacidad(Integer.valueOf(context.formParam("capacidad")));
+        heladera.setModeloHeladera(ModeloHeladera.builder().nombre(context.formParam("modelo")).build());
+        heladera.setTiempoParaVisitarEnMinutos(180);
         return heladera;
     }
 }

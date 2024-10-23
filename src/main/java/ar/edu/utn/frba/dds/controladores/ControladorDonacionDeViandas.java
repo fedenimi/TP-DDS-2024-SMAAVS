@@ -68,7 +68,7 @@ public class ControladorDonacionDeViandas implements ICrudViewsHandler{
 
         DonacionDeViandas donacionDeViandas = new DonacionDeViandas();
         donacionDeViandas.setViandasDonadas(viandas);
-        donacionDeViandas.setFecha(LocalDate.now());
+        donacionDeViandas.setFecha(LocalDateTime.now());
 
         Colaborador colaborador = repositorioColaboradores.buscar(Long.parseLong(context.pathParam("id"))).get();
         donacionDeViandas.setColaborador(colaborador);

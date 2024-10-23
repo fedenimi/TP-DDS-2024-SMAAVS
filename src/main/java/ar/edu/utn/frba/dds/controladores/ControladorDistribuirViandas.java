@@ -69,6 +69,7 @@ public class ControladorDistribuirViandas implements ICrudViewsHandler{
         distribucionDeViandas.setHeladeraDestino(heladeraDestino);
         distribucionDeViandas.setMotivoDistribucion(Motivo.valueOf(context.formParam("motivo")));
         distribucionDeViandas.setCantidadDeViandas(Integer.parseInt(context.formParam("cantidad-viandas")));
+        distribucionDeViandas.setFecha(LocalDateTime.now());
 
         Colaborador colaborador = this.repositorioColaboradores.buscar(Long.parseLong(context.pathParam("id"))).get();
         distribucionDeViandas.setColaborador(colaborador);
