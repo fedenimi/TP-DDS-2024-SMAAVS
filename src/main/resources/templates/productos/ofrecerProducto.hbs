@@ -7,7 +7,7 @@
         <div class="tipo-colab">
             <h1>Publicar un producto</h1>
         </div>
-        <form class="form-registro" id="publicar-producto" method="POST">
+        <form class="form-registro" id="publicar-producto" method="POST" enctype="multipart/form-data">
             <div class="form-element">
                 <label for="form-nombre">Nombre</label>
                 <input type="text" name="producto" id="form-apellido" required>
@@ -29,8 +29,8 @@
                     <ul class="dropdown-item-list">
                         {{#each rubros}}
                             <li class="dropdown-item-only closable" id="item-categoria">
-                                <p>{{nombre}}</p>
                                 <p class="hidden">{{id}}</p>
+                                <p>{{nombre}}</p>
                             </li>
                         {{/each}}
                         <input type="hidden" name="id" id="categoria-id" required>
@@ -38,12 +38,10 @@
                 </div>
             </div>
             <div></div>
-            <div class="form-element">
-                <a class="btn-next2">
-                    <p>Agregar foto</p>
-                    <i class="fa-solid fa-image"></i>
-                </a>
-            </div>
+            <label for="imagen-producto" class="cargar-csv-btn">
+                Cargar imagen
+                <input name="imagen-producto" id="imagen-producto" type="file"/>
+            </label>
         </form>
         <div class="btns-next">
             <a class="btn-next2" href="javascript:history.back()">

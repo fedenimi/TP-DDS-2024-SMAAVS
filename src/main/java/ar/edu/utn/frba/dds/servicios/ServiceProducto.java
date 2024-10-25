@@ -13,6 +13,7 @@ public class ServiceProducto {
                 puntaje(ofrecerProducto.getOferta().getPuntajeMinimo().toString()).
                 rubro(ofrecerProducto.getOferta().getRubro().getNombre()).
                 id(ofrecerProducto.getId().toString()).
+                imagen(ofrecerProducto.getOferta().getImagen()).
                 build();
     }
 }

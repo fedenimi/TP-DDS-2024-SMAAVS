@@ -211,11 +211,11 @@
                     <p></p>
                 </div>
                 <div class="btns-topics-mapa">
-                    <form class="form-registro2" id="form-falla" method="POST">
+                    <form class="form-registro2" id="form-falla" method="POST" enctype="multipart/form-data">
                         <div class="form-element form-element-description">
                             <label for="faltantes">Agregar una descripción...</label>
                             <textarea name="descripcion"></textarea>
-                            <input type="file" id="imagen-falla" name="imagen" accept="image/*"/>
+                            <input type="file" id="imagen-falla" name="imagen-falla" accept="image/*"/>
                             <input type="text" name="heladera" id="input-heladera" required class="hidden">
                         </div>
                     </form>
@@ -235,9 +235,7 @@
 {{#partial "scripts-map"}}
     <script>
         document.querySelector("#submit-btn-siguiente").addEventListener("click", function () {
-            console.log("Siguiente");
             document.querySelector("#input-heladera").value = document.querySelector(".heladera.open").children[6].innerHTML;
-            document.querySelector("#imagen-falla")
             document.querySelector("#form-falla").submit();
         });
     </script>
