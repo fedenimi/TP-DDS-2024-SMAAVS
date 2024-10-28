@@ -1,9 +1,7 @@
 package ar.edu.utn.frba.dds.modelo.entidades.utils;
 
-import ar.edu.utn.frba.dds.dtos.PuntoDonacionCreate;
+import ar.edu.utn.frba.dds.dtos.PuntoDonacionDTO;
 import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Punto;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -20,6 +18,6 @@ public interface PuntosService {
    // Call<List<PuntoDonacionCreate>> agregarPunto(@Query("nombre") String nombre, @Query("lat") Double latitud, @Query("long") Double longitud, @Query("direccion") String direccion);
 
     @POST("puntos")
-    Call<List<PuntoDonacionCreate>> agregarPunto(@Body List<PuntoDonacionCreate> puntos);
+    Call<List<PuntoDonacionDTO>> agregarPunto(@Body List<PuntoDonacionDTO> puntos);
 }
 

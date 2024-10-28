@@ -1,9 +1,7 @@
 package ar.edu.utn.frba.dds.modelo.entidades.utils;
 
-import ar.edu.utn.frba.dds.config.ServiceLocator;
-import ar.edu.utn.frba.dds.dtos.PuntoDonacionCreate;
+import ar.edu.utn.frba.dds.dtos.PuntoDonacionDTO;
 import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Punto;
-import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioHeladeras;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
@@ -40,16 +38,16 @@ public class ServicioPuntos {
         return responsePuntos.body();
     }
 
-    public List<PuntoDonacionCreate> agregarNuevoPunto(String nombre, Double latitud, Double longitud, String direccion) throws IOException {
+    public List<PuntoDonacionDTO> agregarNuevoPunto(String nombre, Double latitud, Double longitud, String direccion) throws IOException {
         PuntosService puntosService = this.retrofit.create(PuntosService.class);
-        PuntoDonacionCreate puntoDonacionCreate = new PuntoDonacionCreate(nombre, latitud, longitud, direccion);
+        PuntoDonacionDTO puntoDonacionDTO = new PuntoDonacionDTO(nombre, latitud, longitud, direccion);
 
-        List<PuntoDonacionCreate> puntos = new ArrayList<>();
-        puntos.add(puntoDonacionCreate);
-        Call<List<PuntoDonacionCreate>> requestPunto = puntosService.agregarPunto(
+        List<PuntoDonacionDTO> puntos = new ArrayList<>();
+        puntos.add(puntoDonacionDTO);
+        Call<List<PuntoDonacionDTO>> requestPunto = puntosService.agregarPunto(
                 puntos
         );
-        Response<List<PuntoDonacionCreate>> responsePunto = requestPunto.execute();
+        Response<List<PuntoDonacionDTO>> responsePunto = requestPunto.execute();
 
         if (!responsePunto.isSuccessful() || responsePunto.body() == null) {
             throw new IOException("Error al agregar el punto: " + responsePunto.errorBody().string());

@@ -42,6 +42,33 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
 heladeras.forEach(heladera => mostrarPunto(heladera, blueIcon));
 
+let holdTimeout;
+map.on('mousedown', function(e) {
+    holdTimeout = setTimeout(() => {
+        obtenerDireccion(e.latlng.lat, e.latlng.lng).then(direccion => {
+            console.log(direccion);
+            var heladera = {latitud: e.latlng.lat, longitud: e.latlng.lng, nombre: "", direccion: direccion};
+            mostrarPunto(heladera, redIcon);
+        });
+    }, 2000);
+});
+map.on('mouseup', function() {
+    clearTimeout(holdTimeout); // Cancela si sueltan antes de los 2 segundos
+});
+
+function obtenerDireccion(lat, lng) {
+    return fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`)
+        .then(response => response.json())
+        .then(data => {
+            var calle = data.address.road == undefined ? "" : data.address.road;
+            var numero = data.address.house_number == undefined ? "" : data.address.house_number;
+            return `${calle} ${numero}`;
+        })
+        .catch(error => {
+            console.error('Error al obtener la dirección:', error);
+            return "";
+        });
+}
 
 function mostrarPunto(heladera, icon) {
     var marker = L.marker([heladera.latitud, heladera.longitud], {icon: icon}).addTo(map);
@@ -52,7 +79,9 @@ function mostrarPunto(heladera, icon) {
     marker.bindPopup(popupContent);
 
     if (icon === blueIcon) marker.on('click', showHeladera);
-    if (icon === redIcon) marker.on('click', showHeladeraForConfirmation);
+    if (icon === redIcon) marker.on('click', function(e) {
+        showHeladeraForConfirmation(heladera)
+    });
     marker.on('mouseover', function (e) {
         this.openPopup();
     })
@@ -104,21 +133,13 @@ function showRecommendedPoints() {
     mostrarPunto(heladera, redIcon);
 }
 
-function showHeladeraForConfirmation(e) {
-    console.log(this);
-    modalRecomendacion.innerHTML = `
-        <form class="form-modal-mapa">
-            <div class="form-element-mapa">
-                <h2>${this._popup._content}</h2>
-            </div>
-            <div class="form-element-mapa">
-                <h2>Dirección ${getDireccionBy(this._popup._content)}</h2>
-            <button class="enviar">
-                Confirmar
-            </button>
-        </form>
-    `;
-    modalRecomendacion.classList.add('open');
+function showHeladeraForConfirmation(heladera) {
+    console.log(heladera);
+    const modalAgregarHeladera = document.querySelector('.modal-agregar-heladera');
+    modalAgregarHeladera.children[0].children[0].children[1].children[1].value = heladera.direccion;
+    modalAgregarHeladera.children[0].children[0].children[2].children[1].value = heladera.latitud;
+    modalAgregarHeladera.children[0].children[1].children[0].children[1].value = heladera.longitud;
+    modalAgregarHeladera.classList.toggle('open');
 }
 
 function showHeladera(e) {
@@ -134,6 +155,7 @@ function showHeladera(e) {
             </button>
         </form>
     `;
+    console.log('ShowHeladera');
     modalRecomendacion.classList.add('open');
 }
 
