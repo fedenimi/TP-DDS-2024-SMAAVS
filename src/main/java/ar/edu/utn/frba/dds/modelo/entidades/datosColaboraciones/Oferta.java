@@ -22,4 +22,7 @@ public class Oferta {
     @ManyToOne(cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "rubro_id")
     private Rubro rubro;
+
+    @Column(name = "imagen", columnDefinition = "VARCHAR(255)")
+    private String imagen;
 }

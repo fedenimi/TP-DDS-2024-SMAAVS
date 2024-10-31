@@ -210,6 +210,21 @@
             border-radius: 5px;
             box-shadow: 0px 0px 5px 0px #000000;
         }
+
+        #info-agregar-puntos {
+            position: absolute;
+            bottom: 1%;
+            left: 1%;
+            z-index: 1000;
+            backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0px 0px 10px 0px #000000;
+            padding: 10px;
+            width: 30%;
+            border-radius: 13px;
+            border: none;
+            font-size: 20px;
+        }
     </style>
 
 </head>
@@ -236,6 +251,7 @@
             <button class="puntos-recom">Puntos recomendados</button>
             <button class="puntos-recom" id="modal-agregar-heladera">Agregar heladera</button>
         </div>
+        <div id="info-agregar-puntos">Mantenga presionado un punto por 2 segundos para agregar una heladera</div>
         <div class="modal-recomendacion">
             <form class="form-modal-mapa">
                 <div class="form-element-mapa">

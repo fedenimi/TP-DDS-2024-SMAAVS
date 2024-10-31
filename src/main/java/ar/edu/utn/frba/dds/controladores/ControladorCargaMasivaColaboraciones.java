@@ -65,7 +65,6 @@ public class ControladorCargaMasivaColaboraciones implements ICrudViewsHandler {
             }
         }
     }
-
     @Override
     public void edit(Context context) {
 

@@ -57,6 +57,8 @@ public class ControladorRegistro {
         }
         usuario.setNombre(context.formParam("usuario"));
 
+        System.out.println(context.formParam("contrasenia"));
+
         if(!ServiceRegistroSesion.errorContrasenia(context.formParam("contrasenia"), context.formParam("usuario")).isEmpty()) {
             mostrarErrorContraseniaInvalida(context, ServiceRegistroSesion.errorContrasenia(context.formParam("contrasenia"), context.formParam("usuario")));
             return;

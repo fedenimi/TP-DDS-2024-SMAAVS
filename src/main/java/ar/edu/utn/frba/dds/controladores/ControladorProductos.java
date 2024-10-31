@@ -13,7 +13,12 @@ import ar.edu.utn.frba.dds.server.Router;
 import ar.edu.utn.frba.dds.servicios.ServiceProducto;
 import ar.edu.utn.frba.dds.servicios.ServiceRubro;
 import io.javalin.http.Context;
+import io.javalin.http.UploadedFile;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -83,7 +88,14 @@ public class ControladorProductos implements ICrudViewsHandler {
         oferta.setNombre(context.formParam("producto"));
         oferta.setPuntajeMinimo(Double.valueOf(context.formParam("puntaje")));
         oferta.setRubro(this.repositorioDeRubros.buscar(Long.valueOf(context.formParam("id"))).get());
-
+        UploadedFile uploadedFile = context.uploadedFile("imagen-producto");
+        File file = new File("src/main/resources/public/img/" + uploadedFile.filename());
+        try {
+            saveUploadedFile(uploadedFile.content(), file);
+            oferta.setImagen("/img/" +uploadedFile.filename());
+        } catch (IOException e) {
+            System.err.println("Error al guardar el archivo: " + e.getMessage());
+        }
         nuevoProducto.setOferta(oferta);
         Colaborador colaborador = this.repositorioColaboradores.buscar(Long.valueOf(context.pathParam("id"))).get();
         nuevoProducto.setColaborador(colaborador);
@@ -94,6 +106,16 @@ public class ControladorProductos implements ICrudViewsHandler {
         repositorioColaboradores.modificar(colaborador);
 
         context.redirect("/"+context.pathParam("id")+"/home");
+    }
+
+    private void saveUploadedFile(InputStream uploadedFileStream, File fileToSave) throws IOException {
+        try (FileOutputStream fos = new FileOutputStream(fileToSave)) {
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = uploadedFileStream.read(buffer)) != -1) {
+                fos.write(buffer, 0, bytesRead);
+            }
+        }
     }
 
     public void saveComprado(Context context) {

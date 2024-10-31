@@ -9,5 +9,6 @@ public class OfrecerProductoDTO {
     private String nombre;
     private String puntaje;
     private String rubro;
+    private String imagen;
     private String id;
 }

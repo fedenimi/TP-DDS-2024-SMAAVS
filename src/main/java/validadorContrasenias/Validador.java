@@ -19,7 +19,7 @@ public class Validador {
     public String validarContrasenia(String contrasenia) {
         try {
             this.condicionesAValidar.stream().allMatch(c -> c.validarCondicion(contrasenia));
-            return null;
+            return "";
         } catch (RuntimeException e) {
             return e.getMessage();
         }
