@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.modelo.entidades.utils;
 
 import ar.edu.utn.frba.dds.config.ServiceLocator;
+import ar.edu.utn.frba.dds.modelo.cronJobs.MainPuntos;
 import ar.edu.utn.frba.dds.modelo.entidades.acceso.Permiso;
 import ar.edu.utn.frba.dds.modelo.entidades.acceso.Usuario;
 import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.OfrecerProducto;
@@ -28,6 +29,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class Initializer {
     public static void init() {
@@ -164,5 +168,11 @@ public class Initializer {
         RepositorioUsuarios repositorioUsuarios = ServiceLocator.instanceOf(RepositorioUsuarios.class);
         repositorioUsuarios.guardar(admin);
 
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
+
+        scheduler.scheduleAtFixedRate(() -> {
+            MainPuntos.main(new String[0]);
+        }, 0, 30, TimeUnit.DAYS);
     }
 }

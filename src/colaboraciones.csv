@@ -1,6 +1,4 @@
-DNI;XXYYYZZZ;Nombre1;Apellido1;mail1@ejemplo.com;23/10/2022;DINERO;303
-DNI;XXYYYZZA;Nombre2;Apellido2;mail2@ejemplo.com;21/10/2022;DONACION_VIANDAS;33
-DNI;XXYYYZZB;Nombre3;Apellido3;mail3@ejemplo.com;22/10/2022;REDISTRIBUCION_VIANDAS;3
-PASAPORTE;XXYYYZZC;Nombre4;Apellido4;mail4@ejemplo.com;24/10/2022;ENTREGA_TARJETAS;10
-;;;;;;;
-;;;;;;;
+DNI;111;Nombre1;Apellido1;mail1@ejemplo.com;23/10/2022;DINERO;303
+DNI;222;Nombre2;Apellido2;mail2@ejemplo.com;21/10/2022;DONACION_VIANDAS;33
+DNI;333;Nombre3;Apellido3;mail3@ejemplo.com;22/10/2022;REDISTRIBUCION_VIANDAS;3
+PASAPORTE;444;Nombre4;Apellido4;mail4@ejemplo.com;24/10/2022;ENTREGA_TARJETAS;10

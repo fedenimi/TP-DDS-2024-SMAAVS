@@ -54,6 +54,8 @@ public class ControladorCargaMasivaColaboraciones implements ICrudViewsHandler {
         LectorCSV lectorCSV = new LectorCSV(new InstanciadorColaborador(new EnviadorDeMail()));
         lectorCSV.cargarContribuciones(colaboradores, file);
         file.delete();
+
+        context.redirect("/"+context.pathParam("id") +"/home");
     }
 
     private void saveUploadedFile(InputStream uploadedFileStream, File fileToSave) throws IOException {
