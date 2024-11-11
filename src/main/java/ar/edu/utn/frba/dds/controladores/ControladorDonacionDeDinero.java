@@ -48,6 +48,7 @@ public class ControladorDonacionDeDinero implements ICrudViewsHandler{
         repositorioPuntuables.guardar(donacionDeDinero);
 
         colaborador.agregarPuntuable(donacionDeDinero);
+        repositorioColaboradores.modificar(colaborador);
 
         context.redirect("/"+ context.pathParam("id") +"/home");
 

@@ -36,7 +36,8 @@ public class PersonaVulnerable {
     private Direccion domicilio;
     @Embedded
     private Documento documento;
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+
+    @OneToMany(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "persona_vulnerable_id")
     private List<PersonaVulnerable> menoresACargo;
 
@@ -76,4 +77,7 @@ public class PersonaVulnerable {
         return this.usosDeHoy() < this.cantidadMaximaDeUsosDeTarjetaDiarios();
     }
 
+    public void agregarMenorACargo(PersonaVulnerable menor) {
+        menoresACargo.add(menor);
+    }
 }

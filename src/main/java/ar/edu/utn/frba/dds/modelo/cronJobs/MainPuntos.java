@@ -18,6 +18,7 @@ public class MainPuntos {
     public static void actualizarPuntosDe(Colaborador colaborador, RepositorioColaboradores repositorio) {
         colaborador.setPuntosDisponibles(Calculador.getInstance().puntaje(colaborador.getPuntuables(), colaborador.getPuntosCanjeados()));
         repositorio.modificar(colaborador);
+        System.out.println("PUNTOS: " + Calculador.getInstance().puntaje(colaborador.getPuntuables(), colaborador.getPuntosCanjeados()));
     }
 }
 

@@ -173,6 +173,6 @@ public class Initializer {
 
         scheduler.scheduleAtFixedRate(() -> {
             MainPuntos.main(new String[0]);
-        }, 0, 30, TimeUnit.DAYS);
+        }, 0, 30, TimeUnit.SECONDS);
     }
 }

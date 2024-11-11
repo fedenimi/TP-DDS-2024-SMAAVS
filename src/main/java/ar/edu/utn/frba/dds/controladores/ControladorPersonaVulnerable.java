@@ -16,6 +16,8 @@ import ar.edu.utn.frba.dds.servicios.ServicePersonasVulnerables;
 import io.javalin.http.Context;
 
 import java.time.LocalDate;
+import java.util.Objects;
+import java.util.Optional;
 
 public class ControladorPersonaVulnerable implements ICrudViewsHandler{
     private RepositorioPersonasVulnerables repositorioPersonasVulnerables;
@@ -46,9 +48,19 @@ public class ControladorPersonaVulnerable implements ICrudViewsHandler{
     public void save(Context context) {
         PersonaVulnerable personaVulnerable = ServicePersonasVulnerables.crearPersonaVulnerable(context);
         RegistroDePersonasVulnerables registroDePersonasVulnerables = new RegistroDePersonasVulnerables();
-        ServicePersonasVulnerables.asignarTarjetaA(personaVulnerable, repositorioPersonasVulnerables);
+        if(Objects.equals(context.formParam("padre"), "")) {
+            ServicePersonasVulnerables.asignarTarjetaA(personaVulnerable, repositorioPersonasVulnerables);
+            repositorioPersonasVulnerables.guardar(personaVulnerable);
+        }
+        else {
+            Optional<PersonaVulnerable> padreOpt = repositorioPersonasVulnerables.buscarPor((context.formParam("padre")));
+            if(padreOpt.isPresent()) {
+                PersonaVulnerable padre = padreOpt.get();
+                padre.agregarMenorACargo(personaVulnerable);
+                personaVulnerable.setTarjeta(padre.getTarjeta());
+            }
+        }
 
-        repositorioPersonasVulnerables.guardar(personaVulnerable);
 
         Colaborador colaborador = repositorioColaboradores.buscar(Long.parseLong(context.pathParam("id"))).get();
         registroDePersonasVulnerables.setColaborador(colaborador);
