@@ -9,12 +9,14 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Oferta;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Rubro;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.Alerta;
+import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.sensores.ReceptorSensorTemperatura;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.Estado;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.ModeloHeladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.*;
 import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Direccion;
 import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Punto;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
+import ar.edu.utn.frba.dds.modelo.entidades.personas.Tecnico;
 import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.AlertaSuscripcion;
 import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.SuscripcionHumana;
 import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.TipoNotificacion;
@@ -53,6 +55,8 @@ public class Initializer {
                 )
                 .build();
 
+        ReceptorSensorTemperatura receptorSensorTemperatura1 = ReceptorSensorTemperatura.builder().heladera(heladera1).mediciones(new ArrayList<>()).build();
+
         Heladera heladera2 = Heladera
                 .builder()
                 .capacidad(600)
@@ -71,6 +75,8 @@ public class Initializer {
                 )
                 .build();
 
+        ReceptorSensorTemperatura receptorSensorTemperatura2 = ReceptorSensorTemperatura.builder().heladera(heladera2).mediciones(new ArrayList<>()).build();
+
         Heladera heladera3 = Heladera
                 .builder()
                 .capacidad(700)
@@ -88,6 +94,8 @@ public class Initializer {
                         Topic.builder().condicionSuscripcionHeladera(new Desperfecto()).suscripciones(new ArrayList<>()).mensaje("La heladera sufrió un desperfecto").build())
                 )
                 .build();
+
+        ReceptorSensorTemperatura receptorSensorTemperatura3 = ReceptorSensorTemperatura.builder().heladera(heladera3).mediciones(new ArrayList<>()).build();
 
         SuscripcionHumana suscripcionHumana1 = SuscripcionHumana.builder().cantidad(5).heladera(heladera1).tipoNotificacion(TipoNotificacion.FALTAN_N_VIANDAS).build();
         SuscripcionHumana suscripcionHumana2 = SuscripcionHumana.builder().cantidad(3).heladera(heladera2).tipoNotificacion(TipoNotificacion.QUEDAN_N_VIANDAS).build();
@@ -142,10 +150,22 @@ public class Initializer {
                 Colaborador.builder().tipoDeColaborador(TipoDeColaborador.JURIDICA).puntosCanjeados(0D).puntosDisponibles(0D).build()
         ).build();
 
+        Tecnico tecnico1 = Tecnico.builder().nombre("Tecnico1").apellido("Tecnico1").documento(Documento.builder().
+                numero("12345678").
+                tipo(TipoDocumento.DNI).build()).
+                cuil("12345678").
+                medioDeContacto(MedioDeContacto.builder().valor("12345678").tipo(TipoDeContacto.TELEFONO).build()).
+                ultimoPunto(Punto.builder().latitud(-34.632166).longitud(-58.425981).build()).
+                build();
         RepositorioHeladeras repositorioDeHeladeras = ServiceLocator.instanceOf(RepositorioHeladeras.class);
         repositorioDeHeladeras.guardar(heladera1);
         repositorioDeHeladeras.guardar(heladera2);
         repositorioDeHeladeras.guardar(heladera3);
+
+        RepositorioReceptoresTemperatura repositorioDeReceptoresTemperatura = ServiceLocator.instanceOf(RepositorioReceptoresTemperatura.class);
+        repositorioDeReceptoresTemperatura.guardar(receptorSensorTemperatura1);
+        repositorioDeReceptoresTemperatura.guardar(receptorSensorTemperatura2);
+        repositorioDeReceptoresTemperatura.guardar(receptorSensorTemperatura3);
 
         RepositorioColaboradores repositorioDeColaboradores = ServiceLocator.instanceOf(RepositorioColaboradores.class);
         repositorioDeColaboradores.guardar(colaborador1);
@@ -167,6 +187,9 @@ public class Initializer {
 
         RepositorioUsuarios repositorioUsuarios = ServiceLocator.instanceOf(RepositorioUsuarios.class);
         repositorioUsuarios.guardar(admin);
+
+        RepositorioTecnicos repositorioTecnicos = ServiceLocator.instanceOf(RepositorioTecnicos.class);
+        repositorioTecnicos.guardar(tecnico1);
 
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 

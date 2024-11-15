@@ -14,7 +14,7 @@ public class CreadorAlerta {
         return instance;
     }
     public Alerta crearAlerta(Heladera heladera, Estado estado) {
-        return new Alerta(1L,estado, LocalDateTime.now(), heladera);
+        return Alerta.builder().tipoAlerta(estado).fechaYHora(LocalDateTime.now()).heladera(heladera).build();
     }
 
 }

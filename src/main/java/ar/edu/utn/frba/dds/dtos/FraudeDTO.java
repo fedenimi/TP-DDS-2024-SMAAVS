@@ -5,6 +5,5 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class FraudeDTO {
-    private String fechaYHora;
     private String idHeladera;
 }

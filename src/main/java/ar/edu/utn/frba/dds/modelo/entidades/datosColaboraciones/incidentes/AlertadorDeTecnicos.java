@@ -18,6 +18,7 @@ public class AlertadorDeTecnicos {
     }
     public void alertar(Heladera heladera, IBuscadorDeTecnicos buscadorDeTecnicos) {
         Tecnico tecnicoMasCercano = buscadorDeTecnicos.buscarTecnicoMasCercanoA(heladera);
+        System.out.println("Se alerto al tecnico: " + tecnicoMasCercano.getNombre() + " " + tecnicoMasCercano.getApellido());
         List<MedioDeContacto> mediosDeContacto = new ArrayList<>();
         mediosDeContacto.add(tecnicoMasCercano.getMedioDeContacto());
         Llamador.getInstance().llamar(mediosDeContacto, "Anda a arreglar la heladera " + heladera.getId(), "HELADERA ROTA");

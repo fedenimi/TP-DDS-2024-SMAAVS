@@ -124,6 +124,14 @@ public class ServiceLocator {
                 RepositorioTecnicos instance = new RepositorioTecnicos();
                 instances.put(componentName, instance);
             }
+            else if(componentName.equals(ControladorTecnico.class.getName())) {
+                ControladorTecnico instance = new ControladorTecnico(instanceOf(RepositorioTecnicos.class));
+                instances.put(componentName, instance);
+            }
+            else if(componentName.equals(RepositorioReceptoresTemperatura.class.getName())) {
+                RepositorioReceptoresTemperatura instance = new RepositorioReceptoresTemperatura();
+                instances.put(componentName, instance);
+            }
         }
 
         return (T) instances.get(componentName);
