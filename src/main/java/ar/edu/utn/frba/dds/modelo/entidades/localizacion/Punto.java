@@ -21,4 +21,8 @@ public class Punto {
     @Column(name = "longitud")
     private Double longitud;
 
+    public double distanciaA(Punto otroPunto) {
+        return Math.sqrt(Math.pow(this.latitud - otroPunto.getLatitud(), 2) + Math.pow(this.longitud - otroPunto.getLongitud(), 2));
+    }
+
 }

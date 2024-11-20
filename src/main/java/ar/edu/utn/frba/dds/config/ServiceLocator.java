@@ -29,7 +29,7 @@ public class ServiceLocator {
                 instances.put(componentName, instance);
             }
             else if (componentName.equals(BuscadorDeTecnicos.class.getName())) {
-                BuscadorDeTecnicos instance = new BuscadorDeTecnicos();
+                BuscadorDeTecnicos instance = new BuscadorDeTecnicos(instanceOf(RepositorioTecnicos.class));
                 instances.put(componentName, instance);
             }
             else if (componentName.equals(ControladorRegistro.class.getName())) {
@@ -120,7 +120,18 @@ public class ServiceLocator {
                 RepositorioUsuarios instance = new RepositorioUsuarios();
                 instances.put(componentName, instance);
             }
-
+            else if(componentName.equals(RepositorioTecnicos.class.getName())) {
+                RepositorioTecnicos instance = new RepositorioTecnicos();
+                instances.put(componentName, instance);
+            }
+            else if(componentName.equals(ControladorTecnico.class.getName())) {
+                ControladorTecnico instance = new ControladorTecnico(instanceOf(RepositorioTecnicos.class));
+                instances.put(componentName, instance);
+            }
+            else if(componentName.equals(RepositorioReceptoresTemperatura.class.getName())) {
+                RepositorioReceptoresTemperatura instance = new RepositorioReceptoresTemperatura();
+                instances.put(componentName, instance);
+            }
         }
 
         return (T) instances.get(componentName);

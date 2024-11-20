@@ -14,8 +14,8 @@ import java.util.ArrayList;
 public class MainMQTT {
     public static void main(String[] args) {
 
-        String topic        = "test";
-        String broker       = "tcp://broker.hivemq.com:1883";
+        String topic        = "test/topic";
+        String broker       = "tcp://test.mosquitto.org:1883";
         String clientId     = "JavaSample";
         MemoryPersistence persistence = new MemoryPersistence();
 

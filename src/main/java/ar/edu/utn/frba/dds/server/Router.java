@@ -17,7 +17,7 @@ public class Router {
         app.get("{id}/configuracion", ServiceLocator.instanceOf(ControladorColaborador.class)::edit, Permiso.HUMANA, Permiso.JURIDICA);
         app.post("{id}/configuracion", ServiceLocator.instanceOf(ControladorColaborador.class)::update, Permiso.HUMANA, Permiso.JURIDICA);
 
-        app.get("/{id}/home", ServiceLocator.instanceOf(ControladorHome.class)::mostrarHome);
+        app.get("/{id}/home", ServiceLocator.instanceOf(ControladorHome.class)::mostrarHome, Permiso.HUMANA, Permiso.JURIDICA, Permiso.ADMIN);
 
         app.get("{id}/donar-viandas/mapa", ServiceLocator.instanceOf(ControladorDonacionDeViandas.class)::abrirMapa, Permiso.DONAR_VIANDAS);
         app.post("{id}/donar-viandas/mapa", ServiceLocator.instanceOf(ControladorDonacionDeViandas.class)::guardarMapa, Permiso.DONAR_VIANDAS);
@@ -39,8 +39,8 @@ public class Router {
         app.get("{id}/reg-persona", ServiceLocator.instanceOf(ControladorPersonaVulnerable.class)::index, Permiso.HUMANA);
         app.post("{id}/reg-persona", ServiceLocator.instanceOf(ControladorPersonaVulnerable.class)::save, Permiso.HUMANA);
 
-        app.get("{id}/productos", ServiceLocator.instanceOf(ControladorProductos.class)::index);
-        app.post("{id}/productos", ServiceLocator.instanceOf(ControladorProductos.class)::saveComprado);
+        app.get("{id}/productos", ServiceLocator.instanceOf(ControladorProductos.class)::index, Permiso.HUMANA, Permiso.JURIDICA);
+        app.post("{id}/productos", ServiceLocator.instanceOf(ControladorProductos.class)::saveComprado, Permiso.HUMANA, Permiso.JURIDICA);
         app.get("{id}/publicar-producto/", ServiceLocator.instanceOf(ControladorProductos.class)::create, Permiso.JURIDICA);
         app.post("{id}/publicar-producto/", ServiceLocator.instanceOf(ControladorProductos.class)::save, Permiso.JURIDICA);
 

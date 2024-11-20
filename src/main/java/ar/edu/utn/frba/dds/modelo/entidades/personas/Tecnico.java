@@ -1,15 +1,20 @@
 package ar.edu.utn.frba.dds.modelo.entidades.personas;
 
+import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.FalloHeladeraTecnico;
 import ar.edu.utn.frba.dds.modelo.entidades.localizacion.AreaDeCobertura;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.Documento;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.MedioDeContacto;
+import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Punto;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -38,4 +43,11 @@ public class Tecnico {
     @ManyToOne
     @JoinColumn(name = "area_de_cobertura_id")
     private AreaDeCobertura areaDeCobertura;
+
+    @Embedded
+    private Punto ultimoPunto;
+
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "tecnico_id")
+    private List<FalloHeladeraTecnico> falloHeladera;
 }

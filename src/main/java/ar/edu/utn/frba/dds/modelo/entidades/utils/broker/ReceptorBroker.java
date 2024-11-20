@@ -1,11 +1,13 @@
 package ar.edu.utn.frba.dds.modelo.entidades.utils.broker;
 
+import ar.edu.utn.frba.dds.config.ServiceLocator;
 import ar.edu.utn.frba.dds.controladores.ControladorContribucionesViandas;
 import ar.edu.utn.frba.dds.controladores.ControladorMovimiento;
 import ar.edu.utn.frba.dds.dtos.AperturaDTO;
 import ar.edu.utn.frba.dds.dtos.FraudeDTO;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.sensores.ReceptorSensorTemperatura;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.sensores.Temperatura;
+import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioHeladeras;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioReceptoresTemperatura;
 import org.eclipse.paho.client.mqttv3.IMqttMessageListener;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
@@ -23,17 +25,19 @@ public class ReceptorBroker implements IMqttMessageListener {
     @Override
     public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
         String mensajeString = mqttMessage.toString();
-        StringTokenizer messageTokenizer = new StringTokenizer(mensajeString, " ");
+        StringTokenizer messageTokenizer = new StringTokenizer(mensajeString, "/");
+        String opcode = messageTokenizer.nextToken();
         String idHeladera = messageTokenizer.nextToken();
-        switch(topic) {
+        System.out.println("Mensaje recibido: " + mqttMessage);
+        switch(opcode) {
             case "temperatura":
                 String temperatura = messageTokenizer.nextToken();
-                ReceptorSensorTemperatura receptor = RepositorioReceptoresTemperatura.getInstance().buscar(Long.parseLong(idHeladera)).get();
+                ReceptorSensorTemperatura receptor = ReceptorSensorTemperatura.builder().
+                        heladera(ServiceLocator.instanceOf(RepositorioHeladeras.class).buscar(Long.parseLong(idHeladera)).get()).build();
                 receptor.evaluarTemperatura(new Temperatura(Double.parseDouble(temperatura)));
                 break;
             case "fraude":
-                String fechaYHora = messageTokenizer.nextToken();
-                FraudeDTO fraudeDTO = new FraudeDTO(fechaYHora, idHeladera);
+                FraudeDTO fraudeDTO = new FraudeDTO(idHeladera);
                 ControladorMovimiento.getInstance().recibirFraude(fraudeDTO);
                 break;
             case "apertura":
