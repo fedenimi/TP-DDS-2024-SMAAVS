@@ -41,6 +41,7 @@ public class ReceptorBroker implements IMqttMessageListener {
                 ControladorMovimiento.getInstance().recibirFraude(fraudeDTO);
                 break;
             case "apertura":
+                System.out.println("hola");
                 String tipoDoc = messageTokenizer.nextToken();
                 String doc = messageTokenizer.nextToken();
                 String fechaSolicitud = messageTokenizer.nextToken();
