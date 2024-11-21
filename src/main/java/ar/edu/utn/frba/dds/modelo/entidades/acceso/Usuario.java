@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.modelo.entidades.acceso;
 
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
+import ar.edu.utn.frba.dds.modelo.entidades.personas.Tecnico;
 import lombok.*;
 
 import javax.persistence.*;
@@ -33,6 +34,10 @@ public class Usuario {
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "colaborador_asociado_id", referencedColumnName = "id")
     private Colaborador colaboradorAsociado;
+
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @JoinColumn(name = "tecnico_asociado_id", referencedColumnName = "id")
+    private Tecnico tecnicoAsociado;
 
     public void agregarPermiso(Permiso permiso) {
         permisos.add(permiso);

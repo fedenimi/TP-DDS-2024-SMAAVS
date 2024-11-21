@@ -5,6 +5,7 @@ import ar.edu.utn.frba.dds.modelo.entidades.acceso.Permiso;
 import ar.edu.utn.frba.dds.modelo.entidades.acceso.Usuario;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.*;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
+import ar.edu.utn.frba.dds.modelo.entidades.personas.Tecnico;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioColaboradores;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioUsuarios;
 import ar.edu.utn.frba.dds.servicios.ServiceColaboradores;
@@ -42,7 +43,16 @@ public class ControladorRegistro {
             return;
         }
         context.sessionAttribute("permisos", usuario.getPermisos());
-        context.sessionAttribute("colaborador_id", usuario.getColaboradorAsociado().getId());
+        Colaborador colaborador = usuario.getColaboradorAsociado();
+        Tecnico tecnico = usuario.getTecnicoAsociado();
+        Long id = -1L;
+        if (colaborador != null) {
+            id = colaborador.getId();
+        }
+        if (tecnico != null) {
+            id = tecnico.getId();
+        }
+        context.sessionAttribute("colaborador_id", id);
         context.redirect("/"+context.sessionAttribute("colaborador_id")+"/home");
     }
     public void mostrarRegistro(Context context) {

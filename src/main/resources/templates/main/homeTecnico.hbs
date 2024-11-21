@@ -1,6 +1,6 @@
 {{#partial "estilos-map"}}
+    <link rel="stylesheet" href="../../css/registro.css">
     <link rel="stylesheet" href="/css/suscripciones.css">
-    <link rel="stylesheet" href="/css/registro.css">
     <style>
         #map {
             width: 100vw;
@@ -168,74 +168,54 @@
     </style>
 {{/partial}}
 {{#partial "main-map"}}
-    <div id="map">
-        {{#each heladeras}}
+    <main>
+        <div id="map">
+            {{#each falloHeladeras}}
                 <div class="heladera hidden" id="heladeras-en-dashboard">
-                    <p  class="hidden">{{this.nombre}}</p>
-                    <hr class="hidden">
-                    <p  class="hidden">{{this.descripcion}}</p>
-                    <p  class="hidden">{{this.latitud}}</p>
-                    <p  class="hidden">{{this.longitud}}</p>
-                    <p  class="hidden">{{this.direccion}}</p>
-                    <p  class="hidden">{{this.id}}</p>
-                    <p  class="title-text hidden"></p>
+                    <p>{{heladera.nombre}}</p>
+                    <hr>
+                    <p class="hidden">{{heladera.cantidadViandas}} viandas</p>
+                    <p class="hidden">{{heladera.latitud}}</p>
+                    <p class="hidden">{{heladera.longitud}}</p>
+                    <p class="hidden">{{heladera.direccion}}</p>
+                    <p class="hidden" id="id-heladera-form">{{heladera.id}}</p>
+                    <p>{{heladera.estado}}</p>
+                    <p>{{id}}</p>
                 </div>
-        {{/each}}
-        <div class="modal-info-heladera-viandas">
-            <h1 class="title-mapa-heladera">Heladera A</h1>
-            <div class="title-mapa-direccion">
-                <p></p>
+            {{/each}}
+            <div class="modal-info-heladera-viandas">
+                <h1 class="title-mapa-heladera"></h1>
+                <div class="title-mapa-direccion">
+                    <p></p>
+                </div>
+                <div class="btns-topics-mapa">
+                    <form class="form-registro2" id="form-falla" method="POST" enctype="multipart/form-data">
+                        <div class="form-element form-element-description">
+                            <label for="faltantes">Agregar una descripción al arreglo de la heladera...</label>
+                            <textarea name="descripcion"></textarea>
+                            <input type="file" id="imagen-falla" name="imagen-falla" accept="image/*"/>
+                            <input type="text" name="heladera" id="input-heladera" required class="hidden">
+                            <input type="text" name="fallo-id" id="input-fallo" required class="hidden">
+                        </div>
+                    </form>
+                </div>
+                <div class="btns-modal-mapa">
+                    <a class="title-mapa-btn" id="submit-btn-siguiente">
+                        <p>Siguiente</p>
+                    </a>
+                </div>
             </div>
-            <div class="btns-topics-mapa">
-                <a class="btn-topic dist1">Viandas restantes</a>
-                <a class="btn-topic dist1">Viandas faltantes</a>
-                <a class="btn-topic dist1">Desperfectos</a>
-            </div>
-            <div class="btns-topics-mapa">
-                <form class="form-registro suscripcion-form dist2" method="POST">
-                    <div class="form-element dist2">
-                        <label for="faltantes">N viandas faltantes</label>
-                        <input type="number" name="faltantes" required>
-                    </div>
-                    <div></div>
-                    <div class="form-element dist2">
-                        <label for="restantes">N viandas restantes</label>
-                        <input type="number" name="restantes" required>
-                    </div>
-                    <input type="hidden" name="id-heladera" value="">
-                    <input type="hidden" name="desperfectos" value="">
-                </form>
-            </div>
-            <div class="btns-modal-mapa">
-                <a href="javascript:history.back()"
-                   class="title-mapa-btn volver-btn-susc btn-suscripcion-modal dist1">
-                    <p>Volver</p>
-                </a>
-                <a class="title-mapa-btn confirmar-btn-susc btn-suscripcion-modal dist1">
-                    <p>Siguiente</p>
-                </a>
-            </div>
-            <div class="btns-modal-mapa">
-                <a class="title-mapa-btn volver-btn-susc btn-suscripcion-modal dist2">
-                    <p>Volver</p>
-                </a>
-                <a class="title-mapa-btn confirmar-btn-susc btn-suscripcion-modal dist2" id="submit-form">
-                    <p>Siguiente</p>
-                </a>
-            </div>
-            <p class="hidden"></p>
         </div>
-    </div>
+    </main>
 {{/partial}}
 {{#partial "scripts-map"}}
-    <script src="/js/suscripciones.js"></script>
     <script>
-        document.querySelector('#submit-form').addEventListener('click', function () {
-            document.querySelector('input[name="id-heladera"]').value = document.querySelector('.modal-info-heladera-viandas').children[6].textContent;
-            document.querySelector('input[name="desperfectos"]').value = document.querySelectorAll('.btns-topics-mapa')[0].children[2].classList.contains('pressed')
-                    ? "true" : null;
-            document.querySelector('.suscripcion-form').submit();
+        document.querySelector("#submit-btn-siguiente").addEventListener("click", function () {
+            document.querySelector("#input-heladera").value = document.querySelector(".heladera.open").children[6].innerHTML;
+            document.querySelector("#input-fallo").value = document.querySelector(".heladera.open").children[8].innerHTML;
+            document.querySelector("#form-falla").submit();
         });
     </script>
+
 {{/partial}}
 {{>templates/base/mapaBase}}

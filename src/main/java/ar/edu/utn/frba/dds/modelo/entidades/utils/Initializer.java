@@ -9,6 +9,7 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Oferta;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Rubro;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.Alerta;
+import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.FalloHeladeraTecnico;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.sensores.ReceptorSensorTemperatura;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.Estado;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.ModeloHeladera;
@@ -156,7 +157,17 @@ public class Initializer {
                 cuil("12345678").
                 medioDeContacto(MedioDeContacto.builder().valor("12345678").tipo(TipoDeContacto.TELEFONO).build()).
                 ultimoPunto(Punto.builder().latitud(-34.632166).longitud(-58.425981).build()).
+                falloHeladera(new ArrayList<>(
+                        List.of(
+                                FalloHeladeraTecnico.builder().fechaYHora(LocalDateTime.now()).visitaRealizada(false).heladera(heladera1).build(),
+                                FalloHeladeraTecnico.builder().fechaYHora(LocalDateTime.now()).visitaRealizada(false).heladera(heladera2).build()
+                        )
+                )).
                 build();
+
+
+        Usuario tecnicoUsuario = Usuario.builder().nombre("tecnico").contrasenia("tecnico").permisos(List.of(Permiso.TECNICO)).tecnicoAsociado(tecnico1).build();
+
         RepositorioHeladeras repositorioDeHeladeras = ServiceLocator.instanceOf(RepositorioHeladeras.class);
         repositorioDeHeladeras.guardar(heladera1);
         repositorioDeHeladeras.guardar(heladera2);
@@ -187,6 +198,7 @@ public class Initializer {
 
         RepositorioUsuarios repositorioUsuarios = ServiceLocator.instanceOf(RepositorioUsuarios.class);
         repositorioUsuarios.guardar(admin);
+        repositorioUsuarios.guardar(tecnicoUsuario);
 
         RepositorioTecnicos repositorioTecnicos = ServiceLocator.instanceOf(RepositorioTecnicos.class);
         repositorioTecnicos.guardar(tecnico1);

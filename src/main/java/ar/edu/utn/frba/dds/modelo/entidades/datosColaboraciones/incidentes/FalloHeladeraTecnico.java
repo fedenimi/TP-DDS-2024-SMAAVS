@@ -2,17 +2,17 @@ package ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes;
 
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateTimeConverter;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "fallo_heladera_tecnico")
+@Builder
 public class FalloHeladeraTecnico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

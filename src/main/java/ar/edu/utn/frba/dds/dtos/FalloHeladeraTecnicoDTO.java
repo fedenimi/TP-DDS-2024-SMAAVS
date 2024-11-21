@@ -8,5 +8,5 @@ import lombok.Getter;
 public class FalloHeladeraTecnicoDTO {
     private String id;
     private String fechaYhora;
-    private String visitaRealizada;
+    private HeladeraDTO heladera;
 }

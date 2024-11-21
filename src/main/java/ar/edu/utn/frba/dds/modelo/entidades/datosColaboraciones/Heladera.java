@@ -102,4 +102,7 @@ public class Heladera{
         return topics.stream().filter(topic -> topic.getCondicionSuscripcionHeladera().getClass().equals(condicionSuscripcionHeladera.getClass())).findFirst().orElse(null);
     }
 
+    public void addVisita(VisitaTecnica visitaTecnica) {
+        visitaTecnicas.add(visitaTecnica);
+    }
 }
