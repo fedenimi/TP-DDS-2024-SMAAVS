@@ -26,6 +26,7 @@ import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.condiciones.Desperfect
 import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.condiciones.FaltanNViandas;
 import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.condiciones.QuedanNViandas;
 import ar.edu.utn.frba.dds.modelo.repositorios.*;
+import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 
 import javax.print.Doc;
 import java.time.LocalDateTime;
@@ -36,7 +37,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class Initializer {
+public class Initializer{
     public static void init() {
         Heladera heladera1 = Heladera
                 .builder()
@@ -207,6 +208,7 @@ public class Initializer {
 
 
         scheduler.scheduleAtFixedRate(() -> {
+            ServiceLocator.instanceOf(RepositorioColaboradores.class).entityManager().clear();
             MainPuntos.main(new String[0]);
         }, 0, 30, TimeUnit.SECONDS);
     }

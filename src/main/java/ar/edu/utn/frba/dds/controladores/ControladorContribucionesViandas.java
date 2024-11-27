@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.controladores;
 
+import ar.edu.utn.frba.dds.config.ServiceLocator;
 import ar.edu.utn.frba.dds.dtos.AperturaDTO;
 import ar.edu.utn.frba.dds.dtos.DonacionViandasDTO;
 import ar.edu.utn.frba.dds.dtos.SolicitudAperturaHeladeraDTO;
@@ -8,6 +9,7 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.Apertura;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.SolicitudApertura;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.FormaColaboracion;
+import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.TipoDocumento;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.CalculadorDeFechas;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.broker.PublicadorBroker;
@@ -62,21 +64,22 @@ public class ControladorContribucionesViandas {
     // TODO: y esto tmb
 
     public void abrirHeladera(AperturaDTO aperturaDTO) throws Exception {
-        /*
-        Optional<Heladera> optionalHeladera = RepositorioHeladeras.getInstance().buscar(Long.parseLong(aperturaDTO.getIdHeladera()));
+
+        Optional<Heladera> optionalHeladera = ServiceLocator.instanceOf(RepositorioHeladeras.class).buscar(Long.parseLong(aperturaDTO.getIdHeladera()));
         if (!optionalHeladera.isPresent()) throw new Exception("No se encontro la heladera");
         Heladera heladera = optionalHeladera.get();
 
         Optional<Colaborador> optionalColaborador = RepositorioColaboradores.getInstance().
-                buscarPor(aperturaDTO.getTipoDoc(), aperturaDTO.getDoc());
+                buscarPor(aperturaDTO.getTipoDoc(), TipoDocumento.valueOf(aperturaDTO.getDoc()));
         if (!optionalColaborador.isPresent()) throw new Exception("No se encontro el colaborador");
         Colaborador colaborador = optionalColaborador.get();
 
-        heladera.agregarApertura(new Apertura(1L,colaborador.getTarjeta(),
+        heladera.agregarApertura(new Apertura(1L,colaborador.getTarjetaColaborador(),
                 CalculadorDeFechas.getInstance().stringToLocalDateTime(aperturaDTO.getFechaApertura()),
-                heladera.buscarSolicitudAperturaPor(colaborador.getTarjeta(),
+                heladera.buscarSolicitudAperturaPor(colaborador.getTarjetaColaborador(),
                 CalculadorDeFechas.getInstance().stringToLocalDateTime(aperturaDTO.getFechaSolicitud()))));
-                */
+
+        ServiceLocator.instanceOf(RepositorioHeladeras.class).modificar(heladera);
     }
 }
 
