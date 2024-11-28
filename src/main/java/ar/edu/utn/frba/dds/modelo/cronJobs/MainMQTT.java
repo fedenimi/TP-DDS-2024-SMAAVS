@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 public class MainMQTT {
     public static void main(String[] args) {
-
             String topic = "test/topic/smaavs";
             String broker = "tcp://test.mosquitto.org:1883";
             String clientId = "JavaSample";

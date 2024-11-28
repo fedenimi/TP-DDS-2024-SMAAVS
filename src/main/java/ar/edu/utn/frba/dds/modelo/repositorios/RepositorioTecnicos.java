@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.modelo.repositorios;
 
+import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.Alerta;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Tecnico;
@@ -35,4 +36,12 @@ public class RepositorioTecnicos implements IRepositorio<Tecnico>, WithSimplePer
                 .createQuery("from " + Tecnico.class.getName())
                 .getResultList();
     }
+
+    public void modificar(Tecnico tecnico) {
+        System.out.println("Modificando tecnico, la fecha del fallo es: " + tecnico.getFalloHeladera().get(tecnico.getFalloHeladera().size() - 1).getFechaYHora());
+        withTransaction(() -> {
+            entityManager().merge(tecnico);//UPDATE
+        });
+    }
+
 }

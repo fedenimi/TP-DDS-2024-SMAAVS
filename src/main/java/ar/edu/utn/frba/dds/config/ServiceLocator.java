@@ -25,7 +25,7 @@ public class ServiceLocator {
                 instances.put(componentName, instance);
             }
             else if (componentName.equals(ControladorHome.class.getName())) {
-                ControladorHome instance = new ControladorHome(instanceOf(RepositorioColaboradores.class));
+                ControladorHome instance = new ControladorHome(instanceOf(RepositorioColaboradores.class), instanceOf(RepositorioTecnicos.class), instanceOf(RepositorioHeladeras.class));
                 instances.put(componentName, instance);
             }
             else if (componentName.equals(BuscadorDeTecnicos.class.getName())) {

@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -99,6 +100,7 @@ public class ControladorReportarFalla implements ICrudViewsHandler {
         }
         fallaTecnica.setHeladera(heladera);
         fallaTecnica.setReportador(this.repositorioColaboradores.buscar(Long.parseLong(context.pathParam("id"))).get());
+        fallaTecnica.setFechaYHora(LocalDateTime.now());
         this.repositorioFallasTecnicas.guardar(fallaTecnica);
 
         RegistradorDeIncidentes.getInstance().registrarIncidente(Estado.FALLA_TECNICA, heladera, buscadorDeTecnicos);

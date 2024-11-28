@@ -17,7 +17,8 @@ public class Router {
         app.get("{id}/configuracion", ServiceLocator.instanceOf(ControladorColaborador.class)::edit, Permiso.HUMANA, Permiso.JURIDICA);
         app.post("{id}/configuracion", ServiceLocator.instanceOf(ControladorColaborador.class)::update, Permiso.HUMANA, Permiso.JURIDICA);
 
-        app.get("/{id}/home", ServiceLocator.instanceOf(ControladorHome.class)::mostrarHome, Permiso.HUMANA, Permiso.JURIDICA, Permiso.ADMIN);
+        app.get("/{id}/home", ServiceLocator.instanceOf(ControladorHome.class)::mostrarHome, Permiso.HUMANA, Permiso.JURIDICA, Permiso.ADMIN, Permiso.TECNICO);
+        app.post("/{id}/home", ServiceLocator.instanceOf(ControladorHome.class)::guardarVisitaTecnica, Permiso.TECNICO);
 
         app.get("{id}/donar-viandas/mapa", ServiceLocator.instanceOf(ControladorDonacionDeViandas.class)::abrirMapa, Permiso.DONAR_VIANDAS);
         app.post("{id}/donar-viandas/mapa", ServiceLocator.instanceOf(ControladorDonacionDeViandas.class)::guardarMapa, Permiso.DONAR_VIANDAS);

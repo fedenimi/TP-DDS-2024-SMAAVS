@@ -1,19 +1,18 @@
 package ar.edu.utn.frba.dds.modelo.entidades.personas;
 
+import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.FalloHeladeraTecnico;
 import ar.edu.utn.frba.dds.modelo.entidades.localizacion.AreaDeCobertura;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.Documento;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.MedioDeContacto;
 import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Punto;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -47,7 +46,12 @@ public class Tecnico {
     @Embedded
     private Punto ultimoPunto;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "tecnico_id")
     private List<FalloHeladeraTecnico> falloHeladera;
+
+
+    public void addFalloHeladera(FalloHeladeraTecnico falloHeladeraTecnico) {
+        this.falloHeladera.add(falloHeladeraTecnico);
+    }
 }

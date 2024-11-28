@@ -28,7 +28,6 @@ public class ReceptorBroker implements IMqttMessageListener {
         StringTokenizer messageTokenizer = new StringTokenizer(mensajeString, "/");
         String opcode = messageTokenizer.nextToken();
         String idHeladera = messageTokenizer.nextToken();
-        System.out.println("Mensaje recibido: " + mqttMessage);
         switch(opcode) {
             case "temperatura":
                 String temperatura = messageTokenizer.nextToken();
