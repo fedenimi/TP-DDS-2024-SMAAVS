@@ -13,37 +13,38 @@ import lombok.RequiredArgsConstructor;
 import java.time.LocalDate;
 import java.time.temporal.WeekFields;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 
 
 public class ReporteViandasColaborador implements Reporte {
-    private RepositorioDonacionesViandas repositorioDonacionesViandas;
-    private RepositorioDistribucionesViandas repositorioDistribucionesViandas;
+    private List<DonacionDeViandas> donacionesDeViandas;
+    private List<DistribucionDeViandas> distribucionesDeViandas;
     @Getter private Map<Colaborador, Integer> colaboradorViandaMap;
     @Getter private String nombreArchivo;
     private ReporteStringViandasColaborador reporteStringViandasColaborador;
 
-    public ReporteViandasColaborador( RepositorioDonacionesViandas repositorioDonacionesViandas, RepositorioDistribucionesViandas repositorioDistribucionesViandas, String nombreArchivo, ReporteStringViandasColaborador reporteStringViandasColaborador) {
-        this.repositorioDonacionesViandas = repositorioDonacionesViandas;
-        this.repositorioDistribucionesViandas = repositorioDistribucionesViandas;
+    public ReporteViandasColaborador(List<DonacionDeViandas> donacionDeViandas, List<DistribucionDeViandas> distribucionDeViandas, String nombreArchivo, ReporteStringViandasColaborador reporteStringViandasColaborador) {
+        this.distribucionesDeViandas = distribucionDeViandas;
+        this.donacionesDeViandas = donacionDeViandas;
         this.nombreArchivo = nombreArchivo;
         this.reporteStringViandasColaborador = reporteStringViandasColaborador;
     }
     @Override
     public String crearReporte() {
         colaboradorViandaMap = new HashMap<Colaborador, Integer>();
-        for (int i = 0; i < repositorioDonacionesViandas.getDonacionDeViandas().size(); i++) {
-            DonacionDeViandas donacionDeViandas = repositorioDonacionesViandas.getDonacionDeViandas().get(i);
+        for (int i = 0; i < donacionesDeViandas.size(); i++) {
+            DonacionDeViandas donacionDeViandas = donacionesDeViandas.get(i);
             if (CalculadorDeFechas.getInstance().esEstaSemana(donacionDeViandas.getFecha())){
                 Colaborador colaborador = donacionDeViandas.getColaborador();
                 Integer cantidadDeViandas = donacionDeViandas.cantidadDeViandas();
                 this.agregarViandasAMap(cantidadDeViandas, colaborador);
             }
         }
-        for (int i = 0; i < repositorioDistribucionesViandas.getDistribucionDeViandas().size(); i++) {
-            DistribucionDeViandas distribucionDeViandas = repositorioDistribucionesViandas.getDistribucionDeViandas().get(i);
+        for (int i = 0; i < distribucionesDeViandas.size(); i++) {
+            DistribucionDeViandas distribucionDeViandas =distribucionesDeViandas.get(i);
             if (CalculadorDeFechas.getInstance().esEstaSemana(distribucionDeViandas.getFecha())) {
                 Colaborador colaborador = distribucionDeViandas.getColaborador();
                 Integer cantidadDeViandas = distribucionDeViandas.getCantidadDeViandas();

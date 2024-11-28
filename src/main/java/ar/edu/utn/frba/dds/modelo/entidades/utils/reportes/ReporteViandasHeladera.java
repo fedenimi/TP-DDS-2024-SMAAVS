@@ -12,20 +12,21 @@ import lombok.Getter;
 import java.time.LocalDate;
 import java.time.temporal.WeekFields;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 public class ReporteViandasHeladera implements Reporte {
-    private RepositorioDonacionesViandas repositorioDonacionesViandas;
-    private RepositorioDistribucionesViandas repositorioDistribucionesViandas;
+    private List<DonacionDeViandas> donacionesDeViandas;
+    private List<DistribucionDeViandas> distribucionesDeViandas;
     @Getter private Map<Heladera, Integer> heladeraViandaColocadaMap;
     @Getter private Map<Heladera, Integer> heladeraViandaRetiradaMap;
     @Getter private String nombreArchivo;
     private ReporteStringViandasHeladera reporteStringViandasHeladera;
 
-    public ReporteViandasHeladera( RepositorioDonacionesViandas repositorioDonacionesViandas, RepositorioDistribucionesViandas repositorioDistribucionesViandas, String nombreArchivo, ReporteStringViandasHeladera reporteStringViandasHeladera) {
-        this.repositorioDonacionesViandas = repositorioDonacionesViandas;
-        this.repositorioDistribucionesViandas = repositorioDistribucionesViandas;
+    public ReporteViandasHeladera( List<DonacionDeViandas> donacionDeViandas, List<DistribucionDeViandas> distribucionDeViandas, String nombreArchivo, ReporteStringViandasHeladera reporteStringViandasHeladera) {
+        this.donacionesDeViandas = donacionDeViandas;
+        this.distribucionesDeViandas = distribucionDeViandas;
         this.nombreArchivo = nombreArchivo;
         this.reporteStringViandasHeladera = reporteStringViandasHeladera;
     }
@@ -33,8 +34,8 @@ public class ReporteViandasHeladera implements Reporte {
     public String crearReporte() {
         heladeraViandaColocadaMap = new HashMap<Heladera, Integer>();
         heladeraViandaRetiradaMap = new HashMap<Heladera, Integer>();
-        for (int i = 0; i < repositorioDonacionesViandas.getDonacionDeViandas().size(); i++) {
-            DonacionDeViandas donacionDeViandas = repositorioDonacionesViandas.getDonacionDeViandas().get(i);
+        for (int i = 0; i < donacionesDeViandas.size(); i++) {
+            DonacionDeViandas donacionDeViandas = donacionesDeViandas.get(i);
             if (CalculadorDeFechas.getInstance().esEstaSemana(donacionDeViandas.getFecha())) {
                 Integer cantidadDeViandas = donacionDeViandas.cantidadDeViandas();
                 for (int j = 0; j < cantidadDeViandas; j++) {
@@ -45,8 +46,8 @@ public class ReporteViandasHeladera implements Reporte {
                 }
             }
         }
-        for (int i = 0; i < repositorioDistribucionesViandas.getDistribucionDeViandas().size(); i++) {
-            DistribucionDeViandas distribucionDeViandas = repositorioDistribucionesViandas.getDistribucionDeViandas().get(i);
+        for (int i = 0; i < distribucionesDeViandas.size(); i++) {
+            DistribucionDeViandas distribucionDeViandas = distribucionesDeViandas.get(i);
             if (CalculadorDeFechas.getInstance().esEstaSemana(distribucionDeViandas.getFecha())) {
                 this.agregarViandasAMap(distribucionDeViandas.getCantidadDeViandas(), distribucionDeViandas.getHeladeraDestino(), heladeraViandaColocadaMap);
                 this.agregarViandasAMap(distribucionDeViandas.getCantidadDeViandas(), distribucionDeViandas.getHeladeraOrigen(), heladeraViandaRetiradaMap);

@@ -19,15 +19,15 @@ import java.util.*;
 @AllArgsConstructor
 public class ReporteFallas implements Reporte {
 
-    private RepositorioAlertas repositorioAlertas;
-    private RepositorioFallasTecnicas repositorioFallasTecnicas;
+    private List<Alerta> alertas;
+    private List<FallaTecnica> fallasTecnicas;
     @Getter private Map<Heladera, Integer> heladeraFallasMap;
     @Getter private String nombreArchivo;
     private ReporteStringFallas reporteStringFallas;
 
-    public ReporteFallas(RepositorioAlertas repositorioAlertas, RepositorioFallasTecnicas repositorioFallasTecnicas, String nombreArchivo, ReporteStringFallas reporteStringFallas) {
-        this.repositorioAlertas = repositorioAlertas;
-        this.repositorioFallasTecnicas = repositorioFallasTecnicas;
+    public ReporteFallas(List<Alerta> alertas, List<FallaTecnica> fallasTecnicas, String nombreArchivo, ReporteStringFallas reporteStringFallas) {
+        this.alertas = alertas;
+        this.fallasTecnicas = fallasTecnicas;
         this.nombreArchivo = nombreArchivo;
         this.reporteStringFallas = reporteStringFallas;
     }
@@ -35,7 +35,6 @@ public class ReporteFallas implements Reporte {
     @Override
     public String crearReporte() {
         heladeraFallasMap = new HashMap<Heladera, Integer>();
-        List <Alerta> alertas = repositorioAlertas.getAlertas();
         for(int i = 0; i < alertas.size(); i++) {
             Alerta alerta = alertas.get(i);
             if(CalculadorDeFechas.getInstance().esEstaSemana(LocalDateTime.from(alerta.getFechaYHora()))) {
@@ -43,7 +42,7 @@ public class ReporteFallas implements Reporte {
                 this.agregarFallaAHeladera(heladera);
             }
         }
-        List <FallaTecnica> fallasTecnicas = repositorioFallasTecnicas.getFallasTecnicas();
+        
         for(int i = 0; i < fallasTecnicas.size(); i++) {
             FallaTecnica fallaTecnica = fallasTecnicas.get(i);
             if(CalculadorDeFechas.getInstance().esEstaSemana(LocalDateTime.from(fallaTecnica.getFechaYHora()))) {

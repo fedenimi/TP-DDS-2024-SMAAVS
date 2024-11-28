@@ -11,6 +11,8 @@ import com.github.jknack.handlebars.Template;
 import io.javalin.Javalin;
 import io.javalin.config.JavalinConfig;
 import io.javalin.http.HttpStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.concurrent.Executors;
@@ -20,6 +22,7 @@ import java.util.function.Consumer;
 
 public class Server {
     private static Javalin app = null;
+
 
     public static Javalin app() {
         if (app == null)
@@ -36,7 +39,6 @@ public class Server {
             AuthMiddleWare.apply(app);
             AppHandlers.applyHandlers(app);
             Router.init(app);
-
 
             if (Boolean.parseBoolean(PrettyProperties.getInstance().propertyFromName("dev_mode"))) {
                 System.out.println("Inicializando datos de prueba...");
