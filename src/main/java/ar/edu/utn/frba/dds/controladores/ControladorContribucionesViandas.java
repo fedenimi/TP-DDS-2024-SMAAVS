@@ -18,6 +18,7 @@ import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioHeladeras;
 import org.eclipse.paho.client.mqttv3.MqttException;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 public class ControladorContribucionesViandas {
@@ -64,22 +65,42 @@ public class ControladorContribucionesViandas {
     // TODO: y esto tmb
 
     public void abrirHeladera(AperturaDTO aperturaDTO) throws Exception {
+        System.out.println(TipoDocumento.valueOf(aperturaDTO.getTipoDoc()) + "AA");
+        System.out.println(Long.parseLong(aperturaDTO.getIdHeladera()) + "BB");
 
         Optional<Heladera> optionalHeladera = ServiceLocator.instanceOf(RepositorioHeladeras.class).buscar(Long.parseLong(aperturaDTO.getIdHeladera()));
+        System.out.println("HOLAae");
         if (!optionalHeladera.isPresent()) throw new Exception("No se encontro la heladera");
         Heladera heladera = optionalHeladera.get();
+        System.out.println(heladera.getId() + "CC");
 
-        Optional<Colaborador> optionalColaborador = RepositorioColaboradores.getInstance().
-                buscarPor(aperturaDTO.getTipoDoc(), TipoDocumento.valueOf(aperturaDTO.getDoc()));
+
+        System.out.println(TipoDocumento.valueOf(aperturaDTO.getTipoDoc()) + "AA");
+        Optional<Colaborador> optionalColaborador = ServiceLocator.instanceOf(RepositorioColaboradores.class).
+                buscarPor(aperturaDTO.getDoc(), TipoDocumento.valueOf(aperturaDTO.getTipoDoc()));
         if (!optionalColaborador.isPresent()) throw new Exception("No se encontro el colaborador");
         Colaborador colaborador = optionalColaborador.get();
 
-        heladera.agregarApertura(new Apertura(1L,colaborador.getTarjetaColaborador(),
-                CalculadorDeFechas.getInstance().stringToLocalDateTime(aperturaDTO.getFechaApertura()),
-                heladera.buscarSolicitudAperturaPor(colaborador.getTarjetaColaborador(),
-                CalculadorDeFechas.getInstance().stringToLocalDateTime(aperturaDTO.getFechaSolicitud()))));
+        System.out.println("eeee");
+        Apertura apertura = new Apertura(colaborador.getTarjetaColaborador(),
+                LocalDateTime.now(),
+                heladera.buscarSolicitudAperturaPor(colaborador.getTarjetaColaborador()));
+        List<DonacionDeViandas> donacionesDeViandas = (List<DonacionDeViandas>) colaborador.getPuntuables().
+                stream().filter(puntuable -> puntuable instanceof DonacionDeViandas);
+        System.out.println("eeeea");
+        Optional<DonacionDeViandas> optionalDonacionDeViandas = donacionesDeViandas.stream().filter(d -> d.getApertura() == null && heladera.getSolicitudAperturas().contains(d.getSolicitudApertura())).findFirst();
+        System.out.println("eeeeae");
+        if (optionalDonacionDeViandas.isPresent()) {
+            DonacionDeViandas donacionDeViandas = optionalDonacionDeViandas.get();
+            donacionDeViandas.setApertura(apertura);
+        }
 
-        ServiceLocator.instanceOf(RepositorioHeladeras.class).modificar(heladera);
+        heladera.agregarApertura(apertura);
+        /*
+        heladera.agregarApertura(new Apertura(1L,colaborador.getTarjetaColaborador(),
+                LocalDateTime.now(),
+                null));
+        ServiceLocator.instanceOf(RepositorioHeladeras.class).modificar(heladera);*/
     }
 }
 

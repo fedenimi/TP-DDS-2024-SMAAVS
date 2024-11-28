@@ -14,34 +14,35 @@ import java.util.ArrayList;
 public class MainMQTT {
     public static void main(String[] args) {
 
-        String topic        = "test/topic";
-        String broker       = "tcp://test.mosquitto.org:1883";
-        String clientId     = "JavaSample";
-        MemoryPersistence persistence = new MemoryPersistence();
+            String topic = "test/topic/smaavs";
+            String broker = "tcp://test.mosquitto.org:1883";
+            String clientId = "JavaSample";
+            MemoryPersistence persistence = new MemoryPersistence();
+            try {
+                MqttClient sampleClient = new MqttClient(broker, clientId, persistence);
+                MqttConnectOptions connOpts = new MqttConnectOptions();
+                connOpts.setCleanSession(true);
 
-        try {
-            MqttClient sampleClient = new MqttClient(broker, clientId, persistence);
-            MqttConnectOptions connOpts = new MqttConnectOptions();
-            connOpts.setCleanSession(true);
+                System.out.println("Connecting to broker: " + broker);
+                sampleClient.connect(connOpts);
+                System.out.println("Connected");
 
-            System.out.println("Connecting to broker: "+broker);
-            sampleClient.connect(connOpts);
-            System.out.println("Connected");
+                System.out.println("Build our receptor");
+                ReceptorBroker receptor = ReceptorBroker.getInstance();
 
-            System.out.println("Build our receptor");
-            ReceptorBroker receptor = ReceptorBroker.getInstance();
+                System.out.println("Now we subscribe to the topic");
+                sampleClient.subscribe(topic, receptor);
 
-            System.out.println("Now we subscribe to the topic");
-            sampleClient.subscribe(topic, receptor);
+                System.out.println("Right! We are subscribed");
 
-            System.out.println("Right! We are subscribed");
-        } catch(MqttException me) {
-            System.out.println("reason " + me.getReasonCode());
-            System.out.println("msg " + me.getMessage());
-            System.out.println("loc " + me.getLocalizedMessage());
-            System.out.println("cause " + me.getCause());
-            System.out.println("excep " + me);
-            me.printStackTrace();
+            } catch (MqttException me) {
+                System.out.println("reason " + me.getReasonCode());
+                System.out.println("msg " + me.getMessage());
+                System.out.println("loc " + me.getLocalizedMessage());
+                System.out.println("cause " + me.getCause());
+                System.out.println("excep " + me);
+                me.printStackTrace();
+            }
         }
-    }
+
 }

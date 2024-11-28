@@ -41,12 +41,11 @@ public class ReceptorBroker implements IMqttMessageListener {
                 ControladorMovimiento.getInstance().recibirFraude(fraudeDTO);
                 break;
             case "apertura":
-                System.out.println("hola");
                 String tipoDoc = messageTokenizer.nextToken();
                 String doc = messageTokenizer.nextToken();
                 String fechaSolicitud = messageTokenizer.nextToken();
-                String fechaApertura = messageTokenizer.nextToken();
-                ControladorContribucionesViandas.getInstance().abrirHeladera(new AperturaDTO(tipoDoc, doc, idHeladera, fechaSolicitud, fechaApertura));
+                System.out.println(fechaSolicitud);
+                ControladorContribucionesViandas.getInstance().abrirHeladera(new AperturaDTO(tipoDoc, doc, idHeladera, fechaSolicitud));
                 break;
             default:
                 System.out.println("No se reconoce el topic");
