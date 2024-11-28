@@ -72,6 +72,10 @@ public class ServiceLocator {
                 RepositorioAlertas instance = new RepositorioAlertas();
                 instances.put(componentName, instance);
             }
+            else if(componentName.equals(RepositorioAperturas.class.getName())) {
+                RepositorioAperturas instance = new RepositorioAperturas();
+                instances.put(componentName, instance);
+            }
             else if(componentName.equals(ControladorAlertaSuscripcion.class.getName())) {
                 ControladorAlertaSuscripcion instance = new ControladorAlertaSuscripcion(instanceOf(RepositorioColaboradores.class));
                 instances.put(componentName, instance);

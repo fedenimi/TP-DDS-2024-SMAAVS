@@ -37,7 +37,7 @@ public class DonacionDeViandas extends Puntuable{
     @JoinColumn(name = "solicitud_apertura_id")
     private SolicitudApertura solicitudApertura;
 
-    @OneToOne
+    @OneToOne()
     @JoinColumn(name = "apertura_id")
     private Apertura apertura;
     public DonacionDeViandas(Colaborador colaborador) {

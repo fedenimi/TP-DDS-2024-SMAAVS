@@ -3,6 +3,8 @@ package ar.edu.utn.frba.dds.modelo.entidades.colaboraciones;
 import ar.edu.utn.frba.dds.modelo.entidades.ColaboracionesProperties;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Motivo;
+import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.Apertura;
+import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.SolicitudApertura;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateConverter;
 import lombok.Getter;
@@ -37,6 +39,15 @@ public class DistribucionDeViandas extends Puntuable {
     @Column(name = "fecha")
     private LocalDateTime fecha;
     // TODO: cambiar a localdatetime
+
+    @OneToOne()
+    @JoinColumn(name = "solicitud_apertura_id")
+    private SolicitudApertura solicitudApertura;
+
+    @OneToOne()
+    @JoinColumn(name = "apertura_id")
+    private Apertura apertura;
+
     public DistribucionDeViandas(Integer cantidadDeViandas, Colaborador colaborador, Heladera heladeraDestino, Heladera heladeraOrigen, LocalDateTime fecha) {
         this.cantidadDeViandas = cantidadDeViandas;
         this.heladeraDestino = heladeraDestino;
