@@ -72,6 +72,12 @@ public class ControladorDonacionDeViandas implements ICrudViewsHandler{
 
         Colaborador colaborador = repositorioColaboradores.buscar(Long.parseLong(context.pathParam("id"))).get();
         donacionDeViandas.setColaborador(colaborador);
+        SolicitudApertura solicitudApertura = SolicitudApertura.builder()
+                .tarjetaColaborador(colaborador.getTarjetaColaborador())
+                .fechaYHora(LocalDateTime.now())
+                .build();
+        donacionDeViandas.setSolicitudApertura(solicitudApertura);
+        heladera.agregarSolicitudApertura(solicitudApertura);
 
         repositorioPuntuables.guardar(donacionDeViandas);
         colaborador.agregarPuntuable(donacionDeViandas);

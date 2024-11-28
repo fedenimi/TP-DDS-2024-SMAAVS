@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.config.ServiceLocator;
 import ar.edu.utn.frba.dds.dtos.AperturaDTO;
 import ar.edu.utn.frba.dds.dtos.DonacionViandasDTO;
 import ar.edu.utn.frba.dds.dtos.SolicitudAperturaHeladeraDTO;
+import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.DistribucionDeViandas;
 import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.DonacionDeViandas;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.Apertura;
@@ -13,12 +14,15 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.TipoDocumento;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.CalculadorDeFechas;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.broker.PublicadorBroker;
+import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioAperturas;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioColaboradores;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioHeladeras;
 import org.eclipse.paho.client.mqttv3.MqttException;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class ControladorContribucionesViandas {
     private static ControladorContribucionesViandas instance = null;
@@ -64,21 +68,40 @@ public class ControladorContribucionesViandas {
     // TODO: y esto tmb
 
     public void abrirHeladera(AperturaDTO aperturaDTO) throws Exception {
-
         Optional<Heladera> optionalHeladera = ServiceLocator.instanceOf(RepositorioHeladeras.class).buscar(Long.parseLong(aperturaDTO.getIdHeladera()));
         if (!optionalHeladera.isPresent()) throw new Exception("No se encontro la heladera");
         Heladera heladera = optionalHeladera.get();
-
-        Optional<Colaborador> optionalColaborador = RepositorioColaboradores.getInstance().
-                buscarPor(aperturaDTO.getTipoDoc(), TipoDocumento.valueOf(aperturaDTO.getDoc()));
+        Optional<Colaborador> optionalColaborador = ServiceLocator.instanceOf(RepositorioColaboradores.class).
+                buscarPor(aperturaDTO.getDoc(), TipoDocumento.valueOf(aperturaDTO.getTipoDoc()));
         if (!optionalColaborador.isPresent()) throw new Exception("No se encontro el colaborador");
         Colaborador colaborador = optionalColaborador.get();
+        Apertura apertura = new Apertura(colaborador.getTarjetaColaborador(),
+                LocalDateTime.now(),
+                heladera.buscarSolicitudAperturaPor(colaborador.getTarjetaColaborador()));
 
-        heladera.agregarApertura(new Apertura(1L,colaborador.getTarjetaColaborador(),
-                CalculadorDeFechas.getInstance().stringToLocalDateTime(aperturaDTO.getFechaApertura()),
-                heladera.buscarSolicitudAperturaPor(colaborador.getTarjetaColaborador(),
-                CalculadorDeFechas.getInstance().stringToLocalDateTime(aperturaDTO.getFechaSolicitud()))));
+        List<DonacionDeViandas> donacionesDeViandas = colaborador.getPuntuables()
+                .stream()
+                .filter(puntuable -> puntuable instanceof DonacionDeViandas)
+                .map(puntuable -> (DonacionDeViandas) puntuable)
+                .collect(Collectors.toList());
+        List<DistribucionDeViandas> distribucionesDeViandas = colaborador.getPuntuables()
+                .stream()
+                .filter(puntuable -> puntuable instanceof DistribucionDeViandas)
+                .map(puntuable -> (DistribucionDeViandas) puntuable)
+                .collect(Collectors.toList());
 
+        Optional<DonacionDeViandas> optionalDonacionDeViandas = donacionesDeViandas.stream().filter(d -> d.getApertura() == null && heladera.getSolicitudAperturas().contains(d.getSolicitudApertura())).findFirst();
+        if (optionalDonacionDeViandas.isPresent()) {
+            DonacionDeViandas donacionDeViandas = optionalDonacionDeViandas.get();
+            donacionDeViandas.setApertura(apertura);
+        }
+        Optional<DistribucionDeViandas> optionalDistribucionDeViandas = distribucionesDeViandas.stream().filter(d -> d.getApertura() == null && heladera.getSolicitudAperturas().contains(d.getSolicitudApertura())).findFirst();
+        if (optionalDistribucionDeViandas.isPresent()) {
+            DistribucionDeViandas distribucionDeViandas = optionalDistribucionDeViandas.get();
+            distribucionDeViandas.setApertura(apertura);
+        }
+        ServiceLocator.instanceOf(RepositorioAperturas.class).guardar(apertura);
+        heladera.agregarApertura(apertura);
         ServiceLocator.instanceOf(RepositorioHeladeras.class).modificar(heladera);
     }
 }

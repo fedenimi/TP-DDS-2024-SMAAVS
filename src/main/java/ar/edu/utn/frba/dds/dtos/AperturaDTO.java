@@ -10,5 +10,4 @@ public class AperturaDTO {
     private String doc;
     private String idHeladera;
     private String fechaSolicitud;
-    private String fechaApertura;
 }

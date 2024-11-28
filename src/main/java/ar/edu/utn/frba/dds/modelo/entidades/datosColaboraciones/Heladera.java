@@ -80,10 +80,10 @@ public class Heladera{
         aperturas.add(apertura);
     }
 
-    public SolicitudApertura buscarSolicitudAperturaPor(TarjetaColaborador tarjetaColaborador, LocalDateTime fechaYHora) {
+    public SolicitudApertura buscarSolicitudAperturaPor(TarjetaColaborador tarjetaColaborador) {
         return solicitudAperturas.stream()
-                .filter(solicitudApertura -> solicitudApertura.getTarjetaColaborador().equals(tarjetaColaborador) &&
-                        solicitudApertura.getFechaYHora().equals(fechaYHora)).findFirst().orElse(null);
+                .filter(solicitudApertura -> solicitudApertura.getTarjetaColaborador().equals(tarjetaColaborador))
+                .max((s1, s2) -> s1.getFechaYHora().compareTo(s2.getFechaYHora())).stream().findFirst().get();
     }
 
     public Double obtenerTemperaturaMinima() {

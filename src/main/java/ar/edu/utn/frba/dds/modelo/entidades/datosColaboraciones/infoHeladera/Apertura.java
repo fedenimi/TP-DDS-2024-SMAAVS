@@ -30,4 +30,10 @@ public class Apertura {
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name="solicitud_apertura_id")
     private SolicitudApertura solicitudApertura;
+
+    public Apertura(TarjetaColaborador tarjetaColaborador, LocalDateTime fechaYHora, SolicitudApertura solicitudApertura) {
+        this.tarjetaColaborador = tarjetaColaborador;
+        this.fechaYHora = fechaYHora;
+        this.solicitudApertura = solicitudApertura;
+    }
 }

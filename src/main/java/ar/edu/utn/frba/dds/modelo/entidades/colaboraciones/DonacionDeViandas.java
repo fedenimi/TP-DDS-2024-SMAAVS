@@ -3,6 +3,8 @@ package ar.edu.utn.frba.dds.modelo.entidades.colaboraciones;
 import ar.edu.utn.frba.dds.modelo.entidades.ColaboracionesProperties;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Vianda;
+import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.Apertura;
+import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.SolicitudApertura;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateConverter;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateTimeConverter;
@@ -31,6 +33,13 @@ public class DonacionDeViandas extends Puntuable{
     @JoinColumn(name = "heladera_id")
     @Getter private Heladera heladera;
 
+    @OneToOne()
+    @JoinColumn(name = "solicitud_apertura_id")
+    private SolicitudApertura solicitudApertura;
+
+    @OneToOne()
+    @JoinColumn(name = "apertura_id")
+    private Apertura apertura;
     public DonacionDeViandas(Colaborador colaborador) {
         this.colaborador = colaborador;
     }
