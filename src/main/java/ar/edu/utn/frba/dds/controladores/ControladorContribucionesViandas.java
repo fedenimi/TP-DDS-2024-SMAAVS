@@ -95,10 +95,18 @@ public class ControladorContribucionesViandas {
             DonacionDeViandas donacionDeViandas = optionalDonacionDeViandas.get();
             donacionDeViandas.setApertura(apertura);
         }
-        Optional<DistribucionDeViandas> optionalDistribucionDeViandas = distribucionesDeViandas.stream().filter(d -> d.getApertura() == null && heladera.getSolicitudAperturas().contains(d.getSolicitudApertura())).findFirst();
-        if (optionalDistribucionDeViandas.isPresent()) {
-            DistribucionDeViandas distribucionDeViandas = optionalDistribucionDeViandas.get();
-            distribucionDeViandas.setApertura(apertura);
+        Optional<DistribucionDeViandas> optionalDistribucionDeViandasOrigen = distribucionesDeViandas.stream().filter(d -> d.getAperturaOrigen() == null && heladera.getSolicitudAperturas().contains(d.getSolicitudAperturaOrigen())).findFirst();
+        if (optionalDistribucionDeViandasOrigen.isPresent()) {
+            DistribucionDeViandas distribucionDeViandas = optionalDistribucionDeViandasOrigen.get();
+            distribucionDeViandas.setAperturaOrigen(apertura);
+        }
+        Optional<DistribucionDeViandas> optionalDistribucionDeViandasDestino = distribucionesDeViandas.stream().filter(d -> d.getAperturaDestino() == null && heladera.getSolicitudAperturas().contains(d.getSolicitudAperturaDestino())).findFirst();
+        if (optionalDistribucionDeViandasDestino.isPresent()) {
+            if(optionalDistribucionDeViandasDestino.get().getAperturaOrigen() != null) {
+                System.out.println("FRAA");
+                DistribucionDeViandas distribucionDeViandas = optionalDistribucionDeViandasDestino.get();
+                distribucionDeViandas.setAperturaDestino(apertura);
+            }
         }
         ServiceLocator.instanceOf(RepositorioAperturas.class).guardar(apertura);
         heladera.agregarApertura(apertura);

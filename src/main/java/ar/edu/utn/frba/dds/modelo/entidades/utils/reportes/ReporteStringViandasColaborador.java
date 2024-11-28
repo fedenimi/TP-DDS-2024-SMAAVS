@@ -12,6 +12,8 @@ public class ReporteStringViandasColaborador {
                 .append(LocalDate.now().toString())
                 .append("\n");
         for (Map.Entry<Colaborador, Integer> entry : reporteViandasColaborador.getColaboradorViandaMap().entrySet()) {
+            System.out.println(entry.getKey() + " " + entry.getValue());
+            System.out.println(reporteViandasColaborador.getColaboradorViandaMap().size());
             result.append(entry.getKey().getNombre())
                     .append(": ")
                     .append(entry.getValue())

@@ -39,6 +39,11 @@ import java.util.concurrent.TimeUnit;
 
 public class Initializer{
     public static void init() {
+        ModeloHeladera modelo1 = ModeloHeladera.builder().nombre("Heladera Samsung").temperaturaMinima(0.0).temperaturaMaxima(10.0).build();
+        ModeloHeladera modelo2 = ModeloHeladera.builder().nombre("Heladera LG").temperaturaMinima(0.0).temperaturaMaxima(10.0).build();
+        ModeloHeladera modelo3 = ModeloHeladera.builder().nombre("Heladera Whirlpool").temperaturaMinima(0.0).temperaturaMaxima(10.0).build();
+
+
         Heladera heladera1 = Heladera
                 .builder()
                 .capacidad(500)
@@ -50,7 +55,7 @@ public class Initializer{
                 .aperturas(null)
                 .solicitudAperturas(null)
                 .visitaTecnicas(null)
-                .modeloHeladera(ModeloHeladera.builder().nombre("Heladera Samsung").temperaturaMinima(0.0).temperaturaMaxima(10.0).build())
+                .modeloHeladera(modelo1)
                 .topics(Arrays.asList(Topic.builder().condicionSuscripcionHeladera(new FaltanNViandas()).suscripciones(new ArrayList<>()).mensaje("Faltan pocas viandas para que la heladera se llene").build(),
                         Topic.builder().condicionSuscripcionHeladera(new QuedanNViandas()).suscripciones(new ArrayList<>()).mensaje("Quedan pocas viandas en la heladera").build(),
                         Topic.builder().condicionSuscripcionHeladera(new Desperfecto()).suscripciones(new ArrayList<>()).mensaje("La heladera sufrió un desperfecto").build())
@@ -70,7 +75,7 @@ public class Initializer{
                 .solicitudAperturas(null)
                 .visitaTecnicas(null)
                 .direccion(Direccion.builder().nombre_direccion("Av. Rivadavia 1234").punto(Punto.builder().latitud(-34.6037).longitud(-58.3816).build()).direccion("Av. Rivadavia 1234").build())
-                .modeloHeladera(ModeloHeladera.builder().nombre("Heladera LG").temperaturaMinima(0.0).temperaturaMaxima(10.0).build())
+                .modeloHeladera(modelo2)
                 .topics(Arrays.asList(Topic.builder().condicionSuscripcionHeladera(new FaltanNViandas()).suscripciones(new ArrayList<>()).mensaje("Faltan pocas viandas para que la heladera se llene").build(),
                         Topic.builder().condicionSuscripcionHeladera(new QuedanNViandas()).suscripciones(new ArrayList<>()).mensaje("Quedan pocas viandas en la heladera").build(),
                         Topic.builder().condicionSuscripcionHeladera(new Desperfecto()).suscripciones(new ArrayList<>()).mensaje("La heladera sufrió un desperfecto").build())
@@ -90,7 +95,7 @@ public class Initializer{
                 .solicitudAperturas(null)
                 .visitaTecnicas(null)
                 .direccion(Direccion.builder().nombre_direccion("Av. Belgrano 1234").punto(Punto.builder().latitud(-35.1234).longitud(-58.3016).build()).direccion("Av. Belgrano 1234").build())
-                .modeloHeladera(ModeloHeladera.builder().nombre("Heladera Whirlpool").temperaturaMinima(0.0).temperaturaMaxima(10.0).build())
+                .modeloHeladera(modelo3)
                 .topics(Arrays.asList(Topic.builder().condicionSuscripcionHeladera(new FaltanNViandas()).suscripciones(new ArrayList<>()).mensaje("Faltan pocas viandas para que la heladera se llene").build(),
                         Topic.builder().condicionSuscripcionHeladera(new QuedanNViandas()).suscripciones(new ArrayList<>()).mensaje("Quedan pocas viandas en la heladera").build(),
                         Topic.builder().condicionSuscripcionHeladera(new Desperfecto()).suscripciones(new ArrayList<>()).mensaje("La heladera sufrió un desperfecto").build())
@@ -204,12 +209,5 @@ public class Initializer{
         RepositorioTecnicos repositorioTecnicos = ServiceLocator.instanceOf(RepositorioTecnicos.class);
         repositorioTecnicos.guardar(tecnico1);
 
-        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-
-
-        scheduler.scheduleAtFixedRate(() -> {
-            ServiceLocator.instanceOf(RepositorioColaboradores.class).entityManager().clear();
-            MainPuntos.main(new String[0]);
-        }, 0, 30, TimeUnit.SECONDS);
     }
 }

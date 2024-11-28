@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.dtos;
 
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
+import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.VisitaTecnica;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -15,4 +16,5 @@ public class HeladeraDTO {
     private String cantidadViandas;
     private String capacidad;
     private String estado;
+    private VisitaTecnicaDTO ultimaVisitaTecnica;
 }

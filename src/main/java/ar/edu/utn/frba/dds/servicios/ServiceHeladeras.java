@@ -7,6 +7,7 @@ import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.Puntuable;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.Estado;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.ModeloHeladera;
+import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.VisitaTecnica;
 import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Direccion;
 import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Punto;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
@@ -29,7 +30,7 @@ import static java.util.stream.Collectors.toList;
 public class ServiceHeladeras {
     public static HeladeraDTO toHeladeraDTO(Heladera heladera) {
 
-        return HeladeraDTO.builder().
+         HeladeraDTO.HeladeraDTOBuilder heladeraDTOBuilder = HeladeraDTO.builder().
                 id(heladera.getId().toString()).
                 nombre(heladera.getDireccion().getNombre_direccion()).
                 latitud(heladera.getDireccion().getPunto().getLatitud().toString()).
@@ -37,8 +38,12 @@ public class ServiceHeladeras {
                 direccion(heladera.getDireccion().getDireccion()).
                 cantidadViandas(heladera.getStock().toString()).
                 capacidad(heladera.getCapacidad().toString()).
-                estado(heladera.getEstado().toString()).
-                build();
+                estado(heladera.getEstado().toString());
+         if(heladera.getVisitaTecnicas().size() > 0) {
+             VisitaTecnica ultimaVisita = heladera.getVisitaTecnicas().get(heladera.getVisitaTecnicas().size() - 1);
+             heladeraDTOBuilder.ultimaVisitaTecnica(ServiceVisitasTecnicas.toVisitaTecnicaDTO(ultimaVisita));
+         }
+          return heladeraDTOBuilder.build();
     }
 
     public static Colaborador colaboradorDe(Heladera heladera) {

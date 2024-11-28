@@ -325,7 +325,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>ar.edu.utn.frba.dds.modelo.cronJobs.MainVerificarConexiones</mainClass>
+              <mainClass>ar.edu.utn.frba.dds.modelo.cronJobs.MainReportar</mainClass>
             </manifest>
           </archive>
         </configuration>
@@ -346,7 +346,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>ar.edu.utn.frba.dds.modelo.cronJobs.MainVerificarConexiones</mainClass>
+              <mainClass>ar.edu.utn.frba.dds.modelo.cronJobs.MainReportar</mainClass>
             </manifest>
           </archive>
         </configuration>
@@ -361,7 +361,7 @@
           </descriptorRefs>
           <archive>
             <manifest>
-              <mainClass>ar.edu.utn.frba.dds.modelo.cronJobs.MainVerificarConexiones</mainClass>
+              <mainClass>ar.edu.utn.frba.dds.modelo.cronJobs.MainReportar</mainClass>
             </manifest>
           </archive>
         </configuration>

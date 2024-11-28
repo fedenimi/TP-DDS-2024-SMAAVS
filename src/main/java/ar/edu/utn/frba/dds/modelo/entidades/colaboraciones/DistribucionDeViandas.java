@@ -42,12 +42,12 @@ public class DistribucionDeViandas extends Puntuable {
 
     @OneToOne()
     @JoinColumn(name = "solicitud_apertura_origen_id")
-    private SolicitudApertura solicitudApertura;
+    private SolicitudApertura solicitudAperturaOrigen;
 
     @OneToOne()
     @JoinColumn(name = "apertura_origen_id")
-    private Apertura apertura;
-    /*
+    private Apertura aperturaOrigen;
+
     @OneToOne()
     @JoinColumn(name = "solicitud_apertura_destino_id")
     private SolicitudApertura solicitudAperturaDestino;
@@ -55,8 +55,8 @@ public class DistribucionDeViandas extends Puntuable {
     @OneToOne()
     @JoinColumn(name = "apertura_destino_id")
     private Apertura aperturaDestino;
-    */
-     */
+
+
 
     public DistribucionDeViandas(Integer cantidadDeViandas, Colaborador colaborador, Heladera heladeraDestino, Heladera heladeraOrigen, LocalDateTime fecha) {
         this.cantidadDeViandas = cantidadDeViandas;
@@ -72,7 +72,7 @@ public class DistribucionDeViandas extends Puntuable {
 
     @Override
     public Double puntaje() {
-        if(apertura == null) {
+        if(aperturaDestino == null) {
             return 0D;
         }
         return cantidadDeViandas.doubleValue();

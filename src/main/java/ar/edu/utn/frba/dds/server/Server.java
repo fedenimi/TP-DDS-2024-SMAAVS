@@ -1,10 +1,12 @@
 package ar.edu.utn.frba.dds.server;
 
+import ar.edu.utn.frba.dds.config.ServiceLocator;
 import ar.edu.utn.frba.dds.middlewares.AuthMiddleWare;
 import ar.edu.utn.frba.dds.modelo.cronJobs.MainPuntos;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.Initializer;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.JavalinRenderer;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.PrettyProperties;
+import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioColaboradores;
 import ar.edu.utn.frba.dds.server.handlers.AppHandlers;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
@@ -39,6 +41,12 @@ public class Server {
             AuthMiddleWare.apply(app);
             AppHandlers.applyHandlers(app);
             Router.init(app);
+            ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
+            scheduler.scheduleAtFixedRate(() -> {
+                ServiceLocator.instanceOf(RepositorioColaboradores.class).entityManager().clear();
+                MainPuntos.main(new String[0]);
+            }, 0, 30, TimeUnit.SECONDS);
 
             if (Boolean.parseBoolean(PrettyProperties.getInstance().propertyFromName("dev_mode"))) {
                 System.out.println("Inicializando datos de prueba...");

@@ -102,6 +102,7 @@ public class ControladorHome {
             System.err.println("Error al guardar el archivo: " + e.getMessage());
         }
         heladera.addVisita(visitaTecnica);
+        heladera.setEstado(Estado.ACTIVA);
         repositorioHeladeras.modificar(heladera);
 
         Tecnico tecnico = repositorioTecnico.buscar(Long.parseLong(context.pathParam("id"))).get();
