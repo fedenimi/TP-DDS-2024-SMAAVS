@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -jar target/MainApp-jar.jar
+web: java -Dserver.port=$PORT -jar target/MainAppjar-with-dependencies.jar

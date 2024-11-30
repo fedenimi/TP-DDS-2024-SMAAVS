@@ -349,7 +349,7 @@
         <version>3.1.0</version>
         <configuration>
           <descriptorRefs>
-            <descriptorRef>-jar</descriptorRef>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
           </descriptorRefs>
           <archive>
             <manifest>
