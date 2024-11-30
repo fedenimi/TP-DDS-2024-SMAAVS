@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.dtos;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 @Builder
 @Getter
