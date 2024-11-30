@@ -2,10 +2,12 @@ package ar.edu.utn.frba.dds.controladores;
 
 import ar.edu.utn.frba.dds.dtos.ColaboradorDTO;
 import ar.edu.utn.frba.dds.dtos.HeladeraDTO;
+import ar.edu.utn.frba.dds.dtos.ModeloDTO;
 import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.HacerseCargoDeHeladera;
 import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.Puntuable;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.Estado;
+import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.ModeloHeladera;
 import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Direccion;
 import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Punto;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
@@ -15,25 +17,30 @@ import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.condiciones.FaltanNVia
 import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.condiciones.QuedanNViandas;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioColaboradores;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioHeladeras;
+import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioModelos;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioPuntuables;
 import ar.edu.utn.frba.dds.server.Router;
 import ar.edu.utn.frba.dds.servicios.ServiceColaboradores;
 import ar.edu.utn.frba.dds.servicios.ServiceHeladeras;
+import ar.edu.utn.frba.dds.servicios.ServiceModelo;
 import io.javalin.http.Context;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ControladorHeladeras implements ICrudViewsHandler{
     private RepositorioHeladeras repositorioHeladeras;
     private RepositorioColaboradores repositorioColaboradores;
     private RepositorioPuntuables repositorioPuntuables;
+    private RepositorioModelos repositorioModelos;
 
-    public ControladorHeladeras(RepositorioHeladeras repositorioHeladeras, RepositorioColaboradores repositorioColaboradores, RepositorioPuntuables repositorioPuntuables) {
+    public ControladorHeladeras(RepositorioHeladeras repositorioHeladeras, RepositorioColaboradores repositorioColaboradores, RepositorioPuntuables repositorioPuntuables, RepositorioModelos repositorioModelos) {
         this.repositorioHeladeras = repositorioHeladeras;
         this.repositorioColaboradores = repositorioColaboradores;
         this.repositorioPuntuables = repositorioPuntuables;
+        this.repositorioModelos = repositorioModelos;
     }
 
     public void index(Context context) {
@@ -98,12 +105,16 @@ public class ControladorHeladeras implements ICrudViewsHandler{
 
     public void abrirMapa(Context context) {
         List<Heladera> heladeras = this.repositorioHeladeras.buscarTodos();
+        Colaborador colaborador = this.repositorioColaboradores.buscar(Long.parseLong(context.pathParam("id"))).get();
         List<HeladeraDTO> heladerasDTO = heladeras.stream().
-                filter(heladera -> !heladera.tieneFallas()).
+                filter(heladera -> colaborador.equals(ServiceHeladeras.colaboradorDe(heladera))).
                 map(ServiceHeladeras::toHeladeraDTO).toList();
+        List<ModeloHeladera> modelosHeladera = this.repositorioModelos.buscarTodos();
+        List<ModeloDTO> modelosDTO = modelosHeladera.stream().map(ServiceModelo::toModeloDTO).toList();
         Map<String, Object> model = new HashMap<>();
         model.put("heladeras", heladerasDTO);
         model.put("titulo", "Listado de heladeras");
+        model.put("modelos", modelosDTO);
         context.render("colaboradores/mapa/mapaAdminHeladeras.hbs", model);
     }
 

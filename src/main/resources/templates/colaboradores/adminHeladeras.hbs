@@ -51,9 +51,9 @@
                                 </div>
                                 <div class="dropdown-heladera">
                                     <li>
-                                        <a href="">
-                                            <i class="fa-solid fa-pencil"></i>
-                                            <p>Modificar</p>
+                                        <a href="" class="abrir-visita-modal">
+                                            <i class="fa-solid fa-wrench"></i>
+                                            <p>Ver última visita</p>
                                         </a>
                                     </li>
                                     <li>
@@ -63,6 +63,15 @@
                                         </a>
                                     </li>
                                 </div>
+                            </div>
+                            <div class="visita-modal hidden">
+                                <h2>Última visita técnica</h2>
+                                <a class="close-visita-modal">
+                                    <i class="fa-solid fa-times"></i>
+                                </a>
+                                <h1>{{ultimaVisitaTecnica.descripcion}}</h1>
+                                <img src="{{ultimaVisitaTecnica.foto}}" alt="Foto de la visita técnica">
+                                <p>{{ultimaVisitaTecnica.fechaVisita}}</p>
                             </div>
                         {{/each}}
                     </div>
@@ -97,6 +106,22 @@
         document.querySelectorAll('.eliminar-heladera').forEach(eliminar => {
             eliminar.addEventListener('click', () => {
                 document.querySelector('#form-eliminar-heladera').submit()
+            });
+        });
+
+        document.querySelectorAll('.abrir-visita-modal').forEach(visita => {
+            visita.addEventListener('click', (e) => {
+                e.preventDefault()
+                const visitaModal = visita.parentElement.parentElement.parentElement.nextElementSibling
+                visitaModal.classList.toggle('hidden')
+            });
+        });
+
+        document.querySelectorAll('.close-visita-modal').forEach(close => {
+            close.addEventListener('click', (e) => {
+                e.preventDefault()
+                const visitaModal = close.parentElement
+                visitaModal.classList.toggle('hidden')
             });
         });
 

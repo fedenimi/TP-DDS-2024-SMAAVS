@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
           integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <link rel="stylesheet" href="/css/main.css">
-
+    <link rel="stylesheet" href="/css/registro.css">
     <style>
         #map {
             width: 100vw;
@@ -214,7 +214,7 @@
         #info-agregar-puntos {
             position: absolute;
             bottom: 1%;
-            left: 1%;
+            right: 1%;
             z-index: 1000;
             backdrop-filter: blur(15px);
             background: rgba(255, 255, 255, 0.2);
@@ -225,6 +225,11 @@
             border: none;
             font-size: 20px;
         }
+
+        .form-element-dropdown {
+            height: 80%;
+        }
+
     </style>
 
 </head>
@@ -289,14 +294,33 @@
                         <input type="text" name="longitud" required>
                     </div>
                     <div class="form-element-mapa">
-                        <label for="form-direccion">Modelo</label>
-                        <input type="text" name="modelo" required>
-                    </div>
-                    <div class="form-element-mapa">
                         <label for="form-direccion">Capacidad (viandas)</label>
                         <input type="text" name="capacidad" required>
                     </div>
+                    <div class="form-element-mapa">
+                        <label for="formas-colaborar">Modelo</label>
+                        <div class="form-element-dropdown">
+                            <div class="dropdown-select-btn">
+                                <p>Selecciona un modelo</p>
+                                <span>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </span>
+                            </div>
+                            <ul class="dropdown-item-list">
+                                {{#each modelos}}
+                                    <li class="dropdown-item-only" id="don-din">
+                                    <span>
+                                        <i class="fa-solid fa-check check-icon"></i>
+                                    </span>
+                                        <p>{{this.nombre}} (Temp min: {{this.temperaturaMinima}}, temp max: {{this.temperaturaMaxima}})</p>
+                                        <p class="hidden">{{this.id}}</p>
+                                    </li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    </div>
                 </div>
+                <input class="hidden" type="number" name="modelo-id" required>
             </form>
             <button class="agregar-heladera-submit">
                 Enviar
@@ -309,12 +333,14 @@
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
 <script src="/js/map.js"></script>
+<script src="/js/dropdownScript.js"></script>
 <script>
     document.querySelector('#modal-agregar-heladera').addEventListener('click', () => {
         document.querySelector('.modal-agregar-heladera').classList.toggle('open');
     });
 
     document.querySelector('.agregar-heladera-submit').addEventListener('click', () => {
+        document.querySelector('input[name="modelo-id"]').value = document.querySelector('.dropdown-item-only.checked').children[2].innerText;
         document.querySelector('.form-modal-heladera').submit();
     });
 
