@@ -16,6 +16,7 @@ import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.condiciones.Desperfect
 import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.condiciones.FaltanNViandas;
 import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.condiciones.QuedanNViandas;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioHeladeras;
+import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioModelos;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioPuntuables;
 import io.javalin.http.Context;
 
@@ -102,7 +103,7 @@ public class ServiceHeladeras {
         ));
         heladera.setStock(0);
         heladera.setCapacidad(Integer.valueOf(context.formParam("capacidad")));
-        heladera.setModeloHeladera(ModeloHeladera.builder().nombre(context.formParam("modelo")).build());
+        heladera.setModeloHeladera(ServiceLocator.instanceOf(RepositorioModelos.class).buscar(Long.valueOf(context.formParam("modelo-id"))).get());
         heladera.setTiempoParaVisitarEnMinutos(180);
         return heladera;
     }

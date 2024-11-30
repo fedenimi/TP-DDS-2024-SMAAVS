@@ -17,7 +17,7 @@ public class ServiceLocator {
 
         if (!instances.containsKey(componentName)) {
             if(componentName.equals(ControladorHeladeras.class.getName())) {
-                ControladorHeladeras instance = new ControladorHeladeras(instanceOf(RepositorioHeladeras.class), instanceOf(RepositorioColaboradores.class), instanceOf(RepositorioPuntuables.class));
+                ControladorHeladeras instance = new ControladorHeladeras(instanceOf(RepositorioHeladeras.class), instanceOf(RepositorioColaboradores.class), instanceOf(RepositorioPuntuables.class), instanceOf(RepositorioModelos.class));
                 instances.put(componentName, instance);
             }
             else if (componentName.equals(RepositorioHeladeras.class.getName())) {
@@ -134,6 +134,10 @@ public class ServiceLocator {
             }
             else if(componentName.equals(RepositorioReceptoresTemperatura.class.getName())) {
                 RepositorioReceptoresTemperatura instance = new RepositorioReceptoresTemperatura();
+                instances.put(componentName, instance);
+            }
+            else if(componentName.equals(RepositorioModelos.class.getName())) {
+                RepositorioModelos instance = new RepositorioModelos();
                 instances.put(componentName, instance);
             }
         }
