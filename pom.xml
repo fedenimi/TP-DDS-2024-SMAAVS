@@ -222,6 +222,13 @@
       <version>1.5.6</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>com.github.jsimone</groupId>
+      <artifactId>webapp-runner</artifactId>
+      <version>9.0.27.1</version>
+      <scope>provided</scope>
+    </dependency>
+
   </dependencies>
 
   <build>
@@ -246,7 +253,7 @@
                   <destFileName>webapp-runner.jar</destFileName>
                 </artifactItem>
               </artifactItems>
-              <outputDirectory>${project.build.directory}/dependency</outputDirectory>
+              <outputDirectory>target/dependency</outputDirectory>
             </configuration>
           </execution>
         </executions>
