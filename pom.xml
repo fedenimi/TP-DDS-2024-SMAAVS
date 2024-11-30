@@ -349,7 +349,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>ar.edu.utn.frba.dds.modelo.cronJobs.MainReportar</mainClass>
+              <mainClass>ar.edu.utn.frba.dds.server.App</mainClass>
             </manifest>
           </archive>
         </configuration>
@@ -370,7 +370,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>ar.edu.utn.frba.dds.modelo.cronJobs.MainReportar</mainClass>
+              <mainClass>ar.edu.utn.frba.dds.server.App</mainClass>
             </manifest>
           </archive>
         </configuration>
@@ -385,7 +385,7 @@
           </descriptorRefs>
           <archive>
             <manifest>
-              <mainClass>ar.edu.utn.frba.dds.modelo.cronJobs.MainReportar</mainClass>
+              <mainClass>ar.edu.utn.frba.dds.server.App</mainClass>
             </manifest>
           </archive>
         </configuration>
