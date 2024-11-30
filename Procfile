@@ -1,1 +1,1 @@
-java -jar target/MainApp.jar --server.port=8080
+web: java -Dserver.port=8081 -jar target/MainApp.jar
