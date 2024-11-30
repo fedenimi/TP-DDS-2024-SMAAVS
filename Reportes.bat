@@ -1,6 +1,12 @@
-cd D:\UTN\DDS\TP\2024-tpa-ma-ma-grupo-02
-d:
-java -jar .\target\MainReportar.jar
-move "reporteFallasHeladera.pdf" src\main\resources\public\reportes
-move "reporteViandasColaborador.pdf" src\main\resources\public\reportes
-move "reporteViandasHeladera.pdf" src\main\resources\public\reportes
+@echo off
+cd /d "%~dp0"
+
+:: Ejecutar el .jar
+java -jar "%~dp0target\ejercicio-1.0-SNAPSHOT-jar-with-dependencies.jar"
+
+:: Mover los reportes
+move "%~dp0reporteFallasHeladera.pdf" "%~dp0src\main\resources\public\reportes"
+move "%~dp0reporteViandasColaborador.pdf" "%~dp0src\main\resources\public\reportes"
+move "%~dp0reporteViandasHeladera.pdf" "%~dp0src\main\resources\public\reportes"
+
+pause

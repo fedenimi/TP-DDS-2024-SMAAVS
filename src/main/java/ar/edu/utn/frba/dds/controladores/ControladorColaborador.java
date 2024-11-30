@@ -11,14 +11,18 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.formulario.Respuesta;
 import ar.edu.utn.frba.dds.modelo.entidades.localizacion.Direccion;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioColaboradores;
+import ar.edu.utn.frba.dds.server.App;
 import ar.edu.utn.frba.dds.servicios.ServiceColaboradores;
 import io.javalin.http.Context;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
 import java.util.*;
 
 public class ControladorColaborador implements ICrudViewsHandler {
     private RepositorioColaboradores repositorioColaboradores;
+    private static final Logger logger = LoggerFactory.getLogger(ControladorColaborador.class);
 
     public ControladorColaborador(RepositorioColaboradores repositorioColaboradores) {
         this.repositorioColaboradores = repositorioColaboradores;
@@ -85,7 +89,7 @@ public class ControladorColaborador implements ICrudViewsHandler {
         ServiceColaboradores.setearMediosDeContacto(colaborador, mediosDeContactoDO);
 
         repositorioColaboradores.modificar(colaborador);
-        
+        logger.atInfo().log("Se modificó el colaborador con id: " + colaborador.getId());
         context.redirect("/"+context.pathParam("id") +"/home");
     }
 

@@ -88,12 +88,14 @@ public class TestMQTT {
         ControladorFallaConexion controladorFallaConexion = new ControladorFallaConexion(5, buscadorDeTecnicos);
         when(buscadorDeTecnicos.buscarTecnicoMasCercanoA(ArgumentMatchers.any(Heladera.class)))
                 .thenReturn(new Tecnico(
-                        1L,
+                        1l,
                         "Juan",
                         "Perez",
                         new Documento("123", TipoDocumento.DNI),
                         "201232",
                         new MedioDeContacto("podolskytomi@gmail.com", TipoDeContacto.MAIL),
+                        null,
+                        null,
                         null));
         Llamador.getInstance().setEnviadorDeMail(mock(EnviadorDeMail.class));
         controladorFallaConexion.verificarConexiones();

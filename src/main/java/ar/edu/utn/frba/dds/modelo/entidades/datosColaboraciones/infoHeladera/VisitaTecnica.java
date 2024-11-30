@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.modelo.entidades.personas.Tecnico;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.converters.LocalDateConverter;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "visita_tecnica")
 @Builder
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class VisitaTecnica {

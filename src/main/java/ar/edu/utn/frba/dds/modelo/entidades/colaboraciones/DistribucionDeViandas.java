@@ -41,12 +41,22 @@ public class DistribucionDeViandas extends Puntuable {
     // TODO: cambiar a localdatetime
 
     @OneToOne()
-    @JoinColumn(name = "solicitud_apertura_id")
-    private SolicitudApertura solicitudApertura;
+    @JoinColumn(name = "solicitud_apertura_origen_id")
+    private SolicitudApertura solicitudAperturaOrigen;
 
     @OneToOne()
-    @JoinColumn(name = "apertura_id")
-    private Apertura apertura;
+    @JoinColumn(name = "apertura_origen_id")
+    private Apertura aperturaOrigen;
+
+    @OneToOne()
+    @JoinColumn(name = "solicitud_apertura_destino_id")
+    private SolicitudApertura solicitudAperturaDestino;
+
+    @OneToOne()
+    @JoinColumn(name = "apertura_destino_id")
+    private Apertura aperturaDestino;
+
+
 
     public DistribucionDeViandas(Integer cantidadDeViandas, Colaborador colaborador, Heladera heladeraDestino, Heladera heladeraOrigen, LocalDateTime fecha) {
         this.cantidadDeViandas = cantidadDeViandas;
@@ -62,6 +72,9 @@ public class DistribucionDeViandas extends Puntuable {
 
     @Override
     public Double puntaje() {
+        if(aperturaDestino == null) {
+            return 0D;
+        }
         return cantidadDeViandas.doubleValue();
     }
 

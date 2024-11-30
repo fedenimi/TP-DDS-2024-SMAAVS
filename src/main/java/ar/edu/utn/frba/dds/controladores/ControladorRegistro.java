@@ -8,9 +8,12 @@ import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Tecnico;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioColaboradores;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioUsuarios;
+import ar.edu.utn.frba.dds.server.App;
 import ar.edu.utn.frba.dds.servicios.ServiceColaboradores;
 import ar.edu.utn.frba.dds.servicios.ServiceRegistroSesion;
 import io.javalin.http.Context;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,7 +23,7 @@ import java.util.Optional;
 public class ControladorRegistro {
     private final RepositorioColaboradores repositorioColaboradores;
     private final RepositorioUsuarios repositorioUsuarios;
-
+    private static final Logger logger = LoggerFactory.getLogger(ControladorRegistro.class);
     public ControladorRegistro(RepositorioColaboradores repositorioColaboradores, RepositorioUsuarios repositorioUsuarios) {
         this.repositorioColaboradores = repositorioColaboradores;
         this.repositorioUsuarios = repositorioUsuarios;
@@ -34,12 +37,14 @@ public class ControladorRegistro {
         Optional<Usuario> usuarioPosible = repositorioUsuarios.buscarPorNombre(context.formParam("usuario"));
         if(usuarioPosible.isEmpty()) {
             this.mostrarErrorUsuarioInexistente(context);
+            logger.atInfo().log("El usuario " + context.formParam("usuario") + " no existe");
             return;
         }
 
         Usuario usuario = usuarioPosible.get();
         if(!usuario.getContrasenia().equals(context.formParam("contrasenia"))) {
             this.mostrarErrorContraseniaIncorrecta(context);
+            logger.atInfo().log("La contraseña de" + usuario.getNombre() + "es incorrecta");
             return;
         }
         context.sessionAttribute("permisos", usuario.getPermisos());
@@ -48,9 +53,11 @@ public class ControladorRegistro {
         Long id = -1L;
         if (colaborador != null) {
             id = colaborador.getId();
+            logger.atInfo().log("El usuario " + usuario.getNombre() + " ha iniciado sesión");
         }
         if (tecnico != null) {
             id = tecnico.getId();
+            logger.atInfo().log("Un técnico ha ingresado al sistema.");
         }
         context.sessionAttribute("colaborador_id", id);
         context.redirect("/"+context.sessionAttribute("colaborador_id")+"/home");
@@ -63,6 +70,7 @@ public class ControladorRegistro {
         Usuario usuario = new Usuario();
         if(ServiceRegistroSesion.esUsuarioRepetido(context, repositorioUsuarios)) {
             mostrarErrorUsuarioRepetido(context);
+            logger.atInfo().log("El nombre de usuario ya se encuentra registrado");
             return;
         }
         usuario.setNombre(context.formParam("usuario"));
@@ -71,6 +79,7 @@ public class ControladorRegistro {
 
         if(!ServiceRegistroSesion.errorContrasenia(context.formParam("contrasenia"), context.formParam("usuario")).isEmpty()) {
             mostrarErrorContraseniaInvalida(context, ServiceRegistroSesion.errorContrasenia(context.formParam("contrasenia"), context.formParam("usuario")));
+            logger.atInfo().log("La contraseña de" + usuario.getNombre() + "no cumple con los requisitos");
             return;
         }
         usuario.setContrasenia(context.formParam("contrasenia"));
@@ -79,10 +88,12 @@ public class ControladorRegistro {
         if(context.formParam("nombre") != null) {
             if(!ServiceRegistroSesion.esDocumentoUnico(context, repositorioColaboradores)) {
                 mostrarErrorDocumentoRepetido(context);
+                logger.atInfo().log("El documento de" + usuario.getNombre() + "ya se encuentra registrado");
                 return;
             }
             if(ServiceRegistroSesion.sinMediosDeContacto(context)) {
                 mostrarErrorAgregarMedioDeContacto(context);
+                logger.atInfo().log("El usuario" + usuario.getNombre() + "no tiene medios de contacto");
                 return;
             }
             colaborador = ServiceColaboradores.crearColaboradorHumano(context, usuario, repositorioColaboradores);
@@ -95,7 +106,7 @@ public class ControladorRegistro {
         repositorioColaboradores.guardar(colaborador);
 
         repositorioUsuarios.guardar(usuario);
-
+        logger.atInfo().log("Se ha registrado el usuario " + usuario.getNombre());
         context.redirect("/inicioSesion");
     }
 

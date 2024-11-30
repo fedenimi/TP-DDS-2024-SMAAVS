@@ -61,8 +61,19 @@ public class ControladorDistribuirViandas implements ICrudViewsHandler{
 
     @Override
     public void save(Context context) {
+        Colaborador colaborador = this.repositorioColaboradores.buscar(Long.parseLong(context.pathParam("id"))).get();
+        SolicitudApertura solicitudAperturaOri= SolicitudApertura.builder()
+                .tarjetaColaborador(colaborador.getTarjetaColaborador())
+                .fechaYHora(LocalDateTime.now())
+                .build();
+        SolicitudApertura solicitudAperturaDes = SolicitudApertura.builder()
+                .tarjetaColaborador(colaborador.getTarjetaColaborador())
+                .fechaYHora(LocalDateTime.now())
+                .build();
         Heladera heladeraOrigen = this.repositorioHeladeras.buscar(Long.parseLong(context.formParam("heladera-or"))).get();
         Heladera heladeraDestino = this.repositorioHeladeras.buscar(Long.parseLong(context.formParam("heladera-dest"))).get();
+        heladeraOrigen.agregarSolicitudApertura(solicitudAperturaOri);
+        heladeraDestino.agregarSolicitudApertura(solicitudAperturaDes);
         // Crear la distribución de viandas
         DistribucionDeViandas distribucionDeViandas = new DistribucionDeViandas();
         distribucionDeViandas.setHeladeraOrigen(heladeraOrigen);
@@ -71,8 +82,9 @@ public class ControladorDistribuirViandas implements ICrudViewsHandler{
         distribucionDeViandas.setCantidadDeViandas(Integer.parseInt(context.formParam("cantidad-viandas")));
         distribucionDeViandas.setFecha(LocalDateTime.now());
 
-        Colaborador colaborador = this.repositorioColaboradores.buscar(Long.parseLong(context.pathParam("id"))).get();
         distribucionDeViandas.setColaborador(colaborador);
+        distribucionDeViandas.setSolicitudAperturaOrigen(solicitudAperturaOri);
+        distribucionDeViandas.setSolicitudAperturaDestino(solicitudAperturaDes);
 
         this.repositorioPuntuables.guardar(distribucionDeViandas);
 

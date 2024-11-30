@@ -52,6 +52,9 @@ public class DonacionDeViandas extends Puntuable{
 
     @Override
     public Double puntaje() {
+        if(apertura == null) {
+            return 0D;
+        }
         Integer ret = viandasDonadas.size();
         return ret.doubleValue();
     }

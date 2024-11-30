@@ -47,7 +47,6 @@ public class ControladorHeladeras implements ICrudViewsHandler{
                 filter(heladera -> heladera.tieneFallas() && colaborador.equals(ServiceHeladeras.colaboradorDe(heladera))).
                 map(ServiceHeladeras::toHeladeraDTO).toList();
 
-
         Map<String, Object> model = new HashMap<>();
         model.put("heladeras", heladerasDTO);
         model.put("heladerasFallas", heladerasConFallasDTO);
