@@ -48,7 +48,7 @@ public class TestPersistencia implements SimplePersistenceTest {
     }
 }
 
- */
+
 public class TestPersistencia implements SimplePersistenceTest {
     private static EntityManagerFactory emf;
     private EntityManager em;
@@ -118,3 +118,4 @@ public class TestPersistencia implements SimplePersistenceTest {
     }
 
 }
+*/
