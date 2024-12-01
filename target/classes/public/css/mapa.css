@@ -1,0 +1,192 @@
+#map {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+.title-mapa {
+    margin-top: 10px;
+    margin-left: 0;
+    z-index: 1000;
+    backdrop-filter: blur(15px);
+    background: rgba(255, 255, 255, 0.2);
+    padding: 40px;
+    border-radius: 13px;
+    border: none;
+    font-size: 30px;
+    width: 50%;
+}
+
+.modal-info-heladera-viandas {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0px;
+    z-index: 1000;
+    backdrop-filter: blur(15px);
+    background: #f0cdaf;
+    width: 50%;
+    max-height: 50%;
+    border-radius: 13px;
+    border: none;
+    font-size: 30px;
+    flex: 1;
+}
+
+.title-mapa-heladera {
+    transform: translateY(-50%);
+    margin-left: 0;
+    background-color: white;
+    border-radius: 13px;
+    padding: 2rem 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border: none;
+    font-size: 30px;
+    width: 70%;
+}
+
+.title-mapa-direccion {
+    margin-left: 0;
+    backdrop-filter: blur(15px);
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 3px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    border: none;
+    font-size: 30px;
+    width: 80%;
+}
+
+.title-mapa-btn {
+    transform: translateY(50%);
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+    padding: 2rem 4rem;
+    background-color: #A0C6FF;
+    border-radius: 13px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border: none;
+    font-size: 30px;
+    width: 50%;
+}
+
+.btns-modal-mapa {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 50%;
+}
+
+.btn-suscripcion-modal {
+    width: max-content
+}
+
+.title-mapa-btn p {
+    color: black;
+}
+
+.title-mapa-btn:hover {
+    scale: 1.1;
+}
+
+.title-mapa-btn:active {
+    opacity: 0.5;
+}
+
+@media (max-width: 1140px) {
+    .title-mapa-btn {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .title-mapa {
+        width: 80%;
+        font-size: 1rem;
+        padding: 20px;
+    }
+
+    .title-mapa-direccion {
+        font-size: 1rem;
+        padding: 20px;
+    }
+
+}
+
+@media (max-width: 570px) {
+    .title-mapa-heladera {
+        width: 90%;
+        font-size: 1rem;
+        padding: 20px;
+    }
+
+    .title-mapa-btn {
+        width: 70%;
+        font-size: 1rem;
+        padding: 20px 10px;
+    }
+}
+
+@media (max-height: 725px) {
+    .line-jump {
+        display: none;
+    }
+
+    .title-mapa-direccion {
+        font-size: 1.3rem;
+    }
+}
+
+
+@media (max-height: 528px) {
+    .title-mapa-heladera {
+        padding: 1rem 2rem;
+    }
+
+    .title-mapa-btn {
+        padding: 1rem 2rem;
+    }
+
+    .title-mapa {
+        font-size: 1rem;
+        padding: 20px;
+    }
+
+    .title-mapa-direccion {
+        font-size: 1rem;
+    }
+}
+
+@media (max-height: 395px) {
+    .title-mapa-heladera {
+        padding: 0.2rem 1rem;
+    }
+
+    .title-mapa-btn {
+        padding: 0.2rem 1rem;
+    }
+}
+
+.open {
+    display: flex;
+}
+
+.leaflet-left {
+    display: none;
+}
+
+.not-overflow {
+    overflow-x: hidden;
+}
+
+.transparent {
+    visibility: hidden;
+}

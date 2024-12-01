@@ -1,0 +1,36 @@
+{{#partial "landing-estilos"}}
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/registro.css">
+{{/partial}}
+{{#partial "header-btns-register"}}
+    <a class="header-btn left-btn pressed-btn" href="inicioSesion">Iniciar sesión</a>
+    <a class="header-btn right-btn" href="registro" >Registrarse</a>
+{{/partial}}
+{{#partial "landing-main"}}
+    <main class="registro2-main">
+        <form class="form-registro2" id="form-login" method="POST">
+            <div class="form-element2">
+                <label for="form-nombre">Usuario</label>
+                <input type="text" name="usuario" id="form-apellido" required>
+            </div>
+            <div class="form-element2">
+                <label for="form-apellido">Contraseña</label>
+                <input type="password" name="contrasenia" id="form-apellido" required>
+            </div>
+        </form>
+        <div class="btns-login">
+            <a class="btn-login" id="login-btn">
+                <p>Iniciar sesión</p>
+            </a>
+        </div>
+    </main>
+{{/partial}}
+{{#partial "landing-scripts"}}
+    <script>
+        document.querySelector('#login-btn').addEventListener('click', () => {
+            document.querySelector('#form-login').submit();
+        });
+    </script>
+    <script src="js/dropdownScript.js"></script>
+{{/partial}}
+{{> templates/base/landingBase }}

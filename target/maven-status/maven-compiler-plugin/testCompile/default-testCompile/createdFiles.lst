@@ -1,0 +1,7 @@
+ar\edu\utn\frba\dds\TestCrearReporte.class
+ar\edu\utn\frba\dds\TestMQTT.class
+ar\edu\utn\frba\dds\TestEnviador.class
+ar\edu\utn\frba\dds\TestRecomendador.class
+ar\edu\utn\frba\dds\TestLectorCSV.class
+ar\edu\utn\frba\dds\TestRecomendadorApi.class
+validadorDeContraseniasTest\TestContrasenias.class

@@ -1,0 +1,149 @@
+{{#partial "home-estilos"}}
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/heladeras.css">
+    <link rel="stylesheet" href="/css/suscripciones.css">
+{{/partial}}
+
+{{#partial "home-main"}}
+    <main class="admin-heladeras">
+        <h1>Suscripciones
+        </h1>
+        <div class="heladeras-mapa">
+            <section class="heladeras-dashboard">
+                <section class="heladeras-dashboard-scrollable">
+                    <div class="title">
+                        <div class="title-text">
+                            <h2>SUSCRIPCIONES</h2>
+                        </div>
+                        <hr>
+                    </div>
+                    {{#unless heladerasFaltan or heladerasQuedan or heladerasDesp}}
+                        <h1 class="grey open">No tiene ninguna suscripción</h1>
+                    {{/unless}}
+                    <div class="heladeras-fallas-dashboard">
+                        {{#if heladerasQuedan}}
+                            <div class="suscripciones-title">
+                                <h2>Heladera</h2>
+                                <h2>Viandas restantes</h2>
+                            </div>
+                        {{/if}}
+                        {{#each heladerasQuedan}}
+                            <div class="heladera">
+                                <p>{{this.nombreHeladera}}</p>
+                                <hr>
+                                <p>Quedan {{this.cantidad}} viandas</p>
+                                <p class="hidden">{{this.id}}</p>
+                            </div>
+                            <div class="dropdown-heladera">
+                                <li>
+                                    <a href="">
+                                        <i class="fa-solid fa-pencil"></i>
+                                        <p>Modificar</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <i class="fa-solid fa-trash eliminar-suscripcion"></i>
+                                        <p>Eliminar</p>
+                                    </a>
+                                </li>
+                            </div>
+                        {{/each}}
+                    </div>
+                    <div class="heladeras-fallas-dashboard">
+                        {{#if heladerasFaltan}}
+                            <div class="suscripciones-title">
+                                <h2>Heladera</h2>
+                                <h2>Viandas faltantes</h2>
+                            </div>
+                        {{/if}}
+                        {{#each heladerasFaltan}}
+                            <div class="heladera">
+                                <p>{{nombreHeladera}}</p>
+                                <hr>
+                                <p>Faltan {{this.cantidad}} viandas</p>
+                                <p class="hidden">{{this.id}}</p>
+                            </div>
+                            <div class="dropdown-heladera">
+                                <li>
+                                    <a href="">
+                                        <i class="fa-solid fa-pencil"></i>
+                                        <p>Modificar</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <i class="fa-solid fa-trash eliminar-suscripcion"></i>
+                                        <p>Eliminar</p>
+                                    </a>
+                                </li>
+                            </div>
+                        {{/each}}
+                    </div>
+                    <div class="heladeras-fallas-dashboard">
+                        {{#if heladerasDesp}}
+                            <div class="suscripciones-title">
+                                <h2>Heladera</h2>
+                                <h2>Desperfecto</h2>
+                            </div>
+                        {{/if}}
+                        {{#each heladerasDesp}}
+                            <div class="heladera">
+                                <p>{{nombreHeladera}}</p>
+                                <hr>
+                                <p>Desperfecto</p>
+                                <p class="hidden">{{this.id}}</p>
+                            </div>
+                            <div class="dropdown-heladera">
+                                <li>
+                                    <a href="">
+                                        <i class="fa-solid fa-pencil"></i>
+                                        <p>Modificar</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <i class="fa-solid fa-trash eliminar-suscripcion"></i>
+                                        <p>Eliminar</p>
+                                    </a>
+                                </li>
+                            </div>
+                        {{/each}}
+                    </div>
+                </section>
+                <div class="btns">
+                    <a href="javascript:history.back()" class="boton-dashboard">Volver</a>
+                </div>
+            </section>
+            <section class="blurred-map">
+                <a href="suscripciones/mapa">AGREGAR SUSCRIPCIONES</a>
+            </section>
+            <form class="hidden" method="POST" id="form-eliminar-suscripcion">
+                <input type="hidden" name="suscripcion" value="">
+            </form>
+        </div>
+    </main>
+{{/partial}}
+{{#partial "home-scripts"}}
+    <script src="/js/heladeras.js"></script>
+    <script src="/js/dropdownScript.js"></script>
+    <script src="/js/modalViandas.js"></script>
+    <script>
+        const heladeras = document.querySelectorAll('.heladera')
+        heladeras.forEach(heladera => {
+            heladera.addEventListener('click', () => {
+                handleDropdown(heladera)
+                document.querySelector('input[name=suscripcion]').value = heladera.children[3].innerText
+            });
+        });
+
+        document.querySelectorAll('.eliminar-suscripcion').forEach(eliminar => {
+            eliminar.addEventListener('click', () => {
+                document.querySelector('#form-eliminar-suscripcion').submit()
+            });
+        });
+
+    </script>
+{{/partial}}
+
+{{> templates/base/homeBase}}

@@ -1,0 +1,36 @@
+{{#partial "home-estilos"}}
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/registro.css">
+{{/partial}}
+
+{{#partial "home-main"}}
+    <main class="registro2-main">
+        <div class="registro2-title">
+            <h1>Reportes semanales<br>
+                Última actualización: {{fecha}}
+            </h1>
+        </div>
+        <div class="btns-reportes">
+            <a href="/reportes/reporteFallasHeladera.pdf" download="reporteFallasHeladera.pdf">FALLAS POR HELADERA</a>
+            <a href="/reportes/reporteViandasHeladera.pdf" download="reporteViandasHeladera.pdf">MOVIMIENTO DE VIANDAS POR HELADERA</a>
+            <a href="/reportes/reporteViandasColaborador.pdf" download="reporteViandasColaborador.pdf">VIANDAS DONADAS POR COLABORADOR</a>
+        </div>
+        </div>
+        <div class="btns-next">
+            <a class="btn-next2" href="javascript:history.back()">
+                <p>Cancelar</p>
+                <i class="fa fa-arrow-left"></i>
+            </a>
+            <a class="btn-next2" href="javascript:history.back()">
+                <p>Aceptar</p>
+                <i class="fa fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+{{/partial}}
+{{#partial "home-scripts"}}
+    <script src="/js/dropdownScript.js">
+    </script>
+{{/partial}}
+
+{{> templates/base/homeAdminBase}}

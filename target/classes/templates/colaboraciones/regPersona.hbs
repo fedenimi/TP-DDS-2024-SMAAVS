@@ -1,0 +1,85 @@
+{{#partial "home-estilos"}}
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/registro.css">
+{{/partial}}
+
+{{#partial "home-main"}}
+    <main class="registro-main">
+        <div class="tipo-colab">
+            <h1>Registrar persona vulnerable</h1>
+        </div>
+        <form class="form-registro" id="form-registro-pv" method="POST">
+            <div class="form-element">
+                <label for="form-nombre">Nombre</label>
+                <input type="text" name="nombre" id="form-apellido" required>
+            </div>
+            <div></div>
+            <div class="form-element">
+                <label for="form-apellido">Número de documento</label>
+                <input type="text" name="documento" id="form-apellido" required>
+            </div>
+            <div class="form-element">
+                <label for="form-nombre">Apellido</label>
+                <input type="text" name="apellido" id="form-apellido" required>
+            </div>
+            <div></div>
+            <div class="form-element">
+                <label for="form-nombre">Fecha de nacimiento</label>
+                <input type="date" name="fechaDeNacimiento" id="form-apellido" required>
+            </div>
+            <div class="form-element">
+                <label for="form-nombre"> Tipo de documento</label>
+                <div class="form-element-dropdown">
+                    <div class="dropdown-select-btn">
+                        <p>Seleccionar</p>
+                        <span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </span>
+                    </div>
+                    <ul class="dropdown-item-list">
+                        <li class="dropdown-item-only closable">
+                            <p></p>
+                            <p>DNI</p>
+                        </li>
+                        <li class="dropdown-item-only closable">
+                            <p></p>
+                            <p>Pasaporte</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div></div>
+            <div class="form-element">
+                <label for="form-apellido">DNI progenitor 1</label>
+                <input type="number" name="padre" id="form-apellido" required>
+            </div>
+            <input type="hidden" name="tipoDocumento" id="tipoDocumento">
+        </form>
+        <div class="btns-next">
+
+            <a class="btn-next2" href="javascript:history.back()">
+                <p>Atrás</p>
+                <i class="fa fa-arrow-left"></i>
+            </a>
+            <a class="btn-next2" id="submit-btn-finalizar">
+                <p>Finalizar</p>
+                <i class="fa fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+{{/partial}}
+
+{{#partial "home-scripts"}}
+    <script src="../js/dropdownScript.js"></script>
+
+    <script>
+        document.querySelector("#submit-btn-finalizar").addEventListener("click", function() {
+            document.querySelector("#tipoDocumento").value = document.querySelector(".dropdown-item-only.checked").children[1].innerHTML;
+            document.querySelector("#form-registro-pv").submit();
+        });
+
+
+    </script>
+{{/partial}}
+
+{{> templates/base/homeBase}}

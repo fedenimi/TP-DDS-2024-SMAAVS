@@ -231,7 +231,7 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>2.22.2</version>
       </plugin>
-      <plugin>
+      <!--<plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
         <version>3.2.1</version>
@@ -308,6 +308,7 @@
           </execution>
         </executions>
       </plugin>
+      -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -325,7 +326,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>ar.edu.utn.frba.dds.modelo.cronJobs.MainReportar</mainClass>
+              <mainClass>ar.edu.utn.frba.dds.server.App</mainClass>
             </manifest>
           </archive>
         </configuration>
@@ -346,7 +347,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>ar.edu.utn.frba.dds.modelo.cronJobs.MainReportar</mainClass>
+              <mainClass>ar.edu.utn.frba.dds.server.App</mainClass>
             </manifest>
           </archive>
         </configuration>
@@ -361,7 +362,7 @@
           </descriptorRefs>
           <archive>
             <manifest>
-              <mainClass>ar.edu.utn.frba.dds.modelo.cronJobs.MainReportar</mainClass>
+              <mainClass>ar.edu.utn.frba.dds.server.App</mainClass>
             </manifest>
           </archive>
         </configuration>

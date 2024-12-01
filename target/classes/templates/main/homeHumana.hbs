@@ -1,0 +1,131 @@
+{{#partial "home-estilos"}}
+    <link rel="stylesheet" href="../css/carrusel.css">
+    <link rel="stylesheet" href="../css/suscripciones.css">
+    <link rel="stylesheet" href="../css/main.css">
+{{/partial}}
+{{#partial "home-main"}}
+    <main class="header-main">
+        <section class="carousel">
+            <input type="radio" name="slider" id="carousel-s1" checked>
+            <input type="radio" name="slider" id="carousel-s2">
+            <input type="radio" name="slider" id="carousel-s3">
+            <input type="radio" name="slider" id="carousel-s4">
+            <input type="radio" name="slider" id="carousel-s5">
+            <div class="cards">
+                <label for="carousel-s1" id="slide1">
+                    <div class="card">
+                        <div class="carousel-img">
+                            <img src="../img/viandas.jpg" alt="">
+                            <div class="card-dots">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div class="carousel-info">
+                            <a href="donar-viandas/mapa" class="carousel-btn">Donar viandas</a>
+                        </div>
+                    </div>
+                </label>
+                <label for="carousel-s2" id="slide2">
+                    <div class="card">
+                        <div class="carousel-img">
+                            <img src="../img/donarDinero.jpg" alt="">
+                        </div>
+                        <div class="carousel-info">
+                            <a href="dinero" class="carousel-btn">Donar dinero</a>
+                        </div>
+                    </div>
+                </label>
+                <label for="carousel-s3" id="slide3">
+                    <div class="card">
+                        <div class="carousel-img">
+                            <img src="../img/distribuirViandas.jpg" alt="">
+                            <div class="card-dots">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div class="carousel-info">
+                            <a href="distribuir-viandas" class="carousel-btn">Distribuir viandas</a>
+                        </div>
+                    </div>
+                </label>
+                <label for="carousel-s4" id="slide4">
+                    <div class="card">
+                        <div class="carousel-img">
+                            <img src="../img/personaVulnerable.jpg" alt="">
+                            <div class="card-dots">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div class="carousel-info">
+                            <a href="reg-persona" class="carousel-btn">Registrar persona vulnerable</a>
+                        </div>
+                    </div>
+                </label>
+                <label for="carousel-s5" id="slide5">
+                    <div class="card">
+                        <div class="carousel-img">
+                            <img src="../img/reportarFallas.jpg" alt="">
+                            <div class="card-dots">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div class="carousel-info">
+                            <a href="reportar-falla" class="carousel-btn">Reportar una falla</a>
+                        </div>
+                    </div>
+                </label>
+            </div>
+        </section>
+        <section class="suscripciones">
+            <h1>Tiene {{alertas.length}} alertas</h1>
+            <div class="linea-suscripciones"></div>
+            <div class="suscripciones-scrollable">
+                {{#each alertas}}
+                    <div class="suscripcion alerta">
+                        <p>{{this.nombreHeladera}}</p>
+                        <div class="right-suscripcion">
+                            <a href="alertas">
+                                <i class="fa-solid fa-warning"></i>
+                                <p>Ver alerta</p>
+                            </a>
+                        </div>
+                    </div>
+                {{/each}}
+                {{#each suscripciones}}
+                    <div class="suscripcion">
+                        <p>{{this.nombreHeladera}}</p>
+                        <div class="right-suscripcion">
+                            <a href="suscripciones">
+                                <i class="fa-solid fa-user"></i>
+                                <p>Suscripto</p>
+                            </a>
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+        </section>
+    </main>
+{{/partial}}
+{{#partial "home-scripts"}}
+    <script src="../js/dropdownScript.js">
+        const toggleBtn = document.querySelector('.toggle-btn');
+        const toggleBtnIcon = document.querySelector('.toggle-btn i');
+        const dropdownMenu = document.querySelector('.dropdown-menu');
+
+        toggleBtn.onclick = function () {
+            dropdownMenu.classList.toggle('open');
+            const isOpen = dropdownMenu.classList.contains('open');
+
+            toggleBtnIcon.classList = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+        }
+    </script>
+{{/partial}}
+{{>templates/base/homeBase}}

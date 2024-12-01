@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMAAVS</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    {{#block "landing-estilos"}}{{/block}}
+</head>
+
+<body>
+<header>
+    <div class="inner-header">
+
+        <div class="header-title">
+            <a href="/">SMAAVS</a>
+        </div>
+        <ul class="links">
+            <li><a href="/">Menu</li>
+            <li><a href="">Contacto</li>
+        </ul>
+        <div class="header-btns" href="#">
+            {{#block "header-btns-register"}}{{/block}}
+        </div>
+        <div class="toggle-btn">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </div>
+    <div class="dropdown-menu">
+        <li><a href="">Menu</a></li>
+        <li><a href="">Contacto</a></li>
+        <li><a href="inicioSesion">Iniciar sesión</a></li>
+        <li><a href="registro">Registrarse</a></li>
+    </div>
+</header>
+{{#block "landing-main"}}{{/block}}
+<script>
+    const toggleBtn = document.querySelector('.toggle-btn');
+    const toggleBtnIcon = document.querySelector('.toggle-btn i');
+    const dropdownMenu = document.querySelector('.dropdown-menu');
+
+    toggleBtn.onclick = function() {
+        dropdownMenu.classList.toggle('open');
+        const isOpen = dropdownMenu.classList.contains('open');
+
+        toggleBtnIcon.classList = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+    }
+</script>
+{{#block "landing-scripts"}}{{/block}}
+</body>
+
+</html>
