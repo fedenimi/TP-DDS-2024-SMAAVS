@@ -1,0 +1,62 @@
+{{#partial "home-estilos"}}
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/registro.css">
+    <style>
+
+        .cargar-csv-btn {
+            background-color: #A0C6FF;
+            border: none;
+            padding: 20px 60px;
+            cursor: pointer;
+            border-radius: 5px;
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        #fotoFormato {
+            width: 50%;
+            height: auto;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+{{/partial}}
+
+{{#partial "home-main"}}
+    <main class="registro2-main">
+        <img id="fotoFormato" src="/img/FormatoCSV.jpg">
+        <div class="registro2-title">
+            <h1>Ingrese su archivo CSV</h1>
+        </div>
+        <form method="POST" id="form-cargar-csv" enctype="multipart/form-data">
+            <label for="cargar-csv" class="cargar-csv-btn">
+                Cargar archivo .csv
+                <input name="csv" id="cargar-csv" type="file"/>
+            </label>
+        </form>
+        <div class="btns-next">
+            <a class="btn-next2" href="mainAdmin.html">
+                <p>Cancelar</p>
+                <i class="fa fa-arrow-left"></i>
+            </a>
+            <a class="btn-next2" id="confirmar-csv">
+                <p>Confirmar</p>
+                <i class="fa fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+{{/partial}}
+{{#partial "home-scripts"}}
+    <script src="/js/dropdownScript.js">
+    </script>
+    <script>
+        document.querySelector('#confirmar-csv').addEventListener('click', function () {
+            document.getElementById('form-cargar-csv').submit();
+        });
+    </script>
+{{/partial}}
+
+{{> templates/base/homeAdminBase}}

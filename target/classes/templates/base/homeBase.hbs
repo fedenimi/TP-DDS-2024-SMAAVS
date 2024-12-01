@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMAAVS</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    {{#block "home-estilos"}}
+    {{/block}}
+</head>
+
+<body>
+<header>
+    <div class="inner-header">
+        <div class="header-title">
+            <a href="home">SMAAVS</a>
+        </div>
+        <ul class="links">
+            <li><a href="configuracion">Configuración</a></li>
+            <li><a href="suscripciones">Suscripciones</a></li>
+            <li>
+                <a href="" class="shadow-header-btn">
+                    {{this.nombre}}
+                    <i class="fa-solid fa-user"></i>
+                </a>
+            </li>
+            <li>
+                <a href="productos" class="shadow-header-btn">
+                    {{this.puntos}}
+                    <i class="fa-solid fa-shopping-cart"></i>
+                </a>
+            </li>
+        </ul>
+        <div class="toggle-btn">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </div>
+    <div class="dropdown-menu">
+        <li><a href="">Configuración</a></li>
+        <li><a href="">Contacto</a></li>
+        <li><a href="">Tienda</a></li>
+    </div>
+</header>
+{{#block "home-main"}}
+{{/block}}
+{{#block "home-scripts"}}
+{{/block}}
+</body>
+
+</html>

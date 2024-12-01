@@ -1,0 +1,129 @@
+{{#partial "home-estilos"}}
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/heladeras.css">
+    <link rel="stylesheet" href="/css/suscripciones.css">
+    <link rel="stylesheet" href="/css/puntos.css">
+    <link rel="stylesheet" href="/css/registro.css">
+{{/partial}}
+{{#partial "home-main"}}
+    <main>
+        <div class="admin-heladeras">
+            <h1>Canje de productos
+            </h1>
+            <div class="heladeras-mapa">
+                <section class="heladeras-dashboard">
+                    <section class="heladeras-dashboard-scrollable">
+                        <div class="title">
+                            <hr>
+                        </div>
+                        <div class="heladeras-fallas-dashboard">
+                            <div class="suscripciones-title">
+                                <h2>Categoría</h2>
+                                <h2>Productos disponibles</h2>
+                            </div>
+                            {{#each categorias}}
+                                <div class="heladera" id="categoria-producto">
+                                    <p>{{nombre}}</p>
+                                    <hr>
+                                    <p>{{productos.length}} productos</p>
+                                </div>
+                            {{/each}}
+                        </div>
+                    </section>
+                    <div class="btns">
+                        <a href="javascript:history.back()" class="boton-dashboard">Cancelar</a>
+                        <a class="boton-dashboard btn-reportar" id="confirmar-producto">Confirmar</a>
+                    </div>
+                </section>
+                <section class="grid-puntos">
+                    {{#each categorias}}
+                        {{#each productos}}
+                            <div class="box-producto">
+                                <img src={{imagen}}>
+                                <div class="producto-info">
+                                    <h3>{{nombre}}</h3>
+                                    <p>{{puntaje}} puntos</p>
+                                    <p class="hidden">{{rubro}}</p>
+                                    <h2 class="hidden">{{this.id}}</h2>
+                                </div>
+                            </div>
+                        {{/each}}
+                    {{/each}}
+                </section>
+            </div>
+        </div>
+        <div class="registro2-main hidden">
+            <div class="registro2-title">
+                <h1>Canje de productos </h1>
+            </div>
+            <div class="eleccion">
+                <h2>Ha elegido canjear: </h2>
+                <h2></h2>
+                <img src={{imagen}} alt="">
+                <p></p>
+            </div>
+            <div class="btns-next">
+                <a class="btn-next2" id="cancelar-producto">
+                    <p>Cancelar</p>
+                    <i class="fa fa-arrow-left"></i>
+                </a>
+                <a class="btn-next2" id="canjear-producto">
+                    <p>Confirmar</p>
+                    <i class="fa fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        <form id="form-producto" method="POST">
+            <input type="hidden" name="producto" id="producto">
+            <input type="hidden" name="puntaje" id="puntaje">
+        </form>
+    </main>
+{{/partial}}
+{{#partial "home-scripts"}}
+    <script>
+        document.querySelector('#confirmar-producto').addEventListener('click', () => {
+            if (hayProductoSeleccionado()) {
+                document.querySelector('.admin-heladeras').classList.toggle('hidden');
+                document.querySelector('.registro2-main').classList.toggle('hidden');
+                document.querySelector('.eleccion').children[1].textContent = document.querySelector('.box-producto.selected h3').textContent;
+                document.querySelector('.eleccion').children[2].src = document.querySelector('.box-producto.selected img').src;
+                document.querySelector('.eleccion').children[3].textContent = document.querySelector('.box-producto.selected div p').textContent;
+            } else {
+                alert('Debe seleccionar un producto');
+            }
+        });
+
+        function hayProductoSeleccionado() {
+            return document.querySelector('.box-producto.selected') !== null;
+        }
+
+        document.querySelector('#cancelar-producto').addEventListener('click', () => {
+            document.querySelector('.admin-heladeras').classList.toggle('hidden');
+            document.querySelector('.registro2-main').classList.toggle('hidden');
+        });
+
+        document.querySelector('#canjear-producto').addEventListener('click', () => {
+            document.querySelector('#producto').value = document.querySelector('.box-producto.selected h2').textContent;
+            document.querySelector('#puntaje').value = document.querySelector('.box-producto.selected div p').textContent.split(' ')[0];
+            document.querySelector('#form-producto').submit();
+        });
+
+        const toggleBtn = document.querySelector('.toggle-btn');
+        const toggleBtnIcon = document.querySelector('.toggle-btn i');
+        const dropdownMenu = document.querySelector('.dropdown-menu');
+
+        toggleBtn.onclick = function () {
+            dropdownMenu.classList.toggle('open');
+            const isOpen = dropdownMenu.classList.contains('open');
+
+            toggleBtnIcon.classList = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+        }
+
+    </script>
+    <script src="/js/categorias.js"></script>
+    <script src="/js/dropdownScript.js"></script>
+    <script src="/js/canjePuntos.js"></script>
+    <script src="/js/modalViandas.js"></script>
+{{/partial}}
+
+{{>templates/base/homeBase}}

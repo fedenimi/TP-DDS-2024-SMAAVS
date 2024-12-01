@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMAAVS</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/carrusel.css">
+    <link rel="stylesheet" href="/css/suscripciones.css">
+</head>
+
+<body>
+<header>
+    <div class="inner-header">
+        <div class="header-title">
+            <a href="index.html">SMAAVS</a>
+        </div>
+        <ul class="links">
+            <li>
+                <a href="" class="shadow-header-btn">
+                    Admin
+                    <i class="fa-solid fa-user"></i>
+                </a>
+            </li>
+        </ul>
+        <div class="toggle-btn">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </div>
+</header>
+<main class="header-main">
+    <div class="main-btns">
+        <a class="contribute" href="">Administrar colaboraciones</a>
+        <a class="contribute" href="">Administrar colaboradores</a>
+        <a class="contribute" href="reportes">Reportes semanales</a>
+        <a class="contribute" href="cargarCSV">Cargar colaboraciones</a>
+    </div>
+    <img src="/img/donation.jpg" alt="" class="img-main">
+</main>
+<script>
+    const toggleBtn = document.querySelector('.toggle-btn');
+    const toggleBtnIcon = document.querySelector('.toggle-btn i');
+    const dropdownMenu = document.querySelector('.dropdown-menu');
+
+    toggleBtn.onclick = function () {
+        dropdownMenu.classList.toggle('open');
+        const isOpen = dropdownMenu.classList.contains('open');
+
+        toggleBtnIcon.classList = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+    }
+</script>
+</body>
+
+</html>
