@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.server;
 
 import ar.edu.utn.frba.dds.config.ServiceLocator;
 import ar.edu.utn.frba.dds.middlewares.AuthMiddleWare;
+import ar.edu.utn.frba.dds.modelo.cronJobs.MainMQTT;
 import ar.edu.utn.frba.dds.modelo.cronJobs.MainPuntos;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.Initializer;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.JavalinRenderer;
@@ -17,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -53,6 +55,9 @@ public class Server {
                 //Initializer.init();
             }
         }
+        CompletableFuture.runAsync(() -> {
+            MainMQTT.main(new String[0]);
+        });
     }
     private static Consumer<JavalinConfig> config() {
         return config -> {
