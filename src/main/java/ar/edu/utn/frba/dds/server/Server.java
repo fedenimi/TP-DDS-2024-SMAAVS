@@ -34,9 +34,13 @@ public class Server {
 
     public static void init() {
         if (app == null) {
-            Integer port = Integer.parseInt(PrettyProperties.getInstance().propertyFromName("server_port"));
+            String port = System.getenv("PORT");
+            if (port == null) {
+                port = "8080"; // valor por defecto para desarrollo local
+            }
+            app.start(Integer.parseInt(port));
             System.out.println("Iniciando servidor en puerto " + port);
-            app = Javalin.create(config()).start(port);
+            app = Javalin.create(config()).start(Integer.parseInt(port));
 
             AuthMiddleWare.apply(app);
             AppHandlers.applyHandlers(app);
