@@ -131,24 +131,19 @@
     </dependency>
 
     <!-- drivers jdbc -->
-    <!-- mysql
+    <!-- mysql -->
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
       <version>8.0.17</version>
     </dependency>
-    -->
+
     <!-- hsqldb -->
     <dependency>
       <groupId>org.hsqldb</groupId>
       <artifactId>hsqldb</artifactId>
       <version>2.4.0</version>
       <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.postgresql</groupId>
-      <artifactId>postgresql</artifactId>
-      <version>42.7.4</version>
     </dependency>
     <dependency>
       <groupId>commons-cli</groupId>
@@ -231,7 +226,7 @@
 
   <build>
     <plugins>
-            <plugin>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>2.22.2</version>
@@ -262,7 +257,7 @@
           </execution>
         </executions>
       </plugin>
-      <!--<plugin>
+      <plugin>
         <groupId>com.github.spotbugs</groupId>
         <artifactId>spotbugs-maven-plugin</artifactId>
         <version>4.7.3.2</version>
@@ -275,7 +270,7 @@
             </goals>
           </execution>
         </executions>
-      </plugin>-->
+      </plugin>
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
@@ -330,7 +325,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>ar.edu.utn.frba.dds.server.App</mainClass>
+              <mainClass>ar.edu.utn.frba.dds.modelo.cronJobs.MainReportar</mainClass>
             </manifest>
           </archive>
         </configuration>
@@ -351,7 +346,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>ar.edu.utn.frba.dds.server.App</mainClass>
+              <mainClass>ar.edu.utn.frba.dds.modelo.cronJobs.MainReportar</mainClass>
             </manifest>
           </archive>
         </configuration>
@@ -366,7 +361,7 @@
           </descriptorRefs>
           <archive>
             <manifest>
-              <mainClass>ar.edu.utn.frba.dds.server.App</mainClass>
+              <mainClass>ar.edu.utn.frba.dds.modelo.cronJobs.MainReportar</mainClass>
             </manifest>
           </archive>
         </configuration>
@@ -381,6 +376,5 @@
         </executions>
       </plugin>
     </plugins>
-    <finalName>MainApp</finalName>
   </build>
 </project>
