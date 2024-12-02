@@ -66,6 +66,12 @@ public class Server {
                 staticFiles.directory = "/public";
             });
 
+            config.staticFiles.add(staticFiles -> {
+                staticFiles.hostedPath = "/img";
+                staticFiles.directory = "imgs"; // Para imágenes dinámicas fuera del empaquetado.
+                staticFiles.location = io.javalin.http.staticfiles.Location.EXTERNAL;
+            });
+
             config.fileRenderer(new JavalinRenderer().register("hbs", (path, model, context) -> {
                 Handlebars handlebars = new Handlebars();
                 Template template = null;

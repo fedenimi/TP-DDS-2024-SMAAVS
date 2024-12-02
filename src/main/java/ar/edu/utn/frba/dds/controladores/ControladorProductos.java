@@ -89,7 +89,7 @@ public class ControladorProductos implements ICrudViewsHandler {
         oferta.setPuntajeMinimo(Double.valueOf(context.formParam("puntaje")));
         oferta.setRubro(this.repositorioDeRubros.buscar(Long.valueOf(context.formParam("id"))).get());
         UploadedFile uploadedFile = context.uploadedFile("imagen-producto");
-        File file = new File("src/main/resources/public/img/" + uploadedFile.filename());
+        File file = new File("imgs/" + uploadedFile.filename());
         try {
             saveUploadedFile(uploadedFile.content(), file);
             oferta.setImagen("/img/" +uploadedFile.filename());

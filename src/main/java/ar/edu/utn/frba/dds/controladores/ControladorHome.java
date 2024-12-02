@@ -88,7 +88,7 @@ public class ControladorHome {
         VisitaTecnica visitaTecnica = new VisitaTecnica();
 
         UploadedFile uploadedFile = context.uploadedFile("imagen-falla");
-        File file = new File("src/main/resources/public/img/" + uploadedFile.filename());
+        File file = new File("target/classes/public/img/" + uploadedFile.filename());
         try {
             saveUploadedFile(uploadedFile.content(), file);
             visitaTecnica = VisitaTecnica.builder()
