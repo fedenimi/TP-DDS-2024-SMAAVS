@@ -54,7 +54,7 @@ public class Server {
             scheduler.scheduleAtFixedRate(() -> {
                 MainReportar.main(new String[0]);
                 System.out.println("Reporte generado");
-            }, 0, 5, TimeUnit.MINUTES);
+            }, 0, 10, TimeUnit.SECONDS);
 
             if (Boolean.parseBoolean(PrettyProperties.getInstance().propertyFromName("dev_mode"))) {
                 System.out.println("Inicializando datos de prueba...");
@@ -75,7 +75,13 @@ public class Server {
 
             config.staticFiles.add(staticFiles -> {
                 staticFiles.hostedPath = "/img";
-                staticFiles.directory = "imgs"; // Para imágenes dinámicas fuera del empaquetado.
+                staticFiles.directory = "public-files"; // Para imágenes dinámicas fuera del empaquetado.
+                staticFiles.location = io.javalin.http.staticfiles.Location.EXTERNAL;
+            });
+
+            config.staticFiles.add(staticFiles -> {
+                staticFiles.hostedPath = "/reportes";
+                staticFiles.directory = "public-files/reportes"; // Para imágenes dinámicas fuera del empaquetado.
                 staticFiles.location = io.javalin.http.staticfiles.Location.EXTERNAL;
             });
 

@@ -10,7 +10,7 @@ import java.util.Map;
 public class ControladorReportes implements ICrudViewsHandler{
     @Override
     public void index(Context context) {
-        File file = new File("src/main/resources/public/reportes/reporteFallasHeladera.pdf");
+        File file = new File("public-files/reportes/reporteFallasHeladera.pdf");
         long lastModified = file.lastModified();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         String fecha = sdf.format(lastModified);

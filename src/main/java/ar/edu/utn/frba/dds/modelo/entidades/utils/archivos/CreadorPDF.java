@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CreadorPDF {
     public void crearPDF(String texto, String nombreArchivo) {
-        try (Document document = new Document(new PdfDocument(new PdfWriter("./src/main/resources/public/reportes/" + nombreArchivo + ".pdf")))) {
+        try (Document document = new Document(new PdfDocument(new PdfWriter("./public-files/reportes/" + nombreArchivo + ".pdf")))) {
             document.add(new Paragraph(texto));
         } catch (Exception e) {
 
