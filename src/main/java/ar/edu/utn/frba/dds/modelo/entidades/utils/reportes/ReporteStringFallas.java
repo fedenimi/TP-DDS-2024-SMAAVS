@@ -16,7 +16,7 @@ public class ReporteStringFallas {
                     .append(entry.getKey().getId())
                     .append(": ")
                     .append(entry.getValue())
-                    .append(" viandas\n");
+                    .append(" fallas\n");
         }
         return result.toString();
     }
