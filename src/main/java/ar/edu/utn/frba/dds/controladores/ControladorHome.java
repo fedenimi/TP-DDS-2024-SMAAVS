@@ -88,7 +88,11 @@ public class ControladorHome {
         VisitaTecnica visitaTecnica = new VisitaTecnica();
 
         UploadedFile uploadedFile = context.uploadedFile("imagen-falla");
-        File file = new File("public-files/img/" + uploadedFile.filename());
+        String nombreArchivo = uploadedFile.filename();
+        if (uploadedFile.filename().contains(" ")) {
+            nombreArchivo = uploadedFile.filename().replace(" ", "_");
+        }
+        File file = new File("public-files/img/" + nombreArchivo);
         try {
             saveUploadedFile(uploadedFile.content(), file);
             visitaTecnica = VisitaTecnica.builder()
@@ -96,7 +100,7 @@ public class ControladorHome {
                     .fechaVisita(LocalDate.now())
                     .tecnico(this.repositorioTecnico.buscar(Long.parseLong(context.pathParam("id"))).get())
                     .descripcion(context.formParam("descripcion"))
-                    .foto("/img/" + uploadedFile.filename())
+                    .foto("/img/" + nombreArchivo)
                     .build();
         } catch (IOException e) {
             System.err.println("Error al guardar el archivo: " + e.getMessage());

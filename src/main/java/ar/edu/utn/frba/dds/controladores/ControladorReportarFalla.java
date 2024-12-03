@@ -91,10 +91,14 @@ public class ControladorReportarFalla implements ICrudViewsHandler {
         FallaTecnica fallaTecnica = new FallaTecnica();
         fallaTecnica.setDescripcion(context.formParam("descripcion"));
         UploadedFile uploadedFile = context.uploadedFile("imagen-falla");
-        File file = new File("public-files/img/" + uploadedFile.filename());
+        String nombreArchivo = uploadedFile.filename();
+        if (uploadedFile.filename().contains(" ")) {
+            nombreArchivo = uploadedFile.filename().replace(" ", "_");
+        }
+        File file = new File("public-files/img/" + nombreArchivo);
         try {
             saveUploadedFile(uploadedFile.content(), file);
-            fallaTecnica.setFoto("/img/" + uploadedFile.filename());
+            fallaTecnica.setFoto("/img/" + nombreArchivo);
         } catch (IOException e) {
             System.err.println("Error al guardar el archivo: " + e.getMessage());
         }
