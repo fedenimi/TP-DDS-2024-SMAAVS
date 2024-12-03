@@ -54,7 +54,7 @@ public class Server {
             scheduler.scheduleAtFixedRate(() -> {
                 MainReportar.main(new String[0]);
                 System.out.println("Reporte generado");
-            }, 0, 10, TimeUnit.SECONDS);
+            }, 0, 5, TimeUnit.MINUTES);
 
             if (Boolean.parseBoolean(PrettyProperties.getInstance().propertyFromName("dev_mode"))) {
                 System.out.println("Inicializando datos de prueba...");
