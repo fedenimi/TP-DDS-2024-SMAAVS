@@ -3,14 +3,12 @@ package ar.edu.utn.frba.dds.modelo.entidades.utils;
 import ar.edu.utn.frba.dds.config.ServiceLocator;
 import ar.edu.utn.frba.dds.modelo.entidades.acceso.Permiso;
 import ar.edu.utn.frba.dds.modelo.entidades.acceso.Usuario;
-import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.Documento;
-import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.MedioDeContacto;
-import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.TipoDeColaborador;
-import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.TipoDocumento;
+import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.*;
 import ar.edu.utn.frba.dds.modelo.entidades.enviadores.Enviador;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioColaboradores;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioUsuarios;
+import ar.edu.utn.frba.dds.servicios.ServiceColaboradores;
 import lombok.AllArgsConstructor;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
@@ -36,6 +34,7 @@ public class InstanciadorColaborador {
                     tipoDeColaborador(TipoDeColaborador.HUMANA).
                     mediosDeContacto(mediosDeContacto).
                     documento(new Documento(colaboradorDO.getDoc(), TipoDocumento.DNI)).
+                    formasDeColaborar(Arrays.asList(FormaColaboracion.DONACION_VIANDAS, FormaColaboracion.DONACION_DINERO, FormaColaboracion.REGISTRO_PERSONAS_VULNERABLES, FormaColaboracion.DISTRIBUCION_VIANDAS)).
                     nombre(colaboradorDO.getNombre()).
                     apellido(colaboradorDO.getApellido()).
                     mediosDeContacto(Arrays.asList(colaboradorDO.getMedioDeContacto())).
@@ -45,6 +44,7 @@ public class InstanciadorColaborador {
                     puntosDisponibles(0D).
                     puntosCanjeados(0D).
                     build();
+            ServiceColaboradores.asignarTarjetaA(colaborador, ServiceLocator.instanceOf(RepositorioColaboradores.class));
             Usuario usuario = Usuario.
                     builder().
                     nombre(colaboradorDO.getNombre()).

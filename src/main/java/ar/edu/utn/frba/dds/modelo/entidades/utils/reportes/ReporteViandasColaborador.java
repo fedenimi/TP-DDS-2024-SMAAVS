@@ -25,6 +25,7 @@ public class ReporteViandasColaborador implements Reporte {
     @Getter private Map<Colaborador, Integer> colaboradorViandaMap;
     @Getter private String nombreArchivo;
     private ReporteStringViandasColaborador reporteStringViandasColaborador;
+    private DonacionDeViandas donacionDeViandas;
 
     public ReporteViandasColaborador(List<DonacionDeViandas> donacionDeViandas, List<DistribucionDeViandas> distribucionDeViandas, String nombreArchivo, ReporteStringViandasColaborador reporteStringViandasColaborador) {
         this.distribucionesDeViandas = distribucionDeViandas;
@@ -37,7 +38,7 @@ public class ReporteViandasColaborador implements Reporte {
         colaboradorViandaMap = new HashMap<Colaborador, Integer>();
         for (int i = 0; i < donacionesDeViandas.size(); i++) {
             DonacionDeViandas donacionDeViandas = donacionesDeViandas.get(i);
-            if (CalculadorDeFechas.getInstance().esEstaSemana(donacionDeViandas.getFecha())){
+            if (CalculadorDeFechas.getInstance().esEstaSemana(donacionDeViandas.getFecha())) {
                 Colaborador colaborador = donacionDeViandas.getColaborador();
                 Integer cantidadDeViandas = donacionDeViandas.cantidadDeViandas();
                 this.agregarViandasAMap(cantidadDeViandas, colaborador);

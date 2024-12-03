@@ -50,7 +50,6 @@ public class Server {
                 ServiceLocator.instanceOf(RepositorioColaboradores.class).entityManager().clear();
                 MainPuntos.main(new String[0]);
             }, 0, 30, TimeUnit.SECONDS);
-
             scheduler.scheduleAtFixedRate(() -> {
                 MainReportar.main(new String[0]);
                 System.out.println("Reporte generado");
@@ -75,7 +74,7 @@ public class Server {
 
             config.staticFiles.add(staticFiles -> {
                 staticFiles.hostedPath = "/img";
-                staticFiles.directory = "public-files"; // Para imágenes dinámicas fuera del empaquetado.
+                staticFiles.directory = "public-files/img"; // Para imágenes dinámicas fuera del empaquetado.
                 staticFiles.location = io.javalin.http.staticfiles.Location.EXTERNAL;
             });
 

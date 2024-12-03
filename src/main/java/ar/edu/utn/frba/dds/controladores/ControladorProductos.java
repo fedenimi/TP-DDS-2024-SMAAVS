@@ -89,10 +89,14 @@ public class ControladorProductos implements ICrudViewsHandler {
         oferta.setPuntajeMinimo(Double.valueOf(context.formParam("puntaje")));
         oferta.setRubro(this.repositorioDeRubros.buscar(Long.valueOf(context.formParam("id"))).get());
         UploadedFile uploadedFile = context.uploadedFile("imagen-producto");
-        File file = new File("public-files/" + uploadedFile.filename());
+        String nombreArchivo = uploadedFile.filename();
+        if (uploadedFile.filename().contains(" ")) {
+            nombreArchivo = uploadedFile.filename().replace(" ", "_");
+        }
+        File file = new File("public-files/img/" + nombreArchivo);
         try {
             saveUploadedFile(uploadedFile.content(), file);
-            oferta.setImagen("/img/" +uploadedFile.filename());
+            oferta.setImagen("/img/" +nombreArchivo);
         } catch (IOException e) {
             System.err.println("Error al guardar el archivo: " + e.getMessage());
         }

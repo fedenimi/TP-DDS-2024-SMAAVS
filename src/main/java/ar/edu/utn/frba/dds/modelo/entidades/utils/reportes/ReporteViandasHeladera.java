@@ -36,13 +36,12 @@ public class ReporteViandasHeladera implements Reporte {
         heladeraViandaRetiradaMap = new HashMap<Heladera, Integer>();
         for (int i = 0; i < donacionesDeViandas.size(); i++) {
             DonacionDeViandas donacionDeViandas = donacionesDeViandas.get(i);
-            if (CalculadorDeFechas.getInstance().esEstaSemana(donacionDeViandas.getFecha())) {
-                Integer cantidadDeViandas = donacionDeViandas.cantidadDeViandas();
-                for (int j = 0; j < cantidadDeViandas; j++) {
-                    /*
-                    Heladera heladera = donacionDeViandas.getViandasDonadas().get(j);
-                    this.agregarViandasAMap(1, heladera, heladeraViandaColocadaMap);
-                     */
+            System.out.println("Cantidad de viandas1: " + donacionDeViandas.cantidadDeViandas());
+            if (donacionDeViandas.cantidadDeViandas() != 0) {
+                System.out.println("Fecha de la donacion: " + donacionDeViandas.getFecha());
+                if (CalculadorDeFechas.getInstance().esEstaSemana(donacionDeViandas.getFecha())) {
+                    Integer cantidadDeViandas = donacionDeViandas.cantidadDeViandas();
+                    this.agregarViandasAMap(cantidadDeViandas, donacionDeViandas.getHeladera(), heladeraViandaColocadaMap);
                 }
             }
         }
@@ -57,6 +56,11 @@ public class ReporteViandasHeladera implements Reporte {
     }
 
     private void agregarViandasAMap(Integer cantidadDeViandas, Heladera heladera, Map<Heladera, Integer> map) {
+        System.out.println("Cantidad de viandas2: " + cantidadDeViandas);
+        System.out.println("Heladera: " + heladera);
+        if (heladera == null) {
+            return;
+        }
         if(map.containsKey(heladera) ) {
             cantidadDeViandas += map.get(heladera);
         }
