@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.config;
 
 import ar.edu.utn.frba.dds.controladores.*;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.BuscadorDeTecnicos;
+import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.RegistradorDeIncidentes;
 import ar.edu.utn.frba.dds.modelo.repositorios.*;
 
 import java.util.HashMap;
@@ -22,6 +23,14 @@ public class ServiceLocator {
             }
             else if (componentName.equals(RepositorioHeladeras.class.getName())) {
                 RepositorioHeladeras instance = new RepositorioHeladeras();
+                instances.put(componentName, instance);
+            }
+            else if (componentName.equals(RegistradorDeIncidentes.class.getName())) {
+                RegistradorDeIncidentes instance = new RegistradorDeIncidentes();
+                instances.put(componentName, instance);
+            }
+            else if (componentName.equals(RepositorioSolicitudesAperturas.class.getName())) {
+                RepositorioSolicitudesAperturas instance = new RepositorioSolicitudesAperturas();
                 instances.put(componentName, instance);
             }
             else if (componentName.equals(ControladorHome.class.getName())) {

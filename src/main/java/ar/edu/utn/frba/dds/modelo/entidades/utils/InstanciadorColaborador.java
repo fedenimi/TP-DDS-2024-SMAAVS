@@ -1,6 +1,8 @@
 package ar.edu.utn.frba.dds.modelo.entidades.utils;
 
 import ar.edu.utn.frba.dds.config.ServiceLocator;
+import ar.edu.utn.frba.dds.modelo.entidades.acceso.Permiso;
+import ar.edu.utn.frba.dds.modelo.entidades.acceso.Usuario;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.Documento;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.MedioDeContacto;
 import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.TipoDeColaborador;
@@ -8,10 +10,12 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosPersonas.TipoDocumento;
 import ar.edu.utn.frba.dds.modelo.entidades.enviadores.Enviador;
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioColaboradores;
+import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioUsuarios;
 import lombok.AllArgsConstructor;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,12 +38,21 @@ public class InstanciadorColaborador {
                     documento(new Documento(colaboradorDO.getDoc(), TipoDocumento.DNI)).
                     nombre(colaboradorDO.getNombre()).
                     apellido(colaboradorDO.getApellido()).
+                    mediosDeContacto(Arrays.asList(colaboradorDO.getMedioDeContacto())).
                     puntuables(new ArrayList<>()).
                     alertaSuscripciones(new ArrayList<>()).
                     suscripciones(new ArrayList<>()).
                     puntosDisponibles(0D).
                     puntosCanjeados(0D).
                     build();
+            Usuario usuario = Usuario.
+                    builder().
+                    nombre(colaboradorDO.getNombre()).
+                    contrasenia("password").
+                    colaboradorAsociado(colaborador).
+                    permisos(Arrays.asList(Permiso.HUMANA, Permiso.DISTRIBUIR_VIANDAS, Permiso.DONAR_VIANDAS, Permiso.DONAR_DINERO, Permiso.REGISTRAR_PERSONA_VULNERABLE)).
+                    build();
+            ServiceLocator.instanceOf(RepositorioUsuarios.class).guardar(usuario);
             System.out.println("Colaborador creado: " + colaborador.getNombre());
             enviador.enviar(colaboradorDO.getMedioDeContacto().getValor(), "Nuevo Registro",
                     "Hola " + colaboradorDO.getNombre() + ", muchas gracias por colaborar!\n" +

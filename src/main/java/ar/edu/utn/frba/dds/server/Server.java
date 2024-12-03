@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.config.ServiceLocator;
 import ar.edu.utn.frba.dds.middlewares.AuthMiddleWare;
 import ar.edu.utn.frba.dds.modelo.cronJobs.MainMQTT;
 import ar.edu.utn.frba.dds.modelo.cronJobs.MainPuntos;
+import ar.edu.utn.frba.dds.modelo.cronJobs.MainReportar;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.Initializer;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.JavalinRenderer;
 import ar.edu.utn.frba.dds.modelo.entidades.utils.PrettyProperties;
@@ -50,6 +51,11 @@ public class Server {
                 MainPuntos.main(new String[0]);
             }, 0, 30, TimeUnit.SECONDS);
 
+            scheduler.scheduleAtFixedRate(() -> {
+                MainReportar.main(new String[0]);
+                System.out.println("Reporte generado");
+            }, 0, 5, TimeUnit.MINUTES);
+
             if (Boolean.parseBoolean(PrettyProperties.getInstance().propertyFromName("dev_mode"))) {
                 System.out.println("Inicializando datos de prueba...");
                 //Initializer.init();
@@ -58,6 +64,7 @@ public class Server {
         CompletableFuture.runAsync(() -> {
             MainMQTT.main(new String[0]);
         });
+
     }
     private static Consumer<JavalinConfig> config() {
         return config -> {

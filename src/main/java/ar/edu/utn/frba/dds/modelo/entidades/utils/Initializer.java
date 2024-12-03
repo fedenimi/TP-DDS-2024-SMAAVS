@@ -161,7 +161,7 @@ public class Initializer{
                 numero("12345678").
                 tipo(TipoDocumento.DNI).build()).
                 cuil("12345678").
-                medioDeContacto(MedioDeContacto.builder().valor("12345678").tipo(TipoDeContacto.TELEFONO).build()).
+                medioDeContacto(MedioDeContacto.builder().valor("podolskytomi@gmail.com").tipo(TipoDeContacto.MAIL).build()).
                 ultimoPunto(Punto.builder().latitud(-34.632166).longitud(-58.425981).build()).
                 falloHeladera(new ArrayList<>(
                         List.of(

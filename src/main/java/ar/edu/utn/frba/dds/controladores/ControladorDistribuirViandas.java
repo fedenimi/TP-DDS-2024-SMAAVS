@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.controladores;
 
+import ar.edu.utn.frba.dds.config.ServiceLocator;
 import ar.edu.utn.frba.dds.dtos.HeladeraDTO;
 import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.DistribucionDeViandas;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
@@ -8,10 +9,7 @@ import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.Sol
 import ar.edu.utn.frba.dds.modelo.entidades.personas.Colaborador;
 import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.TipoNotificacion;
 import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.Topic;
-import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioColaboradores;
-import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioDistribucionesViandas;
-import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioHeladeras;
-import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioPuntuables;
+import ar.edu.utn.frba.dds.modelo.repositorios.*;
 import ar.edu.utn.frba.dds.servicios.ServiceHeladeras;
 import ar.edu.utn.frba.dds.servicios.ServiceTopics;
 import io.javalin.http.Context;
@@ -62,18 +60,20 @@ public class ControladorDistribuirViandas implements ICrudViewsHandler{
     @Override
     public void save(Context context) {
         Colaborador colaborador = this.repositorioColaboradores.buscar(Long.parseLong(context.pathParam("id"))).get();
-        SolicitudApertura solicitudAperturaOri= SolicitudApertura.builder()
+        SolicitudApertura soliOri = SolicitudApertura.builder()
                 .tarjetaColaborador(colaborador.getTarjetaColaborador())
                 .fechaYHora(LocalDateTime.now())
                 .build();
-        SolicitudApertura solicitudAperturaDes = SolicitudApertura.builder()
+        SolicitudApertura soliDes = SolicitudApertura.builder()
                 .tarjetaColaborador(colaborador.getTarjetaColaborador())
                 .fechaYHora(LocalDateTime.now())
                 .build();
+        ServiceLocator.instanceOf(RepositorioSolicitudesAperturas.class).guardar(soliOri);
+        ServiceLocator.instanceOf(RepositorioSolicitudesAperturas.class).guardar(soliDes);
         Heladera heladeraOrigen = this.repositorioHeladeras.buscar(Long.parseLong(context.formParam("heladera-or"))).get();
         Heladera heladeraDestino = this.repositorioHeladeras.buscar(Long.parseLong(context.formParam("heladera-dest"))).get();
-        heladeraOrigen.agregarSolicitudApertura(solicitudAperturaOri);
-        heladeraDestino.agregarSolicitudApertura(solicitudAperturaDes);
+        heladeraOrigen.agregarSolicitudApertura(soliOri);
+        heladeraDestino.agregarSolicitudApertura(soliDes);
         // Crear la distribución de viandas
         DistribucionDeViandas distribucionDeViandas = new DistribucionDeViandas();
         distribucionDeViandas.setHeladeraOrigen(heladeraOrigen);
@@ -83,8 +83,8 @@ public class ControladorDistribuirViandas implements ICrudViewsHandler{
         distribucionDeViandas.setFecha(LocalDateTime.now());
 
         distribucionDeViandas.setColaborador(colaborador);
-        distribucionDeViandas.setSolicitudAperturaOrigen(solicitudAperturaOri);
-        distribucionDeViandas.setSolicitudAperturaDestino(solicitudAperturaDes);
+        distribucionDeViandas.setSolicitudAperturaOrigen(soliOri);
+        distribucionDeViandas.setSolicitudAperturaDestino(soliDes);
 
         this.repositorioPuntuables.guardar(distribucionDeViandas);
 
@@ -93,18 +93,10 @@ public class ControladorDistribuirViandas implements ICrudViewsHandler{
 
         // Le pido al service que notifique a los suscriptores de las heladeras
         ServiceTopics.accionarTopic(heladeraOrigen, TipoNotificacion.QUEDAN_N_VIANDAS);
-        heladeraOrigen.agregarSolicitudApertura(SolicitudApertura.builder()
-                .tarjetaColaborador(colaborador.getTarjetaColaborador())
-                .fechaYHora(LocalDateTime.now())
-                .build());
         heladeraOrigen.setStock(heladeraOrigen.getStock() - distribucionDeViandas.getCantidadDeViandas());
         repositorioHeladeras.modificar(heladeraOrigen);
 
         ServiceTopics.accionarTopic(heladeraDestino, TipoNotificacion.FALTAN_N_VIANDAS);
-        heladeraDestino.agregarSolicitudApertura(SolicitudApertura.builder()
-                .tarjetaColaborador(colaborador.getTarjetaColaborador())
-                .fechaYHora(LocalDateTime.now())
-                .build());
         heladeraDestino.setStock(heladeraDestino.getStock() + distribucionDeViandas.getCantidadDeViandas());
         repositorioHeladeras.modificar(heladeraDestino);
 

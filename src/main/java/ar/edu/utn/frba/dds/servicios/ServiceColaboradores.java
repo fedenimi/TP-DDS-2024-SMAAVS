@@ -26,12 +26,16 @@ public class ServiceColaboradores {
                 nombre(colaborador.getNombre()).
                 puntosDisponibles(String.valueOf(colaborador.getPuntosDisponibles())).
                 tipoColaborador(colaborador.getTipoDeColaborador().toString()).
-                formasDeColaborar(colaborador.getFormasDeColaborar().stream().map(FormaColaboracion::toString).toList()).
-                mail(colaborador.getValorDeContacto(TipoDeContacto.MAIL)).
-                telefono(colaborador.getValorDeContacto(TipoDeContacto.TELEFONO)).
-                whatsapp(colaborador.getValorDeContacto(TipoDeContacto.WHATSAPP)).
-                build();
-
+                formasDeColaborar(colaborador.getFormasDeColaborar().stream().map(FormaColaboracion::toString).toList()).build();
+        if (colaborador.getValorDeContacto(TipoDeContacto.MAIL).isPresent()) {
+            colaboradorDTO.setMail(colaborador.getValorDeContacto(TipoDeContacto.MAIL).get().getValor());
+        }
+        if (colaborador.getValorDeContacto(TipoDeContacto.TELEFONO).isPresent()) {
+            colaboradorDTO.setTelefono(colaborador.getValorDeContacto(TipoDeContacto.TELEFONO).get().getValor());
+        }
+        if (colaborador.getValorDeContacto(TipoDeContacto.WHATSAPP).isPresent()) {
+            colaboradorDTO.setWhatsapp(colaborador.getValorDeContacto(TipoDeContacto.WHATSAPP).get().getValor());
+        }
         if (colaborador.getTipoDeColaborador().equals(TipoDeColaborador.JURIDICA)) {
             colaboradorDTO.setJuridica("true");
         }

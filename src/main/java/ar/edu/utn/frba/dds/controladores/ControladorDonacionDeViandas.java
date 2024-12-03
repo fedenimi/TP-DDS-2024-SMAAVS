@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.controladores;
 
+import ar.edu.utn.frba.dds.config.ServiceLocator;
 import ar.edu.utn.frba.dds.dtos.HeladeraDTO;
 import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.DonacionDeViandas;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
@@ -11,6 +12,7 @@ import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.TipoNotificacion;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioColaboradores;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioHeladeras;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioPuntuables;
+import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioSolicitudesAperturas;
 import ar.edu.utn.frba.dds.servicios.ServiceHeladeras;
 import ar.edu.utn.frba.dds.servicios.ServiceTopics;
 import io.javalin.http.Context;
@@ -76,6 +78,7 @@ public class ControladorDonacionDeViandas implements ICrudViewsHandler{
                 .tarjetaColaborador(colaborador.getTarjetaColaborador())
                 .fechaYHora(LocalDateTime.now())
                 .build();
+        ServiceLocator.instanceOf(RepositorioSolicitudesAperturas.class).guardar(solicitudApertura);
         donacionDeViandas.setSolicitudApertura(solicitudApertura);
         heladera.agregarSolicitudApertura(solicitudApertura);
 
@@ -84,10 +87,6 @@ public class ControladorDonacionDeViandas implements ICrudViewsHandler{
         repositorioColaboradores.modificar(colaborador);
 
         ServiceTopics.accionarTopic(heladera, TipoNotificacion.FALTAN_N_VIANDAS);
-        heladera.agregarSolicitudApertura(SolicitudApertura.builder()
-                .tarjetaColaborador(colaborador.getTarjetaColaborador())
-                .fechaYHora(LocalDateTime.now())
-                .build());
         heladera.setStock(heladera.getStock() + viandas.size());
         repositorioHeladeras.modificar(heladera);
 

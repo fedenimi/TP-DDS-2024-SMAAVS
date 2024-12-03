@@ -3,10 +3,13 @@ package ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.sens
 import ar.edu.utn.frba.dds.config.ServiceLocator;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.Alerta;
+import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.BuscadorDeTecnicos;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.CreadorAlerta;
+import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.RegistradorDeIncidentes;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.infoHeladera.Estado;
 import ar.edu.utn.frba.dds.modelo.entidades.suscripciones.TipoNotificacion;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioAlertas;
+import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioHeladeras;
 import ar.edu.utn.frba.dds.servicios.ServiceTopics;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,10 +40,12 @@ public class ReceptorSensorTemperatura {
     private Heladera heladera;
     public void evaluarTemperatura(Temperatura temperatura) {
         //this.agregarMedicion(temperatura);
-        if (temperatura.getValor() < heladera.obtenerTemperaturaMinima() || temperatura.getValor() > this.getHeladera().obtenerTemperaturaMaxima()){
+        if (temperatura.getValor() < heladera.obtenerTemperaturaMinima() || temperatura.getValor() > heladera.obtenerTemperaturaMaxima()){
             Alerta alerta = this.crearAlerta(heladera, Estado.FALLA_TEMPERATURA);
             ServiceLocator.instanceOf(RepositorioAlertas.class).guardar(alerta);
             ServiceTopics.accionarTopic(heladera, TipoNotificacion.DESPERFECTO);
+            ServiceLocator.instanceOf(RegistradorDeIncidentes.class).registrarIncidente(Estado.FALLA_TEMPERATURA, heladera, ServiceLocator.instanceOf(BuscadorDeTecnicos.class));
+            ServiceLocator.instanceOf(RepositorioHeladeras.class).modificar(heladera);
         }
     }
     public void agregarMedicion(Temperatura temperatura) {

@@ -17,6 +17,7 @@ import ar.edu.utn.frba.dds.modelo.entidades.utils.broker.PublicadorBroker;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioAperturas;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioColaboradores;
 import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioHeladeras;
+import ar.edu.utn.frba.dds.modelo.repositorios.RepositorioPuntuables;
 import org.eclipse.paho.client.mqttv3.MqttException;
 
 import java.time.LocalDateTime;
@@ -91,14 +92,17 @@ public class ControladorContribucionesViandas {
                 .collect(Collectors.toList());
 
         Optional<DonacionDeViandas> optionalDonacionDeViandas = donacionesDeViandas.stream().filter(d -> d.getApertura() == null && heladera.getSolicitudAperturas().contains(d.getSolicitudApertura())).findFirst();
+        ServiceLocator.instanceOf(RepositorioAperturas.class).guardar(apertura);
         if (optionalDonacionDeViandas.isPresent()) {
             DonacionDeViandas donacionDeViandas = optionalDonacionDeViandas.get();
             donacionDeViandas.setApertura(apertura);
+            ServiceLocator.instanceOf(RepositorioPuntuables.class).modificar(donacionDeViandas);
         }
         Optional<DistribucionDeViandas> optionalDistribucionDeViandasOrigen = distribucionesDeViandas.stream().filter(d -> d.getAperturaOrigen() == null && heladera.getSolicitudAperturas().contains(d.getSolicitudAperturaOrigen())).findFirst();
         if (optionalDistribucionDeViandasOrigen.isPresent()) {
             DistribucionDeViandas distribucionDeViandas = optionalDistribucionDeViandasOrigen.get();
             distribucionDeViandas.setAperturaOrigen(apertura);
+            ServiceLocator.instanceOf(RepositorioPuntuables.class).modificar(distribucionDeViandas);
         }
         Optional<DistribucionDeViandas> optionalDistribucionDeViandasDestino = distribucionesDeViandas.stream().filter(d -> d.getAperturaDestino() == null && heladera.getSolicitudAperturas().contains(d.getSolicitudAperturaDestino())).findFirst();
         if (optionalDistribucionDeViandasDestino.isPresent()) {
@@ -106,9 +110,9 @@ public class ControladorContribucionesViandas {
                 System.out.println("FRAA");
                 DistribucionDeViandas distribucionDeViandas = optionalDistribucionDeViandasDestino.get();
                 distribucionDeViandas.setAperturaDestino(apertura);
+                ServiceLocator.instanceOf(RepositorioPuntuables.class).modificar(distribucionDeViandas);
             }
         }
-        ServiceLocator.instanceOf(RepositorioAperturas.class).guardar(apertura);
         heladera.agregarApertura(apertura);
         ServiceLocator.instanceOf(RepositorioHeladeras.class).modificar(heladera);
     }

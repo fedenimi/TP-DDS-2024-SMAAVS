@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.modelo.repositorios;
 
 import ar.edu.utn.frba.dds.modelo.entidades.colaboraciones.Puntuable;
+import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.Heladera;
 import ar.edu.utn.frba.dds.modelo.entidades.datosColaboraciones.incidentes.Alerta;
 import ar.edu.utn.frba.dds.modelo.repositorios.interfaces.IRepositorio;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
@@ -33,5 +34,11 @@ public class RepositorioPuntuables implements IRepositorio<Puntuable>, WithSimpl
         return entityManager()
                 .createQuery("from " + Puntuable.class.getName())
                 .getResultList();
+    }
+
+    public void modificar(Puntuable puntuable) {
+        withTransaction(() -> {
+            entityManager().merge(puntuable);//UPDATE
+        });
     }
 }

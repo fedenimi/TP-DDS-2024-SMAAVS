@@ -20,6 +20,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -126,8 +128,8 @@ public class Colaborador {
         return this.mediosDeContacto.stream().anyMatch(medioDeContacto -> medioDeContacto.getTipo().equals(tipoDeContacto));
     }
 
-    public String getValorDeContacto(TipoDeContacto tipoDeContacto) {
-        return this.mediosDeContacto.stream().filter(medioDeContacto -> medioDeContacto.getTipo().equals(tipoDeContacto)).findFirst().get().getValor();
+    public Optional<MedioDeContacto> getValorDeContacto(TipoDeContacto tipoDeContacto) {
+        return this.mediosDeContacto.stream().filter(medioDeContacto -> medioDeContacto.getTipo().equals(tipoDeContacto)).findFirst();
     }
 
     public void agregarMedioDeContacto(MedioDeContacto medioDeContacto) {
